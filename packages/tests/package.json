@@ -1,0 +1,11 @@
+{
+  "name": "tests",
+  "version": "0.0.1",
+  "description": "Tests",
+  "main": "./src/index.test.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "MIT"
+}
