@@ -6,7 +6,7 @@ export namespace Events {
     }
 
     export interface Input<ET, DT> {
-        type: ET;
+        type?: ET;
         data: DT;
     }
 
@@ -59,10 +59,11 @@ export namespace Events {
             }
 
             const value = { callback: callback, disposable: container };
-            this._listeners.push(value);
-            return disposable(() => {
+            container.addCallback(() => {
                 this._listeners = this._listeners.filter(it => it !== value);
             }, this);
+            this._listeners.push(value);
+            return container;
         }
 
     }

@@ -44,6 +44,7 @@ export class DisposableContainer implements Disposable {
      */
     public dispose(): void {
         this._throwIfDisposed();
+        this._isDisposed = true;
         this._disposables.forEach(it => it.dispose());
         this._disposables = [];
     }

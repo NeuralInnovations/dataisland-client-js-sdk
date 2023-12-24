@@ -83,3 +83,20 @@ test('Events, test this', () => {
     expect(a.value).toBe(1);
     expect(b.value).toBe(2);
 });
+
+test('Events, test unsubscribe', () => {
+    const dispatcher = Events.dispatcher<any, number>();
+
+    let index = 0;
+
+    dispatcher.on((evt) => { index += evt.data; evt.unsubscribe(); });
+    dispatcher.on((evt) => { index += evt.data; });
+
+    dispatcher.dispatch({ data: 1 });
+
+    expect(index).toBe(2);
+
+    dispatcher.dispatch({ data: 1 });
+
+    expect(index).toBe(3);
+});
