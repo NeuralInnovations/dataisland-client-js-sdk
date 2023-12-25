@@ -2,6 +2,9 @@ import { version } from '../../../package.json'
 import { _createApp } from './internal'
 
 export type { Events } from './events'
+export type { Collection } from './types'
+export * from './types'
+export type { Disposable } from './disposable'
 
 const _apps = new Map<string, App>()
 
@@ -34,6 +37,8 @@ export interface App {
   get name(): string
 
   get host(): string
+
+  get settings(): Settings
 }
 
 /**

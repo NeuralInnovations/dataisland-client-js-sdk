@@ -7,6 +7,16 @@ export function _createApp(name: string, settings?: Settings | undefined): App {
     },
     get host(): string {
       return settings?.host ?? 'https://dataisland.io'
+    },
+    get settings(): Settings {
+      return (
+        settings ??
+        ({
+          host: 'https://dataisland.io',
+          name,
+          automaticDataCollectionEnabled: true
+        } satisfies Settings)
+      )
     }
   }
 }
