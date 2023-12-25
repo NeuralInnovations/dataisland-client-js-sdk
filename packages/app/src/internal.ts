@@ -1,12 +1,12 @@
-import { DataIsland } from './index.ts';
+import { type App, type Settings } from './index'
 
-class App implements DataIsland.App {
-    constructor(
-        public readonly name: string,
-        public readonly host: string
-    ) { }
-}
-
-export function _createApp(name, settings): DataIsland.App {
-    return new App(name, settings) as DataIsland.App;
+export function _createApp(name: string, settings?: Settings | undefined): App {
+  return {
+    get name(): string {
+      return name
+    },
+    get host(): string {
+      return settings?.host ?? 'https://dataisland.io'
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { version } from '../../../package.json';
-import { DataIsland } from '../../app/src/index.ts'
+import { DataIsland } from 'data-island/dist';
 
 test('SDK_VERSION', () => {
   expect(DataIsland.SDK_VERSION).toBe(version);
@@ -8,4 +8,3 @@ test('SDK_VERSION', () => {
 test('API', () => {
   DataIsland.app();
 });
-

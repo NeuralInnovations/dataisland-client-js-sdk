@@ -7,5 +7,19 @@
     "test": "jest"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": [
+      "standard-with-typescript",
+      "plugin:react/recommended"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "@typescript-eslint/space-before-function-paren": "off",
+      "@typescript-eslint/semi": "off",
+      "@typescript-eslint/member-delimiter-style": "off"
+    }
+  }
 }
