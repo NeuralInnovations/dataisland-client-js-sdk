@@ -2,7 +2,6 @@
   "name": "dataisland",
   "version": "0.0.1",
   "scripts": {
-    "dev": "lerna run --parallel dev",
     "build": "lerna run --parallel build",
     "test": "lerna run --parallel test",
     "lint": "lerna run --parallel lint"

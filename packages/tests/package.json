@@ -4,7 +4,8 @@
   "description": "Tests",
   "main": "./src/index.test.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .ts,.tsx src"
   },
   "author": "",
   "license": "MIT",
