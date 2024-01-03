@@ -1,22 +1,15 @@
-import { type App, type Settings } from './index'
+import { type App, DEFAULT_HOST, DEFAULT_NAME, type Settings } from './index'
 
-export function _createApp(name: string, settings?: Settings | undefined): App {
+export function _createApp(settings: Settings): App {
   return {
     get name(): string {
-      return name
+      return settings.name ?? DEFAULT_NAME
     },
     get host(): string {
-      return settings?.host ?? 'https://dataisland.io'
+      return settings?.host ?? DEFAULT_HOST
     },
     get settings(): Settings {
-      return (
-        settings ??
-        ({
-          host: 'https://dataisland.io',
-          name,
-          automaticDataCollectionEnabled: true
-        } satisfies Settings)
-      )
+      return settings
     }
   }
 }
