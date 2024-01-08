@@ -1,15 +1,12 @@
-import { type App, DEFAULT_HOST, DEFAULT_NAME, type Settings } from './index'
+import { type AppSdk } from './index'
+import { AppImplementation } from './internal/app.implementation'
+import { type AppBuilder } from './appBuilder'
 
-export function _createApp(settings: Settings): App {
-  return {
-    get name(): string {
-      return settings.name ?? DEFAULT_NAME
-    },
-    get host(): string {
-      return settings?.host ?? DEFAULT_HOST
-    },
-    get settings(): Settings {
-      return settings
-    }
-  }
+export async function _createApp(
+  name: string,
+  setup?: (builder: AppBuilder) => Promise<void>
+): Promise<AppSdk> {
+  const app = new AppImplementation(name)
+  await app.initialize(setup)
+  return app
 }

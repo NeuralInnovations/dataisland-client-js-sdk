@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "lerna run --parallel build",
-    "test": "lerna run --parallel test",
+    "test": "lerna run --parallel build && lerna run --parallel test",
     "lint": "lerna run --parallel lint"
   },
   "private": true,
