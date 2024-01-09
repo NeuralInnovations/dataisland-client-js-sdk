@@ -1,13 +1,16 @@
 import { version } from '../../../package.json'
-import { _createApp } from './internal'
+import { _createApp } from './internal/createApp.impl'
 import { type AppBuilder } from './appBuilder'
+import { type Constructor } from './internal/registry'
+import { type Lifetime } from './disposable'
 
 export type { Events } from './events'
 export type { Collection } from './types'
 export * from './types'
 export type { Disposable } from './disposable'
 
-const _apps = new Map<string, AppSdk>()
+const _appsNotReady = new Map<string, Promise<AppSdk>>()
+const _appsReady = new Map<string, AppSdk>()
 
 /**
  * Current SDK version.
@@ -44,9 +47,18 @@ export interface AppSdk {
   get automaticDataCollectionEnabled(): boolean
 
   /**
-   * Auth.
+   * The lifetime of this app.
    */
-  auth: () => Promise<void>
+  get lifetime(): Lifetime
+
+  /**
+   * Gets the service registered with the given type.
+   */
+  resolve: <T>(type: Constructor<T>) => T | undefined
+}
+
+export function sdks(): AppSdk[] {
+  return Array.from(_appsReady.values())
 }
 
 /**
@@ -69,14 +81,19 @@ export async function appSdk(
   name?: string,
   setup?: (builder: AppBuilder) => Promise<void>
 ): Promise<AppSdk> {
-  if (name === undefined || name === null) {
-    name = DEFAULT_NAME
-  }
+  name = name ?? DEFAULT_NAME
 
-  let app = _apps.get(name)
-  if (app === undefined) {
-    app = await _createApp(name, setup)
-    _apps.set(name, app)
+  let appPromise = _appsNotReady.get(name)
+  if (appPromise === undefined) {
+    appPromise = _createApp(name, setup)
+    appPromise
+      .then(app => {
+        _appsReady.set(name ?? DEFAULT_NAME, app)
+      })
+      .catch(reason => {
+        console.error(`Error: ${reason}`)
+      })
+    _appsNotReady.set(name, appPromise)
   }
-  return app
+  return await appPromise
 }

@@ -6,6 +6,43 @@ export interface Disposable {
 }
 
 /**
+ * Represents a lifetime.
+ */
+export class Lifetime {
+  constructor(private readonly container: DisposableContainer) {}
+
+  /**
+   * Define a new nested disposable to this lifetime.
+   */
+  public defineNested(): DisposableContainer {
+    return this.container.defineNested()
+  }
+
+  /**
+   * Shows whether this lifetime is disposed.
+   */
+  public get isDisposed(): boolean {
+    return this.container.isDisposed
+  }
+
+  /**
+   * Adds a disposable to this lifetime.
+   */
+  public add(disposable: Disposable): this {
+    this.container.add(disposable)
+    return this
+  }
+
+  /**
+   * Adds a callback to this lifetime.
+   */
+  public addCallback(callback: () => void, target?: any): this {
+    this.container.addCallback(callback, target)
+    return this
+  }
+}
+
+/**
  * A container for disposables.
  * @example
  * const container = new DisposableContainer();
@@ -16,6 +53,21 @@ export interface Disposable {
 export class DisposableContainer implements Disposable {
   private _disposables: Disposable[] = []
   private _isDisposed = false
+  private _lifetime?: Lifetime
+
+  /**
+   * Gets whether this container is disposed.
+   */
+  public get isDisposed(): boolean {
+    return this._isDisposed
+  }
+
+  /**
+   * Define new lifetime.
+   */
+  public get lifetime(): Lifetime {
+    return this._lifetime ?? (this._lifetime = new Lifetime(this))
+  }
 
   /**
    * Adds a disposable to this container.
@@ -44,14 +96,32 @@ export class DisposableContainer implements Disposable {
   }
 
   /**
-   * Disposes all disposables in this container.
+   * Defines a nested disposable container.
+   */
+  defineNested(): DisposableContainer {
+    const nested = new DisposableContainer()
+    this._disposables.push(nested)
+    nested.addCallback(() => {
+      const index = this._disposables.indexOf(nested)
+      if (index > -1) {
+        this._disposables.splice(index, 1)
+      }
+    }, this)
+    return nested
+  }
+
+  /**
+   * Disposes all disposables in this container. Last added, first disposed.
    */
   public dispose(): void {
     this._throwIfDisposed()
     this._isDisposed = true
-    this._disposables.forEach(it => {
-      it.dispose()
-    })
+    this._disposables
+      .slice()
+      .reverse()
+      .forEach(it => {
+        it.dispose()
+      })
     this._disposables = []
   }
 
@@ -76,3 +146,5 @@ export function disposable(action: () => void, target: any): Disposable {
     action.call(target)
   })
 }
+
+export const eternalLifetime = new DisposableContainer().lifetime

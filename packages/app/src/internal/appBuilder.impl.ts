@@ -1,15 +1,16 @@
-import { type AppSdk, DEFAULT_HOST } from '../index'
-import { type CredentialBase, DefaultCredential } from '../credentials'
-import { type Middleware } from '../middleware'
 import { AppBuilder } from '../appBuilder'
-
-// class Context {}
+import { DEFAULT_HOST } from '../index'
+import { type CredentialBase, DefaultCredential } from '../credentials'
+import type { Middleware } from '../middleware'
+import { type Service, type ServiceContext } from '../services/service'
+import { type Constructor } from './registry'
 
 export class AppBuilderImplementation extends AppBuilder {
   host: string = DEFAULT_HOST
   automaticDataCollectionEnabled: boolean = true
   credential: CredentialBase = new DefaultCredential()
   middlewares: Middleware[] = []
+  services: Array<[Constructor<any>, (context: ServiceContext) => Service]> = []
 
   useHost(host: string): AppBuilder {
     this.host = host ?? DEFAULT_HOST
@@ -41,43 +42,18 @@ export class AppBuilderImplementation extends AppBuilder {
     this.middlewares.push(middleware)
     return this
   }
-}
 
-export class AppImplementation implements AppSdk {
-  readonly name: string
-  private _host: string = DEFAULT_HOST
-  private _automaticDataCollectionEnabled: boolean = true
-
-  // private readonly _context: Context
-
-  constructor(name: string) {
-    this.name = name
-    // this._context = new Context()
-  }
-
-  get automaticDataCollectionEnabled(): boolean {
-    return this._automaticDataCollectionEnabled
-  }
-
-  get host(): string {
-    return this._host
-  }
-
-  async initialize(
-    setup: ((builder: AppBuilder) => Promise<void>) | undefined
-  ): Promise<void> {
-    const builder = new AppBuilderImplementation()
-    if (setup !== undefined) {
-      await setup(builder)
+  registerService<T extends Service>(
+    type: Constructor<T>,
+    factory: (context: ServiceContext) => T
+  ): AppBuilder {
+    if (type === undefined || type === null) {
+      throw new Error('registerService, type is undefined|null')
     }
-    this._host = builder.host
-    this._automaticDataCollectionEnabled =
-      builder.automaticDataCollectionEnabled
-
-    await Promise.resolve()
-  }
-
-  async auth(): Promise<void> {
-    await Promise.resolve()
+    if (factory === undefined || factory === null) {
+      throw new Error('registerService, factory is undefined|null')
+    }
+    this.services.push([type, factory])
+    return this
   }
 }
