@@ -1,13 +1,13 @@
 import { version } from '../../../package.json'
 import { _createApp } from './internal/createApp.impl'
 import { type AppBuilder } from './appBuilder'
-import { type Constructor } from './internal/registry'
-import { type Lifetime } from './disposable'
+import { type AppSdk } from './appSdk'
 
-export type { Events } from './events'
-export type { Collection } from './types'
+export * from './events'
 export * from './types'
-export type { Disposable } from './disposable'
+export * from './disposable'
+export * from './types'
+export * from './credentials'
 
 const _appsNotReady = new Map<string, Promise<AppSdk>>()
 const _appsReady = new Map<string, AppSdk>()
@@ -26,36 +26,6 @@ export const DEFAULT_NAME = '[DEFAULT]'
  * Default DataIsland App host.
  */
 export const DEFAULT_HOST = 'https://dataisland.com.ua'
-
-/**
- * DataIsland App instance.
- */
-export interface AppSdk {
-  /**
-   * The name of this app.
-   */
-  get name(): string
-
-  /**
-   * The host of this app.
-   */
-  get host(): string
-
-  /**
-   * The automaticDataCollectionEnabled of this app.
-   */
-  get automaticDataCollectionEnabled(): boolean
-
-  /**
-   * The lifetime of this app.
-   */
-  get lifetime(): Lifetime
-
-  /**
-   * Gets the service registered with the given type.
-   */
-  resolve: <T>(type: Constructor<T>) => T | undefined
-}
 
 export function sdks(): AppSdk[] {
   return Array.from(_appsReady.values())

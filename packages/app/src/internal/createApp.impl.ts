@@ -1,6 +1,6 @@
-import { type AppSdk } from '../index'
 import { AppImplementation } from './app.impl'
 import { type AppBuilder } from '../appBuilder'
+import { AppSdk } from '../appSdk'
 
 export async function _createApp(
   name: string,

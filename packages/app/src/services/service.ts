@@ -4,7 +4,7 @@ import { type DisposableContainer, type Lifetime } from '../disposable'
 
 export class ServiceContext {
   constructor(
-    private readonly context: Context,
+    public readonly context: Context,
     private readonly disposableContainer: DisposableContainer
   ) {}
 
@@ -30,8 +30,16 @@ export class ServiceContext {
 }
 
 export abstract class Service {
-  resolve<T>(type: Constructor<T>): T | undefined {
+  public resolve<T>(type: Constructor<T>): T | undefined {
     return this.serviceContext.resolve(type)
+  }
+
+  public get lifetime(): Lifetime {
+    return this.serviceContext.lifetime
+  }
+
+  public get context(): Context {
+    return this.serviceContext.context
   }
 
   public constructor(private readonly serviceContext: ServiceContext) {}

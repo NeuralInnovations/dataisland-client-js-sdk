@@ -1,14 +1,15 @@
-import { type AppBuilder } from './appBuilder'
+import { type MiddlewareService } from './services/middlewareService'
+import { type Lifetime } from './disposable'
 
 /**
  * DataIsland App credential.
  */
 export abstract class CredentialBase {
-  abstract use(builder: AppBuilder): void
+  abstract onRegister(lifetime: Lifetime, service: MiddlewareService): void
 }
 
 export class DefaultCredential extends CredentialBase {
-  use(builder: AppBuilder): void {
+  onRegister(lifetime: Lifetime, service: MiddlewareService): void {
     // Do nothing.
   }
 }
@@ -23,11 +24,13 @@ export class BasicCredential extends CredentialBase {
     this.password = password
   }
 
-  use(builder: AppBuilder): void {
-    builder.addMiddleware(async (req, next) => {
-      req.headers.set('Authorization', `Basic ${this.email}:${this.password}`)
-      await next()
-    })
+  onRegister(lifetime: Lifetime, service: MiddlewareService): void {
+    lifetime.add(
+      service.useMiddleware(async (req, next) => {
+        req.headers.set('Authorization', `Basic ${this.email}:${this.password}`)
+        await next(req)
+      })
+    )
   }
 }
 
@@ -39,10 +42,12 @@ export class BearerCredential extends CredentialBase {
     this.token = token
   }
 
-  use(builder: AppBuilder): void {
-    builder.addMiddleware(async (req, next) => {
-      req.headers.set('Authorization', `Bearer ${this.token}`)
-      await next()
-    })
+  onRegister(lifetime: Lifetime, service: MiddlewareService): void {
+    lifetime.add(
+      service.useMiddleware(async (req, next) => {
+        req.headers.set('Authorization', `Bearer ${this.token}`)
+        await next(req)
+      })
+    )
   }
 }

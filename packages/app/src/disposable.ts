@@ -44,6 +44,7 @@ export class Lifetime {
 
 /**
  * A container for disposables.
+ * Last added, first disposed.
  * @example
  * const container = new DisposableContainer();
  * container.add(someDisposable);
