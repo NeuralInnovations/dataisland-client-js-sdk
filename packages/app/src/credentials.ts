@@ -1,15 +1,16 @@
-import { type MiddlewareService } from './services/middlewareService'
+import { MiddlewareService } from './services/middlewareService'
 import { type Lifetime } from './disposable'
+import { type Context } from './internal/context'
 
 /**
  * DataIsland App credential.
  */
 export abstract class CredentialBase {
-  abstract onRegister(lifetime: Lifetime, service: MiddlewareService): void
+  abstract onRegister(lifetime: Lifetime, context: Context): void
 }
 
 export class DefaultCredential extends CredentialBase {
-  onRegister(lifetime: Lifetime, service: MiddlewareService): void {
+  onRegister(lifetime: Lifetime, context: Context): void {
     // Do nothing.
   }
 }
@@ -24,7 +25,11 @@ export class BasicCredential extends CredentialBase {
     this.password = password
   }
 
-  onRegister(lifetime: Lifetime, service: MiddlewareService): void {
+  onRegister(lifetime: Lifetime, context: Context): void {
+    const service = context.resolve(MiddlewareService)
+    if (service === undefined) {
+      throw new Error('MiddlewareService is not registered.')
+    }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
         req.headers.set('Authorization', `Basic ${this.email}:${this.password}`)
@@ -42,7 +47,11 @@ export class BearerCredential extends CredentialBase {
     this.token = token
   }
 
-  onRegister(lifetime: Lifetime, service: MiddlewareService): void {
+  onRegister(lifetime: Lifetime, context: Context): void {
+    const service = context.resolve(MiddlewareService)
+    if (service === undefined) {
+      throw new Error('MiddlewareService is not registered.')
+    }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
         req.headers.set('Authorization', `Bearer ${this.token}`)
