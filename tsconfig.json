@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "outFile": "dist/dataisland-sdk.js",
-    "rootDir": "src",
+    "rootDir": ".",
     "allowJs": true,
     "checkJs": true,
     "downlevelIteration": true
@@ -26,7 +26,6 @@
     "dist/**/*"
   ],
   "include": [
-    "src/**/*",
-    ".eslintrc.js"
+    "src/**/*"
   ]
 }
