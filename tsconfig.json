@@ -1,8 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
+    "target": "ES2015",
+    "module": "amd",
     "moduleResolution": "node",
     "typeRoots": [
       "node_modules/@types"
@@ -16,6 +16,7 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist",
+    "outFile": "dist/dataisland-sdk.js",
     "rootDir": "src",
     "allowJs": true,
     "checkJs": true,
