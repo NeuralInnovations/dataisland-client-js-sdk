@@ -36,7 +36,7 @@ export class Lifetime {
   /**
    * Adds a callback to this lifetime.
    */
-  public addCallback(callback: () => void, target?: any): this {
+  public addCallback(callback: () => void, target?: unknown): this {
     this.container.addCallback(callback, target)
     return this
   }
@@ -87,7 +87,7 @@ export class DisposableContainer implements Disposable {
    * @param target The target to bind the callback to.
    * @returns The disposable container.
    */
-  public addCallback(callback: () => void, target?: any): Disposable {
+  public addCallback(callback: () => void, target?: unknown): Disposable {
     this._throwIfDisposed()
     return this.add({
       dispose() {
@@ -142,7 +142,7 @@ export class DisposableContainer implements Disposable {
  * @param target The target to bind the action to.
  * @returns The disposable.
  */
-export function disposable(action: () => void, target: any): Disposable {
+export function disposable(action: () => void, target: unknown): Disposable {
   return new DisposableContainer().addCallback(() => {
     action.call(target)
   })

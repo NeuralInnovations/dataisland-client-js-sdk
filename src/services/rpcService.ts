@@ -2,10 +2,12 @@ import { Service, type ServiceContext } from './service'
 import { MiddlewareService } from './middlewareService'
 
 export class RpcService extends Service {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async request(req: Request): Promise<Response> {
     throw new Error('Not implemented')
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   buildUrl(path: string): string {
     throw new Error('Not implemented')
   }

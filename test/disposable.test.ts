@@ -1,4 +1,4 @@
-import { DisposableContainer } from 'dataisland-sdk/dist/disposable'
+import { DisposableContainer } from '../src'
 
 test('DisposableContainer', () => {
   const disposable = new DisposableContainer()

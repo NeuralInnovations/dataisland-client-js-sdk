@@ -1,4 +1,4 @@
-import { version } from '../../../package.json'
+import { version } from '../package.json'
 import { _createApp } from './internal/createApp.impl'
 import { type AppBuilder } from './appBuilder'
 import { type AppSdk } from './appSdk'

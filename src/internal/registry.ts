@@ -42,24 +42,19 @@ export class RegistryItem<T> {
   ) {}
 
   asValue(value: T): void {
-    const type = (value as any).constructor as Constructor<T>
-    this.registry.set(type, new ValueProvider<T>(value))
+    this.registry.set(this.type, new ValueProvider<T>(value))
   }
 
-  asProvider<T>(
-    type: Constructor<T>,
-    provider: () => T,
-    oneTime: boolean = false
-  ): void {
-    this.registry.set(type, new MethodProvider<T>(provider, oneTime))
+  asProvider<T>(provider: () => T, oneTime: boolean = false): void {
+    this.registry.set(this.type, new MethodProvider<T>(provider, oneTime))
   }
 
-  asFactory<T>(type: Constructor<T>, provider: () => T): void {
-    this.registry.set(type, new MethodProvider<T>(provider, false))
+  asFactory<T>(provider: () => T): void {
+    this.registry.set(this.type, new MethodProvider<T>(provider, false))
   }
 
-  asSingleton<T>(type: Constructor<T>, provider: () => T): void {
-    this.registry.set(type, new MethodProvider<T>(provider, true))
+  asSingleton<T>(provider: () => T): void {
+    this.registry.set(this.type, new MethodProvider<T>(provider, true))
   }
 }
 

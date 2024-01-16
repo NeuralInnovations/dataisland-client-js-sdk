@@ -27,3 +27,5 @@ pids
 *.seed
 *.pid.lock
 .nx/
+/dist/
+/coverage/

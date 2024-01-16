@@ -100,7 +100,7 @@ export class AppImplementation implements AppSdk {
 
     const waitList: Array<Promise<void>> = []
     // call onRegister service's callback
-    services.forEach(([serviceContext, service]) => {
+    services.forEach(([serviceContext]) => {
       waitList.push(serviceContext.onRegister())
     })
 
@@ -108,7 +108,7 @@ export class AppImplementation implements AppSdk {
 
     waitList.length = 0
     // call onStart service's callback
-    services.forEach(([serviceContext, service]) => {
+    services.forEach(([serviceContext]) => {
       waitList.push(serviceContext.onStart())
     })
 

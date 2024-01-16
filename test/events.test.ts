@@ -1,4 +1,4 @@
-import { EventDispatcher } from '../../app/src/events'
+import { EventDispatcher } from '../src'
 
 test('Events, test general', () => {
   enum ET {
@@ -129,7 +129,7 @@ test('Events, test this', () => {
 })
 
 test('Events, test unsubscribe', () => {
-  const dispatch = new EventDispatcher<any, number>()
+  const dispatch = new EventDispatcher<unknown, number>()
 
   let index = 0
 

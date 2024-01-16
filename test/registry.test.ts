@@ -1,4 +1,4 @@
-import { Registry } from 'dataisland-sdk/dist/internal/registry'
+import { Registry } from '../src/internal/registry'
 
 class TestClass {
   constructor(public readonly value: string) {}
@@ -13,7 +13,7 @@ test('Registry, test factory', () => {
 
   let index = 0
 
-  registry.map(TestClass).asFactory(TestClass, () => {
+  registry.map(TestClass).asFactory(() => {
     index++
     return new TestClass(`test_${index}`)
   })
@@ -37,7 +37,7 @@ test('Registry, test value', () => {
 test('Registry, test singleton', () => {
   const registry = new Registry()
 
-  registry.map(TestClass).asSingleton(TestClass, () => new TestClass('test1'))
+  registry.map(TestClass).asSingleton(() => new TestClass('test1'))
   const singleton = registry.get(TestClass)
   expect(singleton).toBeInstanceOf(TestClass)
   expect(singleton).toBe(registry.get(TestClass))

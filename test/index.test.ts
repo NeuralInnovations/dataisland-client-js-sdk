@@ -1,18 +1,15 @@
-import { version } from '../../../package.json'
+import { version } from '../package.json'
 import {
+  BasicCredential,
   appSdk,
   SDK_VERSION,
   DEFAULT_NAME,
   DEFAULT_HOST
-} from 'dataisland-sdk/dist'
-import { BasicCredential } from 'dataisland-sdk/dist/credentials'
-import type { AppBuilder } from 'dataisland-sdk/dist/appBuilder'
-import { MiddlewareService } from 'dataisland-sdk/dist/services/middlewareService'
-import { CredentialService } from 'dataisland-sdk/dist/services/credentialService'
-import {
-  RpcService,
-  RpcServiceImpl
-} from 'dataisland-sdk/dist/services/rpcService'
+} from '../src'
+import { MiddlewareService } from '../src/services/middlewareService'
+import { CredentialService } from '../src/services/credentialService'
+import { RpcService, RpcServiceImpl } from '../src/services/rpcService'
+import { AppBuilder } from '../src/appBuilder'
 
 test('SDK_VERSION', () => {
   expect(SDK_VERSION).toBe(version)

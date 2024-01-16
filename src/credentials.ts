@@ -10,6 +10,7 @@ export abstract class CredentialBase {
 }
 
 export class DefaultCredential extends CredentialBase {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onRegister(lifetime: Lifetime, context: Context): void {
     // Do nothing.
   }

@@ -1,7 +1,6 @@
 import { type CredentialBase } from '../credentials'
 import { Service } from './service'
 import { type DisposableContainer } from '../disposable'
-import { MiddlewareService } from './middlewareService'
 
 export class CredentialService extends Service {
   private _credentialDispose?: DisposableContainer = undefined

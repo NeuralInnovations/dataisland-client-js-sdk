@@ -1,4 +1,5 @@
 import { type Events, type Event } from './events'
+import { type Disposable } from './disposable'
 
 export interface Collection<T> {
   get collection(): T[]
@@ -58,8 +59,8 @@ export interface Chat {
   ) => Disposable
   messages: ChatMessage[]
   fetch: () => Promise<void>
-  subscribe: () => any
-  unsubscribe: () => any
+  subscribe: () => void
+  unsubscribe: () => void
 }
 
 export interface Chats {
