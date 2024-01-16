@@ -1,4 +1,4 @@
-import { Registry } from 'data-island/dist/internal/registry'
+import { Registry } from 'dataisland-sdk/dist/internal/registry'
 
 class TestClass {
   constructor(public readonly value: string) {}

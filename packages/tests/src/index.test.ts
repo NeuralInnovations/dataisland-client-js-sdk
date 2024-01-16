@@ -4,15 +4,15 @@ import {
   SDK_VERSION,
   DEFAULT_NAME,
   DEFAULT_HOST
-} from 'data-island/dist'
-import { BasicCredential } from 'data-island/dist/credentials'
-import type { AppBuilder } from 'data-island/dist/appBuilder'
-import { MiddlewareService } from 'data-island/dist/services/middlewareService'
-import { CredentialService } from 'data-island/dist/services/credentialService'
+} from 'dataisland-sdk/dist'
+import { BasicCredential } from 'dataisland-sdk/dist/credentials'
+import type { AppBuilder } from 'dataisland-sdk/dist/appBuilder'
+import { MiddlewareService } from 'dataisland-sdk/dist/services/middlewareService'
+import { CredentialService } from 'dataisland-sdk/dist/services/credentialService'
 import {
   RpcService,
   RpcServiceImpl
-} from 'data-island/dist/services/rpcService'
+} from 'dataisland-sdk/dist/services/rpcService'
 
 test('SDK_VERSION', () => {
   expect(SDK_VERSION).toBe(version)
