@@ -1,5 +1,5 @@
 {
-  "name": "dataisland-sdk",
+  "name": "@neuralinnovations/dataisland-sdk",
   "version": "0.0.1-dev1",
   "description": "SDK for DataIsland project",
   "licenses": [
