@@ -1,7 +1,7 @@
 {
   "name": "dataisland-sdk",
   "version": "0.0.1-dev1",
-  "description": "",
+  "description": "SDK for DataIsland project",
   "licenses": [
     {
       "type": "Apache-2.0",
@@ -16,8 +16,8 @@
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx src"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "Neural Innovations LTD",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "^7.22.11",
     "@babel/plugin-transform-modules-commonjs": "7.22.11",
