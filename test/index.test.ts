@@ -1,5 +1,6 @@
 import { version } from '../package.json'
 import {
+  AppSdk,
   BasicCredential,
   appSdk,
   SDK_VERSION,
@@ -80,4 +81,22 @@ test('SDK, middleware', async () => {
   )
   expect(response2).not.toBeUndefined()
   expect(response2?.status).toBe(400)
+})
+
+test('SDK, it is impossible to setup the same application', async () => {
+  // this test is not stable if you run all tests at once
+  // because the app is cached all app instances
+  // we use a random identifier every time
+  const testId = Math.random().toString(16)
+  appSdk(`test_${testId}`, async () => {}).then(() => {})
+  await expect(appSdk(`test_${testId}`, async () => {})).rejects.toThrow()
+})
+
+test('SDK, setup and get this app', async () => {
+  // this test is not stable if you run all tests at once
+  // because the app is cached all app instances
+  // we use a random identifier every time
+  const testId = Math.random().toString(16)
+  appSdk(`test_${testId}`, async () => {}).then(() => {})
+  await expect(appSdk(`test_${testId}`)).resolves.toBeInstanceOf(AppSdk)
 })

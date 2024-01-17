@@ -8,6 +8,7 @@ export * from './types'
 export * from './disposable'
 export * from './types'
 export * from './credentials'
+export * from './appSdk'
 
 const _appsNotReady = new Map<string, Promise<AppSdk>>()
 const _appsReady = new Map<string, AppSdk>()
@@ -62,8 +63,15 @@ export async function appSdk(
       })
       .catch(reason => {
         console.error(`Error: ${reason}`)
+        _appsNotReady.delete(name ?? DEFAULT_NAME)
       })
     _appsNotReady.set(name, appPromise)
+  } else {
+    if (setup !== undefined) {
+      throw new Error(
+        `App ${name} is initializing. You can't setup the same again.`
+      )
+    }
   }
   return await appPromise
 }

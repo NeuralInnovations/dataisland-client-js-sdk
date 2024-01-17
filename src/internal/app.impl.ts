@@ -8,10 +8,10 @@ import { type Service, ServiceContext } from '../services/service'
 import { CredentialService } from '../services/credentialService'
 import { MiddlewareService } from '../services/middlewareService'
 import { type CredentialBase } from '../credentials'
-import { type AppSdk } from '../appSdk'
+import { AppSdk } from '../appSdk'
 import { RpcService, RpcServiceImpl } from '../services/rpcService'
 
-export class AppImplementation implements AppSdk {
+export class AppImplementation extends AppSdk {
   readonly name: string
   private _host: string = DEFAULT_HOST
   private _automaticDataCollectionEnabled: boolean = true
@@ -20,6 +20,7 @@ export class AppImplementation implements AppSdk {
   private readonly _disposable: DisposableContainer
 
   constructor(name: string) {
+    super()
     this.name = name
     this._registry = new Registry()
     this._disposable = new DisposableContainer()

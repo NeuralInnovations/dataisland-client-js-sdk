@@ -5,36 +5,36 @@ import type { Constructor } from './internal/registry'
 /**
  * DataIsland App instance.
  */
-export interface AppSdk {
+export abstract class AppSdk {
   /**
    * The name of this app.
    */
-  get name(): string
+  abstract get name(): string
 
   /**
    * The host of this app.
    */
-  get host(): string
+  abstract get host(): string
 
   /**
    * The automaticDataCollectionEnabled of this app.
    */
-  get automaticDataCollectionEnabled(): boolean
+  abstract get automaticDataCollectionEnabled(): boolean
 
   /**
    * The lifetime of this app.
    */
-  get lifetime(): Lifetime
+  abstract get lifetime(): Lifetime
 
   /**
    * The credential of this app.
    */
-  get credential(): CredentialBase | undefined
+  abstract get credential(): CredentialBase | undefined
 
-  set credential(value: CredentialBase)
+  abstract set credential(value: CredentialBase)
 
   /**
    * Gets the service registered with the given type.
    */
-  resolve: <T>(type: Constructor<T>) => T | undefined
+  abstract resolve: <T>(type: Constructor<T>) => T | undefined
 }
