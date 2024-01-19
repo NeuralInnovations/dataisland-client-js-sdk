@@ -9,7 +9,7 @@ import {
 } from '../src'
 import { MiddlewareService } from '../src/services/middlewareService'
 import { CredentialService } from '../src/services/credentialService'
-import { RpcService, RpcServiceImpl } from '../src/services/rpcService'
+import { RpcService } from '../src/services/rpcService'
 import { AppBuilder } from '../src/appBuilder'
 
 test('SDK_VERSION', () => {
@@ -46,7 +46,7 @@ test('SDK, services', async () => {
   expect(app.resolve(MiddlewareService)).toBe(middlewareService)
   expect(app.resolve(CredentialService)).not.toBeUndefined()
   expect(app.resolve(RpcService)).not.toBeUndefined()
-  expect(app.resolve(RpcService)).toBeInstanceOf(RpcServiceImpl)
+  expect(app.resolve(RpcService)).toBeInstanceOf(RpcService)
 })
 
 test('SDK, middleware', async () => {

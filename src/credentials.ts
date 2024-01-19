@@ -1,6 +1,6 @@
 import { MiddlewareService } from './services/middlewareService'
 import { type Lifetime } from './disposable'
-import { type Context } from './internal/context'
+import { type Context } from './context'
 
 /**
  * DataIsland App credential.

@@ -2,14 +2,19 @@ import { DEFAULT_HOST } from '../index'
 import { type AppBuilder } from '../appBuilder'
 import { AppBuilderImplementation } from './appBuilder.impl'
 import { type Constructor, Registry } from './registry'
-import { Context } from './context'
+import { Context } from '../context'
 import { DisposableContainer, type Lifetime } from '../disposable'
 import { type Service, ServiceContext } from '../services/service'
 import { CredentialService } from '../services/credentialService'
 import { MiddlewareService } from '../services/middlewareService'
 import { type CredentialBase } from '../credentials'
 import { AppSdk } from '../appSdk'
-import { RpcService, RpcServiceImpl } from '../services/rpcService'
+import { RpcService } from '../services/rpcService'
+import { CommandService } from '../services/commandService'
+import {
+  StartCommandHandler,
+  StartCommand
+} from '../commands/startCommandHandler'
 
 export class AppImplementation extends AppSdk {
   readonly name: string
@@ -25,6 +30,12 @@ export class AppImplementation extends AppSdk {
     this._registry = new Registry()
     this._disposable = new DisposableContainer()
     this._context = new Context(this._registry, this._disposable.lifetime)
+
+    this._registry.map(Context).asValue(this._context)
+  }
+
+  get context(): Context {
+    return this._context
   }
 
   get credential(): CredentialBase | undefined {
@@ -55,6 +66,25 @@ export class AppImplementation extends AppSdk {
     // create app builder
     const builder = new AppBuilderImplementation()
 
+    // register commands
+    builder.registerCommand(StartCommand, (context: Context) => {
+      return new StartCommandHandler(context)
+    })
+
+    // register services
+    builder.registerService(CredentialService, (context: ServiceContext) => {
+      return new CredentialService(context)
+    })
+    builder.registerService(MiddlewareService, (context: ServiceContext) => {
+      return new MiddlewareService(context)
+    })
+    builder.registerService(RpcService, (context: ServiceContext) => {
+      return new RpcService(context, builder.host)
+    })
+    builder.registerService(CommandService, (context: ServiceContext) => {
+      return new CommandService(context)
+    })
+
     // call customer setup
     if (setup !== undefined) {
       await setup(builder)
@@ -68,17 +98,6 @@ export class AppImplementation extends AppSdk {
       builder.automaticDataCollectionEnabled
 
     // register services
-    builder.registerService(CredentialService, (context: ServiceContext) => {
-      return new CredentialService(context)
-    })
-    builder.registerService(MiddlewareService, (context: ServiceContext) => {
-      return new MiddlewareService(context)
-    })
-    builder.registerService(RpcService, (context: ServiceContext) => {
-      return new RpcServiceImpl(context, builder.host) as RpcService
-    })
-
-    // register services
     const services: Array<[ServiceContext, Service]> = []
     builder.services.forEach(serviceFactory => {
       const serviceContext = new ServiceContext(
@@ -90,31 +109,47 @@ export class AppImplementation extends AppSdk {
       }, serviceContext)
       const serviceInstance = serviceFactory[1](serviceContext)
       services.push([serviceContext, serviceInstance])
-      this._registry.set(serviceFactory[0], {
-        provide: () => serviceInstance
-      })
+      this._registry.map(serviceFactory[0]).asValue(serviceInstance)
     })
 
     builder.middlewares.forEach(middleware => {
       this.resolve(MiddlewareService)?.useMiddleware(middleware)
     })
 
+    builder.commands.forEach(command => {
+      this.resolve(CommandService)?.register(command[0], command[1])
+    })
+
+    //-------------------------------------------------------------------------
+    // register services
+    //-------------------------------------------------------------------------
     const waitList: Array<Promise<void>> = []
     // call onRegister service's callback
     services.forEach(([serviceContext]) => {
       waitList.push(serviceContext.onRegister())
     })
 
+    // wait for all services to register
     await Promise.all(waitList)
+    //-------------------------------------------------------------------------
 
+    //-------------------------------------------------------------------------
+    // start services
+    //-------------------------------------------------------------------------
     waitList.length = 0
     // call onStart service's callback
     services.forEach(([serviceContext]) => {
       waitList.push(serviceContext.onStart())
     })
 
+    // wait for all services to start
     await Promise.all(waitList)
+    //-------------------------------------------------------------------------
 
-    await Promise.resolve()
+    // start app, execute start command
+    await this.context.execute(new StartCommand())
+
+    // log app initialized
+    console.log(`AppSDK ${this.name} initialized`)
   }
 }

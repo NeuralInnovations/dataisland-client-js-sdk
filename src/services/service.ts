@@ -1,4 +1,4 @@
-import { type Context } from '../internal/context'
+import { type Context } from '../context'
 import { type Constructor } from '../internal/registry'
 import { type DisposableContainer, type Lifetime } from '../disposable'
 

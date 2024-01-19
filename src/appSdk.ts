@@ -1,6 +1,6 @@
 import type { Lifetime } from './disposable'
 import type { CredentialBase } from './credentials'
-import type { Constructor } from './internal/registry'
+import { Context } from './context'
 
 /**
  * DataIsland App instance.
@@ -34,7 +34,7 @@ export abstract class AppSdk {
   abstract set credential(value: CredentialBase)
 
   /**
-   * Gets the service registered with the given type.
+   * The context of this app.
    */
-  abstract resolve: <T>(type: Constructor<T>) => T | undefined
+  abstract get context(): Context
 }
