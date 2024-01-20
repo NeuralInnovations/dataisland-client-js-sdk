@@ -1,20 +1,14 @@
-import { type Events, type Event } from './events'
+import { type Event } from './events'
 import { type Disposable } from './disposable'
+import {
+  Organization,
+  OrganizationEvent,
+  OrganizationId
+} from './storages/organizations'
 
-export interface Collection<T> {
-  get collection(): T[]
-}
-
-export type OrganizationId = string
 export type WorkspaceId = string
 export type ChatId = string
 export type FileId = string
-
-export enum OrganizationEvent {
-  ADDED,
-  REMOVED,
-  UPDATED
-}
 
 export enum FileEvent {
   ADDED,
@@ -82,17 +76,6 @@ export interface Invites {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Statistics {}
 
-export interface Organization {
-  name: string
-  description: string
-  id: OrganizationId
-  chats: Chats
-  files: Files
-  invites: Invites
-  statistics: Statistics
-  workspaces: Workspaces
-}
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Workspace {}
 
@@ -100,11 +83,4 @@ export interface Workspaces {
   newWorkspace: (name: string) => Promise<Workspace>
 
   delete: (id: WorkspaceId) => Promise<void>
-}
-
-export interface Organizations
-  extends Events<OrganizationEvent, Organization>,
-    Collection<Organization> {
-  create: (name: string) => Promise<Organization>
-  delete: (id: OrganizationId) => Promise<void>
 }
