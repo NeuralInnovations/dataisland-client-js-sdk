@@ -15,6 +15,10 @@ import {
   StartCommandHandler,
   StartCommand
 } from '../commands/startCommandHandler'
+import { UserProfileService } from '../services/userProfileService'
+import { OrganizationService } from '../services/organizationService'
+import { Organizations } from '../storages/organizations'
+import { UserProfile } from '../storages/userProfile'
 
 export class AppImplementation extends AppSdk {
   readonly name: string
@@ -60,6 +64,14 @@ export class AppImplementation extends AppSdk {
     return this._host
   }
 
+  get organizations(): Organizations {
+    return this.resolve(OrganizationService)?.organizations as Organizations
+  }
+
+  get userProfile(): UserProfile {
+    return this.resolve(UserProfileService)?.userProfile as UserProfile
+  }
+
   async initialize(
     setup: ((builder: AppBuilder) => Promise<void>) | undefined
   ): Promise<void> {
@@ -83,6 +95,18 @@ export class AppImplementation extends AppSdk {
     })
     builder.registerService(CommandService, (context: ServiceContext) => {
       return new CommandService(context)
+    })
+    builder.registerService(UserProfileService, (context: ServiceContext) => {
+      return new UserProfileService(context)
+    })
+    builder.registerService(OrganizationService, (context: ServiceContext) => {
+      return new OrganizationService(context)
+    })
+
+    // register middlewares
+    builder.registerMiddleware(async (req, next) => {
+      req.headers.set('accept', 'text/plain')
+      await next(req)
     })
 
     // call customer setup
