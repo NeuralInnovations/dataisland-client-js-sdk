@@ -1,9 +1,5 @@
 import { type Disposable, DisposableContainer } from './disposable'
 
-export interface Events<TE, TD> {
-  get events(): EventDispatcher<TE, TD>
-}
-
 export interface Input<ET, DT> {
   type?: ET
   data: DT
