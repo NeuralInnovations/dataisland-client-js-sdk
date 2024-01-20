@@ -12,7 +12,7 @@ export abstract class AppBuilder {
   /**
    * Add a middleware to the app.
    */
-  abstract addMiddleware(middleware: Middleware): AppBuilder
+  abstract registerMiddleware(middleware: Middleware): AppBuilder
 
   /**
    * Host of the app.

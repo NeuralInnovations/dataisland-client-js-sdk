@@ -29,7 +29,7 @@ test('Custom SDK settings', async () => {
     builder.useHost('https://test.com')
     builder.useAutomaticDataCollectionEnabled(false)
     builder.useCredential(new BasicCredential('email', 'password'))
-    builder.addMiddleware(async (req, next) => {
+    builder.registerMiddleware(async (req, next) => {
       req.headers.set('X-Test', 'test')
       await next(req)
     })

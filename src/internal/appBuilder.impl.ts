@@ -40,7 +40,7 @@ export class AppBuilderImplementation extends AppBuilder {
     return this
   }
 
-  addMiddleware(middleware: Middleware): AppBuilder {
+  registerMiddleware(middleware: Middleware): AppBuilder {
     if (middleware === undefined || middleware === null) {
       throw new Error('addMiddleware, middleware is undefined|null')
     }
