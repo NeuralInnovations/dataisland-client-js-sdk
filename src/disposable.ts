@@ -2,7 +2,7 @@
  * Represents an object that can be disposed.
  */
 export interface Disposable {
-  dispose: () => void
+  dispose(): void
 }
 
 /**
