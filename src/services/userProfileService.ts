@@ -65,9 +65,12 @@ export class UserProfileService extends Service {
     return this.impl
   }
 
-  async fetch() {
+  async fetch(fireError: boolean = true) {
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder('api/v1/Users/self2').sendGet()
+    if (fireError && !response.ok) {
+      throw new Error('Failed to fetch user profile.')
+    }
     const content = (await response.json()) as UserInfoResponse
     this.impl.updateFrom(content)
 

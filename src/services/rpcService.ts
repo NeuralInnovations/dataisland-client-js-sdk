@@ -58,6 +58,9 @@ export class RpcService extends Service {
     if (this.host.endsWith('/') && path.startsWith('/')) {
       return new URL(`${this.host}${path.slice(1)}`)
     }
+    if (!this.host.endsWith('/') && !path.startsWith('/')) {
+      return new URL(`${this.host}/${path}`)
+    }
     return new URL(`${this.host}${path}`)
   }
 

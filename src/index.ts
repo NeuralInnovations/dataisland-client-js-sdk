@@ -26,7 +26,7 @@ export const DEFAULT_NAME = '[DEFAULT]'
 /**
  * Default DataIsland App host.
  */
-export const DEFAULT_HOST = 'https://dataisland.com.ua'
+export const DEFAULT_HOST = 'https://api.dataisland.com.ua'
 
 export function sdks(): AppSdk[] {
   return Array.from(_appsReady.values())

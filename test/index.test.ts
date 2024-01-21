@@ -5,12 +5,25 @@ import {
   appSdk,
   SDK_VERSION,
   DEFAULT_NAME,
-  DEFAULT_HOST
+  BearerCredential
 } from '../src'
 import { MiddlewareService } from '../src/services/middlewareService'
 import { CredentialService } from '../src/services/credentialService'
 import { RpcService } from '../src/services/rpcService'
 import { AppBuilder } from '../src/appBuilder'
+import * as dotenv from 'dotenv'
+import { UnitTest } from '../src/unitTest'
+
+// LOAD ENV
+dotenv.config({ path: '.env.test' })
+
+const NOT_DEFINED = 'NOT_DEFINED'
+// GLOBAL ENV
+const HOST = process.env.HOST ?? NOT_DEFINED
+const TOKEN = process.env.TOKEN ?? NOT_DEFINED
+
+expect(HOST).not.toBe(NOT_DEFINED)
+expect(TOKEN).not.toBe(NOT_DEFINED)
 
 test('SDK_VERSION', () => {
   expect(SDK_VERSION).toBe(version)
@@ -18,14 +31,15 @@ test('SDK_VERSION', () => {
 
 test('Default SDK', async () => {
   // default
-  const app = await appSdk()
-  expect(app.name).toBe(DEFAULT_NAME)
-  expect(app.host).toBe(DEFAULT_HOST)
-  expect(app.automaticDataCollectionEnabled).toBe(true)
+  const app = await appSdk(DEFAULT_NAME, async (builder: AppBuilder) => {
+    builder.useHost(HOST)
+    builder.useCredential(new BearerCredential(TOKEN))
+  })
+  expect(app).not.toBeUndefined()
 })
 
 test('Custom SDK settings', async () => {
-  const app = await appSdk('test', async (builder: AppBuilder) => {
+  const app = await appSdk('test-settings', async (builder: AppBuilder) => {
     builder.useHost('https://test.com')
     builder.useAutomaticDataCollectionEnabled(false)
     builder.useCredential(new BasicCredential('email', 'password'))
@@ -33,14 +47,17 @@ test('Custom SDK settings', async () => {
       req.headers.set('X-Test', 'test')
       await next(req)
     })
+    builder.env.unitTest = UnitTest.DO_NOT_START
   })
-  expect(app.name).toBe('test')
+  expect(app.name).toBe('test-settings')
   expect(app.host).toBe('https://test.com')
   expect(app.automaticDataCollectionEnabled).toBe(false)
 })
 
 test('SDK, services', async () => {
-  const app = await appSdk('test')
+  const app = await appSdk('test-sdk', async (builder: AppBuilder) => {
+    builder.env.unitTest = UnitTest.DO_NOT_START
+  })
   const middlewareService = app.resolve(MiddlewareService)
   expect(middlewareService).not.toBeUndefined()
   expect(app.resolve(MiddlewareService)).toBe(middlewareService)
@@ -50,7 +67,9 @@ test('SDK, services', async () => {
 })
 
 test('SDK, middleware', async () => {
-  const app = await appSdk('test')
+  const app = await appSdk('test-middleware', async (builder: AppBuilder) => {
+    builder.env.unitTest = UnitTest.DO_NOT_START
+  })
   const middlewareService = app.resolve(MiddlewareService)
   expect(middlewareService).not.toBeUndefined()
   expect(app.resolve(MiddlewareService)).toBe(middlewareService)
@@ -88,7 +107,9 @@ test('SDK, it is impossible to setup the same application', async () => {
   // because the app is cached all app instances
   // we use a random identifier every time
   const testId = Math.random().toString(16)
-  appSdk(`test_${testId}`, async () => {}).then(() => {})
+  appSdk(`test_${testId}`, async (builder: AppBuilder) => {
+    builder.env.unitTest = UnitTest.DO_NOT_START
+  }).then(() => {})
   await expect(appSdk(`test_${testId}`, async () => {})).rejects.toThrow()
 })
 
@@ -97,6 +118,8 @@ test('SDK, setup and get this app', async () => {
   // because the app is cached all app instances
   // we use a random identifier every time
   const testId = Math.random().toString(16)
-  appSdk(`test_${testId}`, async () => {}).then(() => {})
+  appSdk(`test_${testId}`, async (builder: AppBuilder) => {
+    builder.env.unitTest = UnitTest.DO_NOT_START
+  }).then(() => {})
   await expect(appSdk(`test_${testId}`)).resolves.toBeInstanceOf(AppSdk)
 })

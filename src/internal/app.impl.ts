@@ -19,6 +19,7 @@ import { UserProfileService } from '../services/userProfileService'
 import { OrganizationService } from '../services/organizationService'
 import { Organizations } from '../storages/organizations'
 import { UserProfile } from '../storages/userProfile'
+import { isUnitTestDoNotStart } from '../unitTest'
 
 export class AppImplementation extends AppSdk {
   readonly name: string
@@ -144,6 +145,8 @@ export class AppImplementation extends AppSdk {
       this.resolve(CommandService)?.register(command[0], command[1])
     })
 
+    this.credential = builder.credential
+
     //-------------------------------------------------------------------------
     // register services
     //-------------------------------------------------------------------------
@@ -171,7 +174,9 @@ export class AppImplementation extends AppSdk {
     //-------------------------------------------------------------------------
 
     // start app, execute start command
-    await this.context.execute(new StartCommand())
+    if (!isUnitTestDoNotStart(builder.env)) {
+      await this.context.execute(new StartCommand())
+    }
 
     // log app initialized
     console.log(`AppSDK ${this.name} initialized`)

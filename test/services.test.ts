@@ -1,14 +1,17 @@
 import { appSdk, BasicCredential, DefaultCredential } from '../src'
 import { CredentialService } from '../src/services/credentialService'
 import { MiddlewareService } from '../src/services/middlewareService'
+import { UnitTest } from '../src/unitTest'
 
 test('CredentialService', async () => {
-  const app = await appSdk('test')
+  const app = await appSdk('test-services', async builder => {
+    builder.env.unitTest = UnitTest.DO_NOT_START
+  })
   const credentialService = app.resolve(CredentialService)
   expect(credentialService).not.toBeUndefined()
   expect(app.resolve(CredentialService)).toBe(credentialService)
   expect(app.resolve(CredentialService)).toBeInstanceOf(CredentialService)
-  expect(app.credential).toBeUndefined()
+  expect(app.credential).not.toBeUndefined()
 
   const credential = new BasicCredential('email', 'password')
   app.credential = credential

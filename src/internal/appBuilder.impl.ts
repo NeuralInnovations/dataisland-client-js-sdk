@@ -6,8 +6,12 @@ import { type Service, type ServiceContext } from '../services/service'
 import { type Constructor } from './registry'
 import { Command, CommandHandler } from '../services/commandService'
 import { Context } from '../context'
+import { UnitTest } from '../unitTest'
 
 export class AppBuilderImplementation extends AppBuilder {
+  envData: Record<string, any> = {
+    unitTest: UnitTest.DO_NOTHING
+  }
   host: string = DEFAULT_HOST
   automaticDataCollectionEnabled: boolean = true
   credential: CredentialBase = new DefaultCredential()
@@ -16,6 +20,10 @@ export class AppBuilderImplementation extends AppBuilder {
   commands: Array<
     [Constructor<any>, (context: Context) => CommandHandler<any>]
   > = []
+
+  get env(): Record<string, any> {
+    return this.envData
+  }
 
   useHost(host: string): AppBuilder {
     this.host = host ?? DEFAULT_HOST

@@ -10,6 +10,11 @@ import { Context } from './context'
  */
 export abstract class AppBuilder {
   /**
+   * Set custom data.
+   */
+  abstract get env(): Record<string, any>
+
+  /**
    * Add a middleware to the app.
    */
   abstract registerMiddleware(middleware: Middleware): AppBuilder
