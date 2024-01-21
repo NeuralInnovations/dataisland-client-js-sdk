@@ -39,12 +39,15 @@ export class OrganizationService extends Service {
   }
 
   updateFrom(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     settings: UserSettings,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     adminInOrganization: string[],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     organizations: OrganizationDto[]
   ) {
-    console.log(settings)
-    console.log(adminInOrganization)
-    console.log(organizations)
+    // console.log(settings)
+    // console.log(adminInOrganization)
+    // console.log(organizations)
   }
 }

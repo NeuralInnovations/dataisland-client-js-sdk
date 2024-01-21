@@ -19,7 +19,7 @@ import { UserProfileService } from '../services/userProfileService'
 import { OrganizationService } from '../services/organizationService'
 import { Organizations } from '../storages/organizations'
 import { UserProfile } from '../storages/userProfile'
-import { isUnitTestDoNotStart } from '../unitTest'
+import { isUnitTestDoNotStart, isUnitTestMask, UnitTest } from '../unitTest'
 
 export class AppImplementation extends AppSdk {
   readonly name: string
@@ -174,11 +174,13 @@ export class AppImplementation extends AppSdk {
     //-------------------------------------------------------------------------
 
     // start app, execute start command
-    if (!isUnitTestDoNotStart(builder.env)) {
+    if (!isUnitTestMask(builder.env, UnitTest.DO_NOT_START)) {
       await this.context.execute(new StartCommand())
     }
 
     // log app initialized
-    console.log(`AppSDK ${this.name} initialized`)
+    if (!isUnitTestMask(builder.env, UnitTest.DO_NOT_PRINT_INITIALIZED_LOG)) {
+      console.log(`AppSDK ${this.name} initialized`)
+    }
   }
 }

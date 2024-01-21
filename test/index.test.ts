@@ -12,14 +12,7 @@ import { CredentialService } from '../src/services/credentialService'
 import { RpcService } from '../src/services/rpcService'
 import { AppBuilder } from '../src/appBuilder'
 import { UnitTest } from '../src/unitTest'
-
-const NOT_DEFINED = 'NOT_DEFINED'
-// GLOBAL ENV
-const HOST = process.env.HOST ?? NOT_DEFINED
-const TOKEN = process.env.TOKEN ?? NOT_DEFINED
-
-expect(HOST).not.toBe(NOT_DEFINED)
-expect(TOKEN).not.toBe(NOT_DEFINED)
+import { HOST, TOKEN } from './setup'
 
 test('SDK_VERSION', () => {
   expect(SDK_VERSION).toBe(version)
