@@ -1,10 +1,10 @@
 import { appSdk, BasicCredential, DefaultCredential } from '../src'
 import { CredentialService } from '../src/services/credentialService'
 import { MiddlewareService } from '../src/services/middlewareService'
-import { UnitTest, UnitTestProfile } from '../src/unitTest'
+import { UnitTest, AppSdkUnitTest } from '../src/unitTest'
 
 test('CredentialService', async () => {
-  await UnitTestProfile.test(UnitTest.DEFAULT, async () => {
+  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
     const app = await appSdk('test-services', async builder => {
       builder.env.unitTest = UnitTest.DO_NOT_START
     })

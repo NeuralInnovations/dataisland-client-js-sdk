@@ -107,7 +107,8 @@ export class AppImplementation extends AppSdk {
     // register middlewares
     builder.registerMiddleware(async (req, next) => {
       req.headers.set('accept', 'text/plain')
-      await next(req)
+      req.headers.set('content-type', 'application/json')
+      return await next(req)
     })
 
     // call customer setup

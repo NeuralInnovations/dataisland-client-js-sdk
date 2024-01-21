@@ -31,7 +31,8 @@ export abstract class Organization {
 export enum OrganizationEvent {
   ADDED = 'added',
   REMOVED = 'removed',
-  CHANGED = 'changed'
+  CHANGED = 'changed',
+  CURRENT_CHANGED = 'currentChanged'
 }
 
 /**
@@ -39,7 +40,7 @@ export enum OrganizationEvent {
  */
 export abstract class Organizations extends EventDispatcher<
   OrganizationEvent,
-  Organization
+  Organization | Organizations
 > {
   /**
    * User's organizations.
@@ -56,6 +57,12 @@ export abstract class Organizations extends EventDispatcher<
    * Get organization by id.
    */
   abstract get(id: OrganizationId): Organization
+
+  /**
+   * Try to get organization by id.
+   * @param id
+   */
+  abstract tryGet(id: OrganizationId): Organization | undefined
 
   /**
    * Create new organization.

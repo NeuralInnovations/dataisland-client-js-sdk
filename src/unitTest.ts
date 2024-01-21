@@ -9,7 +9,7 @@ export enum UnitTest {
 export type UnitTestProfileSyncAction = () => void
 export type UnitTestProfileAsyncAction = () => Promise<void>
 
-export class UnitTestProfile {
+export class AppSdkUnitTest {
   private static _stack: UnitTest[] = [UnitTest.DO_NOTHING]
 
   public static get current(): UnitTest {
@@ -26,7 +26,7 @@ export class UnitTestProfile {
       if (result) {
         await result
       }
-      UnitTestProfile.end()
+      AppSdkUnitTest.end()
     }
   }
 
@@ -38,5 +38,5 @@ export class UnitTestProfile {
 }
 
 export const isUnitTest = (mask: UnitTest): boolean => {
-  return (UnitTestProfile.current & mask) == mask
+  return (AppSdkUnitTest.current & mask) == mask
 }

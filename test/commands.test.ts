@@ -1,6 +1,6 @@
 import { Command, CommandHandler } from '../src/services/commandService'
 import { appSdk } from '../src'
-import { UnitTest, UnitTestProfile } from '../src/unitTest'
+import { UnitTest, AppSdkUnitTest } from '../src/unitTest'
 
 class Cmd extends Command {
   constructor(public readonly name: string = 'test') {
@@ -15,7 +15,7 @@ class CmdHandler extends CommandHandler<Cmd> {
 }
 
 test('Commands test', async () => {
-  await UnitTestProfile.test(UnitTest.DEFAULT, async () => {
+  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
     const app = await appSdk('test-commands', async builder => {
       builder.registerCommand(Cmd, context => new CmdHandler(context))
     })

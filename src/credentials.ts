@@ -34,7 +34,7 @@ export class BasicCredential extends CredentialBase {
     lifetime.add(
       service.useMiddleware(async (req, next) => {
         req.headers.set('Authorization', `Basic ${this.email}:${this.password}`)
-        await next(req)
+        return await next(req)
       })
     )
   }
@@ -56,7 +56,7 @@ export class BearerCredential extends CredentialBase {
     lifetime.add(
       service.useMiddleware(async (req, next) => {
         req.headers.set('Authorization', `Bearer ${this.token}`)
-        await next(req)
+        return await next(req)
       })
     )
   }

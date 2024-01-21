@@ -48,11 +48,14 @@ export class RequestBuilder {
     return this
   }
 
-  public async sendPost(body?: BodyInit | null): Promise<Response> {
-    const url = new URL(this._url.toString())
+  public async sendPost(body?: BodyInit | null | object): Promise<Response> {
+    const url = this._url
     url.search = this._searchParams.toString()
+    if (body !== undefined && body !== null && typeof body === 'object') {
+      body = JSON.stringify(body)
+    }
     return await this._request(
-      new Request(url.toString(), {
+      new Request(url, {
         method: 'POST',
         headers: this._headers,
         body
@@ -61,10 +64,10 @@ export class RequestBuilder {
   }
 
   public async sendGet(): Promise<Response> {
-    const url = new URL(this._url.toString())
+    const url = this._url
     url.search = this._searchParams.toString()
     return await this._request(
-      new Request(url.toString(), {
+      new Request(url, {
         method: 'GET',
         headers: this._headers
       })
@@ -72,21 +75,24 @@ export class RequestBuilder {
   }
 
   public async sendDelete(): Promise<Response> {
-    const url = new URL(this._url.toString())
+    const url = this._url
     url.search = this._searchParams.toString()
     return await this._request(
-      new Request(url.toString(), {
+      new Request(url, {
         method: 'DELETE',
         headers: this._headers
       })
     )
   }
 
-  public async sendPut(body?: BodyInit | null): Promise<Response> {
-    const url = new URL(this._url.toString())
+  public async sendPut(body?: BodyInit | null | object): Promise<Response> {
+    const url = this._url
     url.search = this._searchParams.toString()
+    if (body !== undefined && body !== null && typeof body === 'object') {
+      body = JSON.stringify(body)
+    }
     return await this._request(
-      new Request(url.toString(), {
+      new Request(url, {
         method: 'PUT',
         headers: this._headers,
         body

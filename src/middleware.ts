@@ -4,4 +4,4 @@
 export type Middleware = (
   req: Request,
   next: (req: Request) => Promise<Response>
-) => Promise<void>
+) => Promise<Response>

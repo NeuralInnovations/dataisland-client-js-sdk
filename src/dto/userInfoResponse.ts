@@ -23,12 +23,15 @@ export interface UserSettings {
   activeWorkspaceId: string
 }
 
+export interface OrganizationProfileDto {
+  name: string
+  description: string
+}
+
 export interface OrganizationDto {
-  isActive?: boolean
   id: string
   createdAt: number
   modifiedAt: number
   membersCount: number
-  moderatorsCount: number
-  profile: ProfileDto
+  profile: OrganizationProfileDto
 }

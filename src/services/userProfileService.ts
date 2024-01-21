@@ -49,7 +49,7 @@ class UserProfileImpl extends UserProfile {
     throw new Error('The profile is not loaded.')
   }
 
-  updateFrom(content: UserInfoResponse) {
+  initFrom(content: UserInfoResponse) {
     this.content = content
     this.dispatch({
       type: UserEvent.CHANGED,
@@ -72,12 +72,12 @@ export class UserProfileService extends Service {
       throw new Error('Failed to fetch user profile.')
     }
     const content = (await response.json()) as UserInfoResponse
-    this.impl.updateFrom(content)
+    this.impl.initFrom(content)
 
     const organizationService = this.resolve(
       OrganizationService
     ) as OrganizationService
-    organizationService.updateFrom(
+    organizationService.initFrom(
       content.user.settings,
       content.adminInOrganization,
       content.organizations

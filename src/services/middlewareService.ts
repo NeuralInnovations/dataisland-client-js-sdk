@@ -24,10 +24,12 @@ export class MiddlewareService extends Service {
     const processNext = async (request: Request): Promise<Response> => {
       index++
       if (index < middlewares.length) {
-        await middlewares[index](request, processNext)
+        return await middlewares[index](request, processNext)
+      } else {
+        return await next(request)
       }
-      return await next(request)
     }
+
     return await processNext(req)
   }
 }
