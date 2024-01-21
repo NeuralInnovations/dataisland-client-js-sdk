@@ -11,11 +11,7 @@ import { MiddlewareService } from '../src/services/middlewareService'
 import { CredentialService } from '../src/services/credentialService'
 import { RpcService } from '../src/services/rpcService'
 import { AppBuilder } from '../src/appBuilder'
-import * as dotenv from 'dotenv'
 import { UnitTest } from '../src/unitTest'
-
-// LOAD ENV
-dotenv.config({ path: '.env.test' })
 
 const NOT_DEFINED = 'NOT_DEFINED'
 // GLOBAL ENV
