@@ -18,7 +18,7 @@ export class AppSdkUnitTest {
 
   public static async test(
     unitTest: UnitTest = UnitTest.DEFAULT,
-    func?: UnitTestProfileSyncAction | UnitTestProfileAsyncAction
+    func: UnitTestProfileSyncAction | UnitTestProfileAsyncAction
   ): Promise<void> {
     this._stack.push(unitTest)
     if (func) {

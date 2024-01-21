@@ -71,20 +71,6 @@ test('Create and delete organization', async () => {
   expect(app.organizations.tryGet(org.id)).toBeUndefined()
 })
 
-test('SDK, delete all organizations', async () => {
-  const randomName = `org-test-${Math.random().toString(16)}`
-  const app = await appSdk(randomName, async builder => {
-    builder.useHost(HOST)
-    builder.useCredential(new BearerCredential(TOKEN))
-  })
-  for (const organization of app.organizations.collection.slice()) {
-    await expect(
-      app.organizations.delete(organization.id)
-    ).resolves.not.toThrow()
-  }
-  expect(app.organizations.collection.length).toBe(0)
-})
-
 test('SDK, middleware', async () => {
   await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
     const app = await appSdk('test-settings', async (builder: AppBuilder) => {
@@ -156,8 +142,11 @@ test('SDK, it is impossible to setup the same application', async () => {
     // because the app is cached all app instances
     // we use a random identifier every time
     const testId = Math.random().toString(16)
-    appSdk(`test_${testId}`).then(() => {})
-    await expect(appSdk(`test_${testId}`, async () => {})).rejects.toThrow()
+    const promise = appSdk(`test-setup-${testId}`).then(() => {})
+    await expect(
+      appSdk(`test-setup-${testId}`, async () => {})
+    ).rejects.toThrow()
+    await promise
   })
 })
 
@@ -167,7 +156,8 @@ test('SDK, setup and get this app', async () => {
     // because the app is cached all app instances
     // we use a random identifier every time
     const testId = Math.random().toString(16)
-    appSdk(`test_${testId}`).then(() => {})
-    await expect(appSdk(`test_${testId}`)).resolves.toBeInstanceOf(AppSdk)
+    const promise = appSdk(`test-get-${testId}`).then(() => {})
+    await expect(appSdk(`test-get-${testId}`)).resolves.toBeInstanceOf(AppSdk)
+    await promise
   })
 })

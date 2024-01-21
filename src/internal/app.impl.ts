@@ -34,7 +34,7 @@ export class AppImplementation extends AppSdk {
     this.name = name
     this._registry = new Registry()
     this._disposable = new DisposableContainer()
-    this._context = new Context(this._registry, this._disposable.lifetime)
+    this._context = new Context(this._registry, this._disposable.lifetime, name)
 
     this._registry.map(Context).asValue(this._context)
   }

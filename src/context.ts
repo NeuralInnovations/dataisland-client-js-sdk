@@ -8,7 +8,8 @@ import { Command, CommandService } from './services/commandService'
 export class Context {
   constructor(
     private readonly registry: Registry,
-    public readonly lifetime: Lifetime
+    public readonly lifetime: Lifetime,
+    public readonly appName: string
   ) {}
 
   /**
