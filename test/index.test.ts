@@ -5,7 +5,8 @@ import {
   appSdk,
   SDK_VERSION,
   DEFAULT_NAME,
-  BearerCredential
+  BearerCredential,
+  DebugCredential
 } from '../src'
 import { MiddlewareService } from '../src/services/middlewareService'
 import { CredentialService } from '../src/services/credentialService'
@@ -23,7 +24,7 @@ test('Default SDK', async () => {
   // default
   const app = await appSdk(DEFAULT_NAME, async (builder: AppBuilder) => {
     builder.useHost(HOST)
-    builder.useCredential(new BearerCredential(TOKEN))
+    builder.useCredential(new DebugCredential(TOKEN))
   })
   expect(app).not.toBeUndefined()
 })
@@ -32,7 +33,7 @@ test('Create and delete organization', async () => {
   const randomName = `org-test-${Math.random().toString(16)}`
   const app = await appSdk(randomName, async builder => {
     builder.useHost(HOST)
-    builder.useCredential(new BearerCredential(TOKEN))
+    builder.useCredential(new DebugCredential(TOKEN))
   })
 
   const initLength = app.organizations.collection.length

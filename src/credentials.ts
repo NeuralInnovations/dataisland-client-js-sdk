@@ -40,6 +40,28 @@ export class BasicCredential extends CredentialBase {
   }
 }
 
+export class DebugCredential extends CredentialBase {
+  readonly token: string
+
+  constructor(token: string) {
+    super()
+    this.token = token
+  }
+
+  onRegister(lifetime: Lifetime, context: Context): void {
+    const service = context.resolve(MiddlewareService)
+    if (service === undefined) {
+      throw new Error('MiddlewareService is not registered.')
+    }
+    lifetime.add(
+      service.useMiddleware(async (req, next) => {
+        req.headers.set('Authorization', `Debug ${this.token}`)
+        return await next(req)
+      })
+    )
+  }
+}
+
 export class BearerCredential extends CredentialBase {
   readonly token: string
 

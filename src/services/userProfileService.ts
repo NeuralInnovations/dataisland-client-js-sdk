@@ -69,7 +69,9 @@ export class UserProfileService extends Service {
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder('api/v1/Users/self2').sendGet()
     if (fireError && !response.ok) {
-      throw new Error('Failed to fetch user profile.')
+      throw new Error(
+        `Failed to fetch user profile. Status: ${response.status},${response.statusText}`
+      )
     }
     const content = (await response.json()) as UserInfoResponse
     this.impl.initFrom(content)
@@ -78,9 +80,9 @@ export class UserProfileService extends Service {
       OrganizationService
     ) as OrganizationService
     organizationService.initFrom(
-      content.user.settings,
       content.adminInOrganization,
-      content.organizations
+      content.organizations,
+      content.user.settings
     )
   }
 }

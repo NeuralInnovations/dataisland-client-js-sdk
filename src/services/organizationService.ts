@@ -17,11 +17,11 @@ export class OrganizationService extends Service {
   }
 
   initFrom(
-    settings: UserSettings,
     adminInOrganization: string[],
-    organizations: OrganizationDto[]
+    organizations: OrganizationDto[],
+    settings?: UserSettings | null
   ) {
-    this.impl.currentOrganizationId = settings.activeOrganizationId
+    this.impl.currentOrganizationId = settings?.activeOrganizationId
     for (const organization of organizations) {
       const org = new OrganizationImpl(this, this.impl).initFrom(
         organization,

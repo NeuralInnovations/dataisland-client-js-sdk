@@ -10,7 +10,7 @@ export interface UserDto {
   created_at: number
   modified_at: number
   profile: ProfileDto
-  settings: UserSettings
+  settings?: UserSettings | null
 }
 
 export interface ProfileDto {
