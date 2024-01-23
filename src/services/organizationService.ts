@@ -1,6 +1,6 @@
 import { Service } from './service'
 import {
-  OrganizationEvent,
+  OrganizationsEvent,
   OrganizationId,
   Organizations
 } from '../storages/organizations'
@@ -32,7 +32,7 @@ export class OrganizationService extends Service {
 
       // dispatch event, organization added
       this.impl.dispatch({
-        type: OrganizationEvent.ADDED,
+        type: OrganizationsEvent.ADDED,
         data: org
       })
     }
@@ -75,7 +75,7 @@ export class OrganizationService extends Service {
 
     // dispatch event, organization removed
     this.impl.dispatch({
-      type: OrganizationEvent.REMOVED,
+      type: OrganizationsEvent.REMOVED,
       data: org
     })
 
@@ -117,7 +117,7 @@ export class OrganizationService extends Service {
 
     // dispatch event, organization added
     this.impl.dispatch({
-      type: OrganizationEvent.ADDED,
+      type: OrganizationsEvent.ADDED,
       data: org
     })
 

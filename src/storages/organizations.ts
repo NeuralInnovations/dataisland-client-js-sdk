@@ -28,10 +28,9 @@ export abstract class Organization {
 /**
  * Organization event.
  */
-export enum OrganizationEvent {
+export enum OrganizationsEvent {
   ADDED = 'added',
   REMOVED = 'removed',
-  CHANGED = 'changed',
   CURRENT_CHANGED = 'currentChanged'
 }
 
@@ -39,8 +38,8 @@ export enum OrganizationEvent {
  * Organizations storage.
  */
 export abstract class Organizations extends EventDispatcher<
-  OrganizationEvent,
-  Organization | Organizations
+  OrganizationsEvent,
+  Organization
 > {
   /**
    * User's organizations.

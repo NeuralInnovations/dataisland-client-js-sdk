@@ -1,6 +1,6 @@
 import {
   Organization,
-  OrganizationEvent,
+  OrganizationsEvent,
   OrganizationId,
   Organizations
 } from '../storages/organizations'
@@ -25,11 +25,16 @@ export class OrganizationsImpl extends Organizations {
 
   set current(value: OrganizationId) {
     if (this.currentOrganizationId !== value) {
-      this.currentOrganizationId = value
-      this.dispatch({
-        type: OrganizationEvent.CURRENT_CHANGED,
-        data: this
-      })
+      const org = this.tryGet(value)
+      if (org) {
+        this.currentOrganizationId = value
+        this.dispatch({
+          type: OrganizationsEvent.CURRENT_CHANGED,
+          data: org
+        })
+      } else {
+        throw new Error(`Organization ${value} is not found`)
+      }
     }
   }
 
