@@ -2,13 +2,6 @@ import { type Event } from './events'
 import { type Disposable } from './disposable'
 
 export type ChatId = string
-export type FileId = string
-
-export enum FileEvent {
-  ADDED,
-  REMOVED,
-  UPDATED
-}
 
 export enum ChatEvent {
   ADDED,
@@ -20,20 +13,6 @@ export enum ChatMessageEvent {
   ADDED,
   REMOVED,
   UPDATED
-}
-
-export interface File {
-  id: FileId
-  name: string
-
-  download: () => Promise<void>
-}
-
-export interface Files {
-  files: File[]
-  on: (callback: (event: Event<FileEvent, File>) => void) => Disposable
-  fetch: () => Promise<void>
-  upload: (path: string, name: string) => Promise<File>
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
