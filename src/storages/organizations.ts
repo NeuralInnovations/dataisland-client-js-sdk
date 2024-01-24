@@ -1,4 +1,5 @@
 import { EventDispatcher } from '../events'
+import { Workspaces } from './workspaces'
 
 /**
  * Organization id.
@@ -23,6 +24,11 @@ export abstract class Organization {
    * Organization description.
    */
   abstract get description(): string
+
+  /**
+   * Workspaces.
+   */
+  abstract get workspaces(): Workspaces
 }
 
 /**

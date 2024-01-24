@@ -23,7 +23,7 @@ test('CredentialService', async () => {
     const emailPasswordDisposable = middleware.useMiddleware(
       async (req, next) => {
         expect(req.headers.get('Authorization')).toBe('Basic email:password')
-        await next(req)
+        return await next(req)
       }
     )
     expect(emailPasswordDisposable).not.toBeUndefined()
@@ -42,7 +42,7 @@ test('CredentialService', async () => {
 
     const defaultDisposable = middleware.useMiddleware(async (req, next) => {
       expect(req.headers.get('Authorization')).toBeNull()
-      await next(req)
+      return await next(req)
     })
     expect(defaultDisposable).not.toBeUndefined()
     await middleware.process(

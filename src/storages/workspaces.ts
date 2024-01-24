@@ -1,7 +1,18 @@
 import { EventDispatcher } from '../events'
+import { Files } from './files'
 
 export type WorkspaceId = string
 
+/**
+ * Workspace event.
+ */
+export enum WorkspaceEvent {
+  CHANGED = 'changed'
+}
+
+/**
+ * Workspaces event.
+ */
 export enum WorkspacesEvent {
   ADDED = 'added',
   REMOVED = 'removed'
@@ -10,7 +21,10 @@ export enum WorkspacesEvent {
 /**
  * Workspace.
  */
-export abstract class Workspace {
+export abstract class Workspace extends EventDispatcher<
+  WorkspaceEvent,
+  Workspace
+> {
   /**
    * Workspace id.
    */
@@ -25,6 +39,16 @@ export abstract class Workspace {
    * Workspace description.
    */
   abstract get description(): string
+
+  /**
+   * Workspace files.
+   */
+  abstract get files(): Files
+
+  /**
+   * Change workspace name and description.
+   */
+  abstract change(name: string, description: string): Promise<void>
 }
 
 /**
@@ -54,10 +78,10 @@ export abstract class Workspaces extends EventDispatcher<
   /**
    * Create workspace.
    */
-  abstract create: (name: string, description: string) => Promise<Workspace>
+  abstract create(name: string, description: string): Promise<Workspace>
 
   /**
    * Delete workspace.
    */
-  abstract delete: (id: WorkspaceId) => Promise<void>
+  abstract delete(id: WorkspaceId): Promise<void>
 }

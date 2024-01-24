@@ -4,9 +4,7 @@ import { type AppBuilder } from './appBuilder'
 import { type AppSdk } from './appSdk'
 
 export * from './events'
-export * from './types'
 export * from './disposable'
-export * from './types'
 export * from './credentials'
 export * from './appSdk'
 

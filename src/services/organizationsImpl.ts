@@ -4,6 +4,7 @@ import {
   OrganizationId,
   Organizations
 } from '../storages/organizations'
+import { Workspaces } from '../storages/workspaces'
 import { OrganizationImpl } from './organizationImpl'
 import { OrganizationService } from './organizationService'
 

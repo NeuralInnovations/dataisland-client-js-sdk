@@ -5,7 +5,6 @@ import {
   appSdk,
   SDK_VERSION,
   DEFAULT_NAME,
-  BearerCredential,
   DebugCredential
 } from '../src'
 import { MiddlewareService } from '../src/services/middlewareService'
@@ -64,6 +63,7 @@ test('Create and delete organization', async () => {
 
   // check organizations
   expect(app.organizations.get(org.id)).toBe(org)
+  expect(app.organizations.tryGet(org.id)).toBe(org)
   expect(app.organizations.collection.length).toBe(initLength + 1)
 
   await expect(app.organizations.delete(org.id)).resolves.not.toThrow()
