@@ -1,9 +1,9 @@
 import { Workspace, Workspaces } from '../storages/workspaces'
 import { OrganizationImpl } from './organizationImpl'
-import { OrganizationService } from './organizationService'
+import { Context } from '../context'
 
 export class WorkspacesImpl extends Workspaces {
-  constructor(organization: OrganizationImpl, service: OrganizationService) {
+  constructor(organization: OrganizationImpl, context: Context) {
     super()
   }
 

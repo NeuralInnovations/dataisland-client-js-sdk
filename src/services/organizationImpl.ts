@@ -1,10 +1,9 @@
 import { Organization, OrganizationId } from '../storages/organizations'
 import { Disposable } from '../disposable'
 import { OrganizationDto } from '../dto/userInfoResponse'
-import { OrganizationService } from './organizationService'
-import { OrganizationsImpl } from './organizationsImpl'
 import { Workspaces } from '../storages/workspaces'
 import { WorkspacesImpl } from './workspacesImpl'
+import { Context } from '../context'
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -12,12 +11,9 @@ export class OrganizationImpl extends Organization implements Disposable {
   private _content?: OrganizationDto
   private readonly _workspaces: WorkspacesImpl
 
-  constructor(
-    private readonly service: OrganizationService,
-    private readonly organizations: OrganizationsImpl
-  ) {
+  constructor(private readonly context: Context) {
     super()
-    this._workspaces = new WorkspacesImpl(this, this.service)
+    this._workspaces = new WorkspacesImpl(this, this.context)
   }
 
   public initFrom(
