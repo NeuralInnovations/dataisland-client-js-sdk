@@ -1,3 +1,4 @@
+import { FileProgressDto } from '../dto/workspacesResponse'
 import { EventDispatcher } from '../events'
 
 export type FileId = string
@@ -5,12 +6,6 @@ export type FileId = string
 export enum FilesEvent {
   ADDED = 'added',
   REMOVED = 'removed'
-}
-
-export enum FileStatus {
-  READY = 'ready',
-  PROCESSING = 'processing',
-  ERROR = 'error'
 }
 
 /**
@@ -35,22 +30,18 @@ export abstract class File {
   /**
    * Get file status.
    */
-  abstract get status(): FileStatus
+  abstract status(): Promise<FileProgressDto>
 }
 
 /**
  * Files storage.
  */
 export abstract class Files extends EventDispatcher<FilesEvent, File> {
-  /**
-   * Files count.
-   */
-  abstract get total(): number
 
   /**
    * Get file by id.
    */
-  abstract upload(path: string, name: string): Promise<File>
+  abstract upload(file: any, name: string): Promise<File>
 
   /**
    * Delete file.
@@ -61,5 +52,18 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
    * Query files.
    */
-  abstract query(path: string, page: number, limit: number): Promise<File[]>
+  abstract query(query: string, page: number, limit: number): Promise<FilesList>
 }
+
+export abstract class FilesList{
+
+  abstract get files(): File[]
+
+  abstract get pages(): number 
+
+  abstract get total(): number
+
+  abstract get page(): number
+
+}
+
