@@ -35,3 +35,7 @@ export interface OrganizationDto {
   membersCount: number
   profile: OrganizationProfileDto
 }
+
+export interface MembersResponse {
+  members: UserDto;
+}
