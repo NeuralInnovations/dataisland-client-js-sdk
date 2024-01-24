@@ -1,13 +1,13 @@
 import {
-  Organization,
   OrganizationsEvent,
   OrganizationId,
   Organizations
-} from '../storages/organizations'
-import { OrganizationImpl } from './organizationImpl'
-import { RpcService } from './rpcService'
+} from './organizations'
+import { OrganizationImpl } from './organization.impl'
+import { RpcService } from '../services/rpcService'
 import { OrganizationDto, UserSettings } from '../dto/userInfoResponse'
 import { Context } from '../context'
+import { Organization } from './organization'
 
 export class OrganizationsImpl extends Organizations {
   constructor(public readonly context: Context) {

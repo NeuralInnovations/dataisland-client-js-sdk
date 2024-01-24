@@ -13,7 +13,7 @@ import { RpcService } from '../src/services/rpcService'
 import { AppBuilder } from '../src/appBuilder'
 import { UnitTest, AppSdkUnitTest } from '../src/unitTest'
 import { HOST, TOKEN } from './setup'
-import { OrganizationImpl } from '../src/services/organizationImpl'
+import { OrganizationImpl } from '../src/storages/organization.impl'
 
 test('SDK_VERSION', () => {
   expect(SDK_VERSION).toBe(version)

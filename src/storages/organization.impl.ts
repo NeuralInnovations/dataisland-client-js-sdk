@@ -1,9 +1,10 @@
-import { Organization, OrganizationId } from '../storages/organizations'
+import { OrganizationId } from './organizations'
 import { Disposable } from '../disposable'
 import { OrganizationDto } from '../dto/userInfoResponse'
-import { Workspaces } from '../storages/workspaces'
-import { WorkspacesImpl } from './workspacesImpl'
+import { Workspaces } from './workspaces'
+import { WorkspacesImpl } from './workspaces.impl'
 import { Context } from '../context'
+import { Organization } from './organization'
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
