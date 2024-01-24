@@ -14,11 +14,15 @@ export class OrganizationService extends Service {
     return this.impl
   }
 
-  initFrom(
+  async initFrom(
     adminInOrganization: string[],
     organizations: OrganizationDto[],
     settings?: UserSettings | null
-  ) {
-    this.impl.internalInitFrom(adminInOrganization, organizations, settings)
+  ): Promise<void> {
+    await this.impl.internalInitFrom(
+      adminInOrganization,
+      organizations,
+      settings
+    )
   }
 }

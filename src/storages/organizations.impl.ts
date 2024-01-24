@@ -140,7 +140,7 @@ export class OrganizationsImpl extends Organizations {
     const content = (await response.json())['organization'] as OrganizationDto
 
     // create organization and init from content
-    const org = new OrganizationImpl(this.context).initFrom(content, true)
+    const org = await new OrganizationImpl(this.context).initFrom(content, true)
 
     // add organization to collection
     this.organizations.push(org)
@@ -154,17 +154,19 @@ export class OrganizationsImpl extends Organizations {
     return org
   }
 
-  internalInitFrom(
+  async internalInitFrom(
     adminInOrganization: string[],
     organizations: OrganizationDto[],
     settings: UserSettings | null | undefined
-  ) {
+  ): Promise<void> {
     this.currentOrganizationId = settings?.activeOrganizationId
     for (const organization of organizations) {
-      const org = new OrganizationImpl(this.context).initFrom(
+      // create organization and init from content
+      const org = await new OrganizationImpl(this.context).initFrom(
         organization,
         adminInOrganization.includes(organization.id)
       )
+
       // add organization to collection
       this.organizations.push(org)
 

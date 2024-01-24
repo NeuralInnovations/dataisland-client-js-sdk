@@ -4,7 +4,10 @@ import { Context } from '../context'
 import { Workspace } from './workspace'
 
 export class WorkspacesImpl extends Workspaces {
-  constructor(organization: OrganizationImpl, context: Context) {
+  constructor(
+    private readonly organization: OrganizationImpl,
+    private readonly context: Context
+  ) {
     super()
   }
 

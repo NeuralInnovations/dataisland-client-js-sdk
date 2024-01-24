@@ -17,10 +17,10 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._workspaces = new WorkspacesImpl(this, this.context)
   }
 
-  public initFrom(
+  public async initFrom(
     content: OrganizationDto,
     isAdmin: boolean
-  ): OrganizationImpl {
+  ): Promise<OrganizationImpl> {
     this._content = content
     this._isAdmin = isAdmin
     return this
