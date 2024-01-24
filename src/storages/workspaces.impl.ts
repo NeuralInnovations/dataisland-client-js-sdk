@@ -1,4 +1,4 @@
-import { Workspaces, WorkspacesEvent } from "./workspaces"
+import { WorkspaceId, Workspaces, WorkspacesEvent } from "./workspaces"
 import { OrganizationImpl } from "./organization.impl"
 import { Context } from "../context"
 import { Workspace } from "./workspace"
@@ -119,7 +119,7 @@ export class WorkspacesImpl extends Workspaces {
     return workspace
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: WorkspaceId): Promise<void> {
     // get workspace by id
     const workspace = <WorkspaceImpl>this.tryGet(id)
 

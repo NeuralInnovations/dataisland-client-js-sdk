@@ -28,7 +28,7 @@ test("Default SDK", async () => {
   expect(app).not.toBeUndefined()
 })
 
-test("Create and delete organization", async () => {
+test("Create and delete organization, create and delete workspace", async () => {
   const randomName = `org-test-${Math.random().toString(16)}`
   const app = await appSdk(randomName, async builder => {
     builder.useHost(HOST)
@@ -65,6 +65,28 @@ test("Create and delete organization", async () => {
   expect(app.organizations.get(org.id)).toBe(org)
   expect(app.organizations.tryGet(org.id)).toBe(org)
   expect(app.organizations.collection.length).toBe(initLength + 1)
+
+  const initWorkspacesLength = org.workspaces.collection.length
+
+  const wsPromise = org.workspaces.create(
+    "test-workspace",
+    "test-workspace-description"
+  )
+  await expect(wsPromise).resolves.not.toThrow()
+  const ws = await wsPromise
+  expect(ws).not.toBeUndefined()
+  expect(ws).not.toBeNull()
+  expect(ws.name).toBe("test-workspace")
+  expect(ws.description).toBe("test-workspace-description")
+  expect(app.organizations.get(org.id).workspaces.collection.length).toBe(
+    initWorkspacesLength + 1
+  )
+  expect(org.workspaces.collection.length).toBe(initWorkspacesLength + 1)
+  expect(org.workspaces.get(ws.id)).toBe(ws)
+  expect(org.workspaces.tryGet(ws.id)).toBe(ws)
+  expect(org.workspaces.contains(ws.id)).toBe(true)
+
+  await expect(org.workspaces.delete(ws.id)).resolves.not.toThrow()
 
   await expect(app.organizations.delete(org.id)).resolves.not.toThrow()
   expect((<OrganizationImpl>org).isDisposed).toBe(true)
