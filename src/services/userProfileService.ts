@@ -1,9 +1,9 @@
-import { Service } from './service'
-import { RpcService } from './rpcService'
-import { UserProfile } from '../storages/userProfile'
-import { UserInfoResponse } from '../dto/userInfoResponse'
-import { OrganizationService } from './organizationService'
-import { UserProfileImpl } from '../storages/userProfile.impl'
+import { Service } from "./service"
+import { RpcService } from "./rpcService"
+import { UserProfile } from "../storages/userProfile"
+import { UserInfoResponse } from "../dto/userInfoResponse"
+import { OrganizationService } from "./organizationService"
+import { UserProfileImpl } from "../storages/userProfile.impl"
 
 export class UserProfileService extends Service {
   private readonly impl: UserProfileImpl = new UserProfileImpl()
@@ -14,7 +14,7 @@ export class UserProfileService extends Service {
 
   async fetch(fireError: boolean = true) {
     const rpc = this.resolve(RpcService) as RpcService
-    const response = await rpc.requestBuilder('api/v1/Users/self2').sendGet()
+    const response = await rpc.requestBuilder("api/v1/Users/self2").sendGet()
     if (fireError && !response.ok) {
       throw new Error(
         `Failed to fetch user profile. Status: ${response.status},${response.statusText}`

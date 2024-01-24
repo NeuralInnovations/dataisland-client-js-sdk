@@ -1,8 +1,8 @@
-import { Context } from '../context'
-import { Files } from './files'
-import { Workspace } from './workspace'
-import { OrganizationImpl } from './organization.impl'
-import { WorkspaceDto } from '../dto/workspacesResponse'
+import { Context } from "../context"
+import { Files } from "./files"
+import { Workspace } from "./workspace"
+import { OrganizationImpl } from "./organization.impl"
+import { WorkspaceDto } from "../dto/workspacesResponse"
 
 export class WorkspaceImpl extends Workspace {
   private _isMarkAsDeleted: boolean = false
@@ -15,23 +15,23 @@ export class WorkspaceImpl extends Workspace {
   }
 
   get id(): string {
-    throw new Error('Method not implemented.')
+    throw new Error("Method not implemented.")
   }
 
   get name(): string {
-    throw new Error('Method not implemented.')
+    throw new Error("Method not implemented.")
   }
 
   get description(): string {
-    throw new Error('Method not implemented.')
+    throw new Error("Method not implemented.")
   }
 
   get files(): Files {
-    throw new Error('Method not implemented.')
+    throw new Error("Method not implemented.")
   }
 
   change(name: string, description: string): Promise<void> {
-    throw new Error('Method not implemented.')
+    throw new Error("Method not implemented.")
   }
 
   async initFrom(workspace: WorkspaceDto) {}

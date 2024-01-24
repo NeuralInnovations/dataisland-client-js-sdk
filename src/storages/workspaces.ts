@@ -1,5 +1,5 @@
-import { EventDispatcher } from '../events'
-import { Workspace } from './workspace'
+import { EventDispatcher } from "../events"
+import { Workspace } from "./workspace"
 
 export type WorkspaceId = string
 
@@ -7,8 +7,8 @@ export type WorkspaceId = string
  * Workspaces event.
  */
 export enum WorkspacesEvent {
-  ADDED = 'added',
-  REMOVED = 'removed'
+  ADDED = "added",
+  REMOVED = "removed"
 }
 
 /**

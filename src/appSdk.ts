@@ -1,9 +1,9 @@
-import type { Lifetime } from './disposable'
-import type { CredentialBase } from './credentials'
-import { Context } from './context'
-import type { Constructor } from './internal/registry'
-import { Organizations } from './storages/organizations'
-import { UserProfile } from './storages/userProfile'
+import type { Lifetime } from "./disposable"
+import type { CredentialBase } from "./credentials"
+import { Context } from "./context"
+import type { Constructor } from "./internal/registry"
+import { Organizations } from "./storages/organizations"
+import { UserProfile } from "./storages/userProfile"
 
 /**
  * DataIsland App instance.

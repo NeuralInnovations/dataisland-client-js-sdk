@@ -1,9 +1,9 @@
-import type { Middleware } from './middleware'
-import type { CredentialBase } from './credentials'
-import type { Service, ServiceContext } from './services/service'
-import type { Constructor } from './internal/registry'
-import { CommandHandler, Command } from './services/commandService'
-import { Context } from './context'
+import type { Middleware } from "./middleware"
+import type { CredentialBase } from "./credentials"
+import type { Service, ServiceContext } from "./services/service"
+import type { Constructor } from "./internal/registry"
+import { CommandHandler, Command } from "./services/commandService"
+import { Context } from "./context"
 
 /**
  * DataIsland App builder.

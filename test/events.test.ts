@@ -1,6 +1,6 @@
-import { EventDispatcher } from '../src'
+import { EventDispatcher } from "../src"
 
-test('Events, test general', () => {
+test("Events, test general", () => {
   enum ET {
     A,
     B
@@ -78,7 +78,7 @@ test('Events, test general', () => {
   expect(b2).toBe(3)
 })
 
-test('Events, test this', () => {
+test("Events, test this", () => {
   enum ET {
     A,
     B
@@ -128,7 +128,7 @@ test('Events, test this', () => {
   expect(b.value).toBe(2)
 })
 
-test('Events, test unsubscribe', () => {
+test("Events, test unsubscribe", () => {
   const dispatch = new EventDispatcher<unknown, number>()
 
   let index = 0

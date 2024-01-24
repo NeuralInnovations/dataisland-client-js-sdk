@@ -1,6 +1,6 @@
-import { Service, type ServiceContext } from './service'
-import { MiddlewareService } from './middlewareService'
-import { RequestBuilder } from './requestBuilder'
+import { Service, type ServiceContext } from "./service"
+import { MiddlewareService } from "./middlewareService"
+import { RequestBuilder } from "./requestBuilder"
 
 /**
  * Options for the RpcService.
@@ -55,10 +55,10 @@ export class RpcService extends Service {
     if (this.options !== undefined && this.options.urlBuilder !== undefined) {
       return this.options.urlBuilder(path)
     }
-    if (this.host.endsWith('/') && path.startsWith('/')) {
+    if (this.host.endsWith("/") && path.startsWith("/")) {
       return new URL(`${this.host}${path.slice(1)}`)
     }
-    if (!this.host.endsWith('/') && !path.startsWith('/')) {
+    if (!this.host.endsWith("/") && !path.startsWith("/")) {
       return new URL(`${this.host}/${path}`)
     }
     return new URL(`${this.host}${path}`)

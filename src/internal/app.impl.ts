@@ -1,25 +1,25 @@
-import { DEFAULT_HOST } from '../index'
-import { type AppBuilder } from '../appBuilder'
-import { AppBuilderImplementation } from './appBuilder.impl'
-import { type Constructor, Registry } from './registry'
-import { Context } from '../context'
-import { DisposableContainer, type Lifetime } from '../disposable'
-import { type Service, ServiceContext } from '../services/service'
-import { CredentialService } from '../services/credentialService'
-import { MiddlewareService } from '../services/middlewareService'
-import { type CredentialBase } from '../credentials'
-import { AppSdk } from '../appSdk'
-import { RpcService } from '../services/rpcService'
-import { CommandService } from '../services/commandService'
+import { DEFAULT_HOST } from "../index"
+import { type AppBuilder } from "../appBuilder"
+import { AppBuilderImplementation } from "./appBuilder.impl"
+import { type Constructor, Registry } from "./registry"
+import { Context } from "../context"
+import { DisposableContainer, type Lifetime } from "../disposable"
+import { type Service, ServiceContext } from "../services/service"
+import { CredentialService } from "../services/credentialService"
+import { MiddlewareService } from "../services/middlewareService"
+import { type CredentialBase } from "../credentials"
+import { AppSdk } from "../appSdk"
+import { RpcService } from "../services/rpcService"
+import { CommandService } from "../services/commandService"
 import {
   StartCommandHandler,
   StartCommand
-} from '../commands/startCommandHandler'
-import { UserProfileService } from '../services/userProfileService'
-import { OrganizationService } from '../services/organizationService'
-import { Organizations } from '../storages/organizations'
-import { UserProfile } from '../storages/userProfile'
-import { isUnitTest, UnitTest } from '../unitTest'
+} from "../commands/startCommandHandler"
+import { UserProfileService } from "../services/userProfileService"
+import { OrganizationService } from "../services/organizationService"
+import { Organizations } from "../storages/organizations"
+import { UserProfile } from "../storages/userProfile"
+import { isUnitTest, UnitTest } from "../unitTest"
 
 export class AppImplementation extends AppSdk {
   readonly name: string
@@ -106,8 +106,8 @@ export class AppImplementation extends AppSdk {
 
     // register middlewares
     builder.registerMiddleware(async (req, next) => {
-      req.headers.set('accept', 'text/plain')
-      req.headers.set('content-type', 'application/json')
+      req.headers.set("accept", "text/plain")
+      req.headers.set("content-type", "application/json")
       return await next(req)
     })
 

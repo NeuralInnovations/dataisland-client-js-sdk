@@ -1,5 +1,5 @@
-import { CommandHandler, Command } from '../services/commandService'
-import { UserProfileService } from '../services/userProfileService'
+import { CommandHandler, Command } from "../services/commandService"
+import { UserProfileService } from "../services/userProfileService"
 
 export class StartCommand extends Command {}
 

@@ -1,9 +1,9 @@
-import { EventDispatcher } from '../events'
+import { EventDispatcher } from "../events"
 
 export type UserId = string
 
 export enum UserEvent {
-  CHANGED = 'changed'
+  CHANGED = "changed"
 }
 
 export abstract class UserProfile extends EventDispatcher<

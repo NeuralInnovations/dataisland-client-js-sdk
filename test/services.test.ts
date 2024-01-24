@@ -1,11 +1,11 @@
-import { appSdk, BasicCredential, DefaultCredential } from '../src'
-import { CredentialService } from '../src/services/credentialService'
-import { MiddlewareService } from '../src/services/middlewareService'
-import { UnitTest, AppSdkUnitTest } from '../src/unitTest'
+import { appSdk, BasicCredential, DefaultCredential } from "../src"
+import { CredentialService } from "../src/services/credentialService"
+import { MiddlewareService } from "../src/services/middlewareService"
+import { UnitTest, AppSdkUnitTest } from "../src/unitTest"
 
-test('CredentialService', async () => {
+test("CredentialService", async () => {
   await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk('test-services', async builder => {
+    const app = await appSdk("test-services", async builder => {
       builder.env.unitTest = UnitTest.DO_NOT_START
     })
     const credentialService = app.resolve(CredentialService)
@@ -14,7 +14,7 @@ test('CredentialService', async () => {
     expect(app.resolve(CredentialService)).toBeInstanceOf(CredentialService)
     expect(app.credential).not.toBeUndefined()
 
-    const credential = new BasicCredential('email', 'password')
+    const credential = new BasicCredential("email", "password")
     app.credential = credential
     expect(app.credential).toBe(credential)
     expect(credentialService?.credential).toBe(credential)
@@ -22,15 +22,15 @@ test('CredentialService', async () => {
     const middleware = app.resolve(MiddlewareService) as MiddlewareService
     const emailPasswordDisposable = middleware.useMiddleware(
       async (req, next) => {
-        expect(req.headers.get('Authorization')).toBe('Basic email:password')
+        expect(req.headers.get("Authorization")).toBe("Basic email:password")
         return await next(req)
       }
     )
     expect(emailPasswordDisposable).not.toBeUndefined()
     await middleware.process(
-      new Request('https://localhost:8080'),
+      new Request("https://localhost:8080"),
       async () => {
-        return new Response('', { status: 200 })
+        return new Response("", { status: 200 })
       }
     )
     emailPasswordDisposable?.dispose()
@@ -41,14 +41,14 @@ test('CredentialService', async () => {
     expect(credentialService?.credential).toBe(credential2)
 
     const defaultDisposable = middleware.useMiddleware(async (req, next) => {
-      expect(req.headers.get('Authorization')).toBeNull()
+      expect(req.headers.get("Authorization")).toBeNull()
       return await next(req)
     })
     expect(defaultDisposable).not.toBeUndefined()
     await middleware.process(
-      new Request('https://localhost:8080'),
+      new Request("https://localhost:8080"),
       async () => {
-        return new Response('', { status: 200 })
+        return new Response("", { status: 200 })
       }
     )
     defaultDisposable?.dispose()

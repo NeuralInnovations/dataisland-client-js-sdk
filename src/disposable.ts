@@ -131,7 +131,7 @@ export class DisposableContainer implements Disposable {
    */
   private _throwIfDisposed(): void {
     if (this._isDisposed) {
-      throw new Error('Object disposed')
+      throw new Error("Object disposed")
     }
   }
 }

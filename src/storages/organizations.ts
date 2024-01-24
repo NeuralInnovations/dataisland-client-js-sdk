@@ -1,5 +1,5 @@
-import { EventDispatcher } from '../events'
-import { Organization } from './organization'
+import { EventDispatcher } from "../events"
+import { Organization } from "./organization"
 
 /**
  * Organization id.
@@ -10,9 +10,9 @@ export type OrganizationId = string
  * Organization event.
  */
 export enum OrganizationsEvent {
-  ADDED = 'added',
-  REMOVED = 'removed',
-  CURRENT_CHANGED = 'currentChanged'
+  ADDED = "added",
+  REMOVED = "removed",
+  CURRENT_CHANGED = "currentChanged"
 }
 
 /**

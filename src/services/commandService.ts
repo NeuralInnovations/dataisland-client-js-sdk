@@ -1,6 +1,6 @@
-import { Service } from './service'
-import { Context } from '../context'
-import { Constructor } from '../internal/registry'
+import { Service } from "./service"
+import { Context } from "../context"
+import { Constructor } from "../internal/registry"
 
 export abstract class CommandHandler<T> {
   constructor(protected readonly context: Context) {}

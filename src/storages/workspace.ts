@@ -1,12 +1,12 @@
-import { EventDispatcher } from '../events'
-import { Files } from './files'
-import { WorkspaceId } from './workspaces'
+import { EventDispatcher } from "../events"
+import { Files } from "./files"
+import { WorkspaceId } from "./workspaces"
 
 /**
  * Workspace event.
  */
 export enum WorkspaceEvent {
-  CHANGED = 'changed'
+  CHANGED = "changed"
 }
 
 /**

@@ -1,6 +1,6 @@
-import { type CredentialBase } from '../credentials'
-import { Service } from './service'
-import { type DisposableContainer } from '../disposable'
+import { type CredentialBase } from "../credentials"
+import { Service } from "./service"
+import { type DisposableContainer } from "../disposable"
 
 export class CredentialService extends Service {
   private _credentialDispose?: DisposableContainer = undefined

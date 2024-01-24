@@ -1,6 +1,6 @@
-import { DisposableContainer } from '../src'
+import { DisposableContainer } from "../src"
 
-test('DisposableContainer', () => {
+test("DisposableContainer", () => {
   const disposable = new DisposableContainer()
   expect(disposable.isDisposed).toBe(false)
   expect(disposable.lifetime.isDisposed).toBe(false)
@@ -9,7 +9,7 @@ test('DisposableContainer', () => {
   expect(disposable.lifetime.isDisposed).toBe(true)
 })
 
-test('DisposableContainer, dispose order', () => {
+test("DisposableContainer, dispose order", () => {
   const indexes: number[] = []
   const disposable = new DisposableContainer()
   disposable.addCallback(() => {

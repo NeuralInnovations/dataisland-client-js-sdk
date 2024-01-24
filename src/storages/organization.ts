@@ -1,5 +1,5 @@
-import { Workspaces } from './workspaces'
-import { OrganizationId } from './organizations'
+import { Workspaces } from "./workspaces"
+import { OrganizationId } from "./organizations"
 
 /**
  * Organization.

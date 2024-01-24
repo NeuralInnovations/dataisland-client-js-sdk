@@ -1,4 +1,4 @@
-import { version } from '../package.json'
+import { version } from "../package.json"
 import {
   AppSdk,
   BasicCredential,
@@ -6,20 +6,20 @@ import {
   SDK_VERSION,
   DEFAULT_NAME,
   DebugCredential
-} from '../src'
-import { MiddlewareService } from '../src/services/middlewareService'
-import { CredentialService } from '../src/services/credentialService'
-import { RpcService } from '../src/services/rpcService'
-import { AppBuilder } from '../src/appBuilder'
-import { UnitTest, AppSdkUnitTest } from '../src/unitTest'
-import { HOST, TOKEN } from './setup'
-import { OrganizationImpl } from '../src/storages/organization.impl'
+} from "../src"
+import { MiddlewareService } from "../src/services/middlewareService"
+import { CredentialService } from "../src/services/credentialService"
+import { RpcService } from "../src/services/rpcService"
+import { AppBuilder } from "../src/appBuilder"
+import { UnitTest, AppSdkUnitTest } from "../src/unitTest"
+import { HOST, TOKEN } from "./setup"
+import { OrganizationImpl } from "../src/storages/organization.impl"
 
-test('SDK_VERSION', () => {
+test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)
 })
 
-test('Default SDK', async () => {
+test("Default SDK", async () => {
   // default
   const app = await appSdk(DEFAULT_NAME, async (builder: AppBuilder) => {
     builder.useHost(HOST)
@@ -28,7 +28,7 @@ test('Default SDK', async () => {
   expect(app).not.toBeUndefined()
 })
 
-test('Create and delete organization', async () => {
+test("Create and delete organization", async () => {
   const randomName = `org-test-${Math.random().toString(16)}`
   const app = await appSdk(randomName, async builder => {
     builder.useHost(HOST)
@@ -39,7 +39,7 @@ test('Create and delete organization', async () => {
 
   const org = await app.organizations.create(
     randomName,
-    'this is a unitTest description'
+    "this is a unitTest description"
   )
 
   // check organization
@@ -49,17 +49,17 @@ test('Create and delete organization', async () => {
 
   expect(org.id).not.toBeUndefined()
   expect(org.id).not.toBeNull()
-  expect(org.id.trim()).not.toBe('')
+  expect(org.id.trim()).not.toBe("")
 
   // check name
   expect(org.name).not.toBeUndefined()
   expect(org.name).not.toBeNull()
-  expect(org.name.trim()).not.toBe('')
+  expect(org.name.trim()).not.toBe("")
 
   // check description
   expect(org.description).not.toBeUndefined()
   expect(org.description).not.toBeNull()
-  expect(org.description.trim()).not.toBe('')
+  expect(org.description.trim()).not.toBe("")
 
   // check organizations
   expect(app.organizations.get(org.id)).toBe(org)
@@ -72,26 +72,26 @@ test('Create and delete organization', async () => {
   expect(app.organizations.tryGet(org.id)).toBeUndefined()
 })
 
-test('SDK, middleware', async () => {
+test("SDK, middleware", async () => {
   await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk('test-settings', async (builder: AppBuilder) => {
-      builder.useHost('https://test.com')
+    const app = await appSdk("test-settings", async (builder: AppBuilder) => {
+      builder.useHost("https://test.com")
       builder.useAutomaticDataCollectionEnabled(false)
-      builder.useCredential(new BasicCredential('email', 'password'))
+      builder.useCredential(new BasicCredential("email", "password"))
       builder.registerMiddleware(async (req, next) => {
-        req.headers.set('X-Test', 'test')
+        req.headers.set("X-Test", "test")
         return await next(req)
       })
     })
-    expect(app.name).toBe('test-settings')
-    expect(app.host).toBe('https://test.com')
+    expect(app.name).toBe("test-settings")
+    expect(app.host).toBe("https://test.com")
     expect(app.automaticDataCollectionEnabled).toBe(false)
   })
 })
 
-test('SDK, services', async () => {
+test("SDK, services", async () => {
   await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk('test-sdk')
+    const app = await appSdk("test-sdk")
     const middlewareService = app.resolve(MiddlewareService)
     expect(middlewareService).not.toBeUndefined()
     expect(app.resolve(MiddlewareService)).toBe(middlewareService)
@@ -101,35 +101,35 @@ test('SDK, services', async () => {
   })
 })
 
-test('SDK, middleware', async () => {
+test("SDK, middleware", async () => {
   await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk('test-middleware')
+    const app = await appSdk("test-middleware")
     const middlewareService = app.resolve(MiddlewareService)
     expect(middlewareService).not.toBeUndefined()
     expect(app.resolve(MiddlewareService)).toBe(middlewareService)
     expect(app.resolve(CredentialService)).not.toBeUndefined()
 
     const response = await middlewareService?.process(
-      new Request('http://localhost:8080'),
+      new Request("http://localhost:8080"),
       async (req: Request): Promise<Response> => {
-        const headerXTest = req.headers.get('Custom-Test-Header')
+        const headerXTest = req.headers.get("Custom-Test-Header")
         expect(headerXTest).toBeNull()
-        return new Response('', { status: 200 })
+        return new Response("", { status: 200 })
       }
     )
     expect(response).not.toBeUndefined()
     expect(response?.status).toBe(200)
 
     middlewareService?.useMiddleware(async (req, next) => {
-      req.headers.set('X-Test', 'test-value')
+      req.headers.set("X-Test", "test-value")
       return await next(req)
     })
 
     const response2 = await middlewareService?.process(
-      new Request('https://localhost:8080'),
+      new Request("https://localhost:8080"),
       async (req: Request): Promise<Response> => {
-        expect(req.headers.get('X-Test')).toBe('test-value')
-        return new Response('', { status: 400 })
+        expect(req.headers.get("X-Test")).toBe("test-value")
+        return new Response("", { status: 400 })
       }
     )
     expect(response2).not.toBeUndefined()
@@ -137,7 +137,7 @@ test('SDK, middleware', async () => {
   })
 })
 
-test('SDK, it is impossible to setup the same application', async () => {
+test("SDK, it is impossible to setup the same application", async () => {
   await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances
@@ -151,7 +151,7 @@ test('SDK, it is impossible to setup the same application', async () => {
   })
 })
 
-test('SDK, setup and get this app', async () => {
+test("SDK, setup and get this app", async () => {
   await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances

@@ -1,4 +1,4 @@
-import { WorkspaceDto } from './workspacesResponse'
+import { WorkspaceDto } from "./workspacesResponse"
 
 export interface UserInfoResponse {
   adminInOrganization: string[]

@@ -1,6 +1,6 @@
-import { MiddlewareService } from './services/middlewareService'
-import { type Lifetime } from './disposable'
-import { type Context } from './context'
+import { MiddlewareService } from "./services/middlewareService"
+import { type Lifetime } from "./disposable"
+import { type Context } from "./context"
 
 /**
  * DataIsland App credential.
@@ -29,11 +29,11 @@ export class BasicCredential extends CredentialBase {
   onRegister(lifetime: Lifetime, context: Context): void {
     const service = context.resolve(MiddlewareService)
     if (service === undefined) {
-      throw new Error('MiddlewareService is not registered.')
+      throw new Error("MiddlewareService is not registered.")
     }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
-        req.headers.set('Authorization', `Basic ${this.email}:${this.password}`)
+        req.headers.set("Authorization", `Basic ${this.email}:${this.password}`)
         return await next(req)
       })
     )
@@ -51,11 +51,11 @@ export class DebugCredential extends CredentialBase {
   onRegister(lifetime: Lifetime, context: Context): void {
     const service = context.resolve(MiddlewareService)
     if (service === undefined) {
-      throw new Error('MiddlewareService is not registered.')
+      throw new Error("MiddlewareService is not registered.")
     }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
-        req.headers.set('Authorization', `Debug ${this.token}`)
+        req.headers.set("Authorization", `Debug ${this.token}`)
         return await next(req)
       })
     )
@@ -73,11 +73,11 @@ export class BearerCredential extends CredentialBase {
   onRegister(lifetime: Lifetime, context: Context): void {
     const service = context.resolve(MiddlewareService)
     if (service === undefined) {
-      throw new Error('MiddlewareService is not registered.')
+      throw new Error("MiddlewareService is not registered.")
     }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
-        req.headers.set('Authorization', `Bearer ${this.token}`)
+        req.headers.set("Authorization", `Bearer ${this.token}`)
         return await next(req)
       })
     )

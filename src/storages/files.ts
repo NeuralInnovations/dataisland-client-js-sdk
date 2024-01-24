@@ -1,11 +1,11 @@
-import { FileProgressDto } from '../dto/workspacesResponse'
-import { EventDispatcher } from '../events'
+import { FileProgressDto } from "../dto/workspacesResponse"
+import { EventDispatcher } from "../events"
 
 export type FileId = string
 
 export enum FilesEvent {
-  ADDED = 'added',
-  REMOVED = 'removed'
+  ADDED = "added",
+  REMOVED = "removed"
 }
 
 /**

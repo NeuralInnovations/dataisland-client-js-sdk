@@ -1,6 +1,6 @@
-import { Service } from './service'
-import { type Middleware } from '../middleware'
-import { type Disposable } from '../disposable'
+import { Service } from "./service"
+import { type Middleware } from "../middleware"
+import { type Disposable } from "../disposable"
 
 export class MiddlewareService extends Service {
   _middlewares: Middleware[] = []

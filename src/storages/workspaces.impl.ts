@@ -1,11 +1,11 @@
-import { Workspaces, WorkspacesEvent } from './workspaces'
-import { OrganizationImpl } from './organization.impl'
-import { Context } from '../context'
-import { Workspace } from './workspace'
-import { WorkspaceImpl } from './workspace.impl'
-import { OrganizationId } from './organizations'
-import { RpcService } from '../services/rpcService'
-import { OrganizationWorkspaces } from '../dto/userInfoResponse'
+import { Workspaces, WorkspacesEvent } from "./workspaces"
+import { OrganizationImpl } from "./organization.impl"
+import { Context } from "../context"
+import { Workspace } from "./workspace"
+import { WorkspaceImpl } from "./workspace.impl"
+import { OrganizationId } from "./organizations"
+import { RpcService } from "../services/rpcService"
+import { OrganizationWorkspaces } from "../dto/userInfoResponse"
 
 export class WorkspacesImpl extends Workspaces {
   private readonly _workspaces: WorkspaceImpl[] = []
@@ -34,7 +34,7 @@ export class WorkspacesImpl extends Workspaces {
   }
 
   create(name: string, description: string): Promise<Workspace> {
-    throw new Error('Method not implemented.')
+    throw new Error("Method not implemented.")
   }
 
   async delete(id: string): Promise<void> {
@@ -57,8 +57,8 @@ export class WorkspacesImpl extends Workspaces {
     // send delete request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder('api/v1/Organizations')
-      .searchParam('id', id)
+      ?.requestBuilder("api/v1/Organizations")
+      .searchParam("id", id)
       .sendDelete()
 
     // check response status
@@ -86,8 +86,8 @@ export class WorkspacesImpl extends Workspaces {
     // init workspaces from the server's response
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder('api/v1/Organizations')
-      .searchParam('id', organizationId)
+      ?.requestBuilder("api/v1/Organizations")
+      .searchParam("id", organizationId)
       .sendGet()
 
     // check response status

@@ -1,4 +1,4 @@
-import { UserDto } from "./userInfoResponse";
+import { UserDto } from "./userInfoResponse"
 
 
 export interface PermitsDto {

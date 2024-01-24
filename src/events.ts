@@ -1,4 +1,4 @@
-import { type Disposable, DisposableContainer } from './disposable'
+import { type Disposable, DisposableContainer } from "./disposable"
 
 export interface Input<ET, DT> {
   type?: ET

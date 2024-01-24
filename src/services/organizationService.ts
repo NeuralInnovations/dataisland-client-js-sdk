@@ -1,7 +1,7 @@
-import { Service } from './service'
-import { Organizations } from '../storages/organizations'
-import { OrganizationDto, UserSettings } from '../dto/userInfoResponse'
-import { OrganizationsImpl } from '../storages/organizations.impl'
+import { Service } from "./service"
+import { Organizations } from "../storages/organizations"
+import { OrganizationDto, UserSettings } from "../dto/userInfoResponse"
+import { OrganizationsImpl } from "../storages/organizations.impl"
 
 export class OrganizationService extends Service {
   private _impl?: OrganizationsImpl

@@ -1,12 +1,12 @@
-import { version } from '../package.json'
-import { _createApp } from './internal/createApp.impl'
-import { type AppBuilder } from './appBuilder'
-import { type AppSdk } from './appSdk'
+import { version } from "../package.json"
+import { _createApp } from "./internal/createApp.impl"
+import { type AppBuilder } from "./appBuilder"
+import { type AppSdk } from "./appSdk"
 
-export * from './events'
-export * from './disposable'
-export * from './credentials'
-export * from './appSdk'
+export * from "./events"
+export * from "./disposable"
+export * from "./credentials"
+export * from "./appSdk"
 
 const _appsNotReady = new Map<string, Promise<AppSdk>>()
 const _appsReady = new Map<string, AppSdk>()
@@ -19,12 +19,12 @@ export const SDK_VERSION = version
 /**
  * Default DataIsland App name.
  */
-export const DEFAULT_NAME = '[DEFAULT]'
+export const DEFAULT_NAME = "[DEFAULT]"
 
 /**
  * Default DataIsland App host.
  */
-export const DEFAULT_HOST = 'https://api.dataisland.com.ua'
+export const DEFAULT_HOST = "https://api.dataisland.com.ua"
 
 export function sdks(): AppSdk[] {
   return Array.from(_appsReady.values())

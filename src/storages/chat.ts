@@ -1,15 +1,15 @@
-import { EventDispatcher } from '../events'
+import { EventDispatcher } from "../events"
 
 export type ChatId = string
 
 export enum ChatsEvent {
-  ADDED = 'added',
-  REMOVED = 'removed'
+  ADDED = "added",
+  REMOVED = "removed"
 }
 
 export enum ChatAnswer {
-  SHORT = 'short',
-  LONG = 'long'
+  SHORT = "short",
+  LONG = "long"
 }
 
 export abstract class Chat {

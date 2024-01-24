@@ -84,21 +84,21 @@ export enum StepType {
 }
   
 export class StepTypeInfo {
-    public static hasTokens(type: StepType): boolean {
-        switch (type) {
-        case StepType.GENERATE_ANSWER:
-        case StepType.DONE:
-        case StepType.FINALIZE_RESULT:
-            return true;
-        }
-        return false;
+  public static hasTokens(type: StepType): boolean {
+    switch (type) {
+    case StepType.GENERATE_ANSWER:
+    case StepType.DONE:
+    case StepType.FINALIZE_RESULT:
+      return true
     }
+    return false
+  }
 
-    public static hasSources(type: StepType): boolean {
-        switch (type) {
-        case StepType.SOURCES:
-            return true;
-        }
-        return false;
+  public static hasSources(type: StepType): boolean {
+    switch (type) {
+    case StepType.SOURCES:
+      return true
     }
+    return false
+  }
 }
