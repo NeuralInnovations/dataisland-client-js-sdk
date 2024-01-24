@@ -6,6 +6,7 @@ import { WorkspaceImpl } from "./workspace.impl"
 import { OrganizationId } from "./organizations"
 import { RpcService } from "../services/rpcService"
 import { OrganizationWorkspaces } from "../dto/userInfoResponse"
+import { WorkspaceDto } from "../dto/workspacesResponse"
 
 export class WorkspacesImpl extends Workspaces {
   private readonly _workspaces: WorkspaceImpl[] = []
@@ -33,8 +34,89 @@ export class WorkspacesImpl extends Workspaces {
     return this._workspaces.find(workspace => workspace.id === id) !== undefined
   }
 
-  create(name: string, description: string): Promise<Workspace> {
-    throw new Error("Method not implemented.")
+  async create(
+    name: string,
+    description: string,
+    regulation?: {
+      isCreateNewGroup: boolean
+      newGroupName: string
+      groupIds: string[]
+    }
+  ): Promise<Workspace> {
+    if (name === undefined || name === null || name.trim() === "") {
+      throw new Error("Name is required, must be not empty")
+    }
+    if (
+      description === undefined ||
+      description === null ||
+      description.trim() === ""
+    ) {
+      throw new Error("Description is required, must be not empty")
+    }
+    if (regulation) {
+      if (
+        regulation.isCreateNewGroup === undefined ||
+        regulation.isCreateNewGroup === null
+      ) {
+        throw new Error("isCreateNewGroup is required, must be not empty")
+      }
+      if (
+        regulation.newGroupName === undefined ||
+        regulation.newGroupName === null ||
+        regulation.newGroupName.trim() === ""
+      ) {
+        throw new Error("newGroupName is required, must be not empty")
+      }
+      if (
+        regulation.groupIds === undefined ||
+        regulation.groupIds === null ||
+        regulation.groupIds.length === 0
+      ) {
+        throw new Error("groupIds is required, must be not empty")
+      }
+    }
+
+    // send create request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Workspaces")
+      .sendPost({
+        organizationId: this.organization.id,
+        profile: {
+          name: name,
+          description: description
+        },
+        regulation: {
+          isCreateNewGroup: regulation?.isCreateNewGroup ?? false,
+          newGroupName: regulation?.newGroupName ?? "",
+          groupIds: regulation?.groupIds ?? []
+        }
+      })
+
+    // check response status
+    if (!response?.ok) {
+      throw new Error(
+        `Failed to create workspace, status: ${response?.status}, ${response?.statusText}`
+      )
+    }
+
+    // parse workspace from the server's response
+    const content = (await response.json()).workspace as WorkspaceDto
+
+    // create workspace implementation
+    const workspace = new WorkspaceImpl(this.organization, this.context)
+    await workspace.initFrom(content)
+
+    // add workspace to the collection
+    this._workspaces.push(workspace)
+
+    // dispatch event
+    this.dispatch({
+      type: WorkspacesEvent.ADDED,
+      data: workspace
+    })
+
+    return workspace
   }
 
   async delete(id: string): Promise<void> {
@@ -111,6 +193,12 @@ export class WorkspacesImpl extends Workspaces {
 
       // add workspace to the collection
       this._workspaces.push(workspaceImpl)
+
+      // dispatch event
+      this.dispatch({
+        type: WorkspacesEvent.ADDED,
+        data: workspaceImpl
+      })
     }
   }
 }
