@@ -64,6 +64,10 @@ export class OrganizationsImpl extends Organizations {
   // INTERNALS
   //----------------------------------------------------------------------------
 
+  /**
+   * Delete organization.
+   * @param id
+   */
   async internalDeleteOrganization(id: OrganizationId): Promise<void> {
     if (id === undefined || id === null) {
       throw new Error('Organization delete, id is undefined or null')
@@ -110,6 +114,11 @@ export class OrganizationsImpl extends Organizations {
     org.dispose()
   }
 
+  /**
+   * Create organization.
+   * @param name
+   * @param description
+   */
   async internalCreateOrganization(
     name: string,
     description: string
@@ -154,6 +163,12 @@ export class OrganizationsImpl extends Organizations {
     return org
   }
 
+  /**
+   * Init organizations from user profile.
+   * @param adminInOrganization
+   * @param organizations
+   * @param settings
+   */
   async internalInitFrom(
     adminInOrganization: string[],
     organizations: OrganizationDto[],

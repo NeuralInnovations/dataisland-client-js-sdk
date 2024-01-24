@@ -1,3 +1,5 @@
+import { WorkspaceDto } from './workspacesResponse'
+
 export interface UserInfoResponse {
   adminInOrganization: string[]
   organizations: OrganizationDto[]
@@ -36,6 +38,10 @@ export interface OrganizationDto {
   profile: OrganizationProfileDto
 }
 
+export interface OrganizationWorkspaces extends OrganizationDto {
+  workspaces: WorkspaceDto[]
+}
+
 export interface MembersResponse {
-  members: UserDto;
+  members: UserDto
 }
