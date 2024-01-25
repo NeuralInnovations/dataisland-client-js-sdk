@@ -5,12 +5,17 @@ import { Workspace } from "../src/storages/workspace"
 export const HOST = <string>process.env.HOST
 export const TOKEN = <string>process.env.TOKEN
 
+export const randomHash = (length: number = 5) => {
+  if (length <= 0) length = 1
+  return `name-${((Math.random() * Math.pow(10, length)) | 0).toString(16)}`
+}
+
 export const testInOrganization = async (func: (app: AppSdk, org: Organization) => Promise<void>, config ?: {
     host: string,
     token: string
   }
 ): Promise<void> => {
-  const randomName = `org-name-${Math.random().toString(16)}`
+  const randomName = `org-name-${randomHash()}`
   const app = await appSdk(randomName, async builder => {
     builder.useHost(config?.host ?? HOST)
     builder.useCredential(new DebugCredential(config?.token ?? TOKEN))
@@ -36,7 +41,7 @@ export const testInWorkspace = async (func: (app: AppSdk, org: Organization, wor
   token: string,
 }): Promise<void> => {
   await testInOrganization(async (app, org) => {
-    const randomName = `org-${org.name}-workspace-${Math.random().toString(16)}`
+    const randomName = `workspace-${randomHash()}`
     const workspace = await org.workspaces.create(randomName, `description of ${randomName}`)
     try {
       await func(app, org, workspace)

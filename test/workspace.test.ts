@@ -1,6 +1,6 @@
-import { testInOrganization } from "./setup"
+import { testInOrganization, testInWorkspace } from "./setup"
 
-test("Workspace", async () => {
+test("Workspace create / delete", async () => {
   await testInOrganization(async (app, org) => {
     // save init length
     const initWorkspaceCount = org.workspaces.collection.length
@@ -48,5 +48,24 @@ test("Workspace", async () => {
 
     // check delete
     await expect(org.workspaces.delete(ws.id)).resolves.not.toThrow()
+  })
+})
+
+test("Workspace, change", async () => {
+  await testInWorkspace(async (app, org, ws) => {
+
+    expect(ws.name).not.toBe("new-name")
+
+    // rename
+    await ws.change("new-name", "new-description")
+
+    // check name
+    expect(ws.name).toBe("new-name")
+
+    // check description
+    expect(ws.description).toBe("new-description")
+
+    // check name
+    expect(ws.name).toBe("new-name")
   })
 })

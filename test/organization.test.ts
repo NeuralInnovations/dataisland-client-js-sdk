@@ -1,10 +1,10 @@
 import { appSdk, DebugCredential } from "../src"
-import { HOST, TOKEN } from "./setup"
+import { HOST, randomHash, TOKEN } from "./setup"
 import { OrganizationImpl } from "../src/storages/organization.impl"
 
 test("Organization", async () => {
   // make random name
-  const randomName = `org-test-${Math.random().toString(16)}`
+  const randomName = `org-test-${randomHash()}`
 
   // create app
   const app = await appSdk(randomName, async builder => {

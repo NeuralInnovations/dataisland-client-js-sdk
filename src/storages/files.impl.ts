@@ -1,7 +1,6 @@
 import { Context } from "../context"
 import { Disposable } from "../disposable"
 import { FileDto, FileListResponse } from "../dto/workspacesResponse"
-import { OrganizationService } from "../services/organizationService"
 import { RpcService } from "../services/rpcService"
 import { FileImpl } from "./file.impl"
 import { File, Files, FilesEvent, FilesPage, UploadFile } from "./files"
@@ -100,9 +99,16 @@ export class FilesImpl extends Files {
     page: number,
     limit: number
   ): Promise<FilesPage> {
+
+    // check page
     if (page === undefined || page === null) {
       throw new Error("File fetch, page is undefined or null")
     }
+    if (page < 0) {
+      throw new Error("File fetch, page is negative")
+    }
+
+    // check limit
     if (limit === undefined || limit === null) {
       throw new Error("File fetch, limit is undefined or null")
     }
@@ -110,23 +116,19 @@ export class FilesImpl extends Files {
       throw new Error("File fetch, limit is 0")
     }
 
-    const orgService = this.context.resolve(OrganizationService)
-
-    if (orgService === undefined) {
-      throw new Error("File fetch, organization service undefined")
-    }
-
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/list")
 
       .searchParam("workspaceId", this.workspace.id)
-      .searchParam("organizationId", orgService.organizations.current)
+      .searchParam("organizationId", this.workspace.organization.id)
       .searchParam("query", query)
       .searchParam("page", page.toString())
       .searchParam("limit", limit.toString())
       .sendGet()
 
+    // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
         `Files fetch query:${query}, page:${page}, limit:${limit}, failed`,
@@ -134,54 +136,71 @@ export class FilesImpl extends Files {
       )
     }
 
+    // parse files from the server's response
     const files = (await response!.json()) as FileListResponse
 
+    // create files list
     const filesList = new FilesPageImpl()
     filesList.total = files.totalFilesCount
     filesList.filesPerPage = files.filesPerPage
     filesList.page = page
+
+    // init files from the server's response
     for (const fl of files.files) {
+
+      // create file implementation
       const file = new FileImpl(this.context).initFrom(fl)
 
+      // add file to the collection
       filesList.files.push(file)
 
+      // dispatch event, file added
       this.dispatch({
         type: FilesEvent.ADDED,
         data: file
       })
     }
 
+    // set files list
     this.filesList = filesList
 
     return filesList
   }
 
   async internalUpload(file: UploadFile): Promise<File> {
-    const orgService = this.context.resolve(OrganizationService)
-
-    if (orgService === undefined) {
-      throw new Error("File load, organization service undefined")
+    // check file
+    if (file === undefined || file === null) {
+      throw new Error("File upload, file is undefined or null")
     }
 
+    // form data to send
     const form = new FormData()
-    form.append("organizationId", orgService.organizations.current)
+    form.append("organizationId", this.workspace.organization.id)
     form.append("workspaceId", this.workspace.id)
     form.append("name", file.name)
     form.append("file", file, file.name)
 
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files")
       .sendPostFormData(form)
+
+    // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`File upload ${file.name}`, response)
     }
+
+    // parse file from the server's response
     const result = (await response!.json()).file as FileDto
 
+    // create file implementation
     const fileImpl = new FileImpl(this.context).initFrom(result)
 
+    // TODO: why is this here?
     this.filesList?.files.push(fileImpl)
 
+    // dispatch event, file added
     this.dispatch({
       type: FilesEvent.ADDED,
       data: fileImpl

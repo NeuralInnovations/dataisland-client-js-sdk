@@ -12,7 +12,7 @@ import { CredentialService } from "../src/services/credentialService"
 import { RpcService } from "../src/services/rpcService"
 import { AppBuilder } from "../src/appBuilder"
 import { UnitTest, AppSdkUnitTest } from "../src/unitTest"
-import { HOST, TOKEN } from "./setup"
+import { HOST, randomHash, TOKEN } from "./setup"
 
 test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)
@@ -97,11 +97,11 @@ test("SDK, it is impossible to setup the same application", async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances
     // we use a random identifier every time
-    const testId = Math.random().toString(16)
-    const promise = appSdk(`test-setup-${testId}`).then(() => {
+    const testId = `test-setup-${randomHash()}`
+    const promise = appSdk(testId).then(() => {
     })
     await expect(
-      appSdk(`test-setup-${testId}`, async () => {
+      appSdk(testId, async () => {
       })
     ).rejects.toThrow()
     await promise
@@ -113,10 +113,10 @@ test("SDK, setup and get this app", async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances
     // we use a random identifier every time
-    const testId = Math.random().toString(16)
-    const promise = appSdk(`test-get-${testId}`).then(() => {
+    const testId = `test-get-${randomHash()}`
+    const promise = appSdk(testId).then(() => {
     })
-    await expect(appSdk(`test-get-${testId}`)).resolves.toBeInstanceOf(AppSdk)
+    await expect(appSdk(testId)).resolves.toBeInstanceOf(AppSdk)
     await promise
   })
 })

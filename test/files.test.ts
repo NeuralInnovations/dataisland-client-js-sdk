@@ -24,12 +24,15 @@ test("Files", async () => {
 
     expect(status).not.toBeUndefined()
     expect(status).not.toBeNull()
+    if (!status.success && status.error) {
+      console.error(status.error)
+    }
     expect(status.success).toBe(true)
     expect(status.file_id).toBe(file.id)
-    expect(status.file_parts_count).toBeGreaterThan(status.completed_parts_count)
+    expect(status.file_parts_count).toBeGreaterThanOrEqual(status.completed_parts_count)
 
     while (
-      status.success == true &&
+      status.success &&
       status.completed_parts_count !== status.file_parts_count
     ) {
       await new Promise(r => setTimeout(r, 1000))

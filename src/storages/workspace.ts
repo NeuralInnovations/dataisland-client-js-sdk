@@ -1,6 +1,7 @@
 import { EventDispatcher } from "../events"
 import { Files } from "./files"
 import { WorkspaceId } from "./workspaces"
+import { Organization } from "./organization"
 
 /**
  * Workspace event.
@@ -16,6 +17,11 @@ export abstract class Workspace extends EventDispatcher<
   WorkspaceEvent,
   Workspace
 > {
+  /**
+   * Organization.
+   */
+  abstract get organization(): Organization
+
   /**
    * Workspace id.
    */
