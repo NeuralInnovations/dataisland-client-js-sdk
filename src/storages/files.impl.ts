@@ -174,17 +174,17 @@ export class FilesImpl extends Files {
       ?.requestBuilder("api/v1/Files")
       .sendPost(form)
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`File upload ${file}`, response)
+      await ResponseUtils.throwError(`File upload ${file.name}`, response)
     }
-    const result = (await response!.json()).file as FileDto
+    const result = (await response!.json())['file'] as FileDto
 
     const fileImpl = new FileImpl(this.context).initFrom(result)
 
-    this.filesList!.files.push(file)
+    this.filesList!.files.push(fileImpl)
 
     this.dispatch({
       type: FilesEvent.ADDED,
-      data: file
+      data: fileImpl
     })
 
     return fileImpl
