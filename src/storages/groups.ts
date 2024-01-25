@@ -1,6 +1,8 @@
-import { AccessGroupDto, PermitsDto } from "../dto/accessGroupResponse"
+import { AccessGroupDto } from "../dto/accessGroupResponse"
+import { UserDto } from "../dto/userInfoResponse"
 import { WorkspaceDto } from "../dto/workspacesResponse"
 import { EventDispatcher } from "../events"
+import { OrganizationId } from "./organizations"
 
 export type GroupId = string
 
@@ -10,29 +12,31 @@ export enum GroupEvent {
     UPDATED = "updated"
   }
 
-export abstract class Group {
+export abstract class Group extends EventDispatcher<GroupEvent, Group> {
 
     abstract get id(): GroupId
 
     abstract get group(): AccessGroupDto
 
-    abstract get workspaces(): WorkspaceDto[]
+    abstract get members(): UserDto[]
 
-    abstract set workspaces(value: string[])
+    abstract getWorkspaces() : Promise<WorkspaceDto[]>
 
-    abstract set name(value: string)
+    abstract setWorkspaces(workspaces: string[]): Promise<void>
 
-    abstract set permits(value: PermitsDto[])
-    
-    abstract set members(value: string[])
+    abstract setName(name: string): Promise<void>
+
+    abstract setPermits(permits: {isAdmin: boolean}): Promise<void>
+
+    abstract setMembersIds(members: string[]): Promise<void>
 }
 
 
 export abstract class Groups extends EventDispatcher<GroupEvent, Group>{
 
-    abstract create(): Promise<Group>
+    abstract create(name: string, organizationId: OrganizationId, permits: { isAdmin: boolean }, memberIds: string[]): Promise<Group>
 
-    abstract get(id: GroupId): Promise<Group>
+    abstract get(id: GroupId): Promise<Group | undefined>
 
     abstract delete(id: GroupId): Promise<void>
 
