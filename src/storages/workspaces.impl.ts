@@ -1,12 +1,13 @@
-import { WorkspaceId, Workspaces, WorkspacesEvent } from "./workspaces"
-import { OrganizationImpl } from "./organization.impl"
-import { Context } from "../context"
-import { Workspace } from "./workspace"
-import { WorkspaceImpl } from "./workspace.impl"
-import { OrganizationId } from "./organizations"
-import { RpcService } from "../services/rpcService"
-import { OrganizationWorkspaces } from "../dto/userInfoResponse"
-import { WorkspaceDto } from "../dto/workspacesResponse"
+import { WorkspaceId, Workspaces, WorkspacesEvent } from './workspaces'
+import { OrganizationImpl } from './organization.impl'
+import { Context } from '../context'
+import { Workspace } from './workspace'
+import { WorkspaceImpl } from './workspace.impl'
+import { OrganizationId } from './organizations'
+import { RpcService } from '../services/rpcService'
+import { OrganizationWorkspaces } from '../dto/userInfoResponse'
+import { WorkspaceDto } from '../dto/workspacesResponse'
+import { ResponseUtils } from '../services/responseUtils'
 
 export class WorkspacesImpl extends Workspaces {
   private readonly _workspaces: WorkspaceImpl[] = []
@@ -43,43 +44,43 @@ export class WorkspacesImpl extends Workspaces {
       groupIds: string[]
     }
   ): Promise<Workspace> {
-    if (name === undefined || name === null || name.trim() === "") {
-      throw new Error("Name is required, must be not empty")
+    if (name === undefined || name === null || name.trim() === '') {
+      throw new Error('Name is required, must be not empty')
     }
     if (
       description === undefined ||
       description === null ||
-      description.trim() === ""
+      description.trim() === ''
     ) {
-      throw new Error("Description is required, must be not empty")
+      throw new Error('Description is required, must be not empty')
     }
     if (regulation) {
       if (
         regulation.isCreateNewGroup === undefined ||
         regulation.isCreateNewGroup === null
       ) {
-        throw new Error("isCreateNewGroup is required, must be not empty")
+        throw new Error('isCreateNewGroup is required, must be not empty')
       }
       if (
         regulation.newGroupName === undefined ||
         regulation.newGroupName === null ||
-        regulation.newGroupName.trim() === ""
+        regulation.newGroupName.trim() === ''
       ) {
-        throw new Error("newGroupName is required, must be not empty")
+        throw new Error('newGroupName is required, must be not empty')
       }
       if (
         regulation.groupIds === undefined ||
         regulation.groupIds === null ||
         regulation.groupIds.length === 0
       ) {
-        throw new Error("groupIds is required, must be not empty")
+        throw new Error('groupIds is required, must be not empty')
       }
     }
 
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Workspaces")
+      ?.requestBuilder('api/v1/Workspaces')
       .sendPost({
         organizationId: this.organization.id,
         profile: {
@@ -88,20 +89,18 @@ export class WorkspacesImpl extends Workspaces {
         },
         regulation: {
           isCreateNewGroup: regulation?.isCreateNewGroup ?? false,
-          newGroupName: regulation?.newGroupName ?? "",
+          newGroupName: regulation?.newGroupName ?? '',
           groupIds: regulation?.groupIds ?? []
         }
       })
 
     // check response status
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to create workspace, status: ${response?.status}, ${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError('Failed to create workspace', response)
     }
 
     // parse workspace from the server's response
-    const content = (await response.json()).workspace as WorkspaceDto
+    const content = (await response!.json()).workspace as WorkspaceDto
 
     // create workspace implementation
     const workspace = new WorkspaceImpl(this.organization, this.context)
@@ -139,14 +138,15 @@ export class WorkspacesImpl extends Workspaces {
     // send delete request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Organizations")
-      .searchParam("id", id)
+      ?.requestBuilder('api/v1/Organizations')
+      .searchParam('id', id)
       .sendDelete()
 
     // check response status
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to delete workspace. Status: ${response?.status},${response?.statusText}`
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed to delete workspace: ${workspace.organization.name}/${workspace.name}:${id}`,
+        response
       )
     }
 
@@ -168,19 +168,17 @@ export class WorkspacesImpl extends Workspaces {
     // init workspaces from the server's response
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Organizations")
-      .searchParam("id", organizationId)
+      ?.requestBuilder('api/v1/Organizations')
+      .searchParam('id', organizationId)
       .sendGet()
 
     // check response status
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to fetch workspaces. Status: ${response?.status},${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError('Failed to fetch workspaces.', response)
     }
 
     // parse workspaces from the server's response
-    const workspaces = ((await response.json()) as OrganizationWorkspaces)
+    const workspaces = ((await response!.json()) as OrganizationWorkspaces)
       .workspaces
 
     // init workspaces from the server's response

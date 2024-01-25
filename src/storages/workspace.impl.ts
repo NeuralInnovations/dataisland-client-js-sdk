@@ -5,12 +5,13 @@ import { OrganizationImpl } from "./organization.impl"
 import { WorkspaceDto } from "../dto/workspacesResponse"
 import { RpcService } from "../services/rpcService"
 import { FilesImpl } from "./files.impl"
+import { ResponseUtils } from "../services/responseUtils"
 
 export class WorkspaceImpl extends Workspace {
   private _isMarkAsDeleted: boolean = false
   private _workspace?: WorkspaceDto
 
-  private readonly _files: FilesImpl 
+  private readonly _files: FilesImpl
 
   constructor(
     public readonly organization: OrganizationImpl,
@@ -79,10 +80,8 @@ export class WorkspaceImpl extends Workspace {
         }
       })
 
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to change workspace. ${response?.status}, ${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to change workspace", response)
     }
 
     if (this._workspace) {

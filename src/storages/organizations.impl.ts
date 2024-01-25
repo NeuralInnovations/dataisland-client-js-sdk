@@ -8,6 +8,7 @@ import { RpcService } from "../services/rpcService"
 import { OrganizationDto, UserSettings } from "../dto/userInfoResponse"
 import { Context } from "../context"
 import { Organization } from "./organization"
+import { ResponseUtils } from "../services/responseUtils"
 
 export class OrganizationsImpl extends Organizations {
   constructor(public readonly context: Context) {
@@ -83,16 +84,10 @@ export class OrganizationsImpl extends Organizations {
       ?.requestBuilder("/api/v1/Organizations")
       .searchParam("id", id)
       .sendDelete()
-    if (!response?.ok) {
-      let text: string = ""
-      try {
-        text = (await response?.text()) ?? ""
-      } catch (e) {
-        console.error(e)
-      }
-
-      throw new Error(
-        `Organization delete, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Organization ${id} delete, failed`,
+        response
       )
     }
     const org = <OrganizationImpl>this.get(id)
@@ -141,12 +136,13 @@ export class OrganizationsImpl extends Organizations {
           description: description
         }
       })
-    if (!response?.ok) {
-      throw new Error(
-        `Organization create, response is not ok: ${response?.status}/${response?.statusText}`
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Organization create failed, name: ${name}, description: ${description}`,
+        response
       )
     }
-    const content = (await response.json())["organization"] as OrganizationDto
+    const content = (await response!.json()).organization as OrganizationDto
 
     // create organization and init from content
     const org = await new OrganizationImpl(this.context).initFrom(content, true)

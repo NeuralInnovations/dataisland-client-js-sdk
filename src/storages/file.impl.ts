@@ -3,9 +3,9 @@ import { Disposable } from "../disposable"
 import { FileDto, FileProgressDto } from "../dto/workspacesResponse"
 import { RpcService } from "../services/rpcService"
 import { File } from "./files"
+import { ResponseUtils } from "../services/responseUtils"
 
-
-export class FileImpl extends File implements Disposable{
+export class FileImpl extends File implements Disposable {
   private _isDisposed: boolean = false
   private _content?: FileDto
 
@@ -36,33 +36,33 @@ export class FileImpl extends File implements Disposable{
   }
 
   async url(): Promise<string> {
-    const response = await this.context.resolve(RpcService)
+    const response = await this.context
+      .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/url")
       .searchParam("id", this.id)
       .sendGet()
 
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to get file ${this.id} url. Status: ${response?.status},${response?.statusText}`
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed to get file ${this.id} url`,
+        response
       )
     }
 
-    return (await response.json())["url"]
+    return (await response!.json()).url
   }
 
   async status(): Promise<FileProgressDto> {
-    const response = await this.context.resolve(RpcService)
+    const response = await this.context
+      .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/url")
       .searchParam("id", this.id)
       .sendGet()
 
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to get file ${this.id} status. Status: ${response?.status},${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get file ${this.id}`, response)
     }
 
-    return (await response.json())["progress"] as FileProgressDto
+    return (await response!.json()).progress as FileProgressDto
   }
-
 }

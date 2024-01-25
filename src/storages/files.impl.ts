@@ -6,6 +6,7 @@ import { RpcService } from "../services/rpcService"
 import { FileImpl } from "./file.impl"
 import { File, Files, FilesEvent, FilesList as FilesPage } from "./files"
 import { WorkspaceImpl } from "./workspace.impl"
+import { ResponseUtils } from "../services/responseUtils"
 
 export class FilesPageImpl extends FilesPage implements Disposable {
   private _isDisposed: boolean = false
@@ -72,17 +73,8 @@ export class FilesImpl extends Files {
       ?.requestBuilder("/api/v1/Files")
       .searchParam("id", id)
       .sendDelete()
-    if (!response?.ok) {
-      let text: string = ""
-      try {
-        text = (await response?.text()) ?? ""
-      } catch (e) {
-        console.error(e)
-      }
-
-      throw new Error(
-        `File ${id} delete, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`File ${id} delete, failed`, response)
     }
     const file = <FileImpl>this.filesList!.files.find(f => f.id === id)
     const index = this.filesList!.files.indexOf(file)
@@ -135,20 +127,14 @@ export class FilesImpl extends Files {
       .searchParam("limit", limit.toString())
       .sendGet()
 
-    if (!response?.ok) {
-      let text: string = ""
-      try {
-        text = (await response?.text()) ?? ""
-      } catch (e) {
-        console.error(e)
-      }
-
-      throw new Error(
-        `Files fetch, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Files fetch query:${query}, page:${page}, limit:${limit}, failed`,
+        response
       )
     }
 
-    const files = (await response.json()) as FileListResponse
+    const files = (await response!.json()) as FileListResponse
 
     const filesList = new FilesPageImpl()
     filesList.total = files.totalFilesCount
@@ -187,12 +173,10 @@ export class FilesImpl extends Files {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files")
       .sendPost(form)
-    if (!response?.ok) {
-      throw new Error(
-        `File upload, response is not ok: ${response?.status}/${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`File upload ${file}`, response)
     }
-    const result = (await response.json())["file"] as FileDto
+    const result = (await response!.json()).file as FileDto
 
     const fileImpl = new FileImpl(this.context).initFrom(result)
 

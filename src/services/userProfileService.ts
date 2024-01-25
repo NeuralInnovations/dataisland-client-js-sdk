@@ -4,6 +4,7 @@ import { UserProfile } from "../storages/userProfile"
 import { UserInfoResponse } from "../dto/userInfoResponse"
 import { OrganizationService } from "./organizationService"
 import { UserProfileImpl } from "../storages/userProfile.impl"
+import { ResponseUtils } from "./responseUtils"
 
 export class UserProfileService extends Service {
   private readonly impl: UserProfileImpl = new UserProfileImpl()
@@ -12,13 +13,11 @@ export class UserProfileService extends Service {
     return this.impl
   }
 
-  async fetch(fireError: boolean = true) {
+  async fetch() {
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Users/self2").sendGet()
-    if (fireError && !response.ok) {
-      throw new Error(
-        `Failed to fetch user profile. Status: ${response.status},${response.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to fetch user profile", response)
     }
     const content = (await response.json()) as UserInfoResponse
 
