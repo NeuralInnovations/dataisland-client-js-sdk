@@ -87,7 +87,7 @@ test("Create and delete organization, create and delete workspace", async () => 
   expect(org.workspaces.tryGet(ws.id)).toBe(ws)
   expect(org.workspaces.contains(ws.id)).toBe(true)
 
-  const buffer = fs.readFileSync("test_file.pdf")
+  const buffer = fs.readFileSync("test/data/test_file.pdf")
   const file_obj = new File([new Uint8Array(buffer)], "test_file.pdf", {
     type: "text/plain"
   })
