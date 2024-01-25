@@ -8,7 +8,7 @@ export enum FilesEvent {
   REMOVED = 'removed'
 }
 
-export type UploadFile = File | Blob | string
+export type UploadFile = globalThis.File
 
 /**
  * File.
@@ -42,7 +42,7 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
    * Get file by id.
    */
-  abstract upload(file: any): Promise<File>
+  abstract upload(file: UploadFile): Promise<File>
 
   /**
    * Delete file.
@@ -53,10 +53,10 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
    * Query files.
    */
-  abstract query(query: string, page: number, limit: number): Promise<FilesList>
+  abstract query(query: string, page: number, limit: number): Promise<FilesPage>
 }
 
-export abstract class FilesList {
+export abstract class FilesPage {
   abstract get files(): File[]
 
   abstract get pages(): number

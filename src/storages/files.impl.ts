@@ -4,7 +4,7 @@ import { FileDto, FileListResponse } from "../dto/workspacesResponse"
 import { OrganizationService } from "../services/organizationService"
 import { RpcService } from "../services/rpcService"
 import { FileImpl } from "./file.impl"
-import { File, Files, FilesEvent, FilesList as FilesPage } from "./files"
+import { File, Files, FilesEvent, FilesList as FilesPage, UploadFile } from "./files"
 import { WorkspaceImpl } from "./workspace.impl"
 import { ResponseUtils } from "../services/responseUtils"
 
@@ -156,7 +156,7 @@ export class FilesImpl extends Files {
     return filesList
   }
 
-  async internalUpload(file: any): Promise<File> {
+  async internalUpload(file: UploadFile): Promise<File> {
     const orgService = this.context.resolve(OrganizationService)
 
     if (orgService === undefined) {
