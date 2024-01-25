@@ -4,16 +4,20 @@ import { Workspace, WorkspaceEvent } from "./workspace"
 import { OrganizationImpl } from "./organization.impl"
 import { WorkspaceDto } from "../dto/workspacesResponse"
 import { RpcService } from "../services/rpcService"
+import { FilesImpl } from "./files.impl"
 
 export class WorkspaceImpl extends Workspace {
   private _isMarkAsDeleted: boolean = false
   private _workspace?: WorkspaceDto
+
+  private readonly _files: FilesImpl 
 
   constructor(
     public readonly organization: OrganizationImpl,
     public readonly context: Context
   ) {
     super()
+    this._files = new FilesImpl(this, context)
   }
 
   get id(): string {
@@ -38,7 +42,7 @@ export class WorkspaceImpl extends Workspace {
   }
 
   get files(): Files {
-    throw new Error("Method not implemented.")
+    return this._files
   }
 
   async change(name: string, description: string): Promise<void> {

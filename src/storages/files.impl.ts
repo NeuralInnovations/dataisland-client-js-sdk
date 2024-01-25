@@ -4,11 +4,11 @@ import { FileDto, FileListResponse } from "../dto/workspacesResponse"
 import { OrganizationService } from "../services/organizationService"
 import { RpcService } from "../services/rpcService"
 import { FileImpl } from "./file.impl"
-import { File, Files, FilesEvent, FilesList } from "./files"
+import { File, Files, FilesEvent, FilesList as FilesPage } from "./files"
 import { WorkspaceImpl } from "./workspace.impl"
 
 
-export class FilesListImpl extends FilesList implements Disposable{
+export class FilesPageImpl extends FilesPage implements Disposable{
   private _isDisposed: boolean = false
 
   public files: File[] = []
@@ -17,7 +17,7 @@ export class FilesListImpl extends FilesList implements Disposable{
   public page: number = 0
 
   get pages(): number {
-    return this.total / this.filesPerPage
+    return Math.ceil(Math.max(this.total / this.filesPerPage, 1.0))
   }
 
   get isDisposed(): boolean {
@@ -38,15 +38,16 @@ export class FilesImpl extends Files{
     super()
   }
 
-  public filesList?: FilesList
+  // Object used as files page data, returned by "query"
+  public filesList?: FilesPage
 
-  async upload(file: any, name: string): Promise<File> {
-    return await this.internalUpload(file, name)
+  async upload(file: any): Promise<File> {
+    return await this.internalUpload(file)
   }
   async delete(id: string): Promise<void> {
     return await this.internalDeleteFile(id)
   }
-  async query(query: string, page: number, limit: number): Promise<FilesList> {
+  async query(query: string, page: number, limit: number): Promise<FilesPage> {
     return await this.internalQuery(query, page, limit)
   }
 
@@ -102,7 +103,7 @@ export class FilesImpl extends Files{
         file.dispose()
   }
 
-  async internalQuery(query: string, page: number, limit: number): Promise<FilesList>{
+  async internalQuery(query: string, page: number, limit: number): Promise<FilesPage>{
     if (page === undefined || page === null) {
       throw new Error("File fetch, page is undefined or null")
     }
@@ -113,9 +114,15 @@ export class FilesImpl extends Files{
       throw new Error("File fetch, limit is 0")
     }
 
+    const orgService = this.context.resolve(OrganizationService)
+
+    if (orgService === undefined) {
+      throw new Error("File fetch, organization service undefined")
+    }
+
     const data = {
       "workspaceId" : this.workspace.id,
-      "organizationId" : this.context.resolve(OrganizationService)?.organizations.current!,
+      "organizationId" : orgService.organizations.current,
       "query" : query,
       "page" : page.toString(),
       "limit" : limit.toString()
@@ -140,7 +147,7 @@ export class FilesImpl extends Files{
 
     const files = (await response.json()) as FileListResponse
 
-    const filesList = new FilesListImpl()
+    const filesList = new FilesPageImpl()
     filesList.total = files.totalFilesCount
     filesList.filesPerPage = files.filesPerPage
     filesList.page = page
@@ -160,18 +167,23 @@ export class FilesImpl extends Files{
     return filesList
   }
 
-  async internalUpload(file: any, name: string): Promise<File>{
+  async internalUpload(file: any): Promise<File>{
+    const orgService = this.context.resolve(OrganizationService)
+
+    if (orgService === undefined) {
+      throw new Error("File load, organization service undefined")
+    }
+
+    let form = new FormData();
+    form.append("organizationId", orgService.organizations.current)
+    form.append("workspaceId", this.workspace.id)
+    form.append("name", file.name)
+    form.append("file", file, file.name);
+
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files")
-      .sendPost({
-        OrganizationId: this.context.resolve(OrganizationService)?.organizations.current!,
-        WorkspaceId: this.workspace.id,
-        Name: name,
-        Description: "",
-        File: file
-
-      })
+      .sendPost(form)
     if (!response?.ok) {
       throw new Error(
         `File upload, response is not ok: ${response?.status}/${response?.statusText}`
