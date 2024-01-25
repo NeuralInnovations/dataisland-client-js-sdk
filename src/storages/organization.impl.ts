@@ -5,16 +5,20 @@ import { Workspaces } from "./workspaces"
 import { WorkspacesImpl } from "./workspaces.impl"
 import { Context } from "../context"
 import { Organization } from "./organization"
+import { GroupsImpl } from "./groups.impl"
+import { Groups } from "./groups"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
   private _isAdmin: boolean = false
   private _content?: OrganizationDto
   private readonly _workspaces: WorkspacesImpl
+  private readonly _accessGroups: GroupsImpl
 
   constructor(private readonly context: Context) {
     super()
     this._workspaces = new WorkspacesImpl(this, this.context)
+    this._accessGroups = new GroupsImpl(this, this.context)
   }
 
   public async initFrom(
@@ -56,5 +60,9 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get workspaces(): Workspaces {
     return this._workspaces
+  }
+
+  get accessGroups(): Groups {
+    return this._accessGroups
   }
 }

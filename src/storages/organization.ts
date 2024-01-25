@@ -1,5 +1,6 @@
 import { Workspaces } from "./workspaces"
 import { OrganizationId } from "./organizations"
+import { Groups } from "./groups"
 
 /**
  * Organization.
@@ -24,4 +25,9 @@ export abstract class Organization {
    * Workspaces.
    */
   abstract get workspaces(): Workspaces
+
+  /**
+   * Groups.
+   */
+  abstract get accessGroups(): Groups
 }
