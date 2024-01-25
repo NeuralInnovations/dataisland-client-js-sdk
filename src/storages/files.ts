@@ -1,12 +1,14 @@
-import { FileProgressDto } from "../dto/workspacesResponse"
-import { EventDispatcher } from "../events"
+import { FileProgressDto } from '../dto/workspacesResponse'
+import { EventDispatcher } from '../events'
 
 export type FileId = string
 
 export enum FilesEvent {
-  ADDED = "added",
-  REMOVED = "removed"
+  ADDED = 'added',
+  REMOVED = 'removed'
 }
+
+export type UploadFile = File | Blob | string
 
 /**
  * File.
@@ -37,7 +39,6 @@ export abstract class File {
  * Files storage.
  */
 export abstract class Files extends EventDispatcher<FilesEvent, File> {
-
   /**
    * Get file by id.
    */
@@ -55,15 +56,12 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   abstract query(query: string, page: number, limit: number): Promise<FilesList>
 }
 
-export abstract class FilesList{
-
+export abstract class FilesList {
   abstract get files(): File[]
 
-  abstract get pages(): number 
+  abstract get pages(): number
 
   abstract get total(): number
 
   abstract get page(): number
-
 }
-
