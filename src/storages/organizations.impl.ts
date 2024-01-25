@@ -130,7 +130,7 @@ export class OrganizationsImpl extends Organizations {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Organizations")
-      .sendPost({
+      .sendPostJson({
         profile: {
           name: name,
           description: description

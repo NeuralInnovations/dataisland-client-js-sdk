@@ -26,7 +26,7 @@ export interface FileProgressDto {
   file_parts_count: number
   completed_parts_count: number
   success: boolean
-  error: string
+  error?: string
 }
 
 export interface FileDto {

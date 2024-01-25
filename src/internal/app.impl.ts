@@ -104,13 +104,6 @@ export class AppImplementation extends AppSdk {
       return new OrganizationService(context)
     })
 
-    // register middlewares
-    builder.registerMiddleware(async (req, next) => {
-      req.headers.set("accept", "text/plain")
-      req.headers.set("content-type", "application/json")
-      return await next(req)
-    })
-
     // call customer setup
     if (setup !== undefined) {
       await setup(builder)
@@ -154,7 +147,9 @@ export class AppImplementation extends AppSdk {
     const waitList: Array<Promise<void>> = []
     // call onRegister service's callback
     services.forEach(([serviceContext]) => {
-      waitList.push(serviceContext.onRegister())
+      if (typeof serviceContext.onRegister === "function") {
+        waitList.push(serviceContext.onRegister())
+      }
     })
 
     // wait for all services to register
@@ -167,7 +162,9 @@ export class AppImplementation extends AppSdk {
     waitList.length = 0
     // call onStart service's callback
     services.forEach(([serviceContext]) => {
-      waitList.push(serviceContext.onStart())
+      if (typeof serviceContext.onStart === "function") {
+        waitList.push(serviceContext.onStart())
+      }
     })
 
     // wait for all services to start

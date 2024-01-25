@@ -87,7 +87,7 @@ export class WorkspacesImpl extends Workspaces {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Workspaces")
-      .sendPost({
+      .sendPostJson({
         organizationId: this.organization.id,
         profile: {
           name: name,

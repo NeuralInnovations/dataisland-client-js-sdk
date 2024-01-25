@@ -14,6 +14,7 @@ export interface RequestOptions {
  * RPC service.
  */
 export class RpcService extends Service {
+
   constructor(
     serviceContext: ServiceContext,
     /**
@@ -32,6 +33,22 @@ export class RpcService extends Service {
     }
   ) {
     super(serviceContext)
+
+    serviceContext.onRegister = async () => {
+      serviceContext.resolve(MiddlewareService)?.useMiddleware((req, next) => {
+        if (!req.headers.has("accept")) {
+          req.headers.set("accept", "text/plain")
+        }
+
+        if ((req as any).discardContentType) {
+          delete (req as any).discardContentType
+        } else {
+          req.headers.set("content-type", "application/json")
+        }
+
+        return next(req)
+      })
+    }
   }
 
   /**
@@ -87,35 +104,35 @@ export class RpcService extends Service {
   /**
    * Send a POST request.
    * @param path
-   * @param body
+   * @param body JSON object
    * @param options
    */
   async post(
     path: string,
-    body?: BodyInit | null,
+    body: object | null | undefined,
     options?: RequestOptions
   ): Promise<Response> {
     return this.requestBuilder(path)
       .searchParams(options?.searchParams)
       .headers(options?.headers)
-      .sendPost(body)
+      .sendPostJson(body)
   }
 
   /**
    * Send a PUT request.
    * @param path
-   * @param body
+   * @param body JSON object
    * @param options
    */
   async put(
     path: string,
-    body?: BodyInit | null,
+    body: object | null | undefined,
     options?: RequestOptions
   ): Promise<Response> {
     return this.requestBuilder(path)
       .searchParams(options?.searchParams)
       .headers(options?.headers)
-      .sendPut(body)
+      .sendPutJson(body)
   }
 
   /**

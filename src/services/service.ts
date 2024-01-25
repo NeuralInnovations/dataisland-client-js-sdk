@@ -6,7 +6,8 @@ export class ServiceContext {
   constructor(
     public readonly context: Context,
     private readonly disposableContainer: DisposableContainer
-  ) {}
+  ) {
+  }
 
   public get lifetime(): Lifetime {
     return this.disposableContainer.lifetime
@@ -16,15 +17,15 @@ export class ServiceContext {
     return this.context.resolve(type)
   }
 
-  public async onRegister(): Promise<void> {
+  public onRegister: () => Promise<void> = async (): Promise<void> => {
     await Promise.resolve()
   }
 
-  public async onStart(): Promise<void> {
+  public onStart: () => Promise<void> = async (): Promise<void> => {
     await Promise.resolve()
   }
 
-  public onUnregister(): void {
+  public onUnregister: () => void = (): void => {
     // do nothing
   }
 }
@@ -42,5 +43,6 @@ export abstract class Service {
     return this.serviceContext.context
   }
 
-  public constructor(private readonly serviceContext: ServiceContext) {}
+  public constructor(private readonly serviceContext: ServiceContext) {
+  }
 }

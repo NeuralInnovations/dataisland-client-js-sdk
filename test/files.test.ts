@@ -9,7 +9,7 @@ test("Files", async () => {
 
     const buffer = fs.readFileSync("test/data/test_file.pdf")
     const file_obj = new File([new Uint8Array(buffer)], "test_file.pdf", {
-      type: "text/plain"
+      type: "application/pdf"
     })
 
     const filePromise = ws.files.upload(file_obj)
@@ -24,6 +24,7 @@ test("Files", async () => {
 
     expect(status).not.toBeUndefined()
     expect(status).not.toBeNull()
+    expect(status.success).toBe(true)
     expect(status.file_id).toBe(file.id)
     expect(status.file_parts_count).toBeGreaterThan(status.completed_parts_count)
 

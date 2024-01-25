@@ -3,7 +3,7 @@ import { type Middleware } from "../middleware"
 import { type Disposable } from "../disposable"
 
 export class MiddlewareService extends Service {
-  _middlewares: Middleware[] = []
+  private _middlewares: Middleware[] = []
 
   public useMiddleware(middleware: Middleware): Disposable {
     this._middlewares.push(middleware)

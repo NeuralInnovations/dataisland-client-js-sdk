@@ -73,12 +73,12 @@ export class GroupImpl extends Group implements Disposable {
       } catch (e) {
         console.error(e)
       }
-  
+
       throw new Error(
         `Groups get workspaces, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
       )
     }
-  
+
     const workspaces = (await response.json()) as WorkspacesResponse
 
     return workspaces.workspaces
@@ -101,7 +101,7 @@ export class GroupImpl extends Group implements Disposable {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/name")
-      .sendPut({
+      .sendPutJson({
         groupId: this.id,
         name: name
       })
@@ -117,7 +117,7 @@ export class GroupImpl extends Group implements Disposable {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/permits")
-      .sendPut({
+      .sendPutJson({
         groupId: this.id,
         permits: permits
       })
@@ -138,7 +138,7 @@ export class GroupImpl extends Group implements Disposable {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/workspaces")
-      .sendPut({
+      .sendPutJson({
         groupId: this.id,
         actualWorkspaceIds: workspaces
       })
@@ -159,7 +159,7 @@ export class GroupImpl extends Group implements Disposable {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/members")
-      .sendPut({
+      .sendPutJson({
         groupId: this.id,
         memberIds: members
       })
@@ -227,12 +227,12 @@ export class GroupsImpl extends Groups {
       } catch (e) {
         console.error(e)
       }
-  
+
       throw new Error(
         `Groups init, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
       )
     }
-  
+
     const groups = (await response.json()) as AccessGroupsResponse
 
     for (const gr of groups.groups){
@@ -258,7 +258,7 @@ export class GroupsImpl extends Groups {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups")
-      .sendPost({
+      .sendPostJson({
         name: name,
         organizationId: organizationId,
         permits: permits,
@@ -333,5 +333,5 @@ export class GroupsImpl extends Groups {
     group.dispose()
   }
 
-    
+
 }

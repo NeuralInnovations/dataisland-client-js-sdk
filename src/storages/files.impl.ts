@@ -172,7 +172,7 @@ export class FilesImpl extends Files {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files")
-      .sendPost(form)
+      .sendPostFormData(form)
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`File upload ${file.name}`, response)
     }
@@ -180,7 +180,7 @@ export class FilesImpl extends Files {
 
     const fileImpl = new FileImpl(this.context).initFrom(result)
 
-    this.filesList!.files.push(fileImpl)
+    this.filesList?.files.push(fileImpl)
 
     this.dispatch({
       type: FilesEvent.ADDED,

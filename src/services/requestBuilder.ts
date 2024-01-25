@@ -48,18 +48,42 @@ export class RequestBuilder {
     return this
   }
 
-  public async sendPost(body?: BodyInit | null | object): Promise<Response> {
+  public async sendPostFormData(body: FormData): Promise<Response> {
+    const url = this._url
+
+    // set search params
+    url.search = this._searchParams.toString()
+
+    // create request
+    const req = new Request(url, {
+      method: "POST",
+      headers: this._headers,
+      body
+    })
+
+    // discard content type
+    const reqAny = req as any
+    reqAny.discardContentType = true
+
+    return await this._request(
+      req
+    )
+  }
+
+  public async sendPostJson(body: object | null | undefined): Promise<Response> {
     const url = this._url
     url.search = this._searchParams.toString()
+    let json: string | null | undefined = null
     if (body !== undefined && body !== null && typeof body === "object") {
-      body = JSON.stringify(body)
+      json = JSON.stringify(body)
     }
+    const request = new Request(url, {
+      method: "POST",
+      headers: this._headers,
+      body: json
+    })
     return await this._request(
-      new Request(url, {
-        method: "POST",
-        headers: this._headers,
-        body
-      })
+      request
     )
   }
 
@@ -85,17 +109,18 @@ export class RequestBuilder {
     )
   }
 
-  public async sendPut(body?: BodyInit | null | object): Promise<Response> {
+  public async sendPutJson(body: object | null | undefined): Promise<Response> {
     const url = this._url
     url.search = this._searchParams.toString()
+    let json: string | null | undefined = null
     if (body !== undefined && body !== null && typeof body === "object") {
-      body = JSON.stringify(body)
+      json = JSON.stringify(body)
     }
     return await this._request(
       new Request(url, {
         method: "PUT",
         headers: this._headers,
-        body
+        body: json
       })
     )
   }

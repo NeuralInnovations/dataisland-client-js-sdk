@@ -32,7 +32,7 @@ export class FileImpl extends File implements Disposable {
   }
 
   get name(): string {
-    return <string>this._content?.id
+    return <string>this._content?.name
   }
 
   async url(): Promise<string> {
@@ -55,7 +55,7 @@ export class FileImpl extends File implements Disposable {
   async status(): Promise<FileProgressDto> {
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Files/url")
+      ?.requestBuilder("api/v1/Files/fetch")
       .searchParam("id", this.id)
       .sendGet()
 
@@ -63,6 +63,7 @@ export class FileImpl extends File implements Disposable {
       await ResponseUtils.throwError(`Failed to get file ${this.id}`, response)
     }
 
-    return (await response!.json()).progress as FileProgressDto
+    const content = await response!.json()
+    return content.progress as FileProgressDto
   }
 }
