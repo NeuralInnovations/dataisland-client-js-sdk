@@ -1,4 +1,3 @@
-
 import { Context } from "../context"
 import { Disposable } from "../disposable"
 import { AccessGroupDto, PermitsDto } from "../dto/accessGroupResponse"
@@ -14,18 +13,18 @@ export class GroupImpl extends Group implements Disposable {
     super()
   }
 
-  public initFrom(data: AccessGroupDto){
+  public initFrom(data: AccessGroupDto) {
     this._content = data
   }
 
   get id(): GroupId {
-    if (this._content){
+    if (this._content) {
       return this._content.id
     }
     throw new Error("Access group is not loaded.")
   }
   get group(): AccessGroupDto {
-    if (this._content){
+    if (this._content) {
       return this._content
     }
     throw new Error("Access group is not loaded.")
@@ -53,16 +52,12 @@ export class GroupImpl extends Group implements Disposable {
   dispose(): void {
     this._isDisposed = true
   }
-    
-
 }
 
-
 export class GroupsImpl extends Groups {
-
   constructor(
-        private readonly organization: OrganizationImpl,
-        private readonly context: Context
+    private readonly organization: OrganizationImpl,
+    private readonly context: Context
   ) {
     super()
   }
@@ -70,11 +65,12 @@ export class GroupsImpl extends Groups {
   create(): Promise<Group> {
     throw new Error("Method not implemented.")
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   get(id: string): Promise<Group> {
     throw new Error("Method not implemented.")
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   delete(id: string): Promise<void> {
     throw new Error("Method not implemented.")
   }
-    
 }
