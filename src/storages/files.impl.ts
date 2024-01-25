@@ -7,8 +7,7 @@ import { FileImpl } from "./file.impl"
 import { File, Files, FilesEvent, FilesList as FilesPage } from "./files"
 import { WorkspaceImpl } from "./workspace.impl"
 
-
-export class FilesPageImpl extends FilesPage implements Disposable{
+export class FilesPageImpl extends FilesPage implements Disposable {
   private _isDisposed: boolean = false
 
   public files: File[] = []
@@ -27,13 +26,12 @@ export class FilesPageImpl extends FilesPage implements Disposable{
   dispose(): void {
     this._isDisposed = true
   }
-
 }
 
-export class FilesImpl extends Files{
+export class FilesImpl extends Files {
   constructor(
-        private readonly workspace: WorkspaceImpl, 
-        private readonly context: Context
+    private readonly workspace: WorkspaceImpl,
+    private readonly context: Context
   ) {
     super()
   }
@@ -44,9 +42,11 @@ export class FilesImpl extends Files{
   async upload(file: any): Promise<File> {
     return await this.internalUpload(file)
   }
+
   async delete(id: string): Promise<void> {
     return await this.internalDeleteFile(id)
   }
+
   async query(query: string, page: number, limit: number): Promise<FilesPage> {
     return await this.internalQuery(query, page, limit)
   }
@@ -56,9 +56,9 @@ export class FilesImpl extends Files{
   //----------------------------------------------------------------------------
 
   /**
-     * Delete organization.
-     * @param id
-     */
+   * Delete organization.
+   * @param id
+   */
   async internalDeleteFile(id: string): Promise<void> {
     if (id === undefined || id === null) {
       throw new Error("File delete, id is undefined or null")
@@ -90,20 +90,24 @@ export class FilesImpl extends Files{
       throw new Error("Organization delete, index is not found")
     }
 
-        // remove file from collection
-        this.filesList!.files.splice(index, 1)
+    // remove file from collection
+    this.filesList!.files.splice(index, 1)
 
-        // dispatch event, file removed
-        this.dispatch({
-          type: FilesEvent.REMOVED,
-          data: file
-        })
+    // dispatch event, file removed
+    this.dispatch({
+      type: FilesEvent.REMOVED,
+      data: file
+    })
 
-        // dispose file
-        file.dispose()
+    // dispose file
+    file.dispose()
   }
 
-  async internalQuery(query: string, page: number, limit: number): Promise<FilesPage>{
+  async internalQuery(
+    query: string,
+    page: number,
+    limit: number
+  ): Promise<FilesPage> {
     if (page === undefined || page === null) {
       throw new Error("File fetch, page is undefined or null")
     }
@@ -120,16 +124,15 @@ export class FilesImpl extends Files{
       throw new Error("File fetch, organization service undefined")
     }
 
-    const data = {
-      "workspaceId" : this.workspace.id,
-      "organizationId" : orgService.organizations.current,
-      "query" : query,
-      "page" : page.toString(),
-      "limit" : limit.toString()
-    }
-    const response = await this.context.resolve(RpcService)
+    const response = await this.context
+      .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/list")
-      .searchParams(new Map(Object.entries(data)))
+
+      .searchParam("workspaceId", this.workspace.id)
+      .searchParam("organizationId", orgService.organizations.current)
+      .searchParam("query", query)
+      .searchParam("page", page.toString())
+      .searchParam("limit", limit.toString())
       .sendGet()
 
     if (!response?.ok) {
@@ -151,7 +154,7 @@ export class FilesImpl extends Files{
     filesList.total = files.totalFilesCount
     filesList.filesPerPage = files.filesPerPage
     filesList.page = page
-    for (const fl of files.files){
+    for (const fl of files.files) {
       const file = new FileImpl(this.context).initFrom(fl)
 
       filesList.files.push(file)
@@ -167,18 +170,18 @@ export class FilesImpl extends Files{
     return filesList
   }
 
-  async internalUpload(file: any): Promise<File>{
+  async internalUpload(file: any): Promise<File> {
     const orgService = this.context.resolve(OrganizationService)
 
     if (orgService === undefined) {
       throw new Error("File load, organization service undefined")
     }
 
-    let form = new FormData();
+    const form = new FormData()
     form.append("organizationId", orgService.organizations.current)
     form.append("workspaceId", this.workspace.id)
     form.append("name", file.name)
-    form.append("file", file, file.name);
+    form.append("file", file, file.name)
 
     const response = await this.context
       .resolve(RpcService)
@@ -193,14 +196,13 @@ export class FilesImpl extends Files{
 
     const fileImpl = new FileImpl(this.context).initFrom(result)
 
-        this.filesList!.files.push(file)
+    this.filesList!.files.push(file)
 
-        this.dispatch({
-          type: FilesEvent.ADDED,
-          data: file
-        })
+    this.dispatch({
+      type: FilesEvent.ADDED,
+      data: file
+    })
 
-        return fileImpl
+    return fileImpl
   }
-    
 }

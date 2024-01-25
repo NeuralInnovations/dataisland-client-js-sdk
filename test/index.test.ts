@@ -14,6 +14,7 @@ import { AppBuilder } from "../src/appBuilder"
 import { UnitTest, AppSdkUnitTest } from "../src/unitTest"
 import { HOST, TOKEN } from "./setup"
 import { OrganizationImpl } from "../src/storages/organization.impl"
+import * as fs from "fs"
 
 test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)
@@ -86,11 +87,10 @@ test("Create and delete organization, create and delete workspace", async () => 
   expect(org.workspaces.tryGet(ws.id)).toBe(ws)
   expect(org.workspaces.contains(ws.id)).toBe(true)
 
-  const fs = require('fs');
-  let buffer = fs.readFileSync(`test_file.pdf`);
-  let file_obj = new File([new Uint8Array(buffer)], 'test_file.pdf', {
-    type: 'text/plain'
-  });
+  const buffer = fs.readFileSync("test_file.pdf")
+  const file_obj = new File([new Uint8Array(buffer)], "test_file.pdf", {
+    type: "text/plain"
+  })
 
   const filePromise = ws.files.upload(file_obj)
   await expect(filePromise).resolves.not.toThrow()
@@ -98,17 +98,20 @@ test("Create and delete organization, create and delete workspace", async () => 
 
   expect(file).not.toBeUndefined()
   expect(file).not.toBeNull()
-  expect(file.name).toBe(`test_file.pdf`)
-  
-  var status = await file.status()
+  expect(file.name).toBe("test_file.pdf")
+
+  let status = await file.status()
 
   expect(status).not.toBeUndefined()
   expect(status).not.toBeNull()
   expect(status.file_id).toBe(file.id)
   expect(status.file_parts_count).toBeGreaterThan(status.completed_parts_count)
 
-  while (status.success == true && status.completed_parts_count !== status.file_parts_count){
-    await new Promise(r => setTimeout(r, 1000));
+  while (
+    status.success == true &&
+    status.completed_parts_count !== status.file_parts_count
+  ) {
+    await new Promise(r => setTimeout(r, 1000))
     status = await file.status()
   }
 
