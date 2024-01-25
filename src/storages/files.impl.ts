@@ -4,7 +4,7 @@ import { FileDto, FileListResponse } from "../dto/workspacesResponse"
 import { OrganizationService } from "../services/organizationService"
 import { RpcService } from "../services/rpcService"
 import { FileImpl } from "./file.impl"
-import { File, Files, FilesEvent, FilesList as FilesPage, UploadFile } from "./files"
+import { File, Files, FilesEvent, FilesPage, UploadFile } from "./files"
 import { WorkspaceImpl } from "./workspace.impl"
 import { ResponseUtils } from "../services/responseUtils"
 
@@ -176,7 +176,7 @@ export class FilesImpl extends Files {
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`File upload ${file.name}`, response)
     }
-    const result = (await response!.json())['file'] as FileDto
+    const result = (await response!.json()).file as FileDto
 
     const fileImpl = new FileImpl(this.context).initFrom(result)
 
