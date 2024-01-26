@@ -1,39 +1,19 @@
-import { FileProgressDto } from "../dto/workspacesResponse"
 import { EventDispatcher } from "../events"
+import { File, FileId } from "./file"
+import { FilesPage } from "./filesPage"
 
-export type FileId = string
-
+/**
+ * Files event.
+ */
 export enum FilesEvent {
   ADDED = "added",
   REMOVED = "removed"
 }
 
-export type UploadFile = globalThis.File
-
 /**
- * File.
+ * Upload file.
  */
-export abstract class File {
-  /**
-   * File id.
-   */
-  abstract get id(): FileId
-
-  /**
-   * File name.
-   */
-  abstract get name(): string
-
-  /**
-   * Get temporary url.
-   */
-  abstract url(): Promise<string>
-
-  /**
-   * Get file status.
-   */
-  abstract status(): Promise<FileProgressDto>
-}
+export type UploadFile = globalThis.File
 
 /**
  * Files storage.
@@ -56,12 +36,3 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   abstract query(query: string, page: number, limit: number): Promise<FilesPage>
 }
 
-export abstract class FilesPage {
-  abstract get files(): File[]
-
-  abstract get pages(): number
-
-  abstract get total(): number
-
-  abstract get page(): number
-}

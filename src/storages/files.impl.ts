@@ -3,9 +3,11 @@ import { Disposable } from "../disposable"
 import { FileDto, FileListResponse } from "../dto/workspacesResponse"
 import { RpcService } from "../services/rpcService"
 import { FileImpl } from "./file.impl"
-import { File, Files, FilesEvent, FilesPage, UploadFile } from "./files"
+import { Files, FilesEvent, UploadFile } from "./files"
 import { WorkspaceImpl } from "./workspace.impl"
 import { ResponseUtils } from "../services/responseUtils"
+import { File } from "./file"
+import { FilesPage } from "./filesPage"
 
 export class FilesPageImpl extends FilesPage implements Disposable {
   private _isDisposed: boolean = false

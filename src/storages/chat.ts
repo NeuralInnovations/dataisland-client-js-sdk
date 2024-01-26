@@ -1,11 +1,4 @@
-import { EventDispatcher } from "../events"
-
 export type ChatId = string
-
-export enum ChatsEvent {
-  ADDED = "added",
-  REMOVED = "removed"
-}
 
 export enum ChatAnswer {
   SHORT = "short",
@@ -26,12 +19,3 @@ export abstract class Chat {
   abstract question(message: string, answer?: ChatAnswer): Promise<void>
 }
 
-/**
- * Chats storage.
- */
-export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
-  /**
-   * Create new chat.
-   */
-  abstract create(): Promise<Chat>
-}

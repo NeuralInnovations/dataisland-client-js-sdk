@@ -7,6 +7,17 @@ export * from "./events"
 export * from "./disposable"
 export * from "./credentials"
 export * from "./appSdk"
+export * from "./storages/organizations"
+export * from "./storages/organization"
+export * from "./storages/workspaces"
+export * from "./storages/workspace"
+export * from "./storages/groups"
+export * from "./storages/userProfile"
+export * from "./storages/files"
+export * from "./storages/file"
+export * from "./storages/filesPage"
+export * from "./storages/chats"
+export * from "./storages/chat"
 
 const _appsNotReady = new Map<string, Promise<AppSdk>>()
 const _appsReady = new Map<string, AppSdk>()
@@ -73,3 +84,6 @@ export async function appSdk(
   }
   return await appPromise
 }
+
+export { File } from "./storages/file"
+export { FilesPage } from "./storages/filesPage"

@@ -1,5 +1,5 @@
 import { WorkspaceId } from "../storages/workspaces"
-import { FileId } from "../storages/files"
+import { FileId } from "../storages/file"
 
 export interface WorkspaceProfileDto {
   name: string

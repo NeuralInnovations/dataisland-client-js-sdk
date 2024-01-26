@@ -1,25 +1,25 @@
 import { type Disposable, DisposableContainer } from "./disposable"
 
-export interface Input<ET, DT> {
-  type?: ET
-  data: DT
+export interface Input<EventType, DataType> {
+  type?: EventType
+  data: DataType
 }
 
-export interface Event<ET, DT> extends Input<ET, DT> {
+export interface Event<EventType, DataType> extends Input<EventType, DataType> {
   unsubscribe: () => void
 }
 
-export interface EventSubscriber<ET, DT> {
-  subscribe: (callback: (event: Event<ET, DT>) => void, type?: ET) => Disposable
+export interface EventSubscriber<EventType, DataType> {
+  subscribe: (callback: (event: Event<EventType, DataType>) => void, type?: EventType) => Disposable
 }
 
-export class EventDispatcher<ET, DT> implements EventSubscriber<ET, DT> {
+export class EventDispatcher<EventType, DataType> implements EventSubscriber<EventType, DataType> {
   private _listeners: Array<{
-    callback: (value: Event<ET, DT>) => void
+    callback: (value: Event<EventType, DataType>) => void
     disposable: Disposable
   }> = []
 
-  dispatch(input: Input<ET, DT>): void {
+  dispatch(input: Input<EventType, DataType>): void {
     this._listeners.slice().forEach(it => {
       const value = {
         type: input.type,
@@ -27,16 +27,16 @@ export class EventDispatcher<ET, DT> implements EventSubscriber<ET, DT> {
         unsubscribe: () => {
           it.disposable.dispose()
         }
-      } satisfies Event<ET, DT>
+      } satisfies Event<EventType, DataType>
       it.callback(value)
     })
   }
 
-  subscribe(callback: (event: Event<ET, DT>) => void, type?: ET): Disposable {
+  subscribe(callback: (event: Event<EventType, DataType>) => void, type?: EventType): Disposable {
     const container = new DisposableContainer()
     if (type !== undefined) {
       const cb = callback
-      const listener = (evt: Event<ET, DT>): void => {
+      const listener = (evt: Event<EventType, DataType>): void => {
         if (evt.type === type) {
           cb(evt)
         }

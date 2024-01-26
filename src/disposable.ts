@@ -9,7 +9,8 @@ export interface Disposable {
  * Represents a lifetime.
  */
 export class Lifetime {
-  constructor(private readonly container: DisposableContainer) {}
+  constructor(private readonly container: DisposableContainer) {
+  }
 
   /**
    * Define a new nested disposable to this lifetime.
@@ -147,5 +148,3 @@ export function disposable(action: () => void, target: unknown): Disposable {
     action.call(target)
   })
 }
-
-export const eternalLifetime = new DisposableContainer().lifetime
