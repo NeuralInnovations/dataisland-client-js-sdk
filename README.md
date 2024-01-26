@@ -4,14 +4,14 @@ The DataIsland Client SDK is a TypeScript library designed to seamlessly integra
 
 ## Table of contents
 
-1. [Connect](connect)
-2. [Create app](create-app)
-3. [Use organizations](use-organizations)
-4. [Use chat](use-chat)
-5. [Use workspaces](use-workspaces)
-6. [Use files](use-files)
-7. [Use access groups](use-access-groups)
-8. [Use invites](use-invites)
+1. [Connect](#connect)
+2. [Create app](#create-app)
+3. [Use organizations](#use-organizations)
+4. [Use chat](#use-chat)
+5. [Use workspaces](#use-workspaces)
+6. [Use files](#use-files)
+7. [Use access groups](#use-access-groups)
+8. [Use invites](#use-invites)
 
 ### Connect
 
