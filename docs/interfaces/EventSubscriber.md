@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / EventSubscriber
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / EventSubscriber
 
 # Interface: EventSubscriber\<EventType, DataType\>
 
@@ -39,7 +39,3 @@
 ##### Returns
 
 [`Disposable`](Disposable.md)
-
-#### Defined in
-
-[events.ts:13](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L13)

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / DebugCredential
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / DebugCredential
 
 # Class: DebugCredential
 
@@ -44,19 +44,11 @@ DataIsland App credential.
 
 [CredentialBase](CredentialBase.md).[constructor](CredentialBase.md#constructor)
 
-#### Defined in
-
-[credentials.ts:46](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L46)
-
 ## Properties
 
 ### token
 
 • `Readonly` **token**: `string`
-
-#### Defined in
-
-[credentials.ts:44](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L44)
 
 ## Methods
 
@@ -78,7 +70,3 @@ DataIsland App credential.
 #### Overrides
 
 [CredentialBase](CredentialBase.md).[onRegister](CredentialBase.md#onregister)
-
-#### Defined in
-
-[credentials.ts:51](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L51)

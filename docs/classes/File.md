@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / File
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / File
 
 # Class: File
 
@@ -42,10 +42,6 @@ File id.
 
 `string`
 
-#### Defined in
-
-[storages/file.ts:12](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/file.ts#L12)
-
 ___
 
 ### name
@@ -57,10 +53,6 @@ File name.
 #### Returns
 
 `string`
-
-#### Defined in
-
-[storages/file.ts:17](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/file.ts#L17)
 
 ## Methods
 
@@ -74,10 +66,6 @@ Get file status.
 
 `Promise`\<`FileProgressDto`\>
 
-#### Defined in
-
-[storages/file.ts:27](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/file.ts#L27)
-
 ___
 
 ### url
@@ -89,7 +77,3 @@ Get temporary url.
 #### Returns
 
 `Promise`\<`string`\>
-
-#### Defined in
-
-[storages/file.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/file.ts#L22)

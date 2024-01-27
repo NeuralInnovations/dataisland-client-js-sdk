@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / ChatsEvent
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / ChatsEvent
 
 # Enumeration: ChatsEvent
 
@@ -15,16 +15,8 @@
 
 • **ADDED** = ``"added"``
 
-#### Defined in
-
-[storages/chats.ts:5](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chats.ts#L5)
-
 ___
 
 ### REMOVED
 
 • **REMOVED** = ``"removed"``
-
-#### Defined in
-
-[storages/chats.ts:6](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chats.ts#L6)

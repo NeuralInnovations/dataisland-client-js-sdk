@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / DisposableContainer
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / DisposableContainer
 
 # Class: DisposableContainer
 
@@ -59,29 +59,17 @@ container.dispose();
 
 • `Private` **\_disposables**: [`Disposable`](../interfaces/Disposable.md)[] = `[]`
 
-#### Defined in
-
-[disposable.ts:56](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L56)
-
 ___
 
 ### \_isDisposed
 
 • `Private` **\_isDisposed**: `boolean` = `false`
 
-#### Defined in
-
-[disposable.ts:57](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L57)
-
 ___
 
 ### \_lifetime
 
 • `Private` `Optional` **\_lifetime**: [`Lifetime`](Lifetime.md)
-
-#### Defined in
-
-[disposable.ts:58](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L58)
 
 ## Accessors
 
@@ -95,10 +83,6 @@ Gets whether this container is disposed.
 
 `boolean`
 
-#### Defined in
-
-[disposable.ts:63](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L63)
-
 ___
 
 ### lifetime
@@ -111,10 +95,6 @@ Define new lifetime.
 
 [`Lifetime`](Lifetime.md)
 
-#### Defined in
-
-[disposable.ts:70](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L70)
-
 ## Methods
 
 ### \_throwIfDisposed
@@ -126,10 +106,6 @@ Throws an error if this container is disposed.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[disposable.ts:133](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L133)
 
 ___
 
@@ -150,10 +126,6 @@ Adds a disposable to this container.
 [`Disposable`](../interfaces/Disposable.md)
 
 The disposable container.
-
-#### Defined in
-
-[disposable.ts:79](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L79)
 
 ___
 
@@ -176,10 +148,6 @@ Adds a callback to be executed when this container is disposed.
 
 The disposable container.
 
-#### Defined in
-
-[disposable.ts:91](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L91)
-
 ___
 
 ### defineNested
@@ -191,10 +159,6 @@ Defines a nested disposable container.
 #### Returns
 
 [`DisposableContainer`](DisposableContainer.md)
-
-#### Defined in
-
-[disposable.ts:103](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L103)
 
 ___
 
@@ -211,7 +175,3 @@ Disposes all disposables in this container. Last added, first disposed.
 #### Implementation of
 
 [Disposable](../interfaces/Disposable.md).[dispose](../interfaces/Disposable.md#dispose)
-
-#### Defined in
-
-[disposable.ts:118](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L118)

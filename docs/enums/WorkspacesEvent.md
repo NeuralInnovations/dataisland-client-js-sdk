@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / WorkspacesEvent
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / WorkspacesEvent
 
 # Enumeration: WorkspacesEvent
 
@@ -17,16 +17,8 @@ Workspaces event.
 
 • **ADDED** = ``"added"``
 
-#### Defined in
-
-[storages/workspaces.ts:10](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L10)
-
 ___
 
 ### REMOVED
 
 • **REMOVED** = ``"removed"``
-
-#### Defined in
-
-[storages/workspaces.ts:11](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L11)

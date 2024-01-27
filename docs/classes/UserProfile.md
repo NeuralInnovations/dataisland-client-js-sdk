@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / UserProfile
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / UserProfile
 
 # Class: UserProfile
 
@@ -54,10 +54,6 @@ Created at.
 
 `Date`
 
-#### Defined in
-
-[storages/userProfile.ts:36](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L36)
-
 ___
 
 ### email
@@ -69,10 +65,6 @@ User email.
 #### Returns
 
 `string`
-
-#### Defined in
-
-[storages/userProfile.ts:26](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L26)
 
 ___
 
@@ -86,10 +78,6 @@ User id.
 
 `string`
 
-#### Defined in
-
-[storages/userProfile.ts:16](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L16)
-
 ___
 
 ### isDeleted
@@ -101,10 +89,6 @@ Is user deleted.
 #### Returns
 
 `boolean`
-
-#### Defined in
-
-[storages/userProfile.ts:31](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L31)
 
 ___
 
@@ -118,10 +102,6 @@ Modified at.
 
 `Date`
 
-#### Defined in
-
-[storages/userProfile.ts:41](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L41)
-
 ___
 
 ### name
@@ -133,10 +113,6 @@ User name.
 #### Returns
 
 `string`
-
-#### Defined in
-
-[storages/userProfile.ts:21](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L21)
 
 ## Methods
 
@@ -158,10 +134,6 @@ User name.
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
 
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
-
 ___
 
 ### subscribe
@@ -182,7 +154,3 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
-
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)

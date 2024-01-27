@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Groups
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Groups
 
 # Class: Groups
 
@@ -56,10 +56,6 @@
 
 `Promise`\<[`Group`](Group.md)\>
 
-#### Defined in
-
-[storages/groups.ts:37](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L37)
-
 ___
 
 ### delete
@@ -75,10 +71,6 @@ ___
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[storages/groups.ts:41](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L41)
 
 ___
 
@@ -100,10 +92,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
 
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
-
 ___
 
 ### get
@@ -119,10 +107,6 @@ ___
 #### Returns
 
 `Promise`\<`undefined` \| [`Group`](Group.md)\>
-
-#### Defined in
-
-[storages/groups.ts:39](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L39)
 
 ___
 
@@ -144,7 +128,3 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
-
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)

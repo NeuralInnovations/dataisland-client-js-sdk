@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / BasicCredential
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / BasicCredential
 
 # Class: BasicCredential
 
@@ -46,29 +46,17 @@ DataIsland App credential.
 
 [CredentialBase](CredentialBase.md).[constructor](CredentialBase.md#constructor)
 
-#### Defined in
-
-[credentials.ts:23](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L23)
-
 ## Properties
 
 ### email
 
 • `Readonly` **email**: `string`
 
-#### Defined in
-
-[credentials.ts:20](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L20)
-
 ___
 
 ### password
 
 • `Readonly` **password**: `string`
-
-#### Defined in
-
-[credentials.ts:21](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L21)
 
 ## Methods
 
@@ -90,7 +78,3 @@ ___
 #### Overrides
 
 [CredentialBase](CredentialBase.md).[onRegister](CredentialBase.md#onregister)
-
-#### Defined in
-
-[credentials.ts:29](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L29)

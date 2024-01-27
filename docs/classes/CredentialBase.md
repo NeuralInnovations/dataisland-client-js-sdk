@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / CredentialBase
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / CredentialBase
 
 # Class: CredentialBase
 
@@ -52,7 +52,3 @@ DataIsland App credential.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[credentials.ts:9](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L9)

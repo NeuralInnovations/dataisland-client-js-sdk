@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Disposable
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Disposable
 
 # Interface: Disposable
 
@@ -23,7 +23,3 @@ Represents an object that can be disposed.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[disposable.ts:5](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L5)

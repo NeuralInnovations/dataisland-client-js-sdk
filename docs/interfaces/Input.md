@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Input
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Input
 
 # Interface: Input\<EventType, DataType\>
 
@@ -28,16 +28,8 @@
 
 • **data**: `DataType`
 
-#### Defined in
-
-[events.ts:5](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L5)
-
 ___
 
 ### type
 
 • `Optional` **type**: `EventType`
-
-#### Defined in
-
-[events.ts:4](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L4)

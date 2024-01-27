@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Workspace
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Workspace
 
 # Class: Workspace
 
@@ -56,10 +56,6 @@ Workspace description.
 
 `string`
 
-#### Defined in
-
-[storages/workspace.ts:38](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L38)
-
 ___
 
 ### files
@@ -71,10 +67,6 @@ Workspace files.
 #### Returns
 
 [`Files`](Files.md)
-
-#### Defined in
-
-[storages/workspace.ts:43](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L43)
 
 ___
 
@@ -88,10 +80,6 @@ Workspace id.
 
 `string`
 
-#### Defined in
-
-[storages/workspace.ts:28](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L28)
-
 ___
 
 ### name
@@ -104,10 +92,6 @@ Workspace name.
 
 `string`
 
-#### Defined in
-
-[storages/workspace.ts:33](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L33)
-
 ___
 
 ### organization
@@ -119,10 +103,6 @@ Organization.
 #### Returns
 
 [`Organization`](Organization.md)
-
-#### Defined in
-
-[storages/workspace.ts:23](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L23)
 
 ## Methods
 
@@ -142,10 +122,6 @@ Change workspace name and description.
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[storages/workspace.ts:48](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L48)
 
 ___
 
@@ -167,10 +143,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
 
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
-
 ___
 
 ### subscribe
@@ -191,7 +163,3 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
-
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -39,10 +39,6 @@ Chat id.
 
 `string`
 
-#### Defined in
-
-[storages/chat.ts:12](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chat.ts#L12)
-
 ___
 
 ### name
@@ -54,10 +50,6 @@ Chat name.
 #### Returns
 
 `string`
-
-#### Defined in
-
-[storages/chat.ts:17](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chat.ts#L17)
 
 ## Methods
 
@@ -75,7 +67,3 @@ Chat name.
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[storages/chat.ts:19](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chat.ts#L19)

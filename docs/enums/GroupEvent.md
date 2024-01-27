@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / GroupEvent
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / GroupEvent
 
 # Enumeration: GroupEvent
 
@@ -16,26 +16,14 @@
 
 • **ADDED** = ``"added"``
 
-#### Defined in
-
-[storages/groups.ts:10](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L10)
-
 ___
 
 ### REMOVED
 
 • **REMOVED** = ``"removed"``
 
-#### Defined in
-
-[storages/groups.ts:11](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L11)
-
 ___
 
 ### UPDATED
 
 • **UPDATED** = ``"updated"``
-
-#### Defined in
-
-[storages/groups.ts:12](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L12)

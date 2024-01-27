@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / UserEvent
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / UserEvent
 
 # Enumeration: UserEvent
 
@@ -13,7 +13,3 @@
 ### CHANGED
 
 • **CHANGED** = ``"changed"``
-
-#### Defined in
-
-[storages/userProfile.ts:6](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L6)

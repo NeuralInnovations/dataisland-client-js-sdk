@@ -16,7 +16,7 @@
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx src test",
     "lint:fix": "eslint --fix --ext .ts,.tsx src test",
-    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js"
+    "docs": "typedoc --disableSources --includeVersion --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js"
   },
   "author": "Neural Innovations LTD",
   "license": "Apache-2.0",

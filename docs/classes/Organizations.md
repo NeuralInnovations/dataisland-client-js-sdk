@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
@@ -56,10 +56,6 @@ User's organizations.
 
 readonly [`Organization`](Organization.md)[]
 
-#### Defined in
-
-[storages/organizations.ts:28](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L28)
-
 ___
 
 ### current
@@ -72,10 +68,6 @@ Current organization.
 
 `string`
 
-#### Defined in
-
-[storages/organizations.ts:33](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L33)
-
 • `set` **current**(`value`): `void`
 
 #### Parameters
@@ -87,10 +79,6 @@ Current organization.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[storages/organizations.ts:34](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L34)
 
 ## Methods
 
@@ -111,10 +99,6 @@ Create new organization.
 
 `Promise`\<[`Organization`](Organization.md)\>
 
-#### Defined in
-
-[storages/organizations.ts:50](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L50)
-
 ___
 
 ### delete
@@ -132,10 +116,6 @@ Delete organization.
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[storages/organizations.ts:55](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L55)
 
 ___
 
@@ -157,10 +137,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
 
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
-
 ___
 
 ### get
@@ -178,10 +154,6 @@ Get organization by id.
 #### Returns
 
 [`Organization`](Organization.md)
-
-#### Defined in
-
-[storages/organizations.ts:39](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L39)
 
 ___
 
@@ -204,10 +176,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
 
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)
-
 ___
 
 ### tryGet
@@ -225,7 +193,3 @@ Try to get organization by id.
 #### Returns
 
 `undefined` \| [`Organization`](Organization.md)
-
-#### Defined in
-
-[storages/organizations.ts:45](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L45)

@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev7
 
 ## Table of contents
 
@@ -74,29 +74,17 @@
 
 Ƭ **ChatId**: `string`
 
-#### Defined in
-
-[storages/chat.ts:1](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chat.ts#L1)
-
 ___
 
 ### FileId
 
 Ƭ **FileId**: `string`
 
-#### Defined in
-
-[storages/file.ts:3](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/file.ts#L3)
-
 ___
 
 ### GroupId
 
 Ƭ **GroupId**: `string`
-
-#### Defined in
-
-[storages/groups.ts:7](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L7)
 
 ___
 
@@ -106,10 +94,6 @@ ___
 
 Organization id.
 
-#### Defined in
-
-[storages/organizations.ts:7](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organizations.ts#L7)
-
 ___
 
 ### UploadFile
@@ -118,29 +102,17 @@ ___
 
 Upload file.
 
-#### Defined in
-
-[storages/files.ts:16](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/files.ts#L16)
-
 ___
 
 ### UserId
 
 Ƭ **UserId**: `string`
 
-#### Defined in
-
-[storages/userProfile.ts:3](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/userProfile.ts#L3)
-
 ___
 
 ### WorkspaceId
 
 Ƭ **WorkspaceId**: `string`
-
-#### Defined in
-
-[storages/workspaces.ts:4](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L4)
 
 ## Variables
 
@@ -150,10 +122,6 @@ ___
 
 Default DataIsland App host.
 
-#### Defined in
-
-[index.ts:38](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/index.ts#L38)
-
 ___
 
 ### DEFAULT\_NAME
@@ -162,10 +130,6 @@ ___
 
 Default DataIsland App name.
 
-#### Defined in
-
-[index.ts:33](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/index.ts#L33)
-
 ___
 
 ### SDK\_VERSION
@@ -173,10 +137,6 @@ ___
 • `Const` **SDK\_VERSION**: `string` = `version`
 
 Current SDK version.
-
-#### Defined in
-
-[index.ts:28](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/index.ts#L28)
 
 ## Functions
 
@@ -211,10 +171,6 @@ const app = await dataIslandApp(DEFAULT_NAME, builder => {
  })
 ```
 
-#### Defined in
-
-[index.ts:63](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/index.ts#L63)
-
 ___
 
 ### dataIslandInstances
@@ -226,10 +182,6 @@ Returns a list of DataIsland App instances.
 #### Returns
 
 [`DataIslandApp`](classes/DataIslandApp.md)[]
-
-#### Defined in
-
-[index.ts:43](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/index.ts#L43)
 
 ___
 
@@ -251,7 +203,3 @@ Creates a disposable.
 [`Disposable`](interfaces/Disposable.md)
 
 The disposable.
-
-#### Defined in
-
-[disposable.ts:146](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L146)

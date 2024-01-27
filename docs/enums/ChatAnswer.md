@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / ChatAnswer
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / ChatAnswer
 
 # Enumeration: ChatAnswer
 
@@ -15,16 +15,8 @@
 
 • **LONG** = ``"long"``
 
-#### Defined in
-
-[storages/chat.ts:5](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chat.ts#L5)
-
 ___
 
 ### SHORT
 
 • **SHORT** = ``"short"``
-
-#### Defined in
-
-[storages/chat.ts:4](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/chat.ts#L4)

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Lifetime
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Lifetime
 
 # Class: Lifetime
 
@@ -40,19 +40,11 @@ Represents a lifetime.
 
 [`Lifetime`](Lifetime.md)
 
-#### Defined in
-
-[disposable.ts:12](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L12)
-
 ## Properties
 
 ### container
 
 • `Private` `Readonly` **container**: [`DisposableContainer`](DisposableContainer.md)
-
-#### Defined in
-
-[disposable.ts:12](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L12)
 
 ## Accessors
 
@@ -65,10 +57,6 @@ Shows whether this lifetime is disposed.
 #### Returns
 
 `boolean`
-
-#### Defined in
-
-[disposable.ts:25](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L25)
 
 ## Methods
 
@@ -87,10 +75,6 @@ Adds a disposable to this lifetime.
 #### Returns
 
 `this`
-
-#### Defined in
-
-[disposable.ts:32](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L32)
 
 ___
 
@@ -111,10 +95,6 @@ Adds a callback to this lifetime.
 
 `this`
 
-#### Defined in
-
-[disposable.ts:40](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L40)
-
 ___
 
 ### defineNested
@@ -126,7 +106,3 @@ Define a new nested disposable to this lifetime.
 #### Returns
 
 [`DisposableContainer`](DisposableContainer.md)
-
-#### Defined in
-
-[disposable.ts:18](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/disposable.ts#L18)

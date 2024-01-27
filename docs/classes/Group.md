@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Group
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Group
 
 # Class: Group
 
@@ -54,10 +54,6 @@
 
 `AccessGroupDto`
 
-#### Defined in
-
-[storages/groups.ts:19](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L19)
-
 ___
 
 ### id
@@ -68,10 +64,6 @@ ___
 
 `string`
 
-#### Defined in
-
-[storages/groups.ts:17](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L17)
-
 ___
 
 ### members
@@ -81,10 +73,6 @@ ___
 #### Returns
 
 `UserDto`[]
-
-#### Defined in
-
-[storages/groups.ts:21](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L21)
 
 ## Methods
 
@@ -106,10 +94,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
 
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
-
 ___
 
 ### getWorkspaces
@@ -119,10 +103,6 @@ ___
 #### Returns
 
 `Promise`\<`WorkspaceDto`[]\>
-
-#### Defined in
-
-[storages/groups.ts:23](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L23)
 
 ___
 
@@ -140,10 +120,6 @@ ___
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[storages/groups.ts:31](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L31)
-
 ___
 
 ### setName
@@ -159,10 +135,6 @@ ___
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[storages/groups.ts:27](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L27)
 
 ___
 
@@ -181,10 +153,6 @@ ___
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[storages/groups.ts:29](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L29)
-
 ___
 
 ### setWorkspaces
@@ -200,10 +168,6 @@ ___
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[storages/groups.ts:25](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/groups.ts#L25)
 
 ___
 
@@ -225,7 +189,3 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
-
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)

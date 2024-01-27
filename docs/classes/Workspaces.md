@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Workspaces
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Workspaces
 
 # Class: Workspaces
 
@@ -56,10 +56,6 @@ Workspaces.
 
 readonly [`Workspace`](Workspace.md)[]
 
-#### Defined in
-
-[storages/workspaces.ts:24](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L24)
-
 ## Methods
 
 ### contains
@@ -77,10 +73,6 @@ Check if workspace exists.
 #### Returns
 
 `boolean`
-
-#### Defined in
-
-[storages/workspaces.ts:42](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L42)
 
 ___
 
@@ -101,10 +93,6 @@ Create workspace.
 
 `Promise`\<[`Workspace`](Workspace.md)\>
 
-#### Defined in
-
-[storages/workspaces.ts:47](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L47)
-
 ___
 
 ### delete
@@ -122,10 +110,6 @@ Delete workspace.
 #### Returns
 
 `Promise`\<`void`\>
-
-#### Defined in
-
-[storages/workspaces.ts:52](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L52)
 
 ___
 
@@ -147,10 +131,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
 
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
-
 ___
 
 ### get
@@ -168,10 +148,6 @@ Get workspace by id.
 #### Returns
 
 [`Workspace`](Workspace.md)
-
-#### Defined in
-
-[storages/workspaces.ts:30](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L30)
 
 ___
 
@@ -194,10 +170,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
 
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)
-
 ___
 
 ### tryGet
@@ -215,7 +187,3 @@ Try to get workspace by id.
 #### Returns
 
 `undefined` \| [`Workspace`](Workspace.md)
-
-#### Defined in
-
-[storages/workspaces.ts:36](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspaces.ts#L36)

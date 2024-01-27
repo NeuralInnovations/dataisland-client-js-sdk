@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Files
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Files
 
 # Class: Files
 
@@ -56,10 +56,6 @@ Delete file.
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[storages/files.ts:31](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/files.ts#L31)
-
 ___
 
 ### dispatch
@@ -80,10 +76,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
 
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
-
 ___
 
 ### query
@@ -103,10 +95,6 @@ Query files.
 #### Returns
 
 `Promise`\<[`FilesPage`](FilesPage.md)\>
-
-#### Defined in
-
-[storages/files.ts:36](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/files.ts#L36)
 
 ___
 
@@ -129,10 +117,6 @@ ___
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
 
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)
-
 ___
 
 ### upload
@@ -150,7 +134,3 @@ Get file by id.
 #### Returns
 
 `Promise`\<[`File`](File.md)\>
-
-#### Defined in
-
-[storages/files.ts:25](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/files.ts#L25)

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -40,10 +40,6 @@ Groups.
 
 [`Groups`](Groups.md)
 
-#### Defined in
-
-[storages/organization.ts:32](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organization.ts#L32)
-
 ___
 
 ### description
@@ -55,10 +51,6 @@ Organization description.
 #### Returns
 
 `string`
-
-#### Defined in
-
-[storages/organization.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organization.ts#L22)
 
 ___
 
@@ -72,10 +64,6 @@ Organization id.
 
 `string`
 
-#### Defined in
-
-[storages/organization.ts:12](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organization.ts#L12)
-
 ___
 
 ### name
@@ -88,10 +76,6 @@ Organization name.
 
 `string`
 
-#### Defined in
-
-[storages/organization.ts:17](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organization.ts#L17)
-
 ___
 
 ### workspaces
@@ -103,7 +87,3 @@ Workspaces.
 #### Returns
 
 [`Workspaces`](Workspaces.md)
-
-#### Defined in
-
-[storages/organization.ts:27](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/organization.ts#L27)

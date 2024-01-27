@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / DefaultCredential
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / DefaultCredential
 
 # Class: DefaultCredential
 
@@ -54,7 +54,3 @@ DataIsland App credential.
 #### Overrides
 
 [CredentialBase](CredentialBase.md).[onRegister](CredentialBase.md#onregister)
-
-#### Defined in
-
-[credentials.ts:14](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L14)

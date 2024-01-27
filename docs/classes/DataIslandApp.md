@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / DataIslandApp
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / DataIslandApp
 
 # Class: DataIslandApp
 
@@ -47,10 +47,6 @@ The automaticDataCollectionEnabled of this app.
 
 `boolean`
 
-#### Defined in
-
-[dataIslandApp.ts:25](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L25)
-
 ___
 
 ### context
@@ -62,10 +58,6 @@ The context of this app.
 #### Returns
 
 `Context`
-
-#### Defined in
-
-[dataIslandApp.ts:42](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L42)
 
 ___
 
@@ -79,10 +71,6 @@ The credential of this app.
 
 `undefined` \| [`CredentialBase`](CredentialBase.md)
 
-#### Defined in
-
-[dataIslandApp.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L35)
-
 • `set` **credential**(`value`): `void`
 
 #### Parameters
@@ -94,10 +82,6 @@ The credential of this app.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[dataIslandApp.ts:37](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L37)
 
 ___
 
@@ -111,10 +95,6 @@ The host of this app.
 
 `string`
 
-#### Defined in
-
-[dataIslandApp.ts:20](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L20)
-
 ___
 
 ### lifetime
@@ -126,10 +106,6 @@ The lifetime of this app.
 #### Returns
 
 [`Lifetime`](Lifetime.md)
-
-#### Defined in
-
-[dataIslandApp.ts:30](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L30)
 
 ___
 
@@ -143,10 +119,6 @@ The name of this app.
 
 `string`
 
-#### Defined in
-
-[dataIslandApp.ts:15](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L15)
-
 ___
 
 ### organizations
@@ -159,10 +131,6 @@ User's organizations.
 
 [`Organizations`](Organizations.md)
 
-#### Defined in
-
-[dataIslandApp.ts:47](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L47)
-
 ___
 
 ### userProfile
@@ -174,10 +142,6 @@ User's profile.
 #### Returns
 
 [`UserProfile`](UserProfile.md)
-
-#### Defined in
-
-[dataIslandApp.ts:52](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L52)
 
 ## Methods
 
@@ -202,7 +166,3 @@ Resolve a service from the app.
 #### Returns
 
 `undefined` \| `T`
-
-#### Defined in
-
-[dataIslandApp.ts:58](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/dataIslandApp.ts#L58)

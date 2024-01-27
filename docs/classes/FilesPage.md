@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / FilesPage
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / FilesPage
 
 # Class: FilesPage
 
@@ -39,10 +39,6 @@ Get files.
 
 [`File`](File.md)[]
 
-#### Defined in
-
-[storages/filesPage.ts:11](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/filesPage.ts#L11)
-
 ___
 
 ### page
@@ -54,10 +50,6 @@ Get current page.
 #### Returns
 
 `number`
-
-#### Defined in
-
-[storages/filesPage.ts:26](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/filesPage.ts#L26)
 
 ___
 
@@ -71,10 +63,6 @@ Get pages count.
 
 `number`
 
-#### Defined in
-
-[storages/filesPage.ts:16](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/filesPage.ts#L16)
-
 ___
 
 ### total
@@ -86,7 +74,3 @@ Get total count.
 #### Returns
 
 `number`
-
-#### Defined in
-
-[storages/filesPage.ts:21](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/filesPage.ts#L21)

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / EventDispatcher
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev7](../../README.md) / [Exports](../modules.md) / EventDispatcher
 
 # Class: EventDispatcher\<EventType, DataType\>
 
@@ -71,10 +71,6 @@
 
 • `Private` **\_listeners**: \{ `callback`: (`value`: [`Event`](../interfaces/Event.md)\<`EventType`, `DataType`\>) => `void` ; `disposable`: [`Disposable`](../interfaces/Disposable.md)  }[] = `[]`
 
-#### Defined in
-
-[events.ts:17](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L17)
-
 ## Methods
 
 ### dispatch
@@ -90,10 +86,6 @@
 #### Returns
 
 `void`
-
-#### Defined in
-
-[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
 
 ___
 
@@ -115,7 +107,3 @@ ___
 #### Implementation of
 
 [EventSubscriber](../interfaces/EventSubscriber.md).[subscribe](../interfaces/EventSubscriber.md#subscribe)
-
-#### Defined in
-
-[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)
