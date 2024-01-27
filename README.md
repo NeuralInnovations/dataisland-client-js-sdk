@@ -1,5 +1,7 @@
 @neuralinnovations/dataisland-sdk/[Exports](./docs/modules.md)
 
+![Tests](https://github.com/NeuralInnovations/dataisland-client-js-sdk/actions/workflows/tests.yml/badge.svg?branch=main)
+
 # DataIsland Client SDK
 
 The DataIsland Client SDK is a TypeScript library designed to seamlessly integrate DataIsland web services into websites.
