@@ -23,7 +23,11 @@ jobs:
         run: npm run build
 
       - name: 🧪 Test 🧪
-        run: npm test >> $GITHUB_STEP_SUMMARY | cat
+        run: |
+          echo "HOST=${{ secrets.TEST_HOST }}" > .env.test
+          echo "TOKEN=${{ secrets.TEST_TOKEN }}" >> .env.test
+          npm test >> $GITHUB_STEP_SUMMARY
+          [[ "$?" != "0" ]] && echo "The tests were failed" && exit 1
 
       - name: 📝 Docs 📝
         run: npm run docs
