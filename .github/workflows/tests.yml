@@ -23,4 +23,4 @@ jobs:
         run: |
           echo "HOST=${{ secrets.TEST_HOST }}" > .env.test
           echo "TOKEN=${{ secrets.TEST_TOKEN }}" >> .env.test
-          npm run test
+          npm run test >> $GITHUB_STEP_SUMMARY
