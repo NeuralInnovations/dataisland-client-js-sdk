@@ -16,14 +16,24 @@ jobs:
       - name: ⏩ CI Install ⏩
         run: npm ci
 
-      - name: 🧪 Test 🧪
-        run: npm test >> $GITHUB_STEP_SUMMARY | cat
+      - name: 🌈 Lint 🌈
+        run: npm run lint:fix
 
       - name: 🧱 Build 🧱
         run: npm run build
 
+      - name: 🧪 Test 🧪
+        run: npm test >> $GITHUB_STEP_SUMMARY | cat
+
       - name: 📝 Docs 📝
         run: npm run docs
+
+      - name: 📋 Check changes 📋
+        run: |
+          git diff --exit-code --quiet || {
+            echo "There are changes to commit"
+            exit 1
+          }
 
       - name: 📢 Publish to npm 📢
         run: npm publish --access public
