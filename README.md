@@ -1,3 +1,5 @@
+@neuralinnovations/dataisland-sdk/[Exports](./docs/modules.md)
+
 # DataIsland Client SDK
 
 The DataIsland Client SDK is a TypeScript library designed to seamlessly integrate DataIsland web services into websites.
@@ -12,6 +14,9 @@ The DataIsland Client SDK is a TypeScript library designed to seamlessly integra
 6. [Use files](#use-files)
 7. [Use access groups](#use-access-groups)
 8. [Use invites](#use-invites)
+9. [References](docs/modules.md)
+
+---
 
 ### Install
 
@@ -21,12 +26,15 @@ For connecting this library to your website project simply install it using npm 
 npm i @neuralinnovations/dataisland-sdk
 ```
 
+---
+
 ### Create app
 
 You can initialize default app sdk instance using this code example.
 
 ```typescript
 // default production app sdk instance
+// it is an instance of DataIslandApp
 const dataIslandSdk = await dataIslandApp()
 
 // specific app sdk instance 
@@ -38,6 +46,8 @@ const yourAppNameSdk = await dataIslandApp('your-app-name', async (builder: AppB
 })
 ```
 
+[DataIslandApp](docs/classes/DataIslandApp.md) is a application instance. It contains of user profile, organizations and context.
+
 _It is immpossible to create more than one app sdk intance with same name._
 
 **HOST** is a DataIsland API url which can be passed using environment file.
@@ -47,6 +57,7 @@ Second required parameter for builder is Credentials. It is recomended to use Be
 You can also add requests middlewares with builder options.
 
 ```typescript
+// The app is an instance of DataIslandApp
 const app = await dataIslandApp('your-app-name', async (builder: AppBuilder) => {
   builder.useHost(YOUR_HOST)
   builder.useAutomaticDataCollectionEnabled(false)
@@ -57,6 +68,10 @@ const app = await dataIslandApp('your-app-name', async (builder: AppBuilder) => 
   })
 })
 ```
+
+[DataIslandApp](docs/classes/DataIslandApp.md) is a application instance. It contains of user profile, organizations and context.
+
+---
 
 ### Use organizations
 
@@ -71,11 +86,18 @@ Default organization creation code example:
 
 ```typescript
 // create organization
+// app is an instance of DataIslandApp
+// app.organizations is an instance of Organizations (collection of organizations)
+// return value is an instance of Organization
 const org = await app.organizations.create(
   'your-organization-name',
   'your-organization-description'
 )
 ```
+1. [Organization](docs/classes/Organization.md) is a main object for user data management. It contains of users, workspaces and chats.
+2. [Organizations](docs/classes/Organizations.md) is a collection of organizations.
+
+---
 
 ### Use workspaces
 
@@ -85,6 +107,10 @@ Default workspace creation example:
 
 ```typescript
 // create workspace
+// org is an instance of Organization
+// org.workspaces is an instance of Workspaces (collection of workspaces)
+// return value is an instance of Workspace
+//
 // isCreateNewGroup: boolean - "Bool option for new group creation"
 // newGroupName: string - "New group name"
 // groupIds: string[] - "Array of selected accessed groups IDs"
@@ -104,6 +130,11 @@ const workspace = await org.workspaces.create(
   }
 )
 ```
+1. [Workspace](docs/classes/Workspace.md) is a main object for files management. It contains of files, chats and access groups.
+
+2. [Worskpaces](docs/classes/Workspaces.md) is a collection of workspaces.
+
+---
 
 ### Use files
 

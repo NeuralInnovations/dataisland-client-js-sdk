@@ -1,0 +1,197 @@
+[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / Workspace
+
+# Class: Workspace
+
+Workspace.
+
+## Hierarchy
+
+- [`EventDispatcher`](EventDispatcher.md)\<[`WorkspaceEvent`](../enums/WorkspaceEvent.md), [`Workspace`](Workspace.md)\>
+
+  ↳ **`Workspace`**
+
+## Table of contents
+
+### Constructors
+
+- [constructor](Workspace.md#constructor)
+
+### Accessors
+
+- [description](Workspace.md#description)
+- [files](Workspace.md#files)
+- [id](Workspace.md#id)
+- [name](Workspace.md#name)
+- [organization](Workspace.md#organization)
+
+### Methods
+
+- [change](Workspace.md#change)
+- [dispatch](Workspace.md#dispatch)
+- [subscribe](Workspace.md#subscribe)
+
+## Constructors
+
+### constructor
+
+• **new Workspace**(): [`Workspace`](Workspace.md)
+
+#### Returns
+
+[`Workspace`](Workspace.md)
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
+
+## Accessors
+
+### description
+
+• `get` **description**(): `string`
+
+Workspace description.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[storages/workspace.ts:38](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L38)
+
+___
+
+### files
+
+• `get` **files**(): [`Files`](Files.md)
+
+Workspace files.
+
+#### Returns
+
+[`Files`](Files.md)
+
+#### Defined in
+
+[storages/workspace.ts:43](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L43)
+
+___
+
+### id
+
+• `get` **id**(): `string`
+
+Workspace id.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[storages/workspace.ts:28](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L28)
+
+___
+
+### name
+
+• `get` **name**(): `string`
+
+Workspace name.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[storages/workspace.ts:33](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L33)
+
+___
+
+### organization
+
+• `get` **organization**(): [`Organization`](Organization.md)
+
+Organization.
+
+#### Returns
+
+[`Organization`](Organization.md)
+
+#### Defined in
+
+[storages/workspace.ts:23](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L23)
+
+## Methods
+
+### change
+
+▸ **change**(`name`, `description`): `Promise`\<`void`\>
+
+Change workspace name and description.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `description` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+#### Defined in
+
+[storages/workspace.ts:48](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/storages/workspace.ts#L48)
+
+___
+
+### dispatch
+
+▸ **dispatch**(`input`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `input` | [`Input`](../interfaces/Input.md)\<[`CHANGED`](../enums/WorkspaceEvent.md#changed), [`Workspace`](Workspace.md)\> |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+#### Defined in
+
+[events.ts:22](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L22)
+
+___
+
+### subscribe
+
+▸ **subscribe**(`callback`, `type?`): [`Disposable`](../interfaces/Disposable.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `callback` | (`event`: [`Event`](../interfaces/Event.md)\<[`CHANGED`](../enums/WorkspaceEvent.md#changed), [`Workspace`](Workspace.md)\>) => `void` |
+| `type?` | [`CHANGED`](../enums/WorkspaceEvent.md#changed) |
+
+#### Returns
+
+[`Disposable`](../interfaces/Disposable.md)
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+#### Defined in
+
+[events.ts:35](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/events.ts#L35)

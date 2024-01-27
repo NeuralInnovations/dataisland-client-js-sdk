@@ -1,0 +1,60 @@
+[@neuralinnovations/dataisland-sdk](../../README.md) / [Exports](../modules.md) / DefaultCredential
+
+# Class: DefaultCredential
+
+DataIsland App credential.
+
+## Hierarchy
+
+- [`CredentialBase`](CredentialBase.md)
+
+  ↳ **`DefaultCredential`**
+
+## Table of contents
+
+### Constructors
+
+- [constructor](DefaultCredential.md#constructor)
+
+### Methods
+
+- [onRegister](DefaultCredential.md#onregister)
+
+## Constructors
+
+### constructor
+
+• **new DefaultCredential**(): [`DefaultCredential`](DefaultCredential.md)
+
+#### Returns
+
+[`DefaultCredential`](DefaultCredential.md)
+
+#### Inherited from
+
+[CredentialBase](CredentialBase.md).[constructor](CredentialBase.md#constructor)
+
+## Methods
+
+### onRegister
+
+▸ **onRegister**(`lifetime`, `context`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `lifetime` | [`Lifetime`](Lifetime.md) |
+| `context` | `Context` |
+
+#### Returns
+
+`void`
+
+#### Overrides
+
+[CredentialBase](CredentialBase.md).[onRegister](CredentialBase.md#onregister)
+
+#### Defined in
+
+[credentials.ts:14](https://github.com/NeuralInnovations/dataisland-client-js-sdk/blob/99d310d/src/credentials.ts#L14)

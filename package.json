@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.0.1-dev6",
+  "version": "0.0.1-dev7",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -15,7 +15,8 @@
     "build": "tsc",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx src test",
-    "lint:fix": "eslint --fix --ext .ts,.tsx src test"
+    "lint:fix": "eslint --fix --ext .ts,.tsx src test",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js"
   },
   "author": "Neural Innovations LTD",
   "license": "Apache-2.0",
@@ -50,6 +51,7 @@
     "tslib": "^2.6.2",
     "tslint": "6.1.3",
     "typedoc": "^0.25.7",
+    "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.3.3",
     "watch": "^0.13.0",
     "webpack": "5.76.0",
