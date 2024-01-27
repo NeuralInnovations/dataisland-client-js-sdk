@@ -4,7 +4,7 @@ The DataIsland Client SDK is a TypeScript library designed to seamlessly integra
 
 ## Table of contents
 
-1. [Connect](#connect)
+1. [Install](#install)
 2. [Create app](#create-app)
 3. [Use organizations](#use-organizations)
 4. [Use chat](#use-chat)
@@ -13,41 +13,49 @@ The DataIsland Client SDK is a TypeScript library designed to seamlessly integra
 7. [Use access groups](#use-access-groups)
 8. [Use invites](#use-invites)
 
-### Connect
+### Install
 
 For connecting this library to your website project simply install it using npm package manager.
 
-`npm i @neuralinnovations/dataisland-sdk`
+```shell
+npm i @neuralinnovations/dataisland-sdk
+```
 
 ### Create app
 
 You can initialize default app sdk instance using this code example.
 
-```
-const app = await dataIslandApp("your-app-name", async (builder: AppBuilder) => {
-    builder.useHost(HOST)
-    builder.useCredential(new BearerCredential(TOKEN))
-  })
+```typescript
+// default production app sdk instance
+const dataIslandSdk = await dataIslandApp()
+
+// specific app sdk instance 
+// use this if you have more than one app 
+// or using custom api server
+const yourAppNameSdk = await dataIslandApp('your-app-name', async (builder: AppBuilder) => {
+  builder.useHost(HOST)
+  builder.useCredential(new BearerCredential(TOKEN))
+})
 ```
 
-It is immpossible to create more than one app sdk intance with same name.
+_It is immpossible to create more than one app sdk intance with same name._
 
 **HOST** is a DataIsland API url which can be passed using environment file.
 
-Second required parameter for builder is Credentials. It is recomended to use Bearer credentials instance and pass your user Auth0 **TOKEN** in order to get access to API.
+Second required parameter for builder is Credentials. It is recomended to use Bearer credentials instance and pass your user **TOKEN** in order to get access to API.
 
 You can also add requests middlewares with builder options.
 
-```
-const app = await dataIslandApp("your-app-name", async (builder: AppBuilder) => {
-      builder.useHost(YOUR_HOST)
-      builder.useAutomaticDataCollectionEnabled(false)
-      builder.useCredential(new BasicCredential("email", "password"))
-      builder.registerMiddleware(async (req, next) => {
-        req.headers.set("Your-header-name", "value")
-        return await next(req)
-      })
-    })
+```typescript
+const app = await dataIslandApp('your-app-name', async (builder: AppBuilder) => {
+  builder.useHost(YOUR_HOST)
+  builder.useAutomaticDataCollectionEnabled(false)
+  builder.useCredential(new BasicCredential('email', 'password'))
+  builder.registerMiddleware(async (req, next) => {
+    req.headers.set('Your-header-name', 'value')
+    return await next(req)
+  })
+})
 ```
 
 ### Use organizations
@@ -61,12 +69,12 @@ By default all user organizations are fetched with user profile during app sdk s
 
 Default organization creation code example:
 
-```
+```typescript
 // create organization
-  const org = await app.organizations.create(
-    "your-organization-name",
-    "your-organization-description"
-  )
+const org = await app.organizations.create(
+  'your-organization-name',
+  'your-organization-description'
+)
 ```
 
 ### Use workspaces
@@ -75,16 +83,26 @@ Workspaces are folder-like objects used to store files and controll access to it
 
 Default workspace creation example:
 
-```
+```typescript
+// create workspace
+// isCreateNewGroup: boolean - "Bool option for new group creation"
+// newGroupName: string - "New group name"
+// groupIds: string[] - "Array of selected accessed groups IDs"
 const workspace = await org.workspaces.create(
-      "your-workspace-name",
-      "your-workspace-description",
-      regulation: {
-        isCreateNewGroup: boolean - "Bool option for new group creation"
-        newGroupName: string - "New group name"
-        groupIds: string[] - "Array of selected accessed groups IDs"
-      }
-    )
+  // name of new workspace
+  'your-workspace-name',
+  // description of new workspace
+  'your-workspace-description',
+  // regulation options
+  {
+    // create new group for this workspace
+    isCreateNewGroup: true,
+    // new group name
+    newGroupName: 'your-new-group-name',
+    // array of selected groups IDs
+    groupIds: []
+  }
+)
 ```
 
 ### Use files
