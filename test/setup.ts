@@ -1,6 +1,6 @@
-import { appSdk, AppSdk, DebugCredential } from "../src"
-import { Organization } from "../src/storages/organization"
-import { Workspace } from "../src/storages/workspace"
+import { dataIslandApp, DataIslandApp, DebugCredential } from "../src"
+import { Organization } from "../src"
+import { Workspace } from "../src"
 
 export const HOST = <string>process.env.HOST
 export const TOKEN = <string>process.env.TOKEN
@@ -10,13 +10,13 @@ export const randomHash = (length: number = 5) => {
   return `name-${((Math.random() * Math.pow(10, length)) | 0).toString(16)}`
 }
 
-export const testInOrganization = async (func: (app: AppSdk, org: Organization) => Promise<void>, config ?: {
+export const testInOrganization = async (func: (app: DataIslandApp, org: Organization) => Promise<void>, config ?: {
     host: string,
     token: string
   }
 ): Promise<void> => {
   const randomName = `org-name-${randomHash()}`
-  const app = await appSdk(randomName, async builder => {
+  const app = await dataIslandApp(randomName, async builder => {
     builder.useHost(config?.host ?? HOST)
     builder.useCredential(new DebugCredential(config?.token ?? TOKEN))
   })
@@ -35,7 +35,7 @@ export const testInOrganization = async (func: (app: AppSdk, org: Organization) 
   }
 }
 
-export const testInWorkspace = async (func: (app: AppSdk, org: Organization, workspace: Workspace)
+export const testInWorkspace = async (func: (app: DataIslandApp, org: Organization, workspace: Workspace)
   => Promise<void>, config?: {
   host: string,
   token: string,

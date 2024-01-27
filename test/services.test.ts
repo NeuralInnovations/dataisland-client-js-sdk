@@ -1,11 +1,11 @@
-import { appSdk, BasicCredential, DefaultCredential } from "../src"
+import { dataIslandApp, BasicCredential, DefaultCredential } from "../src"
 import { CredentialService } from "../src/services/credentialService"
 import { MiddlewareService } from "../src/services/middlewareService"
-import { UnitTest, AppSdkUnitTest } from "../src/unitTest"
+import { UnitTest, appTest } from "../src/unitTest"
 
 test("CredentialService", async () => {
-  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk("test-services", async builder => {
+  await appTest(UnitTest.DEFAULT, async () => {
+    const app = await dataIslandApp("test-services", async builder => {
       builder.env.unitTest = UnitTest.DO_NOT_START
     })
     const credentialService = app.resolve(CredentialService)

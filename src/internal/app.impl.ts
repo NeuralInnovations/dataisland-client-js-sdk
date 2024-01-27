@@ -8,7 +8,7 @@ import { type Service, ServiceContext } from "../services/service"
 import { CredentialService } from "../services/credentialService"
 import { MiddlewareService } from "../services/middlewareService"
 import { type CredentialBase } from "../credentials"
-import { AppSdk } from "../appSdk"
+import { DataIslandApp } from "../dataIslandApp"
 import { RpcService } from "../services/rpcService"
 import { CommandService } from "../services/commandService"
 import {
@@ -21,7 +21,7 @@ import { Organizations } from "../storages/organizations"
 import { UserProfile } from "../storages/userProfile"
 import { isUnitTest, UnitTest } from "../unitTest"
 
-export class AppImplementation extends AppSdk {
+export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
   private _host: string = DEFAULT_HOST
   private _automaticDataCollectionEnabled: boolean = true
@@ -178,7 +178,7 @@ export class AppImplementation extends AppSdk {
 
     // log app initialized
     if (!isUnitTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG)) {
-      console.log(`AppSDK ${this.name} initialized`)
+      console.log(`DataIsland ${this.name} initialized`)
     }
   }
 }

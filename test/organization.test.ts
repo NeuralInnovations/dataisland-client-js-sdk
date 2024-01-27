@@ -1,4 +1,4 @@
-import { appSdk, DebugCredential } from "../src"
+import { dataIslandApp, DebugCredential } from "../src"
 import { HOST, randomHash, TOKEN } from "./setup"
 import { OrganizationImpl } from "../src/storages/organization.impl"
 
@@ -7,7 +7,7 @@ test("Organization", async () => {
   const randomName = `org-test-${randomHash()}`
 
   // create app
-  const app = await appSdk(randomName, async builder => {
+  const app = await dataIslandApp(randomName, async builder => {
     builder.useHost(HOST)
     builder.useCredential(new DebugCredential(TOKEN))
   })

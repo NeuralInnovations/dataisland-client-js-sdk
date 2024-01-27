@@ -1,12 +1,12 @@
 import { version } from "../package.json"
 import { _createApp } from "./internal/createApp.impl"
 import { type AppBuilder } from "./appBuilder"
-import { type AppSdk } from "./appSdk"
+import { type DataIslandApp } from "./dataIslandApp"
 
 export * from "./events"
 export * from "./disposable"
 export * from "./credentials"
-export * from "./appSdk"
+export * from "./dataIslandApp"
 export * from "./storages/organizations"
 export * from "./storages/organization"
 export * from "./storages/workspaces"
@@ -19,8 +19,8 @@ export * from "./storages/filesPage"
 export * from "./storages/chats"
 export * from "./storages/chat"
 
-const _appsNotReady = new Map<string, Promise<AppSdk>>()
-const _appsReady = new Map<string, AppSdk>()
+const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
+const _appsReady = new Map<string, DataIslandApp>()
 
 /**
  * Current SDK version.
@@ -37,7 +37,10 @@ export const DEFAULT_NAME = "[DEFAULT]"
  */
 export const DEFAULT_HOST = "https://api.dataisland.com.ua"
 
-export function sdks(): AppSdk[] {
+/**
+ * Returns a list of DataIsland App instances.
+ */
+export function dataIslandInstances(): DataIslandApp[] {
   return Array.from(_appsReady.values())
 }
 
@@ -48,19 +51,19 @@ export function sdks(): AppSdk[] {
  * @returns A DataIsland App instance.
  * @example
  * ```js
- * import { appSdk } from 'data-island'
+ * import { dataIslandApp, DEFAULT_NAME } from '@neuralinnovations/dataisland-sdk'
  *
- * const app = await appSdk("my-app", builder => {
+ * const app = await dataIslandApp(DEFAULT_NAME, builder => {
  *  builder.useHost("https://dataisland.com.ua")
  *  builder.useAutomaticDataCollectionEnabled(true)
  *  builder.useCredential(new BasicCredential("email", "password"))
  *  })
  * ```
  */
-export async function appSdk(
+export async function dataIslandApp(
   name?: string,
   setup?: (builder: AppBuilder) => Promise<void>
-): Promise<AppSdk> {
+): Promise<DataIslandApp> {
   name = name ?? DEFAULT_NAME
 
   let appPromise = _appsNotReady.get(name)
@@ -78,7 +81,7 @@ export async function appSdk(
   } else {
     if (setup !== undefined) {
       throw new Error(
-        `App ${name} is initializing. You can't setup the same again.`
+        `DataIsland ${name} is initializing. You can't setup the same again.`
       )
     }
   }

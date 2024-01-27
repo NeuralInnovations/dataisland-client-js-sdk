@@ -24,7 +24,7 @@ For connecting this library to your website project simply install it using npm 
 You can initialize default app sdk instance using this code example.
 
 ```
-const app = await appSdk("your-app-name", async (builder: AppBuilder) => {
+const app = await dataIslandApp("your-app-name", async (builder: AppBuilder) => {
     builder.useHost(HOST)
     builder.useCredential(new BearerCredential(TOKEN))
   })
@@ -39,7 +39,7 @@ Second required parameter for builder is Credentials. It is recomended to use Be
 You can also add requests middlewares with builder options.
 
 ```
-const app = await appSdk("your-app-name", async (builder: AppBuilder) => {
+const app = await dataIslandApp("your-app-name", async (builder: AppBuilder) => {
       builder.useHost(YOUR_HOST)
       builder.useAutomaticDataCollectionEnabled(false)
       builder.useCredential(new BasicCredential("email", "password"))
@@ -76,7 +76,7 @@ Workspaces are folder-like objects used to store files and controll access to it
 Default workspace creation example:
 
 ```
-const wsPromise = org.workspaces.create(
+const workspace = await org.workspaces.create(
       "your-workspace-name",
       "your-workspace-description",
       regulation: {

@@ -1,8 +1,8 @@
 import { version } from "../package.json"
 import {
-  AppSdk,
+  DataIslandApp,
   BasicCredential,
-  appSdk,
+  dataIslandApp,
   SDK_VERSION,
   DEFAULT_NAME,
   DebugCredential
@@ -11,7 +11,7 @@ import { MiddlewareService } from "../src/services/middlewareService"
 import { CredentialService } from "../src/services/credentialService"
 import { RpcService } from "../src/services/rpcService"
 import { AppBuilder } from "../src/appBuilder"
-import { UnitTest, AppSdkUnitTest } from "../src/unitTest"
+import { UnitTest, appTest } from "../src/unitTest"
 import { HOST, randomHash, TOKEN } from "./setup"
 
 test("SDK_VERSION", () => {
@@ -20,7 +20,7 @@ test("SDK_VERSION", () => {
 
 test("Default SDK", async () => {
   // default
-  const app = await appSdk(DEFAULT_NAME, async (builder: AppBuilder) => {
+  const app = await dataIslandApp(DEFAULT_NAME, async (builder: AppBuilder) => {
     builder.useHost(HOST)
     builder.useCredential(new DebugCredential(TOKEN))
   })
@@ -28,8 +28,8 @@ test("Default SDK", async () => {
 })
 
 test("SDK, middleware", async () => {
-  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk("test-settings", async (builder: AppBuilder) => {
+  await appTest(UnitTest.DEFAULT, async () => {
+    const app = await dataIslandApp("test-settings", async (builder: AppBuilder) => {
       builder.useHost("https://test.com")
       builder.useAutomaticDataCollectionEnabled(false)
       builder.useCredential(new BasicCredential("email", "password"))
@@ -45,8 +45,8 @@ test("SDK, middleware", async () => {
 })
 
 test("SDK, services", async () => {
-  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk("test-sdk")
+  await appTest(UnitTest.DEFAULT, async () => {
+    const app = await dataIslandApp("test-sdk")
     const middlewareService = app.resolve(MiddlewareService)
     expect(middlewareService).not.toBeUndefined()
     expect(app.resolve(MiddlewareService)).toBe(middlewareService)
@@ -57,8 +57,8 @@ test("SDK, services", async () => {
 })
 
 test("SDK, middleware", async () => {
-  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
-    const app = await appSdk("test-middleware")
+  await appTest(UnitTest.DEFAULT, async () => {
+    const app = await dataIslandApp("test-middleware")
     const middlewareService = app.resolve(MiddlewareService)
     expect(middlewareService).not.toBeUndefined()
     expect(app.resolve(MiddlewareService)).toBe(middlewareService)
@@ -93,15 +93,15 @@ test("SDK, middleware", async () => {
 })
 
 test("SDK, it is impossible to setup the same application", async () => {
-  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DEFAULT, async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances
     // we use a random identifier every time
     const testId = `test-setup-${randomHash()}`
-    const promise = appSdk(testId).then(() => {
+    const promise = dataIslandApp(testId).then(() => {
     })
     await expect(
-      appSdk(testId, async () => {
+      dataIslandApp(testId, async () => {
       })
     ).rejects.toThrow()
     await promise
@@ -109,14 +109,14 @@ test("SDK, it is impossible to setup the same application", async () => {
 })
 
 test("SDK, setup and get this app", async () => {
-  await AppSdkUnitTest.test(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DEFAULT, async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances
     // we use a random identifier every time
     const testId = `test-get-${randomHash()}`
-    const promise = appSdk(testId).then(() => {
+    const promise = dataIslandApp(testId).then(() => {
     })
-    await expect(appSdk(testId)).resolves.toBeInstanceOf(AppSdk)
+    await expect(dataIslandApp(testId)).resolves.toBeInstanceOf(DataIslandApp)
     await promise
   })
 })

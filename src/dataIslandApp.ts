@@ -8,7 +8,7 @@ import { UserProfile } from "./storages/userProfile"
 /**
  * DataIsland App instance.
  */
-export abstract class AppSdk {
+export abstract class DataIslandApp {
   /**
    * The name of this app.
    */
