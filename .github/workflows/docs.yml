@@ -1,0 +1,32 @@
+name: Docs Check on Pull Request
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, reopened]
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v4
+
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            registry-url: 'https://registry.npmjs.org'
+  
+        - name: ⏩ CI Install ⏩
+          run: npm ci
+  
+        - name: 📝 Docs 📝
+          run: npm run docs
+  
+        - name: 📋 Check changes 📋
+          run: |
+            git diff --exit-code --quiet || {
+              echo "There are changes to commit"
+              exit 1
+            }

@@ -26,7 +26,11 @@ jobs:
         run: npm run lint:fix
 
       - name: 📋 Check for changes 📋
-        run: git diff --exit-code
+        run: | 
+          git diff --exit-code --quiet || {
+            echo "There are changes to commit"
+            exit 1
+          }
 
       - name: 📢 Formatting needs to be updated. See message below. 📢
         if: ${{ failure() }}
