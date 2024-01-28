@@ -1,0 +1,25 @@
+# Shared editor configurations that track the way prettier formats source.
+#
+# To use this in vscode:
+#
+#   ext install EditorConfig
+
+root = true
+
+# Source files look unixy by default
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Javascript and Typescript look like Google-style
+[*.{js,json,ts}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+ij_javascript_use_semicolon_after_statement = false
+ij_typescript_use_semicolon_after_statement = false
+ij_typescript_use_double_quotes = true
+ij_javascript_use_double_quotes = true
+
+# Not currently supported by vscode, but is supported others, e.g. vim.
+max_line_length = 80

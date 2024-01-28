@@ -1,0 +1,168 @@
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../../README.md) / [Exports](../modules.md) / DataIslandApp
+
+# Class: DataIslandApp
+
+DataIsland App instance.
+
+## Table of contents
+
+### Constructors
+
+- [constructor](DataIslandApp.md#constructor)
+
+### Accessors
+
+- [automaticDataCollectionEnabled](DataIslandApp.md#automaticdatacollectionenabled)
+- [context](DataIslandApp.md#context)
+- [credential](DataIslandApp.md#credential)
+- [host](DataIslandApp.md#host)
+- [lifetime](DataIslandApp.md#lifetime)
+- [name](DataIslandApp.md#name)
+- [organizations](DataIslandApp.md#organizations)
+- [userProfile](DataIslandApp.md#userprofile)
+
+### Methods
+
+- [resolve](DataIslandApp.md#resolve)
+
+## Constructors
+
+### constructor
+
+• **new DataIslandApp**(): [`DataIslandApp`](DataIslandApp.md)
+
+#### Returns
+
+[`DataIslandApp`](DataIslandApp.md)
+
+## Accessors
+
+### automaticDataCollectionEnabled
+
+• `get` **automaticDataCollectionEnabled**(): `boolean`
+
+The automaticDataCollectionEnabled of this app.
+
+#### Returns
+
+`boolean`
+
+___
+
+### context
+
+• `get` **context**(): `Context`
+
+The context of this app.
+
+#### Returns
+
+`Context`
+
+___
+
+### credential
+
+• `get` **credential**(): `undefined` \| [`CredentialBase`](CredentialBase.md)
+
+The credential of this app.
+
+#### Returns
+
+`undefined` \| [`CredentialBase`](CredentialBase.md)
+
+• `set` **credential**(`value`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | [`CredentialBase`](CredentialBase.md) |
+
+#### Returns
+
+`void`
+
+___
+
+### host
+
+• `get` **host**(): `string`
+
+The host of this app.
+
+#### Returns
+
+`string`
+
+___
+
+### lifetime
+
+• `get` **lifetime**(): [`Lifetime`](Lifetime.md)
+
+The lifetime of this app.
+
+#### Returns
+
+[`Lifetime`](Lifetime.md)
+
+___
+
+### name
+
+• `get` **name**(): `string`
+
+The name of this app.
+
+#### Returns
+
+`string`
+
+___
+
+### organizations
+
+• `get` **organizations**(): [`Organizations`](Organizations.md)
+
+User's organizations.
+
+#### Returns
+
+[`Organizations`](Organizations.md)
+
+___
+
+### userProfile
+
+• `get` **userProfile**(): [`UserProfile`](UserProfile.md)
+
+User's profile.
+
+#### Returns
+
+[`UserProfile`](UserProfile.md)
+
+## Methods
+
+### resolve
+
+▸ **resolve**\<`T`\>(`type`): `undefined` \| `T`
+
+Resolve a service from the app.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `type` | `Constructor`\<`T`\> |
+
+#### Returns
+
+`undefined` \| `T`

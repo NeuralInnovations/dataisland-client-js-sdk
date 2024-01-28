@@ -1,0 +1,32 @@
+# Build/Dependencies
+node_modules
+packages/**/dist/
+.awcache
+.cache
+/config/project.json
+scripts/docgen-compat/html
+
+# OS Specific Files
+.DS_Store
+
+# Editor Configs
+.idea
+.vscode
+*.iml
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+.nx/
+/dist/
+/coverage/
+.env.test

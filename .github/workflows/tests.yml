@@ -1,0 +1,34 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - release/*
+      - hotfix/*
+      - feature/*
+      - fix/*
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: ⏩ CI Install ⏩
+        run: npm ci
+
+      - name: 🧪 Test 🧪
+        env:
+          NODE_ENV: test
+        run: |
+          echo "HOST=${{ secrets.TEST_HOST }}" > .env.test
+          echo "TOKEN=${{ secrets.TEST_TOKEN }}" >> .env.test
+          npm run test >> $GITHUB_STEP_SUMMARY
