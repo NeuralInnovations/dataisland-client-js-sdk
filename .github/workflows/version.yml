@@ -1,0 +1,40 @@
+name: Strict Version Check on Pull Request
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, reopened]
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout base branch (master)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+
+      - name: Get version from base branch
+        run: echo "BASE_VERSION=$(cat package.json | jq -r '.version')" >> $GITHUB_ENV
+
+      - name: Checkout head branch (PR)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Get version from head branch
+        run: echo "HEAD_VERSION=$(cat package.json | jq -r '.version')" >> $GITHUB_ENV
+
+      - name: Compare versions
+        run: |
+          if [ "${{ env.HEAD_VERSION }}" = "${{ env.BASE_VERSION }}" ]; then
+            echo "Error: Version in PR is the same as the base branch. It must be strictly higher."
+            exit 1
+          elif [ "$(echo ${{ env.BASE_VERSION }} ${{ env.HEAD_VERSION }} | sort -Vr | head -n 1)" != "${{ env.HEAD_VERSION }}" ]; then
+            echo "Error: Version in PR must be strictly higher than the base branch."
+            exit 1
+          else
+            echo "Version in PR is higher than the base branch. Proceeding with the workflow."
+          fi

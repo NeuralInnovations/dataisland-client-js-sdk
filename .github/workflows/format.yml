@@ -1,0 +1,38 @@
+name: Formatting Check
+
+on: 
+  pull_request
+
+env:
+  GITHUB_PULL_REQUEST_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+  GITHUB_PULL_REQUEST_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+
+jobs:
+  format:
+    name: Run formatting tasks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: ⏩ CI Install ⏩
+        run: npm ci
+
+      - name: 🌈 Lint 🌈
+        run: npm run lint:fix
+
+      - name: 📋 Check for changes 📋
+        run: git diff --exit-code
+
+      - name: 📢 Formatting needs to be updated. See message below. 📢
+        if: ${{ failure() }}
+        run: |
+          echo "### Formatting failed." >> $GITHUB_STEP_SUMMARY
+          echo "➤ execute ➤" >> $GITHUB_STEP_SUMMARY
+          echo "```shell" >> $GITHUB_STEP_SUMMARY
+          echo "run npm lint:fix" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
