@@ -1,6 +1,7 @@
 @neuralinnovations/dataisland-sdk/[Exports](./docs/modules.md)
 
-![Tests](https://github.com/NeuralInnovations/dataisland-client-js-sdk/actions/workflows/tests.yml/badge.svg?branch=main)
+![master](https://github.com/NeuralInnovations/dataisland-client-js-sdk/actions/workflows/tests.yml/badge.svg?branch=master)
+![develop](https://github.com/NeuralInnovations/dataisland-client-js-sdk/actions/workflows/tests.yml/badge.svg?branch=develop)
 
 # DataIsland Client SDK
 
