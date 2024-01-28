@@ -8,6 +8,10 @@
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeuralInnovations/dataisland-client-js-sdk.git"
+  },
   "publishConfig": {
     "access": "public"
   },
