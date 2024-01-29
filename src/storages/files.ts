@@ -20,7 +20,7 @@ export type UploadFile = globalThis.File
  */
 export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
-   * Get file by id.
+   * Upload file.
    */
   abstract upload(file: UploadFile): Promise<File>
 

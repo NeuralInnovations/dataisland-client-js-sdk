@@ -1,5 +1,5 @@
 import { EventDispatcher } from "../events"
-import { Chat } from "./chat"
+import { Chat, ChatId } from "./chat"
 
 export enum ChatsEvent {
   ADDED = "added",
@@ -10,8 +10,26 @@ export enum ChatsEvent {
  * Chats storage.
  */
 export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
+
+  /**
+   * Chats list.
+   */
+  abstract get collection(): ReadonlyArray<Chat>
+
   /**
    * Create new chat.
    */
   abstract create(): Promise<Chat>
+
+  /**
+   * Get chat by id.
+   * @param id
+   */
+  abstract get(id: ChatId): Chat
+
+  /**
+   * Delete chat.
+   * @param id
+   */
+  abstract delete(id: ChatId): Promise<void>
 }
