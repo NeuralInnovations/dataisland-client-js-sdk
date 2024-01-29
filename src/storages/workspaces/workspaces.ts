@@ -1,4 +1,4 @@
-import { EventDispatcher } from "../events"
+import { EventDispatcher } from "../../events"
 import { Workspace } from "./workspace"
 
 export type WorkspaceId = string

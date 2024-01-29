@@ -1,13 +1,13 @@
 import { WorkspaceId, Workspaces, WorkspacesEvent } from "./workspaces"
-import { OrganizationImpl } from "./organization.impl"
-import { Context } from "../context"
+import { OrganizationImpl } from "../organizations/organization.impl"
+import { Context } from "../../context"
 import { Workspace } from "./workspace"
 import { WorkspaceImpl } from "./workspace.impl"
-import { OrganizationId } from "./organizations"
-import { RpcService } from "../services/rpcService"
-import { OrganizationWorkspaces } from "../dto/userInfoResponse"
-import { WorkspaceDto } from "../dto/workspacesResponse"
-import { ResponseUtils } from "../services/responseUtils"
+import { OrganizationId } from "../organizations/organizations"
+import { RpcService } from "../../services/rpcService"
+import { OrganizationWorkspaces } from "../../dto/userInfoResponse"
+import { WorkspaceDto } from "../../dto/workspacesResponse"
+import { ResponseUtils } from "../../services/responseUtils"
 
 export class WorkspacesImpl extends Workspaces {
   private readonly _workspaces: WorkspaceImpl[] = []

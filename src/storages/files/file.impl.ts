@@ -1,8 +1,8 @@
-import { Context } from "../context"
-import { Disposable } from "../disposable"
-import { FileDto, FileProgressDto } from "../dto/workspacesResponse"
-import { RpcService } from "../services/rpcService"
-import { ResponseUtils } from "../services/responseUtils"
+import { Context } from "../../context"
+import { Disposable } from "../../disposable"
+import { FileDto, FileProgressDto } from "../../dto/workspacesResponse"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
 import { File } from "./file"
 
 export class FileImpl extends File implements Disposable {

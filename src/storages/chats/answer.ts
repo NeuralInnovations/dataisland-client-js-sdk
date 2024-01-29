@@ -1,4 +1,4 @@
-import { SourceDto } from "../dto/chatResponse";
+import { SourceDto } from "../../dto/chatResponse"
 
 export type AnswerId = string
 export type StepId = string

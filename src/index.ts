@@ -7,17 +7,17 @@ export * from "./events"
 export * from "./disposable"
 export * from "./credentials"
 export * from "./dataIslandApp"
-export * from "./storages/organizations"
-export * from "./storages/organization"
-export * from "./storages/workspaces"
-export * from "./storages/workspace"
-export * from "./storages/groups"
-export * from "./storages/userProfile"
-export * from "./storages/files"
-export * from "./storages/file"
-export * from "./storages/filesPage"
-export * from "./storages/chats"
-export * from "./storages/chat"
+export * from "./storages/organizations/organizations"
+export * from "./storages/organizations/organization"
+export * from "./storages/workspaces/workspaces"
+export * from "./storages/workspaces/workspace"
+export * from "./storages/groups/groups"
+export * from "./storages/user/userProfile"
+export * from "./storages/files/files"
+export * from "./storages/files/file"
+export * from "./storages/files/filesPage"
+export * from "./storages/chats/chats"
+export * from "./storages/chats/chat"
 
 const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
 const _appsReady = new Map<string, DataIslandApp>()
@@ -88,5 +88,5 @@ export async function dataIslandApp(
   return await appPromise
 }
 
-export { File } from "./storages/file"
-export { FilesPage } from "./storages/filesPage"
+export { File } from "./storages/files/file"
+export { FilesPage } from "./storages/files/filesPage"

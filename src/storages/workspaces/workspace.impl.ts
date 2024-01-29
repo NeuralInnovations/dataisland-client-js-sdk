@@ -1,11 +1,11 @@
-import { Context } from "../context"
-import { Files } from "./files"
+import { Context } from "../../context"
+import { Files } from "../files/files"
 import { Workspace, WorkspaceEvent } from "./workspace"
-import { OrganizationImpl } from "./organization.impl"
-import { WorkspaceDto } from "../dto/workspacesResponse"
-import { RpcService } from "../services/rpcService"
-import { FilesImpl } from "./files.impl"
-import { ResponseUtils } from "../services/responseUtils"
+import { OrganizationImpl } from "../organizations/organization.impl"
+import { WorkspaceDto } from "../../dto/workspacesResponse"
+import { RpcService } from "../../services/rpcService"
+import { FilesImpl } from "../files/files.impl"
+import { ResponseUtils } from "../../services/responseUtils"
 
 export class WorkspaceImpl extends Workspace {
   private _isMarkAsDeleted: boolean = false

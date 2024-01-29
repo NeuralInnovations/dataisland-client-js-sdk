@@ -1,4 +1,4 @@
-import { EventDispatcher } from "../events"
+import { EventDispatcher } from "../../events"
 import { File, FileId } from "./file"
 import { FilesPage } from "./filesPage"
 

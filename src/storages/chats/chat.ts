@@ -1,4 +1,4 @@
-import { Answer } from "./answer";
+import { Answer } from "./answer"
 
 export type ChatId = string
 
@@ -22,7 +22,7 @@ export abstract class Chat {
   /**
    * Answers list.
    */
-  abstract get collection(): ReadonlyArray<Chat>
+  abstract get collection(): ReadonlyArray<Answer>
 
   /**
    * Ask new question in chat.

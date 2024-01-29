@@ -1,4 +1,4 @@
-import { EventDispatcher } from "../events"
+import { EventDispatcher } from "../../events"
 import { Chat, ChatId } from "./chat"
 
 export enum ChatsEvent {
@@ -26,6 +26,12 @@ export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
    * @param id
    */
   abstract get(id: ChatId): Chat
+
+  /**
+   * Try to get chat by id.
+   * @param id
+   */
+  abstract tryGet(id: ChatId): Chat | undefined
 
   /**
    * Delete chat.

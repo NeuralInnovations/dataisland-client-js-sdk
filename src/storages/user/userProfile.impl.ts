@@ -1,5 +1,5 @@
 import { UserEvent, UserProfile } from "./userProfile"
-import { UserInfoResponse } from "../dto/userInfoResponse"
+import { UserInfoResponse } from "../../dto/userInfoResponse"
 
 export class UserProfileImpl extends UserProfile {
   private content?: UserInfoResponse

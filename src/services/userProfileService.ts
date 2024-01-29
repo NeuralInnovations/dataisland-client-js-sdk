@@ -1,9 +1,9 @@
 import { Service } from "./service"
 import { RpcService } from "./rpcService"
-import { UserProfile } from "../storages/userProfile"
+import { UserProfile } from "../storages/user/userProfile"
 import { UserInfoResponse } from "../dto/userInfoResponse"
 import { OrganizationService } from "./organizationService"
-import { UserProfileImpl } from "../storages/userProfile.impl"
+import { UserProfileImpl } from "../storages/user/userProfile.impl"
 import { ResponseUtils } from "./responseUtils"
 
 export class UserProfileService extends Service {

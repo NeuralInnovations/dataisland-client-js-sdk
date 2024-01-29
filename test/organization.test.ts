@@ -1,6 +1,6 @@
 import { dataIslandApp, DebugCredential } from "../src"
 import { HOST, randomHash, TOKEN } from "./setup"
-import { OrganizationImpl } from "../src/storages/organization.impl"
+import { OrganizationImpl } from "../src/storages/organizations/organization.impl"
 
 test("Organization", async () => {
   // make random name

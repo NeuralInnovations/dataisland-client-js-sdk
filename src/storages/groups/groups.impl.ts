@@ -1,12 +1,12 @@
-import { Context } from "../context"
-import { Disposable } from "../disposable"
-import { AccessGroupDto, AccessGroupResponse, AccessGroupsResponse } from "../dto/accessGroupResponse"
-import { UserDto } from "../dto/userInfoResponse"
-import { WorkspaceDto, WorkspacesResponse } from "../dto/workspacesResponse"
-import { RpcService } from "../services/rpcService"
+import { Context } from "../../context"
+import { Disposable } from "../../disposable"
+import { AccessGroupDto, AccessGroupResponse, AccessGroupsResponse } from "../../dto/accessGroupResponse"
+import { UserDto } from "../../dto/userInfoResponse"
+import { WorkspaceDto, WorkspacesResponse } from "../../dto/workspacesResponse"
+import { RpcService } from "../../services/rpcService"
 import { Group, GroupEvent, GroupId, Groups } from "./groups"
-import { OrganizationImpl } from "./organization.impl"
-import { OrganizationId } from "./organizations"
+import { OrganizationImpl } from "../organizations/organization.impl"
+import { OrganizationId } from "../organizations/organizations"
 
 export class GroupImpl extends Group implements Disposable {
   private _isDisposed: boolean = false
