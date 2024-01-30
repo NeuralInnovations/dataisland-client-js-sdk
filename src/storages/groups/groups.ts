@@ -1,8 +1,8 @@
-import { AccessGroupDto } from "../dto/accessGroupResponse"
-import { UserDto } from "../dto/userInfoResponse"
-import { WorkspaceDto } from "../dto/workspacesResponse"
-import { EventDispatcher } from "../events"
-import { OrganizationId } from "./organizations"
+import { AccessGroupDto } from "../../dto/accessGroupResponse"
+import { UserDto } from "../../dto/userInfoResponse"
+import { WorkspaceDto } from "../../dto/workspacesResponse"
+import { EventDispatcher } from "../../events"
+import { OrganizationId } from "../organizations/organizations"
 
 export type GroupId = string
 

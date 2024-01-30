@@ -1,4 +1,4 @@
-import { FileProgressDto } from "../dto/workspacesResponse"
+import { FileProgressDto } from "../../dto/workspacesResponse"
 
 export type FileId = string
 

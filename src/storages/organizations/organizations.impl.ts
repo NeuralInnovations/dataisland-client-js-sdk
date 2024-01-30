@@ -4,11 +4,11 @@ import {
   Organizations
 } from "./organizations"
 import { OrganizationImpl } from "./organization.impl"
-import { RpcService } from "../services/rpcService"
-import { OrganizationDto, UserSettings } from "../dto/userInfoResponse"
-import { Context } from "../context"
+import { RpcService } from "../../services/rpcService"
+import { OrganizationDto, UserSettings } from "../../dto/userInfoResponse"
+import { Context } from "../../context"
 import { Organization } from "./organization"
-import { ResponseUtils } from "../services/responseUtils"
+import { ResponseUtils } from "../../services/responseUtils"
 
 export class OrganizationsImpl extends Organizations {
   constructor(public readonly context: Context) {
@@ -188,4 +188,5 @@ export class OrganizationsImpl extends Organizations {
       })
     }
   }
+
 }
