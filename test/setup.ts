@@ -19,6 +19,12 @@ export const testInOrganization = async (func: (app: DataIslandApp, org: Organiz
   const app = await dataIslandApp(randomName, async builder => {
     builder.useHost(config?.host ?? HOST)
     builder.useCredential(new DebugCredential(config?.token ?? TOKEN))
+    builder.registerMiddleware(async (req, next) => {
+      console.log("REQUEST", req.url, req.method)
+      const response = await next(req)
+      console.log("RESPONSE", response.status)
+      return response
+    })
   })
   const org = await app.organizations.create(
     randomName,
