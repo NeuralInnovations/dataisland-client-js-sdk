@@ -37,4 +37,8 @@ export abstract class Organization {
    */
   abstract get accessGroups(): Groups
 
+  /**
+   * Create invite link 
+   */
+  abstract createInviteLink(emails: string[], accessGroups: GroupId[]): Promise<void>
 }
