@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.0.1-dev8",
+  "version": "0.0.1-dev9",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -8,12 +8,16 @@
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeuralInnovations/dataisland-client-js-sdk.git"
+  },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --runInBand",
     "lint": "eslint --ext .ts,.tsx src test",
     "lint:fix": "eslint --fix --ext .ts,.tsx src test",
     "docs": "typedoc --disableSources --includeVersion --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js"

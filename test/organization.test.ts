@@ -1,6 +1,18 @@
 import { dataIslandApp, DebugCredential } from "../src"
 import { HOST, randomHash, TOKEN } from "./setup"
-import { OrganizationImpl } from "../src/storages/organization.impl"
+import {
+  OrganizationImpl
+} from "../src/storages/organizations/organization.impl"
+
+test.skip("Delete all organizations", async () => {
+  const app = await dataIslandApp("delete-all", async builder => {
+    builder.useHost(HOST)
+    builder.useCredential(new DebugCredential(TOKEN))
+  })
+  for (const organization of app.organizations.collection) {
+    await app.organizations.delete(organization.id)
+  }
+})
 
 test("Organization", async () => {
   // make random name

@@ -4,11 +4,11 @@ import {
   Organizations
 } from "./organizations"
 import { OrganizationImpl } from "./organization.impl"
-import { RpcService } from "../services/rpcService"
-import { OrganizationDto, UserSettings } from "../dto/userInfoResponse"
-import { Context } from "../context"
+import { RpcService } from "../../services/rpcService"
+import { OrganizationDto, UserSettings } from "../../dto/userInfoResponse"
+import { Context } from "../../context"
 import { Organization } from "./organization"
-import { ResponseUtils } from "../services/responseUtils"
+import { ResponseUtils } from "../../services/responseUtils"
 
 export class OrganizationsImpl extends Organizations {
   constructor(public readonly context: Context) {
@@ -79,17 +79,22 @@ export class OrganizationsImpl extends Organizations {
     if (!this.contains(id)) {
       throw new Error(`Organization delete, id: ${id} is not found`)
     }
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("/api/v1/Organizations")
       .searchParam("id", id)
       .sendDelete()
+
+    // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
         `Organization ${id} delete, failed`,
         response
       )
     }
+
+    // check organization in collection
     const org = <OrganizationImpl>this.get(id)
     const index = this.organizations.indexOf(org)
     if (index < 0) {
@@ -188,4 +193,5 @@ export class OrganizationsImpl extends Organizations {
       })
     }
   }
+
 }

@@ -1,13 +1,13 @@
 import { WorkspaceId, Workspaces, WorkspacesEvent } from "./workspaces"
-import { OrganizationImpl } from "./organization.impl"
-import { Context } from "../context"
+import { OrganizationImpl } from "../organizations/organization.impl"
+import { Context } from "../../context"
 import { Workspace } from "./workspace"
 import { WorkspaceImpl } from "./workspace.impl"
-import { OrganizationId } from "./organizations"
-import { RpcService } from "../services/rpcService"
-import { OrganizationWorkspaces } from "../dto/userInfoResponse"
-import { WorkspaceDto } from "../dto/workspacesResponse"
-import { ResponseUtils } from "../services/responseUtils"
+import { OrganizationId } from "../organizations/organizations"
+import { RpcService } from "../../services/rpcService"
+import { OrganizationWorkspaces } from "../../dto/userInfoResponse"
+import { WorkspaceDto } from "../../dto/workspacesResponse"
+import { ResponseUtils } from "../../services/responseUtils"
 
 export class WorkspacesImpl extends Workspaces {
   private readonly _workspaces: WorkspaceImpl[] = []
@@ -102,7 +102,7 @@ export class WorkspacesImpl extends Workspaces {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError("Failed to create workspace", response)
+      await ResponseUtils.throwError(`Failed to create workspace, in organization: ${this.organization.id}`, response)
     }
 
     // parse workspace from the server's response
@@ -139,7 +139,7 @@ export class WorkspacesImpl extends Workspaces {
 
     // check if workspace is already marked as deleted
     if (workspace.isMarkAsDeleted) {
-      throw new Error(`Workspace ${id} is already marked as deleted`)
+      throw new Error(`Workspace ${id} is already marked as deleted, in organization: ${this.organization.id}`)
     }
 
     // mark workspace as deleted
@@ -155,7 +155,7 @@ export class WorkspacesImpl extends Workspaces {
     // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
-        `Failed to delete workspace: ${workspace.organization.name}/${workspace.name}:${id}`,
+        `Failed to delete workspace: ${workspace.organization.name}/${workspace.name}:${id}, in organization: ${this.organization.id}`,
         response
       )
     }
@@ -184,7 +184,7 @@ export class WorkspacesImpl extends Workspaces {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError("Failed to fetch workspaces.", response)
+      await ResponseUtils.throwError(`Failed to fetch workspaces in organization: ${organizationId}`, response)
     }
 
     // parse workspaces from the server's response

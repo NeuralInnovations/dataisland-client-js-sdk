@@ -1,6 +1,7 @@
 @neuralinnovations/dataisland-sdk/[Exports](./docs/modules.md)
 
-![Tests](https://github.com/NeuralInnovations/dataisland-client-js-sdk/actions/workflows/tests.yml/badge.svg?branch=main)
+![master](https://github.com/NeuralInnovations/dataisland-client-js-sdk/actions/workflows/tests.yml/badge.svg?branch=master)
+![develop](https://github.com/NeuralInnovations/dataisland-client-js-sdk/actions/workflows/tests.yml/badge.svg?branch=develop)
 
 # DataIsland Client SDK
 
@@ -96,6 +97,7 @@ const org = await app.organizations.create(
   'your-organization-description'
 )
 ```
+
 1. [Organization](docs/classes/Organization.md) is a main object for user data management. It contains of users, workspaces and chats.
 2. [Organizations](docs/classes/Organizations.md) is a collection of organizations.
 
@@ -103,7 +105,7 @@ const org = await app.organizations.create(
 
 ### Use workspaces
 
-Workspaces are folder-like objects used to store files and controll access to it using acces groups. During creation you must pass organization Id, name and description of new workspace and regulation options. You can pass existing group ID or ask to create new group for this workspace in regulation section. 
+Workspaces are folder-like objects used to store files and controll access to it using acces groups. During creation you must pass organization Id, name and description of new workspace and regulation options. You can pass existing group ID or ask to create new group for this workspace in regulation section.
 
 Default workspace creation example:
 
@@ -132,13 +134,44 @@ const workspace = await org.workspaces.create(
   }
 )
 ```
-1. [Workspace](docs/classes/Workspace.md) is a main object for files management. It contains of files, chats and access groups.
 
+1. [Workspace](docs/classes/Workspace.md) is a main object for files management. It contains of files, chats and access groups.
 2. [Worskpaces](docs/classes/Workspaces.md) is a collection of workspaces.
 
 ---
 
 ### Use files
+
+Files are part of workspaces and can be managed through workspace interface. You can upload, preview and delete files.
+
+Default file upload example:
+
+```
+const file = await workspace.files.upload(file)
+```
+
+The file uploading process always takes some time, so you can track its uploading status using the "status" method. The status result object includes a success indicator, the total count of file parts, the count of uploaded file parts, and an error field. The success indicator represents whether the last file part was uploaded successfully or not. If one of the parts fails, the uploading process is stopped, and the "error" field contains the text of the failure reason.
+
+```
+let status = await file.status()
+```
+
+Delete file example:
+
+```
+await workspace.files.delete(file.id)
+```
+
+You can retrieve a list of files from a workspace using the "query" method. It involves several straightforward parameters: a search query for filtering files based on user input (if empty, no filter is applied), page number, and the number of files per page. The method returns an object containing the file list, selected page number, total page count, and other relevant information.
+
+Here is an example:
+
+```
+const filesPage = await workspace.files.query(
+            "you-user-search-input", 
+            0 - page number,
+            20 - files limit per page )
+```
 
 ### Use chat
 

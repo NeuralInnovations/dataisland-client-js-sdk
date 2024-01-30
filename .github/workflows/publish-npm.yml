@@ -31,3 +31,14 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Read Version
+        id: package_version
+        run: echo "::set-output name=VERSION::$(node -p "require('./package.json').version")"
+  
+      - name: Tag Release
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag v${{ steps.package_version.outputs.VERSION }}
+          git push origin v${{ steps.package_version.outputs.VERSION }}

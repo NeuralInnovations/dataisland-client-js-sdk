@@ -1,7 +1,7 @@
-import { EventDispatcher } from "../events"
-import { Files } from "./files"
+import { EventDispatcher } from "../../events"
+import { Files } from "../files/files"
 import { WorkspaceId } from "./workspaces"
-import { Organization } from "./organization"
+import { Organization } from "../organizations/organization"
 
 /**
  * Workspace event.

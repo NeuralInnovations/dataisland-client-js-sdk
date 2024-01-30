@@ -17,8 +17,8 @@ import {
 } from "../commands/startCommandHandler"
 import { UserProfileService } from "../services/userProfileService"
 import { OrganizationService } from "../services/organizationService"
-import { Organizations } from "../storages/organizations"
-import { UserProfile } from "../storages/userProfile"
+import { Organizations } from "../storages/organizations/organizations"
+import { UserProfile } from "../storages/user/userProfile"
 import { isUnitTest, UnitTest } from "../unitTest"
 
 export class DataIslandAppImpl extends DataIslandApp {

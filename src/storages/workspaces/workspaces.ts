@@ -1,4 +1,4 @@
-import { EventDispatcher } from "../events"
+import { EventDispatcher } from "../../events"
 import { Workspace } from "./workspace"
 
 export type WorkspaceId = string
@@ -44,7 +44,7 @@ export abstract class Workspaces extends EventDispatcher<
   /**
    * Create workspace.
    */
-  abstract create(name: string, description: string): Promise<Workspace>
+  abstract create(name: string, description: string, regulation?: { isCreateNewGroup: boolean, newGroupName: string, groupIds: string[]}): Promise<Workspace>
 
   /**
    * Delete workspace.
