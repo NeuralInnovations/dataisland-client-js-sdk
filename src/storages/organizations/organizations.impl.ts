@@ -172,6 +172,10 @@ export class OrganizationsImpl extends Organizations {
   ): Promise<void> {
     this.currentOrganizationId = settings?.activeOrganizationId
     for (const organization of organizations) {
+      if (!this.check_org_exist(organization.id)){
+        continue
+      }
+
       // create organization and init from content
       const org = await new OrganizationImpl(this.context).initFrom(
         organization,
@@ -187,5 +191,22 @@ export class OrganizationsImpl extends Organizations {
         data: org
       })
     }
+  }
+
+
+  async check_org_exist(organizationId: string): Promise<boolean> {
+    // init workspaces from the server's response
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Organizations")
+      .searchParam("id", organizationId)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      return false
+    }
+
+    return true
   }
 }
