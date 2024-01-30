@@ -8,13 +8,11 @@ import { Chat } from "./chat"
 import { ChatImpl } from "./chat.impl"
 import { Chats, ChatsEvent } from "./chats"
 
-
-
 export class ChatsImpl extends Chats {
   private readonly _chats: Chat[] = []
 
   constructor(
-    private readonly organization: OrganizationImpl,
+    public readonly organization: OrganizationImpl,
     private readonly context: Context
   ) {
     super()
@@ -40,13 +38,18 @@ export class ChatsImpl extends Chats {
       )
     }
 
+    // parse chats from the server's response
     const chats = (await response!.json()) as ChatListResponse
 
-    for (const cht of chats.chats){
-      const chat = await new ChatImpl(this.context).initFrom(cht)
+    // init chats
+    for (const cht of chats.chats) {
+      // create chat implementation
+      const chat = await new ChatImpl(this.context, this.organization).initFrom(cht)
 
+      // add chat to the collection
       this._chats.push(chat)
 
+      // dispatch event
       this.dispatch({
         type: ChatsEvent.ADDED,
         data: chat
@@ -59,7 +62,6 @@ export class ChatsImpl extends Chats {
     return this._chats
   }
 
-
   get(id: string): Chat {
     return <Chat>this.tryGet(id)
   }
@@ -67,25 +69,25 @@ export class ChatsImpl extends Chats {
   tryGet(id: string): Chat | undefined {
     return this._chats.find(chat => chat.id === id)
   }
-  
+
   async create(): Promise<Chat> {
 
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats")
-      .sendPostJson({ organizationId: this.organization.id, })
+      .sendPostJson({ organizationId: this.organization.id })
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError("Failed to create chat", response)
+      await ResponseUtils.throwError(`Failed to create chat, organization: ${this.organization.id}`, response)
     }
 
     // parse workspace from the server's response
     const content = (await response!.json()).chat as ChatDto
 
     // create workspace implementation
-    const chat = new ChatImpl(this.context)
+    const chat = new ChatImpl(this.context, this.organization)
     await chat.initFrom(content)
 
     // add chat to the collection
@@ -106,37 +108,35 @@ export class ChatsImpl extends Chats {
 
     // check if chat is found
     if (!chat) {
-      throw new Error(`Chat ${id} is not found`)
+      throw new Error(`Chat ${id} is not found, organization: ${this.organization.id}`)
     }
- 
- 
+
     // send delete request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats")
       .searchParam("id", id)
       .sendDelete()
- 
+
     // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
-        `Failed to delete chat: ${id}`,
+        `Failed to delete chat: ${id}, organization: ${this.organization.id}`,
         response
       )
     }
- 
+
     // remove chat from the collection
     const index = this._chats.indexOf(<ChatImpl>chat)
     if (index < 0) {
-      throw new Error(`Chat ${id} is not found`)
+      throw new Error(`Chat ${id} is not found, organization: ${this.organization.id}`)
     }
     this._chats.splice(index, 1)
- 
+
     // dispatch event
     this.dispatch({
       type: ChatsEvent.REMOVED,
       data: chat
     })
   }
-    
 }

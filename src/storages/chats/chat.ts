@@ -1,4 +1,5 @@
 import { Answer } from "./answer"
+import { Organization } from "../organizations/organization"
 
 export type ChatId = string
 
@@ -8,6 +9,11 @@ export enum ChatAnswerType {
 }
 
 export abstract class Chat {
+
+  /**
+   * Organization.
+   */
+  abstract get organization(): Organization
 
   /**
    * Chat id.
@@ -28,6 +34,5 @@ export abstract class Chat {
    * Ask new question in chat.
    */
   abstract ask(message: string, answerType: ChatAnswerType): Promise<Answer>
-
 }
 

@@ -30,6 +30,7 @@ export class AnswerImpl extends Answer {
     this._content = answer
     this._id = answer.id
 
+    // fetch answer
     await this.fetch()
 
     return this
@@ -38,6 +39,7 @@ export class AnswerImpl extends Answer {
   async initFromId(id: AnswerId): Promise<AnswerImpl> {
     this._id = id
 
+    // fetch answer
     await this.fetch()
 
     return this
@@ -56,13 +58,17 @@ export class AnswerImpl extends Answer {
   }
 
   async sources(type: StepType): Promise<SourceDto[]> {
+    // fetch answer
     await this.fetch()
+    // get step
     const step = this.getStep(type)
 
+    // check step
     if (!step) {
-      throw new Error(`Step with type ${type.toString()} is not found`)
+      throw new Error(`Step with type ${type.toString()} is not found, answer: ${this.id}, organization: ${this.chat.organization.id}`)
     }
 
+    // get sources
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/answer/sources")
@@ -71,17 +77,21 @@ export class AnswerImpl extends Answer {
       .searchParam("step_id", step.id)
       .sendGet()
 
+    // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to get sources for ${type.toString()}`, response)
+      await ResponseUtils.throwError(`Failed to get sources for ${type.toString()}, answer: ${this.id}, organization: ${this.chat.organization.id}`, response)
     }
 
+    // parse sources from the server's response
     const sources = (await response!.json()).sources as SourceDto[]
 
     return sources
   }
 
   async fetch(): Promise<void> {
+    // fetch answer from position 0
     const position = 0
+    // fetch answer
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/answer/fetch")
@@ -90,24 +100,31 @@ export class AnswerImpl extends Answer {
       .searchParam("position", position.toString())
       .sendGet()
 
+    // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Failed to fetch answer ${this.id}`, response)
     }
 
+    // parse answer from the server's response
     const answer = (await response!.json()) as FetchAnswerResponse
 
+    // update answer
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
   }
 
   async fetchTokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse> {
+    // fetch answer
     await this.fetch()
+    // get step
     const step = this.getStep(type)
 
+    // check step
     if (!step) {
       throw new Error(`Step with type ${type.toString()} is not found`)
     }
 
+    // get tokens
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/answer/fetch/tokens")
@@ -117,16 +134,19 @@ export class AnswerImpl extends Answer {
       .searchParam("token_start_at", token_start_at.toString())
       .sendGet()
 
+    // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Failed to get sources for ${type.toString()}`, response)
     }
 
+    // parse tokens from the server's response
     const tokens = (await response!.json()) as FetchTokensResponse
 
     return tokens
   }
 
   async cancel(): Promise<void> {
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/answer/cancel")
@@ -135,9 +155,9 @@ export class AnswerImpl extends Answer {
         uid: this.id
       })
 
+    // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError("Failed to cancel a question", response)
     }
   }
-
 }
