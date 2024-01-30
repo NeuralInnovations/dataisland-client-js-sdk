@@ -178,3 +178,5 @@ const filesPage = await workspace.files.query(
 ### Use access groups
 
 ### Use Invites
+
+You can invite users to organization with provided emails and selected access groups. Use create invite link method of seleted organization.
