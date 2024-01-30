@@ -78,7 +78,7 @@ export class ChatsImpl extends Chats {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError("Failed to create workspace", response)
+      await ResponseUtils.throwError("Failed to create chat", response)
     }
 
     // parse workspace from the server's response
