@@ -1,8 +1,12 @@
-import { AnswerStatus, FetchTokensResponse, SourceDto, StepType } from "../../dto/chatResponse"
+import {
+  AnswerStatus,
+  FetchTokensResponse,
+  SourceDto,
+  StepType
+} from "../../dto/chatResponse"
 
 export type AnswerId = string
 export type StepId = string
-
 
 export abstract class Answer {
 
@@ -29,7 +33,7 @@ export abstract class Answer {
   /**
    * Fetch answer.
    */
-  abstract fetch_tokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse>
+  abstract fetchTokens(type: StepType, tokenStartAt: number): Promise<FetchTokensResponse>
 
   /**
    * Cancel answer

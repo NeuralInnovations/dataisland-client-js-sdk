@@ -1,10 +1,17 @@
 import { Context } from "../../context"
-import { AnswerDto, AnswerStatus, AnswerStepDto, FetchAnswerResponse, FetchTokensResponse, SourceDto, StepType } from "../../dto/chatResponse"
+import {
+  AnswerDto,
+  AnswerStatus,
+  AnswerStepDto,
+  FetchAnswerResponse,
+  FetchTokensResponse,
+  SourceDto,
+  StepType
+} from "../../dto/chatResponse"
 import { ResponseUtils } from "../../services/responseUtils"
 import { RpcService } from "../../services/rpcService"
 import { Answer, AnswerId } from "./answer"
 import { Chat } from "./chat"
-
 
 export class AnswerImpl extends Answer {
   private _content?: AnswerDto
@@ -52,7 +59,7 @@ export class AnswerImpl extends Answer {
     await this.fetch()
     const step = this.getStep(type)
 
-    if (!step){
+    if (!step) {
       throw new Error(`Step with type ${type.toString()} is not found`)
     }
 
@@ -60,7 +67,7 @@ export class AnswerImpl extends Answer {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/answer/sources")
       .searchParam("chat_uid", this.chat.id)
-      .searchParam("uid",this.id)
+      .searchParam("uid", this.id)
       .searchParam("step_id", step.id)
       .sendGet()
 
@@ -79,7 +86,7 @@ export class AnswerImpl extends Answer {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/answer/fetch")
       .searchParam("chatId", this.chat.id)
-      .searchParam("questionId",this.id)
+      .searchParam("questionId", this.id)
       .searchParam("position", position.toString())
       .sendGet()
 
@@ -91,14 +98,13 @@ export class AnswerImpl extends Answer {
 
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
-
   }
 
-  async fetch_tokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse> {
+  async fetchTokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse> {
     await this.fetch()
     const step = this.getStep(type)
 
-    if (!step){
+    if (!step) {
       throw new Error(`Step with type ${type.toString()} is not found`)
     }
 
@@ -106,7 +112,7 @@ export class AnswerImpl extends Answer {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/answer/fetch/tokens")
       .searchParam("chat_uid", this.chat.id)
-      .searchParam("uid",this.id)
+      .searchParam("uid", this.id)
       .searchParam("step_id", step.id)
       .searchParam("token_start_at", token_start_at.toString())
       .sendGet()
@@ -116,10 +122,9 @@ export class AnswerImpl extends Answer {
     }
 
     const tokens = (await response!.json()) as FetchTokensResponse
-    
+
     return tokens
   }
-
 
   async cancel(): Promise<void> {
     const response = await this.context
@@ -134,5 +139,5 @@ export class AnswerImpl extends Answer {
       await ResponseUtils.throwError("Failed to cancel a question", response)
     }
   }
-    
+
 }

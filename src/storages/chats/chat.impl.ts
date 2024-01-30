@@ -7,13 +7,11 @@ import { AnswerImpl } from "./answer.impl"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 
-
 export class ChatImpl extends Chat implements Disposable {
   private _isDisposed: boolean = false
   private readonly _answers: Answer[] = []
 
   private _content?: ChatDto
-
 
   constructor(private readonly context: Context) {
     super()
@@ -22,24 +20,27 @@ export class ChatImpl extends Chat implements Disposable {
   async initFrom(chat: ChatDto): Promise<ChatImpl> {
     this._content = chat
 
-    for (const ans of chat.answers){
+    for (const ans of chat.answers) {
       const answer = await new AnswerImpl(this, this.context).initFromData(ans)
 
       this._answers.push(answer)
     }
-       
+
     return this
   }
 
   get id(): string {
     return <string>this._content?.id
   }
+
   get name(): string {
     return <string>this._content?.name
   }
+
   get collection(): readonly Answer[] {
     return this._answers
   }
+
   get isDisposed(): boolean {
     return this._isDisposed
   }
@@ -51,7 +52,7 @@ export class ChatImpl extends Chat implements Disposable {
       .sendPutJson({
         chatId: this.id,
         questionMessage: message,
-        isLongAnswer: ( answerType === ChatAnswerType.LONG )
+        isLongAnswer: (answerType === ChatAnswerType.LONG)
       })
 
     if (ResponseUtils.isFail(response)) {
@@ -70,5 +71,5 @@ export class ChatImpl extends Chat implements Disposable {
   dispose(): void {
     this._isDisposed = true
   }
-    
+
 }

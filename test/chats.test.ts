@@ -6,7 +6,7 @@ test("Chat create, ask question, delete", async () => {
   await testInOrganization(async (app, org) => {
 
     const chatPromise = org.chats.create()
-    
+
     // check not throw
     await expect(chatPromise).resolves.not.toThrow()
 
@@ -18,7 +18,6 @@ test("Chat create, ask question, delete", async () => {
 
     // check exists
     expect(chat).not.toBeNull()
-
 
     // check get
     expect(org.chats.get(chat.id)).toBe(chat)
@@ -32,16 +31,16 @@ test("Chat create, ask question, delete", async () => {
 
     const answer = await askPromise
 
-    await expect(answer.status).toBe(AnswerStatus.RUNNING)
+    expect(answer.status).toBe(AnswerStatus.RUNNING)
 
-    while (answer.status !== AnswerStatus.SUCCESS){
+    while (answer.status !== AnswerStatus.SUCCESS) {
       await new Promise(r => setTimeout(r, 300))
       await answer.fetch()
     }
 
-    const tokens = await answer.fetch_tokens(StepType.DONE, 0)
+    const tokens = await answer.fetchTokens(StepType.DONE, 0)
 
-    await expect(tokens.step_tokens.length).toBeGreaterThan(0)
+    expect(tokens.step_tokens.length).toBeGreaterThan(0)
 
     // check delete
     await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
