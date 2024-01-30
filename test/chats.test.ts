@@ -35,7 +35,7 @@ test("Chat create, ask question, delete", async () => {
     await expect(answer.status).toBe(AnswerStatus.RUNNING)
 
     while (answer.status !== AnswerStatus.SUCCESS){
-      await new Promise(r => setTimeout(r, 1000))
+      await new Promise(r => setTimeout(r, 300))
       await answer.fetch()
     }
 
