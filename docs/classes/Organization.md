@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -13,10 +13,15 @@ Organization.
 ### Accessors
 
 - [accessGroups](Organization.md#accessgroups)
+- [chats](Organization.md#chats)
 - [description](Organization.md#description)
 - [id](Organization.md#id)
 - [name](Organization.md#name)
 - [workspaces](Organization.md#workspaces)
+
+### Methods
+
+- [createInviteLink](Organization.md#createinvitelink)
 
 ## Constructors
 
@@ -39,6 +44,18 @@ Groups.
 #### Returns
 
 [`Groups`](Groups.md)
+
+___
+
+### chats
+
+• `get` **chats**(): [`Chats`](Chats.md)
+
+Chats.
+
+#### Returns
+
+[`Chats`](Chats.md)
 
 ___
 
@@ -87,3 +104,22 @@ Workspaces.
 #### Returns
 
 [`Workspaces`](Workspaces.md)
+
+## Methods
+
+### createInviteLink
+
+▸ **createInviteLink**(`emails`, `accessGroups`): `Promise`\<`void`\>
+
+Create invite link
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `emails` | `string`[] |
+| `accessGroups` | `string`[] |
+
+#### Returns
+
+`Promise`\<`void`\>

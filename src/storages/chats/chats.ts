@@ -1,5 +1,6 @@
 import { EventDispatcher } from "../../events"
 import { Chat, ChatId } from "./chat"
+import { Organization } from "../organizations/organization"
 
 export enum ChatsEvent {
   ADDED = "added",
@@ -10,6 +11,11 @@ export enum ChatsEvent {
  * Chats storage.
  */
 export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
+
+  /**
+   * Organization.
+   */
+  abstract get organization(): Organization
 
   /**
    * Chats list.

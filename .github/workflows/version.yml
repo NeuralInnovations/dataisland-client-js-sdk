@@ -29,10 +29,14 @@ jobs:
 
       - name: Compare versions
         run: |
+          echo "BASE_VERSION=${{ env.BASE_VERSION }}"
+          echo "HEAD_VERSION=${{ env.HEAD_VERSION }}"
+          
+          SORTED_VERSIONS=$(echo -e "${{ env.BASE_VERSION }}\n${{ env.HEAD_VERSION }}" | sort -Vr | head -n 1)
           if [ "${{ env.HEAD_VERSION }}" = "${{ env.BASE_VERSION }}" ]; then
             echo "Error: Version in PR is the same as the base branch. It must be strictly higher."
             exit 1
-          elif [ "$(echo ${{ env.BASE_VERSION }} ${{ env.HEAD_VERSION }} | sort -Vr | head -n 1)" != "${{ env.HEAD_VERSION }}" ]; then
+          elif [ "$SORTED_VERSIONS" != "${{ env.HEAD_VERSION }}" ]; then
             echo "Error: Version in PR must be strictly higher than the base branch."
             exit 1
           else

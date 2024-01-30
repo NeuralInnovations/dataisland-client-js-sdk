@@ -1,12 +1,18 @@
 import { Context } from "../../context"
 import { Disposable } from "../../disposable"
-import { AccessGroupDto, AccessGroupResponse, AccessGroupsResponse } from "../../dto/accessGroupResponse"
+import {
+  AccessGroupDto,
+  AccessGroupResponse,
+  AccessGroupsResponse
+} from "../../dto/accessGroupResponse"
 import { UserDto } from "../../dto/userInfoResponse"
 import { WorkspaceDto, WorkspacesResponse } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { Group, GroupEvent, GroupId, Groups } from "./groups"
 import { OrganizationImpl } from "../organizations/organization.impl"
 import { OrganizationId } from "../organizations/organizations"
+import { ResponseUtils } from "../../services/responseUtils"
+import { Organization } from "../organizations/organization"
 
 export class GroupImpl extends Group implements Disposable {
   private _isDisposed: boolean = false
@@ -14,32 +20,28 @@ export class GroupImpl extends Group implements Disposable {
   private _members?: UserDto[]
 
   constructor(
-    private readonly context: Context
+    private readonly context: Context,
+    public readonly organization: Organization
   ) {
     super()
   }
 
-  async initFrom(id: GroupId): Promise<Group>{
+  async initFrom(id: GroupId): Promise<Group> {
+    // fetch group
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups")
       .searchParam("id", id)
       .sendGet()
 
-    if (!response?.ok) {
-      let text: string = ""
-      try {
-        text = (await response?.text()) ?? ""
-      } catch (e) {
-        console.error(e)
-      }
-
-      throw new Error(
-        `Get group, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
-      )
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get group: ${id}, organization: ${this}`, response)
     }
 
-    const group = (await response.json()) as AccessGroupResponse
+    // parse group from the server's response
+    const group = (await response!.json()) as AccessGroupResponse
 
+    // init group
     this._content = group.group
     this._members = group.members
 
@@ -61,31 +63,24 @@ export class GroupImpl extends Group implements Disposable {
   }
 
   async getWorkspaces(): Promise<WorkspaceDto[]> {
+    // fetch workspaces
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Organizations/workspaces")
       .searchParam("groupId", this.id)
       .sendGet()
 
-    if (!response?.ok) {
-      let text: string = ""
-      try {
-        text = (await response?.text()) ?? ""
-      } catch (e) {
-        console.error(e)
-      }
-
-      throw new Error(
-        `Groups get workspaces, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get workspaces for group: ${this.id}, organization: ${this.organization.id}`, response)
     }
 
-    const workspaces = (await response.json()) as WorkspacesResponse
+    // parse workspaces from the server's response
+    const workspaces = (await response!.json()) as WorkspacesResponse
 
     return workspaces.workspaces
   }
 
   get members(): UserDto[] {
-    if (this._members){
+    if (this._members) {
       return this._members
     }
     throw new Error("Access group is not loaded.")
@@ -98,6 +93,7 @@ export class GroupImpl extends Group implements Disposable {
     if (name.length === 0 || name.trim().length === 0) {
       throw new Error("Groups change, name is empty")
     }
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/name")
@@ -106,14 +102,14 @@ export class GroupImpl extends Group implements Disposable {
         name: name
       })
 
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to set new name. ${response?.status}, ${response?.statusText}`
-      )
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to change group name, group: ${this.id}, organization: ${this.organization.id}`, response)
     }
   }
 
-  async setPermits(permits: {isAdmin: boolean}) : Promise<void> {
+  async setPermits(permits: { isAdmin: boolean }): Promise<void> {
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/permits")
@@ -122,19 +118,17 @@ export class GroupImpl extends Group implements Disposable {
         permits: permits
       })
 
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to set new permits. ${response?.status}, ${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to change group permits, group: ${this.id}, organization: ${this.organization.id}`, response)
     }
   }
 
-
   async setWorkspaces(workspaces: string[]): Promise<void> {
-    if (workspaces === null || workspaces === undefined){
+    if (workspaces === null || workspaces === undefined) {
       throw new Error("Group add workspaces, workspaces is undefined or null")
     }
 
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/workspaces")
@@ -143,19 +137,17 @@ export class GroupImpl extends Group implements Disposable {
         actualWorkspaceIds: workspaces
       })
 
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to set new member Ids. ${response?.status}, ${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to set workspaces for group: ${this.id}, organization: ${this.organization.id}`, response)
     }
   }
 
-
   async setMembersIds(members: string[]) {
-    if (members === null || members === undefined){
+    if (members === null || members === undefined) {
       throw new Error("Group add members, members is undefined or null")
     }
 
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups/members")
@@ -164,12 +156,9 @@ export class GroupImpl extends Group implements Disposable {
         memberIds: members
       })
 
-    if (!response?.ok) {
-      throw new Error(
-        `Failed to set new member Ids. ${response?.status}, ${response?.statusText}`
-      )
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to set members for group: ${this.id}, organization: ${this.organization.id}`, response)
     }
-
   }
 
   get isDisposed(): boolean {
@@ -186,26 +175,29 @@ export class GroupsImpl extends Groups {
   private _groups: Group[] = []
 
   constructor(
-    private readonly organization: OrganizationImpl,
+    public readonly organization: OrganizationImpl,
     private readonly context: Context
   ) {
     super()
   }
 
-  async initialize(){
+  async initialize() {
     await this.internalInit()
   }
 
-  async create(name: string, organizationId: OrganizationId, permits: { isAdmin: boolean }, memberIds: string[]): Promise<Group> {
+  async create(name: string, organizationId: OrganizationId, permits: {
+    isAdmin: boolean
+  }, memberIds: string[]): Promise<Group> {
     return await this.internalCreate(name, organizationId, permits, memberIds)
   }
-  async get(id: GroupId): Promise<Group | undefined> {
-    return await this._groups.find(group => group.id === id)
+
+  get(id: GroupId): Group | undefined {
+    return this._groups.find(group => group.id === id)
   }
+
   async delete(id: GroupId): Promise<void> {
     return await this.internalDeleteGroup(id)
   }
-
 
   //----------------------------------------------------------------------------
   // INTERNALS
@@ -215,31 +207,29 @@ export class GroupsImpl extends Groups {
    * Init access groups.
    */
   async internalInit(): Promise<void> {
+    // fetch groups
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Organizations/access_groups")
       .searchParam("id", this.organization.id)
       .sendGet()
 
-    if (!response?.ok) {
-      let text: string = ""
-      try {
-        text = (await response?.text()) ?? ""
-      } catch (e) {
-        console.error(e)
-      }
-
-      throw new Error(
-        `Groups init, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
-      )
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get groups for organization: ${this.organization.id}`, response)
     }
 
-    const groups = (await response.json()) as AccessGroupsResponse
+    // parse groups from the server's response
+    const groups = (await response!.json()) as AccessGroupsResponse
 
-    for (const gr of groups.groups){
-      const group = await new GroupImpl(this.context).initFrom(gr.id)
+    // init groups
+    for (const gr of groups.groups) {
+      // create group implementation
+      const group = await new GroupImpl(this.context, this.organization).initFrom(gr.id)
 
+      // add group to the collection
       this._groups.push(group)
 
+      // dispatch event
       this.dispatch({
         type: GroupEvent.ADDED,
         data: group
@@ -247,7 +237,9 @@ export class GroupsImpl extends Groups {
     }
   }
 
-  async internalCreate(name: string, organizationId: OrganizationId, permits: { isAdmin: boolean }, memberIds: string[]): Promise<Group>{
+  async internalCreate(name: string, organizationId: OrganizationId, permits: {
+    isAdmin: boolean
+  }, memberIds: string[]): Promise<Group> {
     if (name === undefined || name === null) {
       throw new Error("Group create, name is undefined or null")
     }
@@ -255,6 +247,7 @@ export class GroupsImpl extends Groups {
       throw new Error("Group create, name is empty")
     }
 
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups")
@@ -265,17 +258,20 @@ export class GroupsImpl extends Groups {
         memberIds: memberIds
       })
 
-    if (!response?.ok) {
-      throw new Error(
-        `Organization create, response is not ok: ${response?.status}/${response?.statusText}`
-      )
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to create group, organization: ${this.organization.id}`, response)
     }
-    const content = (await response.json()) as AccessGroupResponse
+    // parse group from the server's response
+    const content = (await response!.json()) as AccessGroupResponse
 
-    const group = await new GroupImpl(this.context).initFrom(content.group.id)
+    // create group implementation
+    const group = await new GroupImpl(this.context, this.organization).initFrom(content.group.id)
 
+    // add group to the collection
     this._groups.push(group)
 
+    // dispatch event
     this.dispatch({
       type: GroupEvent.ADDED,
       data: group
@@ -296,24 +292,19 @@ export class GroupsImpl extends Groups {
       throw new Error("Group delete, id is empty")
     }
 
+    // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("/api/v1/AccessGroups")
       .searchParam("groupId", id)
       .sendDelete()
-    if (!response?.ok) {
-      let text: string = ""
-      try {
-        text = (await response?.text()) ?? ""
-      } catch (e) {
-        console.error(e)
-      }
 
-      throw new Error(
-        `Group ${id} delete, response is not ok, status: ${response?.status},${response?.statusText} ${text}`
-      )
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to delete group: ${id}, organization: ${this.organization.id}`, response)
     }
 
+    // delete group from collection
     const group = <GroupImpl>this._groups.find(f => f.id === id)
     const index = this._groups.indexOf(group)
     if (index < 0) {
@@ -332,6 +323,4 @@ export class GroupsImpl extends Groups {
     // dispose group
     group.dispose()
   }
-
-
 }

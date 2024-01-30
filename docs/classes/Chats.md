@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 
@@ -16,11 +16,19 @@ Chats storage.
 
 - [constructor](Chats.md#constructor)
 
+### Accessors
+
+- [collection](Chats.md#collection)
+- [organization](Chats.md#organization)
+
 ### Methods
 
 - [create](Chats.md#create)
+- [delete](Chats.md#delete)
 - [dispatch](Chats.md#dispatch)
+- [get](Chats.md#get)
 - [subscribe](Chats.md#subscribe)
+- [tryGet](Chats.md#tryget)
 
 ## Constructors
 
@@ -36,6 +44,30 @@ Chats storage.
 
 [EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
 
+## Accessors
+
+### collection
+
+• `get` **collection**(): readonly [`Chat`](Chat.md)[]
+
+Chats list.
+
+#### Returns
+
+readonly [`Chat`](Chat.md)[]
+
+___
+
+### organization
+
+• `get` **organization**(): [`Organization`](Organization.md)
+
+Organization.
+
+#### Returns
+
+[`Organization`](Organization.md)
+
 ## Methods
 
 ### create
@@ -47,6 +79,24 @@ Create new chat.
 #### Returns
 
 `Promise`\<[`Chat`](Chat.md)\>
+
+___
+
+### delete
+
+▸ **delete**(`id`): `Promise`\<`void`\>
+
+Delete chat.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 
@@ -70,6 +120,24 @@ ___
 
 ___
 
+### get
+
+▸ **get**(`id`): [`Chat`](Chat.md)
+
+Get chat by id.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+
+#### Returns
+
+[`Chat`](Chat.md)
+
+___
+
 ### subscribe
 
 ▸ **subscribe**(`callback`, `type?`): [`Disposable`](../interfaces/Disposable.md)
@@ -88,3 +156,21 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### tryGet
+
+▸ **tryGet**(`id`): `undefined` \| [`Chat`](Chat.md)
+
+Try to get chat by id.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+
+#### Returns
+
+`undefined` \| [`Chat`](Chat.md)

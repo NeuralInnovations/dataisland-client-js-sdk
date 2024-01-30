@@ -1,6 +1,8 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../../README.md) / [Exports](../modules.md) / Groups
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / Groups
 
 # Class: Groups
+
+Groups storage.
 
 ## Hierarchy
 
@@ -13,6 +15,10 @@
 ### Constructors
 
 - [constructor](Groups.md#constructor)
+
+### Accessors
+
+- [organization](Groups.md#organization)
 
 ### Methods
 
@@ -36,11 +42,25 @@
 
 [EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
 
+## Accessors
+
+### organization
+
+• `get` **organization**(): [`Organization`](Organization.md)
+
+Organization.
+
+#### Returns
+
+[`Organization`](Organization.md)
+
 ## Methods
 
 ### create
 
 ▸ **create**(`name`, `organizationId`, `permits`, `memberIds`): `Promise`\<[`Group`](Group.md)\>
+
+Create new group.
 
 #### Parameters
 
@@ -61,6 +81,8 @@ ___
 ### delete
 
 ▸ **delete**(`id`): `Promise`\<`void`\>
+
+delete group by id.
 
 #### Parameters
 
@@ -96,7 +118,9 @@ ___
 
 ### get
 
-▸ **get**(`id`): `Promise`\<`undefined` \| [`Group`](Group.md)\>
+▸ **get**(`id`): `undefined` \| [`Group`](Group.md)
+
+Get group by id.
 
 #### Parameters
 
@@ -106,7 +130,7 @@ ___
 
 #### Returns
 
-`Promise`\<`undefined` \| [`Group`](Group.md)\>
+`undefined` \| [`Group`](Group.md)
 
 ___
 

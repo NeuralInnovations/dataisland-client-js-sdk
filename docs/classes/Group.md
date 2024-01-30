@@ -1,6 +1,8 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../../README.md) / [Exports](../modules.md) / Group
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / Group
 
 # Class: Group
+
+Group.
 
 ## Hierarchy
 
@@ -50,6 +52,8 @@
 
 • `get` **group**(): `AccessGroupDto`
 
+Group information.
+
 #### Returns
 
 `AccessGroupDto`
@@ -60,6 +64,8 @@ ___
 
 • `get` **id**(): `string`
 
+Group id.
+
 #### Returns
 
 `string`
@@ -69,6 +75,8 @@ ___
 ### members
 
 • `get` **members**(): `UserDto`[]
+
+Group members.
 
 #### Returns
 
@@ -100,6 +108,8 @@ ___
 
 ▸ **getWorkspaces**(): `Promise`\<`WorkspaceDto`[]\>
 
+Group workspaces.
+
 #### Returns
 
 `Promise`\<`WorkspaceDto`[]\>
@@ -109,6 +119,8 @@ ___
 ### setMembersIds
 
 ▸ **setMembersIds**(`members`): `Promise`\<`void`\>
+
+Set members.
 
 #### Parameters
 
@@ -126,6 +138,8 @@ ___
 
 ▸ **setName**(`name`): `Promise`\<`void`\>
 
+Set name.
+
 #### Parameters
 
 | Name | Type |
@@ -141,6 +155,8 @@ ___
 ### setPermits
 
 ▸ **setPermits**(`permits`): `Promise`\<`void`\>
+
+Set permits.
 
 #### Parameters
 
@@ -158,6 +174,8 @@ ___
 ### setWorkspaces
 
 ▸ **setWorkspaces**(`workspaces`): `Promise`\<`void`\>
+
+Set workspaces.
 
 #### Parameters
 
