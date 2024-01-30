@@ -3,9 +3,13 @@ import { Disposable } from "../../disposable"
 import { Answer } from "./answer"
 import { ChatDto } from "../../dto/chatResponse"
 import { Context } from "../../context"
+import { AnswerImpl } from "./answer.impl"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
 
 
 export class ChatImpl extends Chat implements Disposable {
+  private _isDisposed: boolean = false
   private readonly _answers: Answer[] = []
 
   private _content?: ChatDto
@@ -15,9 +19,14 @@ export class ChatImpl extends Chat implements Disposable {
     super()
   }
 
-  public initFrom(chat: ChatDto): ChatImpl {
+  async initFrom(chat: ChatDto): Promise<ChatImpl> {
     this._content = chat
 
+    for (const ans of chat.answers){
+      const answer = await new AnswerImpl(this, this.context).initFromData(ans)
+
+      this._answers.push(answer)
+    }
        
     return this
   }
@@ -31,17 +40,35 @@ export class ChatImpl extends Chat implements Disposable {
   get collection(): readonly Answer[] {
     return this._answers
   }
-  ask(message: string, answer: ChatAnswerType): Promise<Answer> {
-    throw new Error("Method not implemented.")
+  get isDisposed(): boolean {
+    return this._isDisposed
   }
-  delete(): Promise<void> {
-    throw new Error("Method not implemented.")
+
+  async ask(message: string, answerType: ChatAnswerType): Promise<Answer> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Chats/question")
+      .sendPutJson({
+        chatId: this.id,
+        questionMessage: message,
+        isLongAnswer: ( answerType === ChatAnswerType.LONG )
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to ask a question", response)
+    }
+
+    const id = (await response!.json()).id
+
+    const answer = await new AnswerImpl(this, this.context).initFromId(id)
+
+    this._answers.push(answer)
+
+    return answer
   }
-  cancel(): Promise<void> {
-    throw new Error("Method not implemented.")
-  }
+
   dispose(): void {
-    throw new Error("Method not implemented.")
+    this._isDisposed = true
   }
     
 }

@@ -27,17 +27,7 @@ export abstract class Chat {
   /**
    * Ask new question in chat.
    */
-  abstract ask(message: string, answer: ChatAnswerType): Promise<Answer>
-
-  /**
-   * Delete answer.
-   */
-  abstract delete(): Promise<void>
-
-  /**
-    * Cancel answer.
-    */
-  abstract cancel(): Promise<void> 
+  abstract ask(message: string, answerType: ChatAnswerType): Promise<Answer>
 
 }
 

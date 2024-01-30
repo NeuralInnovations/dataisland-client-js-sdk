@@ -1,7 +1,8 @@
-import { SourceDto } from "../../dto/chatResponse"
+import { AnswerStatus, FetchTokensResponse, SourceDto, StepType } from "../../dto/chatResponse"
 
 export type AnswerId = string
 export type StepId = string
+
 
 export abstract class Answer {
 
@@ -11,18 +12,27 @@ export abstract class Answer {
   abstract get id(): AnswerId
 
   /**
+   * Answer status.
+   */
+  abstract get status(): AnswerStatus
+
+  /**
    * Answer sources.
    */
-  abstract get sources(): SourceDto[]
+  abstract sources(type: StepType): Promise<SourceDto[]>
 
   /**
    * Fetch answer.
    */
-  abstract fetch(startAt: number): Promise<void>
-
+  abstract fetch(): Promise<void>
 
   /**
    * Fetch answer.
    */
-  abstract fetch_tokens(stepId: StepId, tokensStartAt: number): Promise<void>
+  abstract fetch_tokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse>
+
+  /**
+   * Cancel answer
+   */
+  abstract cancel(): Promise<void>
 }
