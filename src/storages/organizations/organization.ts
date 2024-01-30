@@ -1,6 +1,6 @@
 import { Workspaces } from "../workspaces/workspaces"
 import { OrganizationId } from "./organizations"
-import { Groups } from "../groups/groups"
+import { GroupId, Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
 
 /**
@@ -31,14 +31,14 @@ export abstract class Organization {
    * Chats.
    */
   abstract get chats(): Chats
-  
+
   /**
    * Groups.
    */
   abstract get accessGroups(): Groups
 
   /**
-   * Create invite link 
+   * Create invite link
    */
   abstract createInviteLink(emails: string[], accessGroups: GroupId[]): Promise<void>
 }

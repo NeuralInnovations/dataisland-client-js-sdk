@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -10,12 +10,14 @@
 
 ### Accessors
 
+- [collection](Chat.md#collection)
 - [id](Chat.md#id)
 - [name](Chat.md#name)
+- [organization](Chat.md#organization)
 
 ### Methods
 
-- [question](Chat.md#question)
+- [ask](Chat.md#ask)
 
 ## Constructors
 
@@ -28,6 +30,18 @@
 [`Chat`](Chat.md)
 
 ## Accessors
+
+### collection
+
+• `get` **collection**(): readonly `Answer`[]
+
+Answers list.
+
+#### Returns
+
+readonly `Answer`[]
+
+___
 
 ### id
 
@@ -51,19 +65,33 @@ Chat name.
 
 `string`
 
+___
+
+### organization
+
+• `get` **organization**(): [`Organization`](Organization.md)
+
+Organization.
+
+#### Returns
+
+[`Organization`](Organization.md)
+
 ## Methods
 
-### question
+### ask
 
-▸ **question**(`message`, `answer?`): `Promise`\<`void`\>
+▸ **ask**(`message`, `answerType`): `Promise`\<`Answer`\>
+
+Ask new question in chat.
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `message` | `string` |
-| `answer?` | [`ChatAnswer`](../enums/ChatAnswer.md) |
+| `answerType` | [`ChatAnswerType`](../enums/ChatAnswerType.md) |
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<`Answer`\>

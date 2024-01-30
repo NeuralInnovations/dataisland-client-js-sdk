@@ -1,12 +1,12 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev8
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev9
 
 ## Table of contents
 
 ### Enumerations
 
-- [ChatAnswer](enums/ChatAnswer.md)
+- [ChatAnswerType](enums/ChatAnswerType.md)
 - [ChatsEvent](enums/ChatsEvent.md)
 - [FilesEvent](enums/FilesEvent.md)
 - [GroupEvent](enums/GroupEvent.md)
@@ -85,6 +85,8 @@ ___
 ### GroupId
 
 Ƭ **GroupId**: `string`
+
+Group id.
 
 ___
 

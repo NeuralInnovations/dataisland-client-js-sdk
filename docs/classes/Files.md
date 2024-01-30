@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev8](../../README.md) / [Exports](../modules.md) / Files
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / Files
 
 # Class: Files
 
@@ -123,7 +123,7 @@ ___
 
 ▸ **upload**(`file`): `Promise`\<[`File`](File.md)\>
 
-Get file by id.
+Upload file.
 
 #### Parameters
 

@@ -3,41 +3,99 @@ import { UserDto } from "../../dto/userInfoResponse"
 import { WorkspaceDto } from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
 import { OrganizationId } from "../organizations/organizations"
+import { Organization } from "../organizations/organization"
 
+/**
+ * Group id.
+ */
 export type GroupId = string
 
+/**
+ * Group event.
+ */
 export enum GroupEvent {
-    ADDED = "added",
-    REMOVED = "removed",
-    UPDATED = "updated"
-  }
-
-export abstract class Group extends EventDispatcher<GroupEvent, Group> {
-
-    abstract get id(): GroupId
-
-    abstract get group(): AccessGroupDto
-
-    abstract get members(): UserDto[]
-
-    abstract getWorkspaces() : Promise<WorkspaceDto[]>
-
-    abstract setWorkspaces(workspaces: string[]): Promise<void>
-
-    abstract setName(name: string): Promise<void>
-
-    abstract setPermits(permits: {isAdmin: boolean}): Promise<void>
-
-    abstract setMembersIds(members: string[]): Promise<void>
+  ADDED = "added",
+  REMOVED = "removed",
+  UPDATED = "updated"
 }
 
+/**
+ * Group.
+ */
+export abstract class Group extends EventDispatcher<GroupEvent, Group> {
 
-export abstract class Groups extends EventDispatcher<GroupEvent, Group>{
+  /**
+   * Group id.
+   */
+  abstract get id(): GroupId
 
-    abstract create(name: string, organizationId: OrganizationId, permits: { isAdmin: boolean }, memberIds: string[]): Promise<Group>
+  /**
+   * Group information.
+   */
+  abstract get group(): AccessGroupDto
 
-    abstract get(id: GroupId): Promise<Group | undefined>
+  /**
+   * Group members.
+   */
+  abstract get members(): UserDto[]
 
-    abstract delete(id: GroupId): Promise<void>
+  /**
+   * Group workspaces.
+   */
+  abstract getWorkspaces(): Promise<WorkspaceDto[]>
+
+  /**
+   * Set workspaces.
+   */
+  abstract setWorkspaces(workspaces: string[]): Promise<void>
+
+  /**
+   * Set name.
+   */
+  abstract setName(name: string): Promise<void>
+
+  /**
+   * Set permits.
+   */
+  abstract setPermits(permits: { isAdmin: boolean }): Promise<void>
+
+  /**
+   * Set members.
+   */
+  abstract setMembersIds(members: string[]): Promise<void>
+}
+
+/**
+ * Groups storage.
+ */
+export abstract class Groups extends EventDispatcher<GroupEvent, Group> {
+
+  /**
+   * Organization.
+   */
+  abstract get organization(): Organization
+
+  /**
+   * Create new group.
+   * @param name
+   * @param organizationId
+   * @param permits
+   * @param memberIds
+   */
+  abstract create(name: string, organizationId: OrganizationId, permits: {
+    isAdmin: boolean
+  }, memberIds: string[]): Promise<Group>
+
+  /**
+   * Get group by id.
+   * @param id
+   */
+  abstract get(id: GroupId): Group | undefined
+
+  /**
+   * delete group by id.
+   * @param id
+   */
+  abstract delete(id: GroupId): Promise<void>
 
 }
