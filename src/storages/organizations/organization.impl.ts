@@ -9,6 +9,8 @@ import { GroupsImpl } from "../groups/groups.impl"
 import { Groups } from "../groups/groups"
 import { ChatsImpl } from "../chats/chats.impl"
 import { Chats } from "../chats/chats"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -72,5 +74,22 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get chats(): Chats {
     return this._chats
+  }
+  
+  async createInviteLink(emails: string[], accessGroups: string[]): Promise<void> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Invites")
+      .sendPostJson({
+        organizationId: this.id,
+        emails: emails,
+        accessGroupIds: accessGroups
+      })
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Invite link creation failed for organization ${this.id}`,
+        response
+      )
+    }
   }
 }
