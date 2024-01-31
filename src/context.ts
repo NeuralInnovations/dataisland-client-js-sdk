@@ -10,7 +10,8 @@ export class Context {
     private readonly registry: Registry,
     public readonly lifetime: Lifetime,
     public readonly appName: string
-  ) {}
+  ) {
+  }
 
   /**
    * Resolve a service from the context.
