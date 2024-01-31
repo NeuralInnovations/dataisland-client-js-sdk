@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.0.1-dev9",
+  "version": "0.0.1-dev10",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -15,6 +15,24 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": "./dist/dataisland-sdk.js"
+  },
+  "main": "dist/dataisland-sdk.js",
+  "types": "dist/dataisland-sdk.d.ts",
+  "browser": "dist/dataisland-sdk.js",
+  "directories": {
+    "test": "test"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.js",
+    "index.d.ts"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest --runInBand",
@@ -22,8 +40,20 @@
     "lint:fix": "eslint --fix --ext .ts,.tsx src test",
     "docs": "typedoc --disableSources --includeVersion --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js"
   },
+  "keywords": [
+    "dataisland",
+    "sdk",
+    "neuralinnovations",
+    "neural innovations",
+    "neural-innovations",
+    "neural"
+  ],
   "author": "Neural Innovations LTD",
   "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/NeuralInnovations/dataisland-client-js-sdk/issues"
+  },
+  "homepage": "https://github.com/NeuralInnovations/dataisland-client-js-sdk#readme",
   "devDependencies": {
     "@babel/core": "^7.22.11",
     "@babel/plugin-transform-modules-commonjs": "7.22.11",
