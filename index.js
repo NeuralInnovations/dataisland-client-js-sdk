@@ -1,1 +1,1 @@
-module.exports = require("./dist/dataisland-sdk")
+module.exports = require("./src/index")

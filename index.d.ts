@@ -1,1 +1,1 @@
-export * from "./dist/dataisland-sdk"
+export * from "./src/index"
