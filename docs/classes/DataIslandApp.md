@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / DataIslandApp
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev10](../../README.md) / [Exports](../modules.md) / DataIslandApp
 
 # Class: DataIslandApp
 
@@ -51,13 +51,13 @@ ___
 
 ### context
 
-• `get` **context**(): `Context`
+• `get` **context**(): [`Context`](Context.md)
 
 The context of this app.
 
 #### Returns
 
-`Context`
+[`Context`](Context.md)
 
 ___
 

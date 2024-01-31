@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / BasicCredential
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev10](../../README.md) / [Exports](../modules.md) / BasicCredential
 
 # Class: BasicCredential
 
@@ -69,7 +69,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `lifetime` | [`Lifetime`](Lifetime.md) |
-| `context` | `Context` |
+| `context` | [`Context`](Context.md) |
 
 #### Returns
 

@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev10](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev9
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev10
 
 ## Table of contents
 
@@ -17,10 +17,12 @@
 
 ### Classes
 
+- [AppBuilder](classes/AppBuilder.md)
 - [BasicCredential](classes/BasicCredential.md)
 - [BearerCredential](classes/BearerCredential.md)
 - [Chat](classes/Chat.md)
 - [Chats](classes/Chats.md)
+- [Context](classes/Context.md)
 - [CredentialBase](classes/CredentialBase.md)
 - [DataIslandApp](classes/DataIslandApp.md)
 - [DebugCredential](classes/DebugCredential.md)
@@ -51,6 +53,7 @@
 - [ChatId](modules.md#chatid)
 - [FileId](modules.md#fileid)
 - [GroupId](modules.md#groupid)
+- [Middleware](modules.md#middleware)
 - [OrganizationId](modules.md#organizationid)
 - [UploadFile](modules.md#uploadfile)
 - [UserId](modules.md#userid)
@@ -87,6 +90,29 @@ ___
 Ƭ **GroupId**: `string`
 
 Group id.
+
+___
+
+### Middleware
+
+Ƭ **Middleware**: (`req`: `Request`, `next`: (`req`: `Request`) => `Promise`\<`Response`\>) => `Promise`\<`Response`\>
+
+DataIsland App request middleware.
+
+#### Type declaration
+
+▸ (`req`, `next`): `Promise`\<`Response`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `req` | `Request` |
+| `next` | (`req`: `Request`) => `Promise`\<`Response`\> |
+
+##### Returns
+
+`Promise`\<`Response`\>
 
 ___
 
@@ -153,7 +179,7 @@ Returns a DataIsland App instance.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `name?` | `string` | Optional The name of the app. |
-| `setup?` | (`builder`: `AppBuilder`) => `Promise`\<`void`\> | Optional setup function. |
+| `setup?` | (`builder`: [`AppBuilder`](classes/AppBuilder.md)) => `Promise`\<`void`\> | Optional setup function. |
 
 #### Returns
 
