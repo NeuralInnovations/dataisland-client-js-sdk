@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev9](../../README.md) / [Exports](../modules.md) / BearerCredential
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev10](../../README.md) / [Exports](../modules.md) / BearerCredential
 
 # Class: BearerCredential
 
@@ -61,7 +61,7 @@ DataIsland App credential.
 | Name | Type |
 | :------ | :------ |
 | `lifetime` | [`Lifetime`](Lifetime.md) |
-| `context` | `Context` |
+| `context` | [`Context`](Context.md) |
 
 #### Returns
 
