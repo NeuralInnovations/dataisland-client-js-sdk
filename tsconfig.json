@@ -1,8 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "amd",
+    "target": "ES2017",
+    "module": "commonjs",
     "moduleResolution": "node",
     "typeRoots": [
       "node_modules/@types"
@@ -16,16 +16,27 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "outFile": "dist/dataisland-sdk.js",
-    "rootDir": ".",
+    "alwaysStrict": true,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "checkJs": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "types": [
+      "jest",
+      "node"
+    ]
   },
   "exclude": [
     "dist/**/*"
   ],
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "index.js",
+    "index.ts"
   ]
 }
