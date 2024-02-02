@@ -7,7 +7,8 @@ import { FilesPage } from "./filesPage"
  */
 export enum FilesEvent {
   ADDED = "added",
-  REMOVED = "removed"
+  REMOVED = "removed",
+  UPDATED = "updated"
 }
 
 /**

@@ -10,7 +10,7 @@ import {
 } from "../../dto/chatResponse"
 import { ResponseUtils } from "../../services/responseUtils"
 import { RpcService } from "../../services/rpcService"
-import { Answer, AnswerId } from "./answer"
+import { Answer, AnswerEvent, AnswerId } from "./answer"
 import { Chat } from "./chat"
 
 export class AnswerImpl extends Answer {
@@ -41,6 +41,11 @@ export class AnswerImpl extends Answer {
 
     // fetch answer
     await this.fetch()
+
+    this.dispatch({
+      type: AnswerEvent.ADDED,
+      data: this
+    })
 
     return this
   }
@@ -111,6 +116,11 @@ export class AnswerImpl extends Answer {
     // update answer
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
+
+    this.dispatch({
+      type: AnswerEvent.UPDATED,
+      data: this
+    })
   }
 
   async fetchTokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse> {
@@ -159,5 +169,10 @@ export class AnswerImpl extends Answer {
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError("Failed to cancel a question", response)
     }
+
+    this.dispatch({
+      type: AnswerEvent.CANCALLED,
+      data: this
+    })
   }
 }
