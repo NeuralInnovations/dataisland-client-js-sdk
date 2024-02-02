@@ -82,7 +82,7 @@ export abstract class Groups extends EventDispatcher<GroupEvent, Group> {
    * @param permits
    * @param memberIds
    */
-  abstract create(name: string, organizationId: OrganizationId, permits: {
+  abstract create(name: string, permits: {
     isAdmin: boolean
   }, memberIds: string[]): Promise<Group>
 

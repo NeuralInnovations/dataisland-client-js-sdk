@@ -4,10 +4,13 @@ import { FileDto, FileProgressDto } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { File } from "./file"
+import { FilesEvent } from "./files"
 
 export class FileImpl extends File implements Disposable {
   private _isDisposed: boolean = false
   private _content?: FileDto
+  private _status?: FileProgressDto
+
 
   constructor(private readonly context: Context) {
     super()
@@ -35,6 +38,10 @@ export class FileImpl extends File implements Disposable {
     return <string>this._content?.name
   }
 
+  get status(): FileProgressDto {
+    return <FileProgressDto>this._status
+  }
+
   async url(): Promise<string> {
     const response = await this.context
       .resolve(RpcService)
@@ -52,7 +59,7 @@ export class FileImpl extends File implements Disposable {
     return (await response!.json()).url
   }
 
-  async status(): Promise<FileProgressDto> {
+  async update_status(): Promise<void> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/fetch")
@@ -63,7 +70,14 @@ export class FileImpl extends File implements Disposable {
       await ResponseUtils.throwError(`Failed to get file ${this.id}`, response)
     }
 
-    const content = await response!.json()
-    return content.progress as FileProgressDto
+    this._status = (await response!.json()) as FileProgressDto
+
+
+    // dispatch event, file updated
+    this.dispatch({
+      type: FilesEvent.UPDATED,
+      data: this
+    })
+
   }
 }

@@ -1,5 +1,6 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
+import { FilesEvent } from "../src"
 
 test("Files", async () => {
   await testInWorkspace(async (app, org, ws) => {
@@ -20,23 +21,23 @@ test("Files", async () => {
     expect(file).not.toBeNull()
     expect(file.name).toBe("test_file.pdf")
 
-    let status = await file.status()
+    await file.update_status()
 
-    expect(status).not.toBeUndefined()
-    expect(status).not.toBeNull()
-    if (!status.success && status.error) {
-      console.error(status.error)
+    expect(file.status).not.toBeUndefined()
+    expect(file.status).not.toBeNull()
+    if (!file.status.success && file.status.error) {
+      console.error(file.status.error)
     }
-    expect(status.success).toBe(true)
-    expect(status.file_id).toBe(file.id)
-    expect(status.file_parts_count).toBeGreaterThanOrEqual(status.completed_parts_count)
+    expect(file.status.success).toBe(true)
+    expect(file.status.file_id).toBe(file.id)
+    expect(file.status.file_parts_count).toBeGreaterThanOrEqual(file.status.completed_parts_count)
 
     while (
-      status.success &&
-      status.completed_parts_count !== status.file_parts_count
+      file.status.success &&
+      file.status.completed_parts_count !== file.status.file_parts_count
     ) {
       await new Promise(r => setTimeout(r, 1000))
-      status = await file.status()
+      await file.update_status()
     }
 
     const queryPromise = ws.files.query("", 0, 20)
