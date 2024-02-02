@@ -10,7 +10,6 @@ import { WorkspaceDto, WorkspacesResponse } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { Group, GroupEvent, GroupId, Groups } from "./groups"
 import { OrganizationImpl } from "../organizations/organization.impl"
-import { OrganizationId } from "../organizations/organizations"
 import { ResponseUtils } from "../../services/responseUtils"
 import { Organization } from "../organizations/organization"
 

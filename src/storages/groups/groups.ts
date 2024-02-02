@@ -2,7 +2,6 @@ import { AccessGroupDto } from "../../dto/accessGroupResponse"
 import { UserDto } from "../../dto/userInfoResponse"
 import { WorkspaceDto } from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
-import { OrganizationId } from "../organizations/organizations"
 import { Organization } from "../organizations/organization"
 
 /**
