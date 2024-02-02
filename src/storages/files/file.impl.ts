@@ -70,7 +70,7 @@ export class FileImpl extends File implements Disposable {
       await ResponseUtils.throwError(`Failed to get file ${this.id}`, response)
     }
 
-    this._status = (await response!.json()) as FileProgressDto
+    this._status = (await response!.json()).progress as FileProgressDto
 
 
     // dispatch event, file updated

@@ -1,6 +1,5 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
-import { FilesEvent } from "../src"
 
 test("Files", async () => {
   await testInWorkspace(async (app, org, ws) => {
