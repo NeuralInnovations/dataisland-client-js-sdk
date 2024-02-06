@@ -4,11 +4,18 @@ import {
   SourceDto,
   StepType
 } from "../../dto/chatResponse"
+import { EventDispatcher } from "../../events"
 
 export type AnswerId = string
 export type StepId = string
 
-export abstract class Answer {
+export enum AnswerEvent {
+  ADDED = "added",
+  CANCALLED = "cancelled",
+  UPDATED = "updated"
+}
+
+export abstract class Answer extends EventDispatcher<AnswerEvent, Answer> {
 
   /**
    * Answer id.

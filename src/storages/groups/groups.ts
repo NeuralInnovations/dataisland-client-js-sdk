@@ -2,7 +2,6 @@ import { AccessGroupDto } from "../../dto/accessGroupResponse"
 import { UserDto } from "../../dto/userInfoResponse"
 import { WorkspaceDto } from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
-import { OrganizationId } from "../organizations/organizations"
 import { Organization } from "../organizations/organization"
 
 /**
@@ -82,7 +81,7 @@ export abstract class Groups extends EventDispatcher<GroupEvent, Group> {
    * @param permits
    * @param memberIds
    */
-  abstract create(name: string, organizationId: OrganizationId, permits: {
+  abstract create(name: string, permits: {
     isAdmin: boolean
   }, memberIds: string[]): Promise<Group>
 

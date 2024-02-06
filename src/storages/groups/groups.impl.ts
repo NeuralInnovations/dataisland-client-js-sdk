@@ -10,7 +10,6 @@ import { WorkspaceDto, WorkspacesResponse } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { Group, GroupEvent, GroupId, Groups } from "./groups"
 import { OrganizationImpl } from "../organizations/organization.impl"
-import { OrganizationId } from "../organizations/organizations"
 import { ResponseUtils } from "../../services/responseUtils"
 import { Organization } from "../organizations/organization"
 
@@ -185,10 +184,10 @@ export class GroupsImpl extends Groups {
     await this.internalInit()
   }
 
-  async create(name: string, organizationId: OrganizationId, permits: {
+  async create(name: string, permits: {
     isAdmin: boolean
   }, memberIds: string[]): Promise<Group> {
-    return await this.internalCreate(name, organizationId, permits, memberIds)
+    return await this.internalCreate(name, permits, memberIds)
   }
 
   get(id: GroupId): Group | undefined {
@@ -237,7 +236,7 @@ export class GroupsImpl extends Groups {
     }
   }
 
-  async internalCreate(name: string, organizationId: OrganizationId, permits: {
+  async internalCreate(name: string, permits: {
     isAdmin: boolean
   }, memberIds: string[]): Promise<Group> {
     if (name === undefined || name === null) {
@@ -253,7 +252,7 @@ export class GroupsImpl extends Groups {
       ?.requestBuilder("api/v1/AccessGroups")
       .sendPostJson({
         name: name,
-        organizationId: organizationId,
+        organizationId: this.organization.id,
         permits: permits,
         memberIds: memberIds
       })

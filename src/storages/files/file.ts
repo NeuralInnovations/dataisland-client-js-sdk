@@ -1,11 +1,16 @@
 import { FileProgressDto } from "../../dto/workspacesResponse"
+import { EventDispatcher } from "../../events"
+import { FilesEvent } from "./files"
 
 export type FileId = string
 
 /**
  * File.
  */
-export abstract class File {
+export abstract class File extends EventDispatcher<
+FilesEvent,
+File
+> {
   /**
    * File id.
    */
@@ -16,6 +21,8 @@ export abstract class File {
    */
   abstract get name(): string
 
+  abstract get status(): FileProgressDto
+
   /**
    * Get temporary url.
    */
@@ -24,5 +31,5 @@ export abstract class File {
   /**
    * Get file status.
    */
-  abstract status(): Promise<FileProgressDto>
+  abstract update_status(): Promise<void>
 }
