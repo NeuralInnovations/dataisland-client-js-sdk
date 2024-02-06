@@ -8,6 +8,7 @@ test("Files", async () => {
     expect(org).not.toBeUndefined()
 
     const buffer = fs.readFileSync("test/data/test_file.pdf")
+    
     const file_obj = new File([new Uint8Array(buffer)], "test_file.pdf", {
       type: "application/pdf"
     })
@@ -38,6 +39,8 @@ test("Files", async () => {
       await new Promise(r => setTimeout(r, 1000))
       status = await file.status()
     }
+
+    expect(status.success && status.completed_parts_count).toBe(status.file_parts_count)
 
     const queryPromise = ws.files.query("", 0, 20)
     await expect(queryPromise).resolves.not.toThrow()
