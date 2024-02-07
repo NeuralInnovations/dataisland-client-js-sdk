@@ -40,7 +40,7 @@ test("Files", async () => {
       await file.update_status()
     }
 
-    expect(status.success && status.completed_parts_count).toBe(status.file_parts_count)
+    expect(file.status.success && file.status.completed_parts_count).toBe(file.status.file_parts_count)
 
     const queryPromise = ws.files.query("", 0, 20)
     await expect(queryPromise).resolves.not.toThrow()
