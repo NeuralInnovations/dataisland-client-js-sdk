@@ -24,7 +24,7 @@ test("Files", async () => {
     expect(file).not.toBeNull()
     expect(file.name).toBe("test_file.pdf")
 
-    await file.update_status()
+    await file.updateStatus()
 
     expect(file.status).not.toBeUndefined()
     expect(file.status).not.toBeNull()
@@ -42,7 +42,7 @@ test("Files", async () => {
       file.status.completed_parts_count !== file.status.file_parts_count
     ) {
       await new Promise(r => setTimeout(r, 1000))
-      await file.update_status()
+      await file.updateStatus()
     }
 
 
