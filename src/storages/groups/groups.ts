@@ -36,7 +36,7 @@ export abstract class Group extends EventDispatcher<GroupEvent, Group> {
   /**
    * Group members.
    */
-  abstract getMembers(): Promise<UserDto[]>
+  abstract get members(): UserDto[]
 
   /**
    * Group workspaces.
