@@ -31,5 +31,5 @@ File
   /**
    * Get file status.
    */
-  abstract update_status(): Promise<void>
+  abstract updateStatus(): Promise<void>
 }

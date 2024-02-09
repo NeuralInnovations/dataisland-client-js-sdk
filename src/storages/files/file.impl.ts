@@ -59,7 +59,7 @@ export class FileImpl extends File implements Disposable {
     return (await response!.json()).url
   }
 
-  async update_status(): Promise<void> {
+  async updateStatus(): Promise<void> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/fetch")

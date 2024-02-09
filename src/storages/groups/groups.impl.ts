@@ -25,24 +25,9 @@ export class GroupImpl extends Group implements Disposable {
     super()
   }
 
-  async initFrom(id: GroupId): Promise<Group> {
-    // fetch group
-    const response = await this.context.resolve(RpcService)
-      ?.requestBuilder("api/v1/AccessGroups")
-      .searchParam("id", id)
-      .sendGet()
-
-    // check response status
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to get group: ${id}, organization: ${this}`, response)
-    }
-
-    // parse group from the server's response
-    const group = (await response!.json()) as AccessGroupResponse
-
+  async initFrom(group: AccessGroupDto): Promise<Group> {
     // init group
-    this._content = group.group
-    this._members = group.members
+    this._content = group
 
     return this
   }
@@ -78,11 +63,27 @@ export class GroupImpl extends Group implements Disposable {
     return workspaces.workspaces
   }
 
-  get members(): UserDto[] {
-    if (this._members) {
-      return this._members
+  async getMembers(): Promise<UserDto[]> {
+    if (!this._members) {
+      // fetch group
+      const response = await this.context.resolve(RpcService)
+        ?.requestBuilder("api/v1/AccessGroups")
+        .searchParam("id", this.id)
+        .sendGet()
+
+      // check response status
+      if (ResponseUtils.isFail(response)) {
+        await ResponseUtils.throwError(`Failed to get group: ${this.id}, organization: ${this.organization.id}`, response)
+      }
+
+      // parse group from the server's response
+      const group = (await response!.json()) as AccessGroupResponse
+
+      this._content = group.group
+      this._members = group.members
     }
-    throw new Error("Access group is not loaded.")
+
+    return this._members
   }
 
   async setName(name: string): Promise<void> {
@@ -223,7 +224,7 @@ export class GroupsImpl extends Groups {
     // init groups
     for (const gr of groups.groups) {
       // create group implementation
-      const group = await new GroupImpl(this.context, this.organization).initFrom(gr.id)
+      const group = await new GroupImpl(this.context, this.organization).initFrom(gr)
 
       // add group to the collection
       this._groups.push(group)
@@ -265,7 +266,7 @@ export class GroupsImpl extends Groups {
     const content = (await response!.json()) as AccessGroupResponse
 
     // create group implementation
-    const group = await new GroupImpl(this.context, this.organization).initFrom(content.group.id)
+    const group = await new GroupImpl(this.context, this.organization).initFrom(content.group)
 
     // add group to the collection
     this._groups.push(group)
