@@ -77,7 +77,6 @@ export abstract class Groups extends EventDispatcher<GroupEvent, Group> {
   /**
    * Create new group.
    * @param name
-   * @param organizationId
    * @param permits
    * @param memberIds
    */
