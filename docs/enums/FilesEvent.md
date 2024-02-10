@@ -10,6 +10,7 @@ Files event.
 
 - [ADDED](FilesEvent.md#added)
 - [REMOVED](FilesEvent.md#removed)
+- [UPDATED](FilesEvent.md#updated)
 
 ## Enumeration Members
 
@@ -22,3 +23,9 @@ ___
 ### REMOVED
 
 • **REMOVED** = ``"removed"``
+
+___
+
+### UPDATED
+
+• **UPDATED** = ``"updated"``
