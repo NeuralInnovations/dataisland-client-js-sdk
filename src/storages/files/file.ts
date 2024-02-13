@@ -21,6 +21,11 @@ File
    */
   abstract get name(): string
 
+  /**
+   * File date added.
+   */
+  abstract get createdAt(): number
+
   abstract get status(): FileProgressDto
 
   /**

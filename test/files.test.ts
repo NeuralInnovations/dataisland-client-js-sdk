@@ -39,6 +39,7 @@ test("Files", async () => {
     for ( const file of files ) { 
       expect(file).not.toBeUndefined()
       expect(file).not.toBeNull()
+      expect(file.createdAt).toBeGreaterThan(0)
 
       if ( !file ){ 
         console.error("File not found after loading")
