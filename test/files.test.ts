@@ -75,9 +75,13 @@ test("Files", async () => {
 
     }
 
+    var filesCount = await ws.filesCount()
+    expect(filesCount).toBe(2)
 
     await expect(ws.files.delete(ids)).resolves.not.toThrow()
 
+    filesCount = await ws.filesCount()
+    expect(filesCount).toBe(0)
 
   })
 })
