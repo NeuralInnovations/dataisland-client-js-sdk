@@ -24,7 +24,7 @@ test("Files", async () => {
 
     const filePromise = ws.files.upload(upload_files)
     await expect(filePromise).resolves.not.toThrow()
-    const ids = await filePromise
+    const files = await filePromise
 
     const queryPromise = ws.files.query("", 0, 20)
     await expect(queryPromise).resolves.not.toThrow()
@@ -34,9 +34,9 @@ test("Files", async () => {
     expect(filePage.files.length).toBe(2)
     expect(filePage.pages).toBe(1)
 
-    for ( const id of ids ){
-      const file = filePage.files.find(file => file.id === id)
-      
+    var ids: string[] = []
+
+    for ( const file of files ) { 
       expect(file).not.toBeUndefined()
       expect(file).not.toBeNull()
 
@@ -44,6 +44,9 @@ test("Files", async () => {
         console.error("File not found after loading")
         continue 
       } 
+
+      ids.push(file.id)
+
       await file.updateStatus()
 
       expect(file.status).not.toBeUndefined()

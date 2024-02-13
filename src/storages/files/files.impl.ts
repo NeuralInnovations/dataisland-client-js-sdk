@@ -41,12 +41,12 @@ export class FilesImpl extends Files {
   // Object used as files page data, returned by "query"
   public filesList?: FilesPage
 
-  async upload(files: any[]): Promise<string[]> {
-    const ids = []
+  async upload(files: any[]): Promise<File[]> {
+    const loaded_files = []
     for ( const file of files ){
-      ids.push(await this.internalUpload(file))
+      loaded_files.push(await this.internalUpload(file))
     } 
-    return ids
+    return loaded_files
   }
 
   async delete(ids: string[]): Promise<void> {
@@ -174,7 +174,7 @@ export class FilesImpl extends Files {
     return filesList
   }
 
-  async internalUpload(file: UploadFile): Promise<string> {
+  async internalUpload(file: UploadFile): Promise<File> {
     // check file
     if (file === undefined || file === null) {
       throw new Error("File upload, file is undefined or null")
@@ -213,6 +213,6 @@ export class FilesImpl extends Files {
       data: fileImpl
     })
 
-    return fileImpl.id
+    return fileImpl
   }
 }

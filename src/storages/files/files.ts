@@ -23,7 +23,7 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
    * Upload file.
    */
-  abstract upload(files: UploadFile[]): Promise<string[]>
+  abstract upload(files: UploadFile[]): Promise<File[]>
 
   /**
    * Delete files.
