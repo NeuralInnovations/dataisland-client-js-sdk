@@ -43,10 +43,18 @@ export class FilesImpl extends Files {
 
   async upload(file: any): Promise<File> {
     return await this.internalUpload(file)
+  async upload(files: any[]): Promise<string[]> {
+    const ids = []
+    for ( const file of files ){
+      ids.push(await this.internalUpload(file))
+    } 
+    return ids
   }
 
-  async delete(id: string): Promise<void> {
-    return await this.internalDeleteFile(id)
+  async delete(ids: string[]): Promise<void> {
+    for ( const id of ids ){
+      await this.internalDeleteFile(id)
+    }
   }
 
   async query(query: string, page: number, limit: number): Promise<FilesPage> {
@@ -58,7 +66,7 @@ export class FilesImpl extends Files {
   //----------------------------------------------------------------------------
 
   /**
-   * Delete organization.
+   * Delete file.
    * @param id
    */
   async internalDeleteFile(id: string): Promise<void> {
@@ -80,7 +88,7 @@ export class FilesImpl extends Files {
     const file = <FileImpl>this.filesList!.files.find(f => f.id === id)
     const index = this.filesList!.files.indexOf(file)
     if (index < 0) {
-      throw new Error("Organization delete, index is not found")
+      throw new Error("File delete, index is not found")
     }
 
     // remove file from collection
@@ -122,7 +130,6 @@ export class FilesImpl extends Files {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/list")
-
       .searchParam("workspaceId", this.workspace.id)
       .searchParam("organizationId", this.workspace.organization.id)
       .searchParam("query", query)
@@ -169,7 +176,7 @@ export class FilesImpl extends Files {
     return filesList
   }
 
-  async internalUpload(file: UploadFile): Promise<File> {
+  async internalUpload(file: UploadFile): Promise<string> {
     // check file
     if (file === undefined || file === null) {
       throw new Error("File upload, file is undefined or null")
@@ -208,6 +215,6 @@ export class FilesImpl extends Files {
       data: fileImpl
     })
 
-    return fileImpl
+    return fileImpl.id
   }
 }
