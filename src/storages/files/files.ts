@@ -7,7 +7,8 @@ import { FilesPage } from "./filesPage"
  */
 export enum FilesEvent {
   ADDED = "added",
-  REMOVED = "removed"
+  REMOVED = "removed",
+  UPDATED = "updated"
 }
 
 /**
@@ -22,13 +23,13 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
    * Upload file.
    */
-  abstract upload(file: UploadFile): Promise<File>
+  abstract upload(files: UploadFile[]): Promise<File[]>
 
   /**
-   * Delete file.
+   * Delete files.
    * @param id
    */
-  abstract delete(id: FileId): Promise<void>
+  abstract delete(ids: FileId[]): Promise<void>
 
   /**
    * Query files.

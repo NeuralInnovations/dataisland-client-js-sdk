@@ -4,7 +4,6 @@ import { testInOrganization } from "./setup"
 
 test("Chat create, ask question, delete", async () => {
   await testInOrganization(async (app, org) => {
-
     const chatPromise = org.chats.create()
 
     // check not throw
@@ -38,6 +37,10 @@ test("Chat create, ask question, delete", async () => {
       await answer.fetch()
     }
 
+    expect(answer).toBeTruthy()
+    expect(answer.id).not.toBeUndefined()
+    expect(answer.status).not.toBeUndefined()
+
     const tokens = await answer.fetchTokens(StepType.DONE, 0)
 
     expect(tokens.step_tokens.length).toBeGreaterThan(0)
@@ -46,3 +49,4 @@ test("Chat create, ask question, delete", async () => {
     await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
   })
 })
+

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev12](../../README.md) / [Exports](../modules.md) / FilesEvent
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev13](../../README.md) / [Exports](../modules.md) / FilesEvent
 
 # Enumeration: FilesEvent
 
@@ -10,6 +10,7 @@ Files event.
 
 - [ADDED](FilesEvent.md#added)
 - [REMOVED](FilesEvent.md#removed)
+- [UPDATED](FilesEvent.md#updated)
 
 ## Enumeration Members
 
@@ -22,3 +23,9 @@ ___
 ### REMOVED
 
 • **REMOVED** = ``"removed"``
+
+___
+
+### UPDATED
+
+• **UPDATED** = ``"updated"``

@@ -1,7 +1,7 @@
 name: Formatting Check
 
-on: 
-  pull_request
+on:
+  pull_request:
 
 env:
   GITHUB_PULL_REQUEST_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
@@ -26,7 +26,8 @@ jobs:
         run: npm run lint:fix
 
       - name: 📋 Check for changes 📋
-        run: | 
+        run: |
+          git --no-pager diff
           git diff --exit-code --quiet || {
             echo "There are changes to commit"
             exit 1

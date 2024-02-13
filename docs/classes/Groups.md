@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev12](../../README.md) / [Exports](../modules.md) / Groups
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev13](../../README.md) / [Exports](../modules.md) / Groups
 
 # Class: Groups
 
@@ -58,7 +58,7 @@ Organization.
 
 ### create
 
-▸ **create**(`name`, `organizationId`, `permits`, `memberIds`): `Promise`\<[`Group`](Group.md)\>
+▸ **create**(`name`, `permits`, `memberIds`): `Promise`\<[`Group`](Group.md)\>
 
 Create new group.
 
@@ -67,7 +67,6 @@ Create new group.
 | Name | Type |
 | :------ | :------ |
 | `name` | `string` |
-| `organizationId` | `string` |
 | `permits` | `Object` |
 | `permits.isAdmin` | `boolean` |
 | `memberIds` | `string`[] |

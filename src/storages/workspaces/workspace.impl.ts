@@ -46,6 +46,26 @@ export class WorkspaceImpl extends Workspace {
     return this._files
   }
 
+  async filesCount(): Promise<number> {
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Workspaces/files/count")
+      .searchParam("workspaceId", this.id)
+      .searchParam("organizationId", this.organization.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during get workspace total files count for ${this.id} of ${this.organization.id}`,
+        response
+      )
+    }
+
+    return (await response!.json()).count
+  }
+
   async change(name: string, description: string): Promise<void> {
     if (!this._workspace) {
       throw new Error("Workspace is not loaded.")
