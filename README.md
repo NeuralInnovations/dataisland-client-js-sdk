@@ -135,6 +135,12 @@ const workspace = await org.workspaces.create(
 )
 ```
 
+You can get workspace total file count with:
+
+```
+const count = workspace.totalCount()
+```
+
 1. [Workspace](docs/classes/Workspace.md) is a main object for files management. It contains of files, chats and access groups.
 2. [Worskpaces](docs/classes/Workspaces.md) is a collection of workspaces.
 
@@ -142,12 +148,12 @@ const workspace = await org.workspaces.create(
 
 ### Use files
 
-Files are part of workspaces and can be managed through workspace interface. You can upload, preview and delete files.
+Files are part of workspaces and can be managed through workspace interface. You can upload, preview and delete files. Upload and delete operations are working with list parameters ( files list for upload, file ids list for delete )
 
 Default file upload example:
 
 ```
-const file = await workspace.files.upload(file)
+const file = await workspace.files.upload([file])
 ```
 
 The file uploading process always takes some time, so you can track its uploading status using the "status" property. The status object includes a success indicator, the total count of file parts, the count of uploaded file parts, and an error field. The success indicator represents whether the last file part was uploaded successfully or not. If one of the parts fails, the uploading process is stopped, and the "error" field contains the text of the failure reason. FIle status can be updated manually with update_status() method, or through events.
@@ -160,7 +166,7 @@ let status = file.status()
 Delete file example:
 
 ```
-await workspace.files.delete(file.id)
+await workspace.files.delete([file.id])
 ```
 
 You can retrieve a list of files from a workspace using the "query" method. It involves several straightforward parameters: a search query for filtering files based on user input (if empty, no filter is applied), page number, and the number of files per page. The method returns an object containing the file list, selected page number, total page count, and other relevant information.
@@ -270,7 +276,7 @@ You can manage users access to workspaces and different features using access gr
 
 ```
 const group = await organization.accessGroups.create(
-  "your_organization_name",
+  "your_group_name",
   permits: {
     isAdmin: bool is user admin,
   },
