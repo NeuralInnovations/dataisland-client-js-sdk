@@ -4,7 +4,7 @@ import { OrganizationDto } from "../../dto/userInfoResponse"
 import { Workspaces } from "../workspaces/workspaces"
 import { WorkspacesImpl } from "../workspaces/workspaces.impl"
 import { Context } from "../../context"
-import { Organization } from "./organization"
+import { Organization, OrganizationEvent } from "./organization"
 import { GroupsImpl } from "../groups/groups.impl"
 import { Groups } from "../groups/groups"
 import { ChatsImpl } from "../chats/chats.impl"
@@ -74,6 +74,53 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get chats(): Chats {
     return this._chats
+  }
+
+  async change(name: string, description: string): Promise<void> {
+    if (!this._content) {
+      throw new Error("Organization is not loaded.")
+    }
+
+    if (name === this.name && description === this.description) {
+      return Promise.resolve()
+    }
+    if (name === undefined || name === null || name.trim() === "") {
+      throw new Error("Name is required. Please provide a valid name.")
+    }
+    if (
+      description === undefined ||
+      description === null ||
+      description.trim() === ""
+    ) {
+      throw new Error(
+        "Description is required. Please provide a valid description."
+      )
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Organizations")
+      .sendPutJson({
+        organizationId: this.id,
+        profile: {
+          name,
+          description
+        }
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to change organization", response)
+    }
+
+    if (this._content) {
+      this._content.profile.name = name
+      this._content.profile.description = description
+    }
+
+    this.dispatch({
+      type: OrganizationEvent.CHANGED,
+      data: this
+    })
   }
   
   async createInviteLink(emails: string[], accessGroups: string[]): Promise<void> {

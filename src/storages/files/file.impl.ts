@@ -38,6 +38,10 @@ export class FileImpl extends File implements Disposable {
     return <string>this._content?.name
   }
 
+  get createdAt(): number {
+    return <number>this._content?.createdAt
+  }
+
   get status(): FileProgressDto {
     return <FileProgressDto>this._status
   }
@@ -59,7 +63,7 @@ export class FileImpl extends File implements Disposable {
     return (await response!.json()).url
   }
 
-  async update_status(): Promise<void> {
+  async updateStatus(): Promise<void> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/fetch")

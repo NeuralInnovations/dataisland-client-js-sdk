@@ -21,6 +21,11 @@ File
    */
   abstract get name(): string
 
+  /**
+   * File date added.
+   */
+  abstract get createdAt(): number
+
   abstract get status(): FileProgressDto
 
   /**
@@ -31,5 +36,5 @@ File
   /**
    * Get file status.
    */
-  abstract update_status(): Promise<void>
+  abstract updateStatus(): Promise<void>
 }

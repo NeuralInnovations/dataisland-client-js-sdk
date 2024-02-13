@@ -10,6 +10,7 @@
 - [ChatsEvent](enums/ChatsEvent.md)
 - [FilesEvent](enums/FilesEvent.md)
 - [GroupEvent](enums/GroupEvent.md)
+- [OrganizationEvent](enums/OrganizationEvent.md)
 - [OrganizationsEvent](enums/OrganizationsEvent.md)
 - [UserEvent](enums/UserEvent.md)
 - [WorkspaceEvent](enums/WorkspaceEvent.md)

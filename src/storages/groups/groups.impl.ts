@@ -29,17 +29,16 @@ export class GroupImpl extends Group implements Disposable {
     // fetch group
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups")
-      .searchParam("id", id)
+      .searchParam("groupId", id)
       .sendGet()
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to get group: ${id}, organization: ${this}`, response)
+      await ResponseUtils.throwError(`Failed to get group: ${id}, organization: ${this.organization.id}`, response)
     }
 
     // parse group from the server's response
     const group = (await response!.json()) as AccessGroupResponse
-
     // init group
     this._content = group.group
     this._members = group.members

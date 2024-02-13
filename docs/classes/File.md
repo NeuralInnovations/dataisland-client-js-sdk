@@ -4,6 +4,12 @@
 
 File.
 
+## Hierarchy
+
+- [`EventDispatcher`](EventDispatcher.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)\>
+
+  ↳ **`File`**
+
 ## Table of contents
 
 ### Constructors
@@ -12,12 +18,16 @@ File.
 
 ### Accessors
 
+- [createdAt](File.md#createdat)
 - [id](File.md#id)
 - [name](File.md#name)
+- [status](File.md#status)
 
 ### Methods
 
-- [status](File.md#status)
+- [dispatch](File.md#dispatch)
+- [subscribe](File.md#subscribe)
+- [updateStatus](File.md#updatestatus)
 - [url](File.md#url)
 
 ## Constructors
@@ -30,7 +40,23 @@ File.
 
 [`File`](File.md)
 
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
+
 ## Accessors
+
+### createdAt
+
+• `get` **createdAt**(): `number`
+
+File date added.
+
+#### Returns
+
+`number`
+
+___
 
 ### id
 
@@ -54,17 +80,68 @@ File name.
 
 `string`
 
-## Methods
+___
 
 ### status
 
-▸ **status**(): `Promise`\<`FileProgressDto`\>
+• `get` **status**(): `FileProgressDto`
+
+#### Returns
+
+`FileProgressDto`
+
+## Methods
+
+### dispatch
+
+▸ **dispatch**(`input`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `input` | [`Input`](../interfaces/Input.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)\> |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### subscribe
+
+▸ **subscribe**(`callback`, `type?`): [`Disposable`](../interfaces/Disposable.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `callback` | (`event`: [`Event`](../interfaces/Event.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)\>) => `void` |
+| `type?` | [`FilesEvent`](../enums/FilesEvent.md) |
+
+#### Returns
+
+[`Disposable`](../interfaces/Disposable.md)
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### updateStatus
+
+▸ **updateStatus**(): `Promise`\<`void`\>
 
 Get file status.
 
 #### Returns
 
-`Promise`\<`FileProgressDto`\>
+`Promise`\<`void`\>
 
 ___
 

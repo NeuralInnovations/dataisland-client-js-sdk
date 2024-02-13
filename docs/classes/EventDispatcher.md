@@ -13,7 +13,11 @@
 
 - **`EventDispatcher`**
 
+  ↳ [`File`](File.md)
+
   ↳ [`Organizations`](Organizations.md)
+
+  ↳ [`Organization`](Organization.md)
 
   ↳ [`Workspaces`](Workspaces.md)
 

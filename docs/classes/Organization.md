@@ -4,6 +4,12 @@
 
 Organization.
 
+## Hierarchy
+
+- [`EventDispatcher`](EventDispatcher.md)\<[`OrganizationEvent`](../enums/OrganizationEvent.md), [`Organization`](Organization.md)\>
+
+  ↳ **`Organization`**
+
 ## Table of contents
 
 ### Constructors
@@ -21,7 +27,10 @@ Organization.
 
 ### Methods
 
+- [change](Organization.md#change)
 - [createInviteLink](Organization.md#createinvitelink)
+- [dispatch](Organization.md#dispatch)
+- [subscribe](Organization.md#subscribe)
 
 ## Constructors
 
@@ -32,6 +41,10 @@ Organization.
 #### Returns
 
 [`Organization`](Organization.md)
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
 
 ## Accessors
 
@@ -107,6 +120,25 @@ Workspaces.
 
 ## Methods
 
+### change
+
+▸ **change**(`name`, `description`): `Promise`\<`void`\>
+
+Change organization name and description.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `description` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
+
 ### createInviteLink
 
 ▸ **createInviteLink**(`emails`, `accessGroups`): `Promise`\<`void`\>
@@ -123,3 +155,44 @@ Create invite link
 #### Returns
 
 `Promise`\<`void`\>
+
+___
+
+### dispatch
+
+▸ **dispatch**(`input`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `input` | [`Input`](../interfaces/Input.md)\<[`CHANGED`](../enums/OrganizationEvent.md#changed), [`Organization`](Organization.md)\> |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### subscribe
+
+▸ **subscribe**(`callback`, `type?`): [`Disposable`](../interfaces/Disposable.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `callback` | (`event`: [`Event`](../interfaces/Event.md)\<[`CHANGED`](../enums/OrganizationEvent.md#changed), [`Organization`](Organization.md)\>) => `void` |
+| `type?` | [`CHANGED`](../enums/OrganizationEvent.md#changed) |
+
+#### Returns
+
+[`Disposable`](../interfaces/Disposable.md)
+
+#### Inherited from
+
+[EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)

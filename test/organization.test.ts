@@ -57,6 +57,15 @@ test("Organization", async () => {
   expect(app.organizations.tryGet(org.id)).toBe(org)
   expect(app.organizations.collection.length).toBe(initLength + 1)
 
+  const test_description = "this is a updated unitTest description"
+  // create organization
+  await app.organizations.get(org.id).change(
+    randomName,
+    test_description
+  )
+
+  expect(org.description.trim()).toBe(test_description)
+
   // delete organization
   await expect(app.organizations.delete(org.id)).resolves.not.toThrow()
   expect((<OrganizationImpl>org).isDisposed).toBe(true)
