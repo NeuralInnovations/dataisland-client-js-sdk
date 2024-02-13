@@ -20,7 +20,7 @@ test("Files", async () => {
       type: "application/pdf"
     })
 
-    var upload_files = [file_obj, file_obj_second]
+    const upload_files = [file_obj, file_obj_second]
 
     const filePromise = ws.files.upload(upload_files)
     await expect(filePromise).resolves.not.toThrow()
@@ -34,7 +34,7 @@ test("Files", async () => {
     expect(filePage.files.length).toBe(2)
     expect(filePage.pages).toBe(1)
 
-    var ids: string[] = []
+    const ids: string[] = []
 
     for ( const file of files ) { 
       expect(file).not.toBeUndefined()
@@ -76,7 +76,7 @@ test("Files", async () => {
 
     }
 
-    var filesCount = await ws.filesCount()
+    let filesCount = await ws.filesCount()
     expect(filesCount).toBe(2)
 
     await expect(ws.files.delete(ids)).resolves.not.toThrow()

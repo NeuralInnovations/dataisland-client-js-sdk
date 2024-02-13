@@ -17,6 +17,8 @@
 
   ↳ [`Organizations`](Organizations.md)
 
+  ↳ [`Organization`](Organization.md)
+
   ↳ [`Workspaces`](Workspaces.md)
 
   ↳ [`Workspace`](Workspace.md)

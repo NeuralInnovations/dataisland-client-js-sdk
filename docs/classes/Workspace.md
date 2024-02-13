@@ -28,6 +28,7 @@ Workspace.
 
 - [change](Workspace.md#change)
 - [dispatch](Workspace.md#dispatch)
+- [filesCount](Workspace.md#filescount)
 - [subscribe](Workspace.md#subscribe)
 
 ## Constructors
@@ -142,6 +143,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### filesCount
+
+▸ **filesCount**(): `Promise`\<`number`\>
+
+Workspace files count.
+
+#### Returns
+
+`Promise`\<`number`\>
 
 ___
 

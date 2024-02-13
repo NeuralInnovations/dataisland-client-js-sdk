@@ -42,15 +42,15 @@ Files storage.
 
 ### delete
 
-▸ **delete**(`id`): `Promise`\<`void`\>
+▸ **delete**(`ids`): `Promise`\<`void`\>
 
-Delete file.
+Delete files.
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `id` | `string` |
+| `ids` | `string`[] |
 
 #### Returns
 
@@ -121,7 +121,7 @@ ___
 
 ### upload
 
-▸ **upload**(`file`): `Promise`\<[`File`](File.md)\>
+▸ **upload**(`files`): `Promise`\<[`File`](File.md)[]\>
 
 Upload file.
 
@@ -129,8 +129,8 @@ Upload file.
 
 | Name | Type |
 | :------ | :------ |
-| `file` | `File` |
+| `files` | `File`[] |
 
 #### Returns
 
-`Promise`\<[`File`](File.md)\>
+`Promise`\<[`File`](File.md)[]\>

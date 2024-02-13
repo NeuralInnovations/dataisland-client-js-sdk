@@ -18,6 +18,7 @@ File.
 
 ### Accessors
 
+- [createdAt](File.md#createdat)
 - [id](File.md#id)
 - [name](File.md#name)
 - [status](File.md#status)
@@ -44,6 +45,18 @@ File.
 [EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
 
 ## Accessors
+
+### createdAt
+
+• `get` **createdAt**(): `number`
+
+File date added.
+
+#### Returns
+
+`number`
+
+___
 
 ### id
 
