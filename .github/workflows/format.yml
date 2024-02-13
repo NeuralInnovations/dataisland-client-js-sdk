@@ -26,7 +26,8 @@ jobs:
         run: npm run lint:fix
 
       - name: 📋 Check for changes 📋
-        run: | 
+        run: |
+          git --no-pager diff
           git diff --exit-code --quiet || {
             echo "There are changes to commit"
             exit 1
