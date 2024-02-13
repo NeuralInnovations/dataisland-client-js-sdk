@@ -41,8 +41,6 @@ export class FilesImpl extends Files {
   // Object used as files page data, returned by "query"
   public filesList?: FilesPage
 
-  async upload(file: any): Promise<File> {
-    return await this.internalUpload(file)
   async upload(files: any[]): Promise<string[]> {
     const ids = []
     for ( const file of files ){
