@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev12](../../README.md) / [Exports](../modules.md) / Workspace
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev13](../../README.md) / [Exports](../modules.md) / Workspace
 
 # Class: Workspace
 
@@ -28,6 +28,7 @@ Workspace.
 
 - [change](Workspace.md#change)
 - [dispatch](Workspace.md#dispatch)
+- [filesCount](Workspace.md#filescount)
 - [subscribe](Workspace.md#subscribe)
 
 ## Constructors
@@ -142,6 +143,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### filesCount
+
+▸ **filesCount**(): `Promise`\<`number`\>
+
+Workspace files count.
+
+#### Returns
+
+`Promise`\<`number`\>
 
 ___
 

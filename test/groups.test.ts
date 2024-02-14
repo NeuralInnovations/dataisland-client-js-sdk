@@ -23,7 +23,11 @@ test("Groups", async () => {
 
     expect(org.accessGroups.get(group.id)).toBe(group)
 
+    expect(org.accessGroups.collection.length).toBe(1)
+
     await expect(org.accessGroups.delete(group.id)).resolves.not.toThrow()
+
+    expect(org.accessGroups.collection.length).toBe(0)
     expect((<GroupImpl>group).isDisposed).toBe(true)
   })
 })

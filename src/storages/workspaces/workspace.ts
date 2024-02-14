@@ -43,6 +43,11 @@ export abstract class Workspace extends EventDispatcher<
   abstract get files(): Files
 
   /**
+   * Workspace files count.
+   */
+  abstract filesCount(): Promise<number>
+
+  /**
    * Change workspace name and description.
    */
   abstract change(name: string, description: string): Promise<void>

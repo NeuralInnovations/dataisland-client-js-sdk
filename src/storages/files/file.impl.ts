@@ -38,6 +38,10 @@ export class FileImpl extends File implements Disposable {
     return <string>this._content?.name
   }
 
+  get createdAt(): number {
+    return <number>this._content?.createdAt
+  }
+
   get status(): FileProgressDto {
     return <FileProgressDto>this._status
   }

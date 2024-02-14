@@ -2,11 +2,23 @@ import { Workspaces } from "../workspaces/workspaces"
 import { OrganizationId } from "./organizations"
 import { GroupId, Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
+import { EventDispatcher } from "../../events"
+
+
+/**
+ * Organization event.
+ */
+export enum OrganizationEvent {
+  CHANGED = "changed"
+}
 
 /**
  * Organization.
  */
-export abstract class Organization {
+export abstract class Organization extends EventDispatcher<
+OrganizationEvent,
+Organization
+>  {
   /**
    * Organization id.
    */
@@ -36,6 +48,11 @@ export abstract class Organization {
    * Groups.
    */
   abstract get accessGroups(): Groups
+
+  /**
+   * Change organization name and description.
+   */
+  abstract change(name: string, description: string): Promise<void>
 
   /**
    * Create invite link
