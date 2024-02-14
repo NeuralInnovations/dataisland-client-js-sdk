@@ -28,9 +28,9 @@ test("Files", async () => {
 
     expect(file.status).not.toBeUndefined()
     expect(file.status).not.toBeNull()
-    if (!file.status.success && file.status.error) {
-      console.error(file.status.error)
-    }
+    // if (!file.status.success && file.status.error) {
+    //   console.error(file.status.error)
+    // }
     expect(file.status.success).toBe(true)
     expect(file.status.file_id).toBe(file.id)
     expect(file.status.file_parts_count).toBeGreaterThanOrEqual(
