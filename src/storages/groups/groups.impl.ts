@@ -179,6 +179,10 @@ export class GroupsImpl extends Groups {
     super()
   }
 
+  get collection(): readonly Group[] {
+    return this._groups
+  }
+
   async initialize() {
     await this.internalInit()
   }
