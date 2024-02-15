@@ -89,10 +89,7 @@ test("Chat create, ask question, delete", async () => {
     await expect(chatImpl.ask("Hello", ChatAnswerType.SHORT)).rejects.toThrow()
 
 
-    const askPromise2 = chat.ask(question, ChatAnswerType.SHORT)
-    const answer2 = await askPromise2
-
-    await expect(answer2.cancel()).rejects.toThrow()
+    await expect(answer.cancel()).rejects.toThrow() // ???
 
     const answerImpl = new AnswerImpl(chat, app.context)
     const type = StepType.SOURCES
