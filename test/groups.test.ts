@@ -1,5 +1,4 @@
-import { GroupImpl, GroupsImpl } from "../src/storages/groups/groups.impl"
-import { OrganizationImpl } from "../src/storages/organizations/organization.impl"
+import { GroupImpl } from "../src/storages/groups/groups.impl"
 import { testInOrganization } from "./setup"
 test("Groups", async () => {
   await testInOrganization(async (app, org) => {
@@ -45,9 +44,9 @@ test("Groups", async () => {
     // setName
     const newName = "New Group Name"
 
-    await group.setName(newName) // ??? Test group
+    await group.setName(newName)
     
-    await expect(group.group.name).toBe("Test group")
+    await expect(group.group.name).toBe("New Group Name")
 
     await expect(group.setName("")).rejects.toThrow("Groups change, name is empty")
 
@@ -75,13 +74,3 @@ test("Groups", async () => {
 
   })
 })
-
-
-// test("GroupsImpl", async () => {
-//   testInOrganization(async (app, org) => {
-//     const useGroups = new GroupImpl(app.context, org)
-
-//     await expect(() => useGroups.id).toThrow("Access group is not loaded.")
-//     await expect(() => useGroups.group.name).toThrow("Access group is not loaded.")
-//   })
-// })

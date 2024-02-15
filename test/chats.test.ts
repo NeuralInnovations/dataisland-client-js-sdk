@@ -85,8 +85,14 @@ test("Chat create, ask question, delete", async () => {
 
     await expect(answer.fetchTokens(StepType.PREPARE, 0)).rejects.toThrow(`Step with type ${StepType.PREPARE} is not found`)
 
-    // check delete
-    await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
+
+    await expect(chatImpl.ask("Hello", ChatAnswerType.SHORT)).rejects.toThrow()
+
+
+    const askPromise2 = chat.ask(question, ChatAnswerType.SHORT)
+    const answer2 = await askPromise2
+
+    await expect(answer2.cancel()).rejects.toThrow()
 
     const answerImpl = new AnswerImpl(chat, app.context)
     const type = StepType.SOURCES
@@ -114,5 +120,8 @@ test("Chat create, ask question, delete", async () => {
 
     expect(fetchSpy).toHaveBeenCalled()
     expect(result).toEqual(sources)
+
+    // check delete
+    await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
   })
 })

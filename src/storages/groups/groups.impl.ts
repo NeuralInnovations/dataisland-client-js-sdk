@@ -104,6 +104,10 @@ export class GroupImpl extends Group implements Disposable {
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Failed to change group name, group: ${this.id}, organization: ${this.organization.id}`, response)
     }
+
+    if (this._content) {
+      this._content.name = name
+    }
   }
 
   async setPermits(permits: { isAdmin: boolean }): Promise<void> {
