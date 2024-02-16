@@ -64,7 +64,7 @@ export class GroupImpl extends Group implements Disposable {
     // fetch workspaces
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Organizations/workspaces")
-      .searchParam("groupId", this.id)
+      .searchParam("id", this.id)
       .sendGet()
 
     if (ResponseUtils.isFail(response)) {
