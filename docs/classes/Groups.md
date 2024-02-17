@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev13](../../README.md) / [Exports](../modules.md) / Groups
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev14](../../README.md) / [Exports](../modules.md) / Groups
 
 # Class: Groups
 
@@ -18,7 +18,7 @@ Groups storage.
 
 ### Accessors
 
-- [organization](Groups.md#organization)
+- [collection](Groups.md#collection)
 
 ### Methods
 
@@ -44,15 +44,15 @@ Groups storage.
 
 ## Accessors
 
-### organization
+### collection
 
-• `get` **organization**(): [`Organization`](Organization.md)
+• `get` **collection**(): readonly [`Group`](Group.md)[]
 
-Organization.
+Collection.
 
 #### Returns
 
-[`Organization`](Organization.md)
+readonly [`Group`](Group.md)[]
 
 ## Methods
 

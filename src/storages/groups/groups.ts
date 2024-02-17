@@ -2,7 +2,6 @@ import { AccessGroupDto } from "../../dto/accessGroupResponse"
 import { UserDto } from "../../dto/userInfoResponse"
 import { WorkspaceDto } from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
-import { Organization } from "../organizations/organization"
 
 /**
  * Group id.
@@ -70,9 +69,9 @@ export abstract class Group extends EventDispatcher<GroupEvent, Group> {
 export abstract class Groups extends EventDispatcher<GroupEvent, Group> {
 
   /**
-   * Organization.
+   * Collection.
    */
-  abstract get organization(): Organization
+  abstract get collection(): ReadonlyArray<Group>
 
   /**
    * Create new group.
