@@ -1,3 +1,5 @@
+import { OrganizationImpl } from "../src/storages/organizations/organization.impl"
+import { WorkspaceImpl } from "../src/storages/workspaces/workspace.impl"
 import { testInOrganization, testInWorkspace } from "./setup"
 
 test("Workspace create / delete", async () => {
@@ -8,12 +10,25 @@ test("Workspace create / delete", async () => {
     // create workspace
     const wsPromise = org.workspaces.create(
       "test-workspace",
-      "test-workspace-description"
+      "test-workspace-description",
+      {
+        isCreateNewGroup: true,
+        newGroupName: "Group 1",
+        groupIds: ["group1"]
+      }
     )
-
     // check not throw
     await expect(wsPromise).resolves.not.toThrow()
+    await expect(org.workspaces.create("", "test-workspace-description")).rejects.toThrow("Name is required, must be not empty")
+    await expect(org.workspaces.create("test-workspace", "")).rejects.toThrow("Description is required, must be not empty")
 
+    // check to throw
+    await expect(org.workspaces.create("test-workspace", "test-workspace-description", {
+      isCreateNewGroup: true,
+      newGroupName: "Group 1",
+      groupIds: []
+    })).rejects.toThrow("groupIds is required, must be not empty")
+    
     // get workspace
     const ws = await wsPromise
 
@@ -48,24 +63,41 @@ test("Workspace create / delete", async () => {
 
     // check delete
     await expect(org.workspaces.delete(ws.id)).resolves.not.toThrow()
+
+    expect(org.workspaces.contains(ws.id)).toBe(false)
+
+    const organization = new OrganizationImpl(app.context)
+    const workspace = new WorkspaceImpl(organization, app.context)
+    expect(() => {
+      workspace.id
+    }).toThrow("Workspace is not loaded.")
+    expect(() => {
+      workspace.name
+    }).toThrow("Workspace is not loaded.")
+    expect(() => {
+      workspace.description
+    }).toThrow("Workspace is not loaded.")
   })
 })
 
 test("Workspace, change", async () => {
   await testInWorkspace(async (app, org, ws) => {
-
-    expect(ws.name).not.toBe("new-name")
+    const newName = "new-name"
+    const newDescription = "new-name"
+    
+    expect(ws.name).not.toBe(newName)
 
     // rename
-    await ws.change("new-name", "new-description")
+    await ws.change(newName, newDescription)
 
     // check name
-    expect(ws.name).toBe("new-name")
+    expect(ws.name).toBe(newName)
 
     // check description
-    expect(ws.description).toBe("new-description")
+    expect(ws.description).toBe(newDescription)
 
-    // check name
-    expect(ws.name).toBe("new-name")
+    const organization = new OrganizationImpl(app.context)
+    const workspaceImpl = new WorkspaceImpl(organization, app.context)
+    await expect(workspaceImpl.change(newName, newDescription)).rejects.toThrow("Workspace is not loaded.")
   })
 })

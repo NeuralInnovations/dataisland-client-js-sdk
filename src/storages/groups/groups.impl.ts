@@ -64,7 +64,7 @@ export class GroupImpl extends Group implements Disposable {
     // fetch workspaces
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Organizations/workspaces")
-      .searchParam("groupId", this.id)
+      .searchParam("id", this.id)
       .sendGet()
 
     if (ResponseUtils.isFail(response)) {
@@ -103,6 +103,10 @@ export class GroupImpl extends Group implements Disposable {
     // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Failed to change group name, group: ${this.id}, organization: ${this.organization.id}`, response)
+    }
+
+    if (this._content) {
+      this._content.name = name
     }
   }
 
