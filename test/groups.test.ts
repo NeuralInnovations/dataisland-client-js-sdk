@@ -2,6 +2,8 @@ import { GroupImpl } from "../src/storages/groups/groups.impl"
 import { testInOrganization } from "./setup"
 test("Groups", async () => {
   await testInOrganization(async (app, org) => {
+    const initialGroupsCount = org.accessGroups.collection.length
+
     const groupPromise = org.accessGroups.create("Test group", { isAdmin: true }, ["123"])
     const mockGroupPromise = org.accessGroups.create("", { isAdmin: true }, ["123"])
     expect(mockGroupPromise).rejects.toThrow("Group create, name is empty")
@@ -40,7 +42,7 @@ test("Groups", async () => {
 
     expect(org.accessGroups.get(group.id)).toBe(group)
 
-    expect(org.accessGroups.collection.length).toBe(1)
+    expect(org.accessGroups.collection.length).toBe(initialGroupsCount + 1)
 
 
     // setName
@@ -71,8 +73,8 @@ test("Groups", async () => {
     // delete
     await expect(org.accessGroups.delete(group.id)).resolves.not.toThrow()
 
-    
-    expect(org.accessGroups.collection.length).toBe(0)
+    expect(org.accessGroups.collection.length).toBe(initialGroupsCount)
+
     expect((<GroupImpl>group).isDisposed).toBe(true)
 
   })

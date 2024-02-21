@@ -36,6 +36,8 @@ export class OrganizationImpl extends Organization implements Disposable {
 
     // init workspaces by organization id
     await this._workspaces.initFrom(content.id)
+    await this._chats.initFrom(content.id)
+    await this._accessGroups.initialize()
 
     return this
   }
