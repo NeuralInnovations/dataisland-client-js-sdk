@@ -90,6 +90,3 @@ export async function dataIslandApp(
   }
   return await appPromise
 }
-
-export { File } from "./storages/files/file"
-export { FilesPage } from "./storages/files/filesPage"
