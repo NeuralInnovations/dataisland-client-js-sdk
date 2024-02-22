@@ -1,5 +1,4 @@
 import { Context } from "../../context"
-import { Disposable } from "../../disposable"
 import { FileDto, FileListResponse } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { FileImpl } from "./file.impl"
@@ -8,27 +7,7 @@ import { WorkspaceImpl } from "../workspaces/workspace.impl"
 import { ResponseUtils } from "../../services/responseUtils"
 import { File } from "./file"
 import { FilesPage } from "./filesPage"
-
-export class FilesPageImpl extends FilesPage implements Disposable {
-  private _isDisposed: boolean = false
-
-  public files: File[] = []
-  public total: number = 0
-  public filesPerPage: number = 0
-  public page: number = 0
-
-  get pages(): number {
-    return Math.ceil(Math.max(this.total / this.filesPerPage, 1.0))
-  }
-
-  get isDisposed(): boolean {
-    return this._isDisposed
-  }
-
-  dispose(): void {
-    this._isDisposed = true
-  }
-}
+import { FilesPageImpl } from "./filesPage.impl"
 
 export class FilesImpl extends Files {
   constructor(
@@ -45,7 +24,7 @@ export class FilesImpl extends Files {
     const loaded_files = []
     for ( const file of files ){
       loaded_files.push(await this.internalUpload(file))
-    } 
+    }
     return loaded_files
   }
 

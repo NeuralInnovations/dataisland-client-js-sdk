@@ -1,9 +1,10 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
-import { FilesPageImpl } from "../src/storages/files/files.impl"
 import { FileImpl } from "../src/storages/files/file.impl"
-import { Context } from "../src/context"
-import { FileDto } from "../src/dto/workspacesResponse"
+import { Context, DisposableContainer } from "../src"
+import { FileDto } from "../src"
+import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
+import { Registry } from "../src/internal/registry"
 
 test("Files", async () => {
   await testInWorkspace(async (app, org, ws) => {
@@ -36,15 +37,15 @@ test("Files", async () => {
 
     const ids: string[] = []
 
-    for ( const file of files ) { 
+    for (const file of files) {
       expect(file).not.toBeUndefined()
       expect(file).not.toBeNull()
       expect(file.createdAt).toBeGreaterThan(0)
 
-      if ( !file ){ 
+      if (!file) {
         console.error("File not found after loading")
-        continue 
-      } 
+        continue
+      }
 
       ids.push(file.id)
 
@@ -68,7 +69,6 @@ test("Files", async () => {
         await new Promise(r => setTimeout(r, 1000))
         await file.updateStatus()
       }
-
 
       expect(file.status.success && file.status.completed_parts_count).toBe(
         file.status.file_parts_count
@@ -132,7 +132,6 @@ describe("FilesPageImpl", () => {
   // Add more tests as needed for specific behaviors or edge cases.
 })
 
-
 describe("FileImpl", () => {
   let file: FileImpl
   let contextMock: Context
@@ -143,10 +142,10 @@ describe("FileImpl", () => {
       resolve: jest.fn(() => ({
         requestBuilder: jest.fn(() => ({
           searchParam: jest.fn(() => ({
-            sendGet: jest.fn(),
-          })),
-        })),
-      })),
+            sendGet: jest.fn()
+          }))
+        }))
+      }))
     } as any
 
     file = new FileImpl(contextMock)
@@ -194,4 +193,45 @@ describe("FileImpl", () => {
     // Add assertions for other properties
   })
 
+})
+
+test("FilesPage equals", async () => {
+  function createFileImpl(id: string): FileImpl {
+    const impl = new FileImpl(new Context(new Registry(), new DisposableContainer().lifetime, "appName"))
+    impl.initFrom({
+      createdAt: 0,
+      description: "",
+      hash: "",
+      id: id,
+      isProcessedSuccessfully: false,
+      modifiedAt: 0,
+      name: "",
+      organizationId: "",
+      url: "",
+      workspaceId: ""
+    })
+    return impl
+  }
+
+  const v1: FilesPageImpl = new FilesPageImpl()
+  v1.files = [createFileImpl("id1")]
+  v1.total = 10
+  v1.filesPerPage = 5
+  v1.page = 1
+
+  const v2: FilesPageImpl = new FilesPageImpl()
+  v1.files = [createFileImpl("id1")]
+  v2.total = 10
+  v2.filesPerPage = 5
+  v2.page = 1
+
+  expect(v1.equals(v2)).toBeTruthy()
+
+  const v3: FilesPageImpl = new FilesPageImpl()
+  v3.files = [createFileImpl("id2")]
+  v3.total = 10
+  v3.filesPerPage = 5
+  v3.page = 1
+
+  expect(v1.equals(v3)).toBeFalsy()
 })
