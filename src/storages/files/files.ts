@@ -27,7 +27,7 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
 
   /**
    * Delete files.
-   * @param id
+   * @param ids
    */
   abstract delete(ids: FileId[]): Promise<void>
 

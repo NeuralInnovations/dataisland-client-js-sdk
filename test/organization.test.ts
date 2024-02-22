@@ -1,9 +1,11 @@
 import { dataIslandApp, DebugCredential } from "../src"
-import { HOST, randomHash, TOKEN } from "./setup"
+import { HOST, randomHash, testInOrganization, TOKEN } from "./setup"
 import {
   OrganizationImpl
 } from "../src/storages/organizations/organization.impl"
-
+import {
+  OrganizationsEvent,
+} from "../src/storages/organizations/organizations"
 test.skip("Delete all organizations", async () => {
   const app = await dataIslandApp("delete-all", async builder => {
     builder.useHost(HOST)
@@ -75,4 +77,22 @@ test("Organization", async () => {
 
   // check organization must be undefined because it was deleted
   expect(app.organizations.tryGet(org.id)).toBeUndefined()
+
+  await testInOrganization(async (app, org) => {
+
+    const organizations = app.organizations
+
+    await expect(organizations.delete("123")).rejects.toThrow("Organization delete, id: 123 is not found")
+    await expect(organizations.delete("")).rejects.toThrow("Organization delete, id is empty")
+
+    const dispatchSpy = jest.spyOn(organizations, "dispatch")
+
+    organizations.current = org.id
+    expect(organizations.current).toBe(org.id)
+    expect(dispatchSpy).toHaveBeenCalledWith({
+      type: OrganizationsEvent.CURRENT_CHANGED,
+      data: organizations.tryGet(org.id)
+    })
+
+  })
 })
