@@ -24,4 +24,10 @@ export abstract class FilesPage {
    * Get current page.
    */
   abstract get page(): number
+
+  /**
+   * Equals.
+   * @param other
+   */
+  abstract equals(other?: FilesPage | null): boolean
 }
