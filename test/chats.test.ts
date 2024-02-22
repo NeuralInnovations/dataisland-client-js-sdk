@@ -23,71 +23,35 @@ test("Chat create, ask question, delete", async () => {
     // check get
     expect(org.chats.get(chat.id)).toBe(chat)
 
-    const chatDto = {
-      id: "chat123",
-      name: "Chat 1",
-      createdAt: 1234567890,
-      modifiedAt: 1234567890,
-      userId: "user123",
-      organizationId: "org123",
-      workspaceId: "workspace123",
-      answers: []
-    }
-    
-    const chatImpl = new ChatImpl(app.context, org)
-
-    await chatImpl.initFrom(chatDto)
-
-    expect(() => {
-      chatImpl.initFrom(chatDto)
-    }).not.toThrow()
-
-    for (const answer of chat["_answers"]) {
-      expect(answer).toBeInstanceOf(AnswerImpl)
-      expect(answer["chat"]).toBe(chat)
-      expect(answer["context"]).toBe(app.context)
-    }
-
-    expect(chatImpl.id).toBe("chat123")
-    expect(chatImpl.name).toBe("Chat 1")
-    expect(chatImpl.collection.length).toBe(0)
-
-    chatImpl.dispose()
-
-    await expect(chatImpl.ask("Hello", ChatAnswerType.SHORT)).rejects.toThrow()
-
-    // Create answer
-
     const question = "Hello!"
 
     const askPromise = chat.ask(question, ChatAnswerType.SHORT)
 
     // check not throw
-    await expect(chatPromise).resolves.not.toThrow()
+    await expect(askPromise).resolves.not.toThrow()
 
-    const answer = await askPromise
+    let answer = await askPromise
 
     expect(answer.id).toBeTruthy()
     expect(answer.status).toBe(AnswerStatus.RUNNING)
 
     while (answer.status !== AnswerStatus.SUCCESS) {
       await new Promise(r => setTimeout(r, 300))
-      await answer.fetch()
+      await chat.getAnswer(answer.id).fetch()
+      answer = chat.getAnswer(answer.id)
     }
 
     expect(answer).toBeTruthy()
     expect(answer.id).not.toBeUndefined()
     expect(answer.status).not.toBeUndefined()
 
+    expect(chat.getAnswer(answer.id).content).not.toBeUndefined()
+
     const tokens = await answer.fetchTokens(StepType.DONE, 0)
 
     expect(tokens.step_tokens.length).toBeGreaterThan(0)
 
     await expect(answer.fetchTokens(StepType.PREPARE, 0)).rejects.toThrow(`Step with type ${StepType.PREPARE} is not found`)
-
-
-    await expect(chatImpl.ask("Hello", ChatAnswerType.SHORT)).rejects.toThrow()
-
 
     await expect(answer.cancel()).rejects.toThrow() // ???
 
@@ -120,5 +84,44 @@ test("Chat create, ask question, delete", async () => {
 
     // check delete
     await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
+  })
+})
+
+test("Chat Impl Test", async () => { 
+  await testInOrganization(async (app, org) => {
+    const chatDto = {
+      id: "chat123",
+      name: "Chat 1",
+      createdAt: 1234567890,
+      modifiedAt: 1234567890,
+      userId: "user123",
+      organizationId: "org123",
+      workspaceId: "workspace123",
+      answers: []
+    }
+    
+    const chatImpl = new ChatImpl(app.context, org)
+
+    await chatImpl.initFrom(chatDto)
+
+    expect(() => {
+      chatImpl.initFrom(chatDto)
+    }).not.toThrow()
+
+    for (const answer of chatImpl["_answers"]) {
+      expect(answer).toBeInstanceOf(AnswerImpl)
+      expect(answer["chat"]).toBe(chatImpl)
+      expect(answer["context"]).toBe(app.context)
+    }
+
+    expect(chatImpl.id).toBe("chat123")
+    expect(chatImpl.name).toBe("Chat 1")
+    expect(chatImpl.collection.length).toBe(0)
+
+    chatImpl.dispose()
+
+    // Create answer
+    await expect(chatImpl.ask("Hello", ChatAnswerType.SHORT)).rejects.toThrow()
+
   })
 })

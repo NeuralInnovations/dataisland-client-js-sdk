@@ -30,9 +30,6 @@ export class AnswerImpl extends Answer {
     this._content = answer
     this._id = answer.id
 
-    // fetch answer
-    await this.fetch()
-
     return this
   }
 
@@ -56,6 +53,13 @@ export class AnswerImpl extends Answer {
 
   get status(): AnswerStatus {
     return <AnswerStatus>this._status
+  }
+
+  get content(): AnswerDto {
+    if (this.status != AnswerStatus.RUNNING){
+      return <AnswerDto>this._content
+    }
+    throw new Error("Answer status is running, please use fetch() or fetch_tokens()")
   }
 
   private getStep(type: StepType): AnswerStepDto | undefined {
@@ -121,6 +125,10 @@ export class AnswerImpl extends Answer {
       type: AnswerEvent.UPDATED,
       data: this
     })
+
+    if (this._status != AnswerStatus.RUNNING){
+      await this.chat.update()
+    }
   }
 
   async fetchTokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse> {
