@@ -53,11 +53,11 @@ export class ChatImpl extends Chat implements Disposable {
   }
 
   public getAnswer(id: string): Answer {
-      const answer = this._answers.find(answer => answer.id === id)
-      if (answer){
-        return answer
-      }
-      throw new Error(`Answer with id ${id} is not found`)
+    const answer = this._answers.find(answer => answer.id === id)
+    if (answer){
+      return answer
+    }
+    throw new Error(`Answer with id ${id} is not found`)
   }
 
   async ask(message: string, answerType: ChatAnswerType): Promise<Answer> {
