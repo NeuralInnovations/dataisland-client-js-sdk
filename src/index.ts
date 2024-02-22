@@ -22,7 +22,9 @@ export * from "./storages/files/filesPage"
 export * from "./storages/chats/chats"
 export * from "./storages/chats/chat"
 
+// map of apps that are not ready to be used
 const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
+// map of apps that are ready to be used
 const _appsReady = new Map<string, DataIslandApp>()
 
 /**
