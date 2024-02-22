@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev15](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev16](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -18,6 +18,8 @@
 ### Methods
 
 - [ask](Chat.md#ask)
+- [getAnswer](Chat.md#getanswer)
+- [update](Chat.md#update)
 
 ## Constructors
 
@@ -95,3 +97,33 @@ Ask new question in chat.
 #### Returns
 
 `Promise`\<`Answer`\>
+
+___
+
+### getAnswer
+
+▸ **getAnswer**(`id`): `Answer`
+
+Get answer by id
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | `string` | answer id |
+
+#### Returns
+
+`Answer`
+
+___
+
+### update
+
+▸ **update**(): `Promise`\<`void`\>
+
+Update chat
+
+#### Returns
+
+`Promise`\<`void`\>
