@@ -214,37 +214,52 @@ You can access all chats list using **collection** property.
 const chats = organization.chats.collection
 ```
 
-Main chat functionality is answer handling. You can create, fetch and cancel answer in the chat.
+Main chat functionality is answer handling. You can create, fetch and cancel answer in the chat. Answer is a data object which contains question, answer, answer steps and sources for them.
 
 Here are some examples:
 
 ```
-const asnwer = await chat.ask("Hello!", ChatAnswerType.SHORT)
+const answer = await chat.ask("Hello!", ChatAnswerType.SHORT)
 
-await answer.cancel()
-  
-const tokens = await answer.fetchTokens(StepType.DONE, 0)
+await chat.getAnswer(answer.id).cancel()
 
 ```
 
-You can track answer progress status using **status** property of answer object. It can be updated using fetch method.
+Answer can be updated using fetch method.
 
 ```
-await answer.fetch()
+await chat.getAnswer(answer.id).fetch()
+```
 
-status = answer.status
+Answer have two main states: running and done. This states is represented in answer status propery.
+Main statuses are RUNNING, SUCCESS, CANCELED, FAIL. You can use them to correctly draw answer in chat.
+
+```
+status = chat.getAnswer(answer.id).status
 ```
 
 Answer is consists of step. Main steps are Prepare, Generate answer, Sources and Done. Each step also includes tokens that model generate during execution. You can access them using fetch_tokens method.
 
 ```
-const tokens = await answer.fetchTokens(StepType.DONE, 0)
+const tokens = await chat.getAnswer(answer.id).fetchTokens(StepType.DONE, 0)
 ```
 
 Every step also includes Sources that were used during execution. Step "Sources" contains all sources of all answer steps.
 
 ```
-const sources = await answer.sources(StepType.SOURCES)
+const sources = await chat.getAnswer(answer.id).sources(StepType.SOURCES)
+```
+
+If you want to get chat history, you can access chat.collection property
+
+```
+const answers = chat.collection
+```
+
+After some answer is done, it's content property is become available. There you can have answer data object to draw an answer in history.Every answer from history is accessed from collection after it status is changed from RUNNING.
+
+```
+const answer = chat.getAnswer(id).content
 ```
 
 #### Events

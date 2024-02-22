@@ -1,4 +1,5 @@
 import {
+  AnswerDto,
   AnswerStatus,
   FetchTokensResponse,
   SourceDto,
@@ -21,6 +22,11 @@ export abstract class Answer extends EventDispatcher<AnswerEvent, Answer> {
    * Answer id.
    */
   abstract get id(): AnswerId
+
+  /**
+   * Answer data object
+   */
+  abstract get content(): AnswerDto
 
   /**
    * Answer status.

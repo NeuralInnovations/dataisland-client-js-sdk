@@ -31,8 +31,19 @@ export abstract class Chat {
   abstract get collection(): ReadonlyArray<Answer>
 
   /**
+   * Get answer by id
+   * @param id answer id
+   */
+  abstract getAnswer(id: string): Answer
+
+  /**
    * Ask new question in chat.
    */
   abstract ask(message: string, answerType: ChatAnswerType): Promise<Answer>
+
+  /**
+   * Update chat
+   */
+  abstract update(): Promise<void>
 }
 
