@@ -59,6 +59,10 @@ test("Organization", async () => {
   expect(app.organizations.tryGet(org.id)).toBe(org)
   expect(app.organizations.collection.length).toBe(initLength + 1)
 
+  const members = await app.organizations.get(org.id).members()
+
+  expect(members.length).toBeGreaterThan(0)
+
   const test_description = "this is a updated unitTest description"
   // create organization
   await app.organizations.get(org.id).change(
