@@ -1,17 +1,20 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev16](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev17](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev16
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev17
 
 ## Table of contents
 
 ### Enumerations
 
+- [AnswerStatus](enums/AnswerStatus.md)
 - [ChatAnswerType](enums/ChatAnswerType.md)
 - [ChatsEvent](enums/ChatsEvent.md)
 - [FilesEvent](enums/FilesEvent.md)
 - [GroupEvent](enums/GroupEvent.md)
 - [OrganizationEvent](enums/OrganizationEvent.md)
 - [OrganizationsEvent](enums/OrganizationsEvent.md)
+- [StepStatus](enums/StepStatus.md)
+- [StepType](enums/StepType.md)
 - [UserEvent](enums/UserEvent.md)
 - [WorkspaceEvent](enums/WorkspaceEvent.md)
 - [WorkspacesEvent](enums/WorkspacesEvent.md)
@@ -38,16 +41,45 @@
 - [Lifetime](classes/Lifetime.md)
 - [Organization](classes/Organization.md)
 - [Organizations](classes/Organizations.md)
+- [StepTypeInfo](classes/StepTypeInfo.md)
 - [UserProfile](classes/UserProfile.md)
 - [Workspace](classes/Workspace.md)
 - [Workspaces](classes/Workspaces.md)
 
 ### Interfaces
 
+- [AccessGroupDto](interfaces/AccessGroupDto.md)
+- [AccessGroupResponse](interfaces/AccessGroupResponse.md)
+- [AccessGroupsResponse](interfaces/AccessGroupsResponse.md)
+- [AnswerDto](interfaces/AnswerDto.md)
+- [AnswerSourcesResponse](interfaces/AnswerSourcesResponse.md)
+- [AnswerStepDto](interfaces/AnswerStepDto.md)
+- [ChatDto](interfaces/ChatDto.md)
+- [ChatListResponse](interfaces/ChatListResponse.md)
 - [Disposable](interfaces/Disposable.md)
 - [Event](interfaces/Event.md)
 - [EventSubscriber](interfaces/EventSubscriber.md)
+- [FetchAnswerResponse](interfaces/FetchAnswerResponse.md)
+- [FetchTokensResponse](interfaces/FetchTokensResponse.md)
+- [FileDto](interfaces/FileDto.md)
+- [FileListResponse](interfaces/FileListResponse.md)
+- [FileProgressDto](interfaces/FileProgressDto.md)
+- [FileUrlDto](interfaces/FileUrlDto.md)
 - [Input](interfaces/Input.md)
+- [MembersResponse](interfaces/MembersResponse.md)
+- [OrganizationDto](interfaces/OrganizationDto.md)
+- [OrganizationProfileDto](interfaces/OrganizationProfileDto.md)
+- [OrganizationWorkspaces](interfaces/OrganizationWorkspaces.md)
+- [PermitsDto](interfaces/PermitsDto.md)
+- [ProfileDto](interfaces/ProfileDto.md)
+- [RegulationDto](interfaces/RegulationDto.md)
+- [SourceDto](interfaces/SourceDto.md)
+- [UserDto](interfaces/UserDto.md)
+- [UserInfoResponse](interfaces/UserInfoResponse.md)
+- [UserSettings](interfaces/UserSettings.md)
+- [WorkspaceDto](interfaces/WorkspaceDto.md)
+- [WorkspaceProfileDto](interfaces/WorkspaceProfileDto.md)
+- [WorkspacesResponse](interfaces/WorkspacesResponse.md)
 
 ### Type Aliases
 

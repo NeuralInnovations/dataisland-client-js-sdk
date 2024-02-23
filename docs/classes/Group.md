@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev16](../../README.md) / [Exports](../modules.md) / Group
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev17](../../README.md) / [Exports](../modules.md) / Group
 
 # Class: Group
 
@@ -50,13 +50,13 @@ Group.
 
 ### group
 
-• `get` **group**(): `AccessGroupDto`
+• `get` **group**(): [`AccessGroupDto`](../interfaces/AccessGroupDto.md)
 
 Group information.
 
 #### Returns
 
-`AccessGroupDto`
+[`AccessGroupDto`](../interfaces/AccessGroupDto.md)
 
 ___
 
@@ -74,13 +74,13 @@ ___
 
 ### members
 
-• `get` **members**(): `UserDto`[]
+• `get` **members**(): [`UserDto`](../interfaces/UserDto.md)[]
 
 Group members.
 
 #### Returns
 
-`UserDto`[]
+[`UserDto`](../interfaces/UserDto.md)[]
 
 ## Methods
 
@@ -106,13 +106,13 @@ ___
 
 ### getWorkspaces
 
-▸ **getWorkspaces**(): `Promise`\<`WorkspaceDto`[]\>
+▸ **getWorkspaces**(): `Promise`\<[`WorkspaceDto`](../interfaces/WorkspaceDto.md)[]\>
 
 Group workspaces.
 
 #### Returns
 
-`Promise`\<`WorkspaceDto`[]\>
+`Promise`\<[`WorkspaceDto`](../interfaces/WorkspaceDto.md)[]\>
 
 ___
 
