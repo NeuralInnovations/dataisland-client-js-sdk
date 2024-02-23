@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev16](../../README.md) / [Exports](../modules.md) / FilesPage
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev17](../../README.md) / [Exports](../modules.md) / FilesPage
 
 # Class: FilesPage
 
@@ -16,6 +16,10 @@ Files page.
 - [page](FilesPage.md#page)
 - [pages](FilesPage.md#pages)
 - [total](FilesPage.md#total)
+
+### Methods
+
+- [equals](FilesPage.md#equals)
 
 ## Constructors
 
@@ -74,3 +78,21 @@ Get total count.
 #### Returns
 
 `number`
+
+## Methods
+
+### equals
+
+▸ **equals**(`other?`): `boolean`
+
+Equals.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other?` | ``null`` \| [`FilesPage`](FilesPage.md) |
+
+#### Returns
+
+`boolean`

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev16](../../README.md) / [Exports](../modules.md) / File
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev17](../../README.md) / [Exports](../modules.md) / File
 
 # Class: File
 
@@ -84,11 +84,11 @@ ___
 
 ### status
 
-• `get` **status**(): `FileProgressDto`
+• `get` **status**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
 
 #### Returns
 
-`FileProgressDto`
+[`FileProgressDto`](../interfaces/FileProgressDto.md)
 
 ## Methods
 
