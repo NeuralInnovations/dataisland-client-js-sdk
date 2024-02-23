@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev16](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev17](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -30,6 +30,7 @@ Organization.
 - [change](Organization.md#change)
 - [createInviteLink](Organization.md#createinvitelink)
 - [dispatch](Organization.md#dispatch)
+- [members](Organization.md#members)
 - [subscribe](Organization.md#subscribe)
 
 ## Constructors
@@ -175,6 +176,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### members
+
+▸ **members**(): `Promise`\<[`UserDto`](../interfaces/UserDto.md)[]\>
+
+Get organization members
+
+#### Returns
+
+`Promise`\<[`UserDto`](../interfaces/UserDto.md)[]\>
 
 ___
 

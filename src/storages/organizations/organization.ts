@@ -3,6 +3,7 @@ import { OrganizationId } from "./organizations"
 import { GroupId, Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
 import { EventDispatcher } from "../../events"
+import { UserDto } from "../../dto/userInfoResponse"
 
 
 /**
@@ -48,6 +49,11 @@ Organization
    * Groups.
    */
   abstract get accessGroups(): Groups
+
+  /**
+   * Get organization members
+   */
+  abstract members(): Promise<UserDto[]>
 
   /**
    * Change organization name and description.

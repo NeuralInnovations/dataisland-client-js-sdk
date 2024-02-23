@@ -1,6 +1,6 @@
 import { OrganizationId } from "./organizations"
 import { Disposable } from "../../disposable"
-import { OrganizationDto } from "../../dto/userInfoResponse"
+import { OrganizationDto, UserDto } from "../../dto/userInfoResponse"
 import { Workspaces } from "../workspaces/workspaces"
 import { WorkspacesImpl } from "../workspaces/workspaces.impl"
 import { Context } from "../../context"
@@ -76,6 +76,25 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get chats(): Chats {
     return this._chats
+  }
+
+  async members(): Promise<UserDto[]> {
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Organizations/members")
+      .searchParam("id", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during fetch of organization members ${this.id}`,
+        response
+      )
+    }
+
+    return (await response!.json()).members as UserDto[]
   }
 
   async change(name: string, description: string): Promise<void> {
