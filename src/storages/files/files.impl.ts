@@ -139,12 +139,6 @@ export class FilesImpl extends Files {
 
       // add file to the collection
       filesList.files.push(file)
-
-      // dispatch event, file added
-      this.dispatch({
-        type: FilesEvent.ADDED,
-        data: file
-      })
     }
 
     // set files list
