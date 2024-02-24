@@ -1,5 +1,4 @@
 const fs = require("fs")
-const path = require("path")
 
 // Path to your package.json file
 const packageJsonPath = "package.json"
