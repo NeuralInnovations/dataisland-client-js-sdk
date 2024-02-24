@@ -12,6 +12,7 @@ import { Group, GroupEvent, GroupId, Groups } from "./groups"
 import { OrganizationImpl } from "../organizations/organization.impl"
 import { ResponseUtils } from "../../services/responseUtils"
 import { Organization } from "../organizations/organization"
+import { UserId } from "../user/userProfile"
 
 export class GroupImpl extends Group implements Disposable {
   private _isDisposed: boolean = false
@@ -26,6 +27,11 @@ export class GroupImpl extends Group implements Disposable {
   }
 
   async initFrom(id: GroupId): Promise<Group> {
+    await this.reloadGroup(id)
+    return this
+  }
+
+  async reloadGroup(id: GroupId): Promise<void> {
     // fetch group
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/AccessGroups")
@@ -42,8 +48,6 @@ export class GroupImpl extends Group implements Disposable {
     // init group
     this._content = group.group
     this._members = group.members
-
-    return this
   }
 
   get id(): GroupId {
@@ -144,9 +148,9 @@ export class GroupImpl extends Group implements Disposable {
     }
   }
 
-  async setMembersIds(members: string[]) {
+  async setMembersIds(members: UserId[]) {
     if (members === null || members === undefined) {
-      throw new Error("Group add members, members is undefined or null")
+      throw new Error("Group setMembersIds, members is undefined or null")
     }
 
     // send request to the server
@@ -161,6 +165,33 @@ export class GroupImpl extends Group implements Disposable {
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Failed to set members for group: ${this.id}, organization: ${this.organization.id}`, response)
     }
+
+    // reload group
+    await this.reloadGroup(this.id)
+  }
+
+  async removeMembers(members: UserId[]): Promise<void> {
+    // check members
+    if (members === null || members === undefined) {
+      throw new Error("Group removeMembers, members is undefined or null")
+    }
+
+    // make set of members
+    const groupMembers = new Set(this.members.map(m => m.id))
+
+    // check argument
+    if (!members.every(m => groupMembers.has(m))) {
+      const notExistingMembers = members.filter(memberId => !groupMembers.has(memberId))
+      throw new Error(`Group removeMembers, members contains not existing members: ${notExistingMembers}`)
+    }
+
+    // remove members
+    for (const id of members) {
+      groupMembers.delete(id)
+    }
+
+    // send request to the server
+    await this.setMembersIds(Array.from(groupMembers))
   }
 
   get isDisposed(): boolean {
