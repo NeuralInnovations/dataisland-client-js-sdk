@@ -108,7 +108,7 @@ export class ChatImpl extends Chat implements Disposable {
       let answer = this._answers.find(answer => answer.id === ans.id)
       if (!answer){
         // create answer implementation
-        answer = await new AnswerImpl(this, this.context).initFromData(ans)
+        answer = new AnswerImpl(this, this.context).initFromData(ans)
       }else{
         this._answers.splice(this._answers.indexOf(answer), 1)
 

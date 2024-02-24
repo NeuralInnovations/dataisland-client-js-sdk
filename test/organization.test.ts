@@ -5,7 +5,7 @@ import {
 } from "../src/storages/organizations/organization.impl"
 import {
   OrganizationsEvent,
-} from "../src/storages/organizations/organizations"
+} from "../src"
 test.skip("Delete all organizations", async () => {
   const app = await dataIslandApp("delete-all", async builder => {
     builder.useHost(HOST)

@@ -26,7 +26,7 @@ export class AnswerImpl extends Answer {
     super()
   }
 
-  async initFromData(answer: AnswerDto): Promise<AnswerImpl> {
+  initFromData(answer: AnswerDto): AnswerImpl {
     this._content = answer
     this._id = answer.id
 
