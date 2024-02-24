@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.0.1-dev18",
+  "version": "0.0.1-dev19",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -39,7 +39,8 @@
     "lint": "eslint --ext .ts,.tsx src test",
     "lint:fix": "eslint --fix --ext .ts,.tsx src test",
     "docs": "typedoc --disableSources --includeVersion --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js",
-    "version-up-dev": "node scripts/version/up-dev.js && rm package-lock.json && npm install"
+    "version-up-dev": "node scripts/version/up-dev.js && rm package-lock.json && npm install && npm run build && npm run lint:fix && npm run docs",
+    "release": "rm package-lock.json && npm install && npm run build && npm run lint:fix && npm run docs"
   },
   "keywords": [
     "dataisland",
