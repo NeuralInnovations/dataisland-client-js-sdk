@@ -95,7 +95,7 @@ describe("FilesPageImpl", () => {
   })
 
   afterEach(async () => {
-    await filesPage.dispose()
+    filesPage.dispose()
   })
 
   test("should be created", () => {
@@ -124,7 +124,7 @@ describe("FilesPageImpl", () => {
   })
 
   test("should dispose correctly", async () => {
-    await filesPage.dispose()
+    filesPage.dispose()
 
     expect(filesPage.isDisposed).toBeTruthy()
   })
@@ -152,7 +152,7 @@ describe("FileImpl", () => {
   })
 
   afterEach(async () => {
-    await file.dispose()
+    file.dispose()
   })
 
   it("should be created", () => {
@@ -167,7 +167,7 @@ describe("FileImpl", () => {
   })
 
   it("should dispose correctly", async () => {
-    await file.dispose()
+    file.dispose()
 
     expect(file.isDisposed).toBeTruthy()
   })

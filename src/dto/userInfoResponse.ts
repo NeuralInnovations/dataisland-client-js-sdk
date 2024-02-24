@@ -1,4 +1,6 @@
 import { WorkspaceDto } from "./workspacesResponse"
+import { UserId } from "../storages/user/userProfile"
+import { OrganizationId } from "../storages/organizations/organizations"
 
 export interface UserInfoResponse {
   adminInOrganization: string[]
@@ -7,7 +9,7 @@ export interface UserInfoResponse {
 }
 
 export interface UserDto {
-  id: string
+  id: UserId
   isDeleted: boolean
   created_at: number
   modified_at: number
@@ -31,7 +33,7 @@ export interface OrganizationProfileDto {
 }
 
 export interface OrganizationDto {
-  id: string
+  id: OrganizationId
   createdAt: number
   modifiedAt: number
   membersCount: number

@@ -10,7 +10,7 @@ import {
 import { MiddlewareService } from "../src/services/middlewareService"
 import { CredentialService } from "../src/services/credentialService"
 import { RpcService } from "../src/services/rpcService"
-import { AppBuilder } from "../src/appBuilder"
+import { AppBuilder } from "../src"
 import { UnitTest, appTest } from "../src/unitTest"
 import { HOST, randomHash, TOKEN } from "./setup"
 

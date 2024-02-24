@@ -1,4 +1,4 @@
-import { ChatAnswerType } from "../src"
+import { ChatAnswerType, SourceDto } from "../src"
 import { AnswerStatus, StepType } from "../src/dto/chatResponse"
 import { AnswerImpl } from "../src/storages/chats/answer.impl"
 import { ChatImpl } from "../src/storages/chats/chat.impl"
@@ -64,20 +64,19 @@ test("Chat create, ask question, delete", async () => {
       chatId: chat.id,
       question: question,
       context: app.name,
-      timestamp: 123,
+      timestamp: 123
     }
-   
-    await answerImpl.initFromData(answerDto)
+
+    answerImpl.initFromData(answerDto)
     expect(answer.id).toBe(answer.id)
 
     const wrongStepTpe = StepType.PREPARE
-    const sources = []
+    const sources: SourceDto[] = []
 
     await expect(answer.sources(wrongStepTpe)).rejects.toThrow(`Step with type ${wrongStepTpe} is not found, answer: ${answer.id}, organization: ${chat.organization.id}`)
 
     const fetchSpy = jest.spyOn(answer, "fetch").mockResolvedValueOnce()
     const result = await answer.sources(type)
-
 
     expect(fetchSpy).toHaveBeenCalled()
     expect(result).toEqual(sources)
@@ -87,7 +86,7 @@ test("Chat create, ask question, delete", async () => {
   })
 })
 
-test("Chat Impl Test", async () => { 
+test("Chat Impl Test", async () => {
   await testInOrganization(async (app, org) => {
     const chatDto = {
       id: "chat123",
@@ -99,7 +98,7 @@ test("Chat Impl Test", async () => {
       workspaceId: "workspace123",
       answers: []
     }
-    
+
     const chatImpl = new ChatImpl(app.context, org)
 
     await chatImpl.initFrom(chatDto)

@@ -2,6 +2,8 @@ import { AccessGroupDto } from "../../dto/accessGroupResponse"
 import { UserDto } from "../../dto/userInfoResponse"
 import { WorkspaceDto } from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
+import { UserId } from "../user/userProfile"
+import { WorkspaceId } from "../workspaces/workspaces"
 
 /**
  * Group id.
@@ -45,7 +47,7 @@ export abstract class Group extends EventDispatcher<GroupEvent, Group> {
   /**
    * Set workspaces.
    */
-  abstract setWorkspaces(workspaces: string[]): Promise<void>
+  abstract setWorkspaces(workspaces: WorkspaceId[]): Promise<void>
 
   /**
    * Set name.
@@ -60,7 +62,13 @@ export abstract class Group extends EventDispatcher<GroupEvent, Group> {
   /**
    * Set members.
    */
-  abstract setMembersIds(members: string[]): Promise<void>
+  abstract setMembersIds(members: UserId[]): Promise<void>
+
+  /**
+   * Remove members.
+   * @param members
+   */
+  abstract removeMembers(members: UserId[]): Promise<void>
 }
 
 /**
