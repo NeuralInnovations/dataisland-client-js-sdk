@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev18](../../README.md) / [Exports](../modules.md) / DisposableContainer
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev19](../../README.md) / [Exports](../modules.md) / DisposableContainer
 
 # Class: DisposableContainer
 
@@ -99,9 +99,15 @@ Define new lifetime.
 
 ### \_throwIfDisposed
 
-▸ **_throwIfDisposed**(): `void`
+▸ **_throwIfDisposed**(`message`): `void`
 
 Throws an error if this container is disposed.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `message` | `string` |
 
 #### Returns
 

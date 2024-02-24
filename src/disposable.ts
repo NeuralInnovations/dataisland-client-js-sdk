@@ -77,7 +77,8 @@ export class DisposableContainer implements Disposable {
    * @returns The disposable container.
    */
   public add(disposable: Disposable): Disposable {
-    this._throwIfDisposed()
+    this._throwIfDisposed("Cannot add disposable to disposed container.")
+
     this._disposables.push(disposable)
     return disposable
   }
@@ -89,7 +90,8 @@ export class DisposableContainer implements Disposable {
    * @returns The disposable container.
    */
   public addCallback(callback: () => void, target?: unknown): Disposable {
-    this._throwIfDisposed()
+    this._throwIfDisposed("Cannot add callback to disposed container.")
+
     return this.add({
       dispose() {
         callback.call(target)
@@ -101,6 +103,8 @@ export class DisposableContainer implements Disposable {
    * Defines a nested disposable container.
    */
   defineNested(): DisposableContainer {
+    this._throwIfDisposed("Cannot define nested disposable for disposed container.")
+
     const nested = new DisposableContainer()
     this._disposables.push(nested)
     nested.addCallback(() => {
@@ -116,23 +120,32 @@ export class DisposableContainer implements Disposable {
    * Disposes all disposables in this container. Last added, first disposed.
    */
   public dispose(): void {
-    this._throwIfDisposed()
+    // return if already disposed
+    if (this._isDisposed) {
+      return
+    }
+
+    // mark as disposed
     this._isDisposed = true
+
+    // dispose all disposables
     this._disposables
       .slice()
       .reverse()
       .forEach(it => {
         it.dispose()
       })
+
+    // clear disposables
     this._disposables = []
   }
 
   /**
    * Throws an error if this container is disposed.
    */
-  private _throwIfDisposed(): void {
+  private _throwIfDisposed(message: string): void {
     if (this._isDisposed) {
-      throw new Error("Object disposed")
+      throw new Error("Object disposed, but you try to use it: " + message)
     }
   }
 }
