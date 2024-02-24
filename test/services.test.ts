@@ -105,10 +105,10 @@ test("ResponseUtils", async () => {
   expect(ResponseUtils.isOk(undefinedResponse)).toBe(false)
   expect(ResponseUtils.isOk(nullResponse)).toBe(false)
 
-  expect(ResponseUtils.throwError(message, undefined)).rejects.toThrow(
+  await expect(ResponseUtils.throwError(message, undefined)).rejects.toThrow(
     `${message}. Response is undefined`
   )
-  expect(ResponseUtils.throwError(message, null)).rejects.toThrow(
+  await expect(ResponseUtils.throwError(message, null)).rejects.toThrow(
     `${message}. Response is null`
   )
 
@@ -116,7 +116,10 @@ test("ResponseUtils", async () => {
     status,
     statusText
   })
-  response2.text = async () => errorBody
+
+  // do it to avoid ts error
+  const responseMock = response2 as any
+  responseMock.text = async () => errorBody
 
   await expect(ResponseUtils.throwError(message, response2)).rejects.toThrow(
     `${message}. Response fail. Status: ${status},${statusText}, body: ${errorBody}`

@@ -67,7 +67,7 @@ test("Chat create, ask question, delete", async () => {
       timestamp: 123
     }
 
-    await answerImpl.initFromData(answerDto)
+    answerImpl.initFromData(answerDto)
     expect(answer.id).toBe(answer.id)
 
     const wrongStepTpe = StepType.PREPARE

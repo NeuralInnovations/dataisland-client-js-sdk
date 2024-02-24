@@ -75,6 +75,5 @@ test("Groups", async () => {
     expect(org.accessGroups.collection.length).toBe(initialGroupsCount)
 
     expect((<GroupImpl>group).isDisposed).toBe(true)
-
   })
 })

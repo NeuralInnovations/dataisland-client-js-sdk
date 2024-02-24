@@ -1,16 +1,15 @@
-import { UserInfoResponse } from "../src/dto/userInfoResponse"
-import { UserEvent } from "../src/storages/user/userProfile"
+import { UserEvent, UserInfoResponse } from "../src"
 import { UserProfileImpl } from "../src/storages/user/userProfile.impl" // Update the import path based on your project structure
 
 describe("UserProfileImpl", () => {
-  let userProfile
+  let userProfile: UserProfileImpl
 
   beforeEach(() => {
     userProfile = new UserProfileImpl()
   })
 
   const mockUserInfoResponse: UserInfoResponse = {
-    adminInOrganization:["123"],
+    adminInOrganization: ["123"],
     organizations: [],
     user: {
       id: "user123",
