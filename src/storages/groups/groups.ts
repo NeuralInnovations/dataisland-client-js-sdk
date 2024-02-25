@@ -69,6 +69,12 @@ export abstract class Group extends EventDispatcher<GroupEvent, Group> {
    * @param members
    */
   abstract removeMembers(members: UserId[]): Promise<void>
+
+  /**
+   * Remove workspaces.
+   * @param workspaces
+   */
+  abstract removeWorkspaces(workspaces: WorkspaceId[]): Promise<void>
 }
 
 /**
