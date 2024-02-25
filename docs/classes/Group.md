@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev21](../../README.md) / [Exports](../modules.md) / Group
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev22](../../README.md) / [Exports](../modules.md) / Group
 
 # Class: Group
 
@@ -27,6 +27,7 @@ Group.
 
 - [dispatch](Group.md#dispatch)
 - [removeMembers](Group.md#removemembers)
+- [removeWorkspaces](Group.md#removeworkspaces)
 - [setMembersIds](Group.md#setmembersids)
 - [setName](Group.md#setname)
 - [setPermits](Group.md#setpermits)
@@ -128,6 +129,24 @@ Remove members.
 | Name | Type |
 | :------ | :------ |
 | `members` | `string`[] |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
+
+### removeWorkspaces
+
+▸ **removeWorkspaces**(`workspaces`): `Promise`\<`void`\>
+
+Remove workspaces.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `workspaces` | `string`[] |
 
 #### Returns
 

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev21](../../README.md) / [Exports](../modules.md) / WorkspacesEvent
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev22](../../README.md) / [Exports](../modules.md) / WorkspacesEvent
 
 # Enumeration: WorkspacesEvent
 
