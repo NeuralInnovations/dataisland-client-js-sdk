@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev20](../../README.md) / [Exports](../modules.md) / Group
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev21](../../README.md) / [Exports](../modules.md) / Group
 
 # Class: Group
 
@@ -21,11 +21,11 @@ Group.
 - [group](Group.md#group)
 - [id](Group.md#id)
 - [members](Group.md#members)
+- [workspaces](Group.md#workspaces)
 
 ### Methods
 
 - [dispatch](Group.md#dispatch)
-- [getWorkspaces](Group.md#getworkspaces)
 - [removeMembers](Group.md#removemembers)
 - [setMembersIds](Group.md#setmembersids)
 - [setName](Group.md#setname)
@@ -83,6 +83,18 @@ Group members.
 
 [`UserDto`](../interfaces/UserDto.md)[]
 
+___
+
+### workspaces
+
+• `get` **workspaces**(): readonly [`Workspace`](Workspace.md)[]
+
+Group workspaces.
+
+#### Returns
+
+readonly [`Workspace`](Workspace.md)[]
+
 ## Methods
 
 ### dispatch
@@ -102,18 +114,6 @@ Group members.
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
-
-___
-
-### getWorkspaces
-
-▸ **getWorkspaces**(): `Promise`\<[`WorkspaceDto`](../interfaces/WorkspaceDto.md)[]\>
-
-Group workspaces.
-
-#### Returns
-
-`Promise`\<[`WorkspaceDto`](../interfaces/WorkspaceDto.md)[]\>
 
 ___
 

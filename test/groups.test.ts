@@ -27,9 +27,8 @@ test("Groups", async () => {
     expect(() => groupImpl.group.name).toThrow("Access group is not loaded.")
     expect(() => groupImpl.members).toThrow("Access group is not loaded.")
 
-    await expect(group.getWorkspaces()).resolves.not.toThrow()
-
-    console.log("group.getWorkspaces()", group.getWorkspaces())
+    expect(group.workspaces).not.toBeUndefined()
+    expect(group.workspaces).not.toBeNull()
 
     expect(group.group.name).not.toBeUndefined()
     expect(group.group.name).not.toBeNull()
@@ -60,7 +59,8 @@ test("Groups", async () => {
     const workspaces = ["workspace1", "workspace2", "workspace3"]
     await group.setWorkspaces(workspaces)
     await expect(group.setWorkspaces(workspaces)).resolves.not.toThrow("Group add workspaces, workspaces is undefined or null")
-    await expect(group.getWorkspaces()).resolves.not.toThrow()
+    expect(group.workspaces).not.toBeUndefined()
+    expect(group.workspaces).not.toBeNull()
 
     // setMembersIds
     expect(group.members.length).toBe(0)
