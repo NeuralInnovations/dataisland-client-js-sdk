@@ -6,18 +6,20 @@ import {
   AccessGroupsResponse
 } from "../../dto/accessGroupResponse"
 import { UserDto } from "../../dto/userInfoResponse"
-import { WorkspaceDto, WorkspacesResponse } from "../../dto/workspacesResponse"
+import { WorkspacesResponse } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { Group, GroupEvent, GroupId, Groups } from "./groups"
 import { OrganizationImpl } from "../organizations/organization.impl"
 import { ResponseUtils } from "../../services/responseUtils"
 import { Organization } from "../organizations/organization"
 import { UserId } from "../user/userProfile"
+import { Workspace } from "../workspaces/workspace"
 
 export class GroupImpl extends Group implements Disposable {
   private _isDisposed: boolean = false
   private _content?: AccessGroupDto
   private _members?: UserDto[]
+  private _workspaces: Workspace[] = []
 
   constructor(
     private readonly context: Context,
@@ -28,6 +30,7 @@ export class GroupImpl extends Group implements Disposable {
 
   async initFrom(id: GroupId): Promise<Group> {
     await this.reloadGroup(id)
+    await this.reloadWorkspaces()
     return this
   }
 
@@ -50,6 +53,35 @@ export class GroupImpl extends Group implements Disposable {
     this._members = group.members
   }
 
+  async reloadWorkspaces(): Promise<void> {
+    const groupWorkspaces = await this.loadWorkspaces(this.id)
+    this._workspaces.length = 0
+    this._workspaces.push(...groupWorkspaces)
+  }
+
+  async loadWorkspaces(groupId: GroupId): Promise<Workspace[]> {
+    // fetch workspaces
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/AccessGroups/workspaces")
+      .searchParam("groupId", groupId)
+      .sendGet()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get workspaces for group: ${this.id}, organization: ${this.organization.id}`, response)
+    }
+
+    // parse workspaces from the server's response
+    const workspaces = (await response!.json()) as WorkspacesResponse
+
+    // get workspaces
+    const result: Workspace[] = []
+    for (const workspaceDto of workspaces.workspaces) {
+      result.push(this.organization.workspaces.get(workspaceDto.id))
+    }
+
+    return result
+  }
+
   get id(): GroupId {
     if (this._content) {
       return this._content.id
@@ -64,21 +96,8 @@ export class GroupImpl extends Group implements Disposable {
     throw new Error("Access group is not loaded.")
   }
 
-  async getWorkspaces(): Promise<WorkspaceDto[]> {
-    // fetch workspaces
-    const response = await this.context.resolve(RpcService)
-      ?.requestBuilder("api/v1/Organizations/workspaces")
-      .searchParam("id", this.id)
-      .sendGet()
-
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to get workspaces for group: ${this.id}, organization: ${this.organization.id}`, response)
-    }
-
-    // parse workspaces from the server's response
-    const workspaces = (await response!.json()) as WorkspacesResponse
-
-    return workspaces.workspaces
+  get workspaces(): readonly Workspace[] {
+    return this._workspaces
   }
 
   get members(): UserDto[] {
@@ -109,6 +128,7 @@ export class GroupImpl extends Group implements Disposable {
       await ResponseUtils.throwError(`Failed to change group name, group: ${this.id}, organization: ${this.organization.id}`, response)
     }
 
+    // change name
     if (this._content) {
       this._content.name = name
     }
@@ -146,6 +166,9 @@ export class GroupImpl extends Group implements Disposable {
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Failed to set workspaces for group: ${this.id}, organization: ${this.organization.id}`, response)
     }
+
+    // reload workspaces
+    await this.reloadWorkspaces()
   }
 
   async setMembersIds(members: UserId[]) {

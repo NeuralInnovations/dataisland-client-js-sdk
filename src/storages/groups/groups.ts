@@ -1,9 +1,9 @@
 import { AccessGroupDto } from "../../dto/accessGroupResponse"
 import { UserDto } from "../../dto/userInfoResponse"
-import { WorkspaceDto } from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
 import { UserId } from "../user/userProfile"
 import { WorkspaceId } from "../workspaces/workspaces"
+import { Workspace } from "../workspaces/workspace"
 
 /**
  * Group id.
@@ -42,7 +42,7 @@ export abstract class Group extends EventDispatcher<GroupEvent, Group> {
   /**
    * Group workspaces.
    */
-  abstract getWorkspaces(): Promise<WorkspaceDto[]>
+  abstract get workspaces(): readonly Workspace[]
 
   /**
    * Set workspaces.
