@@ -14,6 +14,7 @@ import { ResponseUtils } from "../../services/responseUtils"
 import { Organization } from "../organizations/organization"
 import { UserId } from "../user/userProfile"
 import { Workspace } from "../workspaces/workspace"
+import { WorkspaceId } from "../workspaces/workspaces"
 
 export class GroupImpl extends Group implements Disposable {
   private _isDisposed: boolean = false
@@ -169,6 +170,29 @@ export class GroupImpl extends Group implements Disposable {
 
     // reload workspaces
     await this.reloadWorkspaces()
+  }
+
+  async removeWorkspaces(workspaces: WorkspaceId[]): Promise<void> {
+    if (workspaces === null || workspaces === undefined) {
+      throw new Error("Group removeWorkspaces, workspaces is undefined or null")
+    }
+
+    // make set of workspaces
+    const groupWorkspaces = new Set(this.workspaces.map(w => w.id))
+
+    // check argument
+    if (!workspaces.every(w => groupWorkspaces.has(w))) {
+      const notExistingWorkspaces = workspaces.filter(workspaceId => !groupWorkspaces.has(workspaceId))
+      throw new Error(`Group removeWorkspaces, workspaces contains not existing workspaces: ${notExistingWorkspaces}`)
+    }
+
+    // remove workspaces
+    for (const id of workspaces) {
+      groupWorkspaces.delete(id)
+    }
+
+    // send request to the server
+    await this.setWorkspaces(Array.from(groupWorkspaces))
   }
 
   async setMembersIds(members: UserId[]) {
