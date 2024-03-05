@@ -96,3 +96,6 @@ export async function dataIslandApp(
   }
   return await appPromise
 }
+export { Group } from "./storages/groups/group"
+export { GroupEvent } from "./storages/groups/group"
+export { GroupId } from "./storages/groups/group"
