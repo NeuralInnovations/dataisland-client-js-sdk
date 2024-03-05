@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev22](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev23](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev22
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev23
 
 ## Table of contents
 
@@ -11,6 +11,7 @@
 - [ChatsEvent](enums/ChatsEvent.md)
 - [FilesEvent](enums/FilesEvent.md)
 - [GroupEvent](enums/GroupEvent.md)
+- [GroupsEvent](enums/GroupsEvent.md)
 - [OrganizationEvent](enums/OrganizationEvent.md)
 - [OrganizationsEvent](enums/OrganizationsEvent.md)
 - [StepStatus](enums/StepStatus.md)

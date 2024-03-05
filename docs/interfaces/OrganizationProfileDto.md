@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev22](../../README.md) / [Exports](../modules.md) / OrganizationProfileDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev23](../../README.md) / [Exports](../modules.md) / OrganizationProfileDto
 
 # Interface: OrganizationProfileDto
 

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev22](../../README.md) / [Exports](../modules.md) / Group
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev23](../../README.md) / [Exports](../modules.md) / Group
 
 # Class: Group
 
@@ -106,7 +106,7 @@ readonly [`Workspace`](Workspace.md)[]
 
 | Name | Type |
 | :------ | :------ |
-| `input` | [`Input`](../interfaces/Input.md)\<[`GroupEvent`](../enums/GroupEvent.md), [`Group`](Group.md)\> |
+| `input` | [`Input`](../interfaces/Input.md)\<[`UPDATED`](../enums/GroupEvent.md#updated), [`Group`](Group.md)\> |
 
 #### Returns
 
@@ -235,8 +235,8 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `callback` | (`event`: [`Event`](../interfaces/Event.md)\<[`GroupEvent`](../enums/GroupEvent.md), [`Group`](Group.md)\>) => `void` |
-| `type?` | [`GroupEvent`](../enums/GroupEvent.md) |
+| `callback` | (`event`: [`Event`](../interfaces/Event.md)\<[`UPDATED`](../enums/GroupEvent.md#updated), [`Group`](Group.md)\>) => `void` |
+| `type?` | [`UPDATED`](../enums/GroupEvent.md#updated) |
 
 #### Returns
 
