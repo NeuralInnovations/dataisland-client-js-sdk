@@ -1,5 +1,5 @@
-import { GroupImpl } from "../src/storages/groups/groups.impl"
 import { testInOrganization } from "./setup"
+import { GroupImpl } from "../src/storages/groups/group.impl"
 
 test("Groups", async () => {
   await testInOrganization(async (app, org) => {

@@ -1,9 +1,10 @@
 import { Workspaces } from "../workspaces/workspaces"
 import { OrganizationId } from "./organizations"
-import { GroupId, Groups } from "../groups/groups"
+import { Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
 import { EventDispatcher } from "../../events"
 import { UserDto } from "../../dto/userInfoResponse"
+import { GroupId } from "../groups/group"
 
 
 /**
