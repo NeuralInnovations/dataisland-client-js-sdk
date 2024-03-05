@@ -17,7 +17,7 @@ import { ResponseUtils } from "../src/services/responseUtils"
 import { UnitTest, appTest } from "../src/unitTest"
 
 test("CredentialService", async () => {
-  await appTest(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     const app = await dataIslandApp("test-services", async builder => {
       builder.env.unitTest = UnitTest.DO_NOT_START
     })

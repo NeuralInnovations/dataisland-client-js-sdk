@@ -8,6 +8,8 @@ import { RpcService } from "../../services/rpcService"
 import { OrganizationWorkspaces } from "../../dto/userInfoResponse"
 import { WorkspaceDto } from "../../dto/workspacesResponse"
 import { ResponseUtils } from "../../services/responseUtils"
+import { UserProfileService } from "../../services/userProfileService"
+import { UserProfile } from "../user/userProfile"
 
 export class WorkspacesImpl extends Workspaces {
   private readonly _workspaces: WorkspaceImpl[] = []
@@ -184,7 +186,8 @@ export class WorkspacesImpl extends Workspaces {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to fetch workspaces in organization: ${organizationId}`, response)
+      const userProfile = this.context.resolve(UserProfileService)?.userProfile as UserProfile
+      await ResponseUtils.throwError(`Failed to fetch workspaces in organization: ${organizationId}, userId: ${userProfile.id}, email: ${userProfile.email}`, response)
     }
 
     // parse workspaces from the server's response

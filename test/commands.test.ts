@@ -15,7 +15,7 @@ class CmdHandler extends CommandHandler<Cmd> {
 }
 
 test("Commands test", async () => {
-  await appTest(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     const app = await dataIslandApp("test-commands", async builder => {
       builder.registerCommand(Cmd, context => new CmdHandler(context))
     })
