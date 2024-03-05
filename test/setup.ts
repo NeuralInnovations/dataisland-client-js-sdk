@@ -1,13 +1,52 @@
 import { dataIslandApp, DataIslandApp, DebugCredential } from "../src"
 import { Organization } from "../src"
 import { Workspace } from "../src"
+import { jest } from "@jest/globals"
 
 export const HOST = <string>process.env.HOST
-export const TOKEN = <string>process.env.TOKEN
+const TOKEN = <string>process.env.TOKEN
+const RUNNER_ID = <string>process.env.RUNNER_ID
+let globalIndex = 0
+const map = new Set<string>()
 
-export const randomHash = (length: number = 5) => {
-  if (length <= 0) length = 1
-  return `name-${((Math.random() * Math.pow(10, length)) | 0).toString(16)}`
+const randomInt = (length: number): number => {
+  if (length <= 0 || length === undefined || length === null) {
+    throw new Error("Invalid length")
+  }
+  const randomNumber = Math.random()
+  const pw = Math.pow(10, length)
+  const power = (randomNumber * pw + (++globalIndex))
+  const time = new Date().getTime() + jest.now()
+  const result = Math.abs(Math.round((power + time)))
+
+  return result
+}
+
+export const newTestUserToken = (): string => {
+  const filenameSplit = __filename.split("/")
+  if (filenameSplit.length < 2) {
+    throw new Error("Invalid filename")
+  }
+  const filename = filenameSplit[filenameSplit.length - 1].replace(".ts", "").replace(".js", "")
+  const userToken = TOKEN + "unittest_" + RUNNER_ID + filename + Math.abs(new Date().getTime()).toString(16) + randomHash(12) + "@ni.solutions"
+  if (userToken.includes("unittest_@ni.solutions")) {
+    throw new Error("Invalid token")
+  }
+  console.log(userToken)
+  if(map.has(userToken)) {
+    throw new Error(`Token already exists ${userToken}`)
+  }
+  map.add(userToken)
+  return userToken
+}
+
+export const randomHash = (length: number = 10) => {
+  if (length <= 0 || length === undefined || length === null) length = 5
+  let hash = `${randomInt(length).toString(16)}`
+  if (hash.startsWith("-")) {
+    hash = hash.slice(1, hash.length)
+  }
+  return hash
 }
 
 export const testInOrganization = async (func: (app: DataIslandApp, org: Organization) => Promise<void>, config ?: {
@@ -15,15 +54,15 @@ export const testInOrganization = async (func: (app: DataIslandApp, org: Organiz
     token: string
   }
 ): Promise<void> => {
-  const randomName = `org-name-${randomHash()}`
+  const randomName = `org-${randomHash(20)}`
   const app = await dataIslandApp(randomName, async builder => {
     builder.useHost(config?.host ?? HOST)
-    builder.useCredential(new DebugCredential(config?.token ?? TOKEN))
+    builder.useCredential(new DebugCredential(config?.token ?? newTestUserToken()))
     builder.registerMiddleware(async (req, next) => {
       const url = req.url
-      console.log("REQUEST", url, req.method)
+      // console.log("REQUEST", url, req.method)
       const response = await next(req)
-      console.log("RESPONSE", url, response.status)
+      // console.log("RESPONSE", url, response.status)
       return response
     })
   })

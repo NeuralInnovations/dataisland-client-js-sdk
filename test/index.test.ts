@@ -12,7 +12,10 @@ import { CredentialService } from "../src/services/credentialService"
 import { RpcService } from "../src/services/rpcService"
 import { AppBuilder } from "../src"
 import { UnitTest, appTest } from "../src/unitTest"
-import { HOST, randomHash, TOKEN } from "./setup"
+import { HOST, randomHash, newTestUserToken } from "./setup"
+import {
+  DeleteUserFullCommand
+} from "../src/commands/deleteUserFullCommandHandler"
 
 test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)
@@ -22,13 +25,14 @@ test("Default SDK", async () => {
   // default
   const app = await dataIslandApp(DEFAULT_NAME, async (builder: AppBuilder) => {
     builder.useHost(HOST)
-    builder.useCredential(new DebugCredential(TOKEN))
+    builder.useCredential(new DebugCredential(newTestUserToken()))
   })
   expect(app).not.toBeUndefined()
+  await app.context.execute(new DeleteUserFullCommand())
 })
 
 test("SDK, middleware", async () => {
-  await appTest(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     const app = await dataIslandApp("test-settings", async (builder: AppBuilder) => {
       builder.useHost("https://test.com")
       builder.useAutomaticDataCollectionEnabled(false)
@@ -45,7 +49,7 @@ test("SDK, middleware", async () => {
 })
 
 test("SDK, services", async () => {
-  await appTest(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     const app = await dataIslandApp("test-sdk")
     const middlewareService = app.resolve(MiddlewareService)
     expect(middlewareService).not.toBeUndefined()
@@ -57,7 +61,7 @@ test("SDK, services", async () => {
 })
 
 test("SDK, middleware", async () => {
-  await appTest(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     const app = await dataIslandApp("test-middleware")
     const middlewareService = app.resolve(MiddlewareService)
     expect(middlewareService).not.toBeUndefined()
@@ -93,7 +97,7 @@ test("SDK, middleware", async () => {
 })
 
 test("SDK, it is impossible to setup the same application", async () => {
-  await appTest(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances
     // we use a random identifier every time
@@ -109,7 +113,7 @@ test("SDK, it is impossible to setup the same application", async () => {
 })
 
 test("SDK, setup and get this app", async () => {
-  await appTest(UnitTest.DEFAULT, async () => {
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     // this test is not stable if you run all tests at once
     // because the app is cached all app instances
     // we use a random identifier every time

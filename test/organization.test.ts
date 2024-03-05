@@ -1,15 +1,19 @@
 import { dataIslandApp, DebugCredential } from "../src"
-import { HOST, randomHash, testInOrganization, TOKEN } from "./setup"
+import { HOST, randomHash, testInOrganization, newTestUserToken } from "./setup"
 import {
   OrganizationImpl
 } from "../src/storages/organizations/organization.impl"
 import {
-  OrganizationsEvent,
+  OrganizationsEvent
 } from "../src"
+import {
+  DeleteUserFullCommand
+} from "../src/commands/deleteUserFullCommandHandler"
+
 test.skip("Delete all organizations", async () => {
   const app = await dataIslandApp("delete-all", async builder => {
     builder.useHost(HOST)
-    builder.useCredential(new DebugCredential(TOKEN))
+    builder.useCredential(new DebugCredential(newTestUserToken()))
   })
   for (const organization of app.organizations.collection) {
     await app.organizations.delete(organization.id)
@@ -18,12 +22,12 @@ test.skip("Delete all organizations", async () => {
 
 test("Organization", async () => {
   // make random name
-  const randomName = `org-test-${randomHash()}`
+  const randomName = `org-test-${randomHash(20)}`
 
   // create app
   const app = await dataIslandApp(randomName, async builder => {
     builder.useHost(HOST)
-    builder.useCredential(new DebugCredential(TOKEN))
+    builder.useCredential(new DebugCredential(newTestUserToken()))
   })
 
   // save init length
@@ -99,4 +103,6 @@ test("Organization", async () => {
     })
 
   })
+
+  await app.context.execute(new DeleteUserFullCommand())
 })
