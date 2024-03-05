@@ -86,7 +86,7 @@ test("Workspace create / delete", async () => {
 })
 
 test("Workspace, change", async () => {
-  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
       const newName = "new-name"
       const newDescription = "new-name"

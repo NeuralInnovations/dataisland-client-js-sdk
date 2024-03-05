@@ -4,8 +4,9 @@ import { Workspace } from "../src"
 import { jest } from "@jest/globals"
 
 export const HOST = <string>process.env.HOST
-const TOKEN = <string>process.env.TOKEN
-const RUNNER_ID = <string>process.env.RUNNER_ID
+const UNITTEST_TOKEN = <string>process.env.UNITTEST_TOKEN
+const UNITTEST_RUNNER_ID = <string>process.env.RUNNER_ID
+
 let globalIndex = 0
 const map = new Set<string>()
 
@@ -27,13 +28,15 @@ export const newTestUserToken = (): string => {
   if (filenameSplit.length < 2) {
     throw new Error("Invalid filename")
   }
+
   const filename = filenameSplit[filenameSplit.length - 1].replace(".ts", "").replace(".js", "")
-  const userToken = TOKEN + "unittest_" + RUNNER_ID + filename + Math.abs(new Date().getTime()).toString(16) + randomHash(12) + "@ni.solutions"
-  if (userToken.includes("unittest_@ni.solutions")) {
-    throw new Error("Invalid token")
-  }
-  console.log(userToken)
-  if(map.has(userToken)) {
+  const hash = UNITTEST_RUNNER_ID + filename + Math.abs(new Date().getTime()).toString(16) + randomHash(12)
+
+  const token = "token_" + hash
+  const email = "unittest_" + hash + "@ni.solutions"
+  const userToken = UNITTEST_TOKEN.replace("{TOKEN}", token).replace("{EMAIL}", email)
+
+  if (map.has(userToken)) {
     throw new Error(`Token already exists ${userToken}`)
   }
   map.add(userToken)

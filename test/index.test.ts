@@ -22,13 +22,15 @@ test("SDK_VERSION", () => {
 })
 
 test("Default SDK", async () => {
-  // default
-  const app = await dataIslandApp(DEFAULT_NAME, async (builder: AppBuilder) => {
-    builder.useHost(HOST)
-    builder.useCredential(new DebugCredential(newTestUserToken()))
+  await appTest(UnitTest.DO_NOT_START_SDK, async () => {
+    // default
+    const app = await dataIslandApp(DEFAULT_NAME, async (builder: AppBuilder) => {
+      builder.useHost(HOST)
+      builder.useCredential(new DebugCredential(newTestUserToken()))
+    })
+    expect(app).not.toBeUndefined()
+    await app.context.execute(new DeleteUserFullCommand())
   })
-  expect(app).not.toBeUndefined()
-  await app.context.execute(new DeleteUserFullCommand())
 })
 
 test("SDK, middleware", async () => {
