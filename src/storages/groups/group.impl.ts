@@ -19,6 +19,7 @@ export class GroupImpl extends Group implements Disposable {
   private _content?: AccessGroupDto
   private _members?: UserDto[]
   private _workspaces: Workspace[] = []
+  private _id?: GroupId
 
   constructor(
     private readonly context: Context,
@@ -28,8 +29,16 @@ export class GroupImpl extends Group implements Disposable {
   }
 
   async initFrom(id: GroupId): Promise<Group> {
-    await this.reloadGroup(id)
-    await this.reloadWorkspaces()
+    // set id
+    this._id = id
+
+    // reload group and workspaces
+    const groupPromise = this.reloadGroup(id)
+    const workspacePromise = this.reloadWorkspaces(id)
+
+    // wait for all promises
+    await Promise.all([groupPromise, workspacePromise])
+    
     return this
   }
 
@@ -52,8 +61,8 @@ export class GroupImpl extends Group implements Disposable {
     this._members = group.members
   }
 
-  async reloadWorkspaces(): Promise<void> {
-    const groupWorkspaces = await this.loadWorkspaces(this.id)
+  async reloadWorkspaces(id: GroupId): Promise<void> {
+    const groupWorkspaces = await this.loadWorkspaces(id)
     this._workspaces.length = 0
     this._workspaces.push(...groupWorkspaces)
   }
@@ -82,8 +91,8 @@ export class GroupImpl extends Group implements Disposable {
   }
 
   get id(): GroupId {
-    if (this._content) {
-      return this._content.id
+    if (this._id) {
+      return this._id
     }
     throw new Error("Access group is not loaded.")
   }
@@ -173,7 +182,7 @@ export class GroupImpl extends Group implements Disposable {
     }
 
     // reload workspaces
-    await this.reloadWorkspaces()
+    await this.reloadWorkspaces(this.id)
 
     // dispatch event
     this.dispatch({
