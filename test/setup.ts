@@ -62,7 +62,7 @@ export const testInOrganization = async (func: (app: DataIslandApp, org: Organiz
     builder.useHost(config?.host ?? HOST)
     builder.useCredential(new DebugCredential(config?.token ?? newTestUserToken()))
     builder.registerMiddleware(async (req, next) => {
-      const url = req.url
+      // const url = req.url
       // console.log("REQUEST", url, req.method)
       const response = await next(req)
       // console.log("RESPONSE", url, response.status)
