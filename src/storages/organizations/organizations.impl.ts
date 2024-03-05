@@ -175,23 +175,32 @@ export class OrganizationsImpl extends Organizations {
     organizations: OrganizationDto[],
     settings: UserSettings | null | undefined
   ): Promise<void> {
+
+    // set current organization
     this.currentOrganizationId = settings?.activeOrganizationId
+
+    // wait list
+    const waitList: Promise<OrganizationImpl>[] = []
+
+    // init organizations
     for (const organization of organizations) {
       // create organization and init from content
-      const org = await new OrganizationImpl(this.context).initFrom(
+      const orgPromise = new OrganizationImpl(this.context).initFrom(
         organization,
         adminInOrganization.includes(organization.id)
       )
 
+      // add organization to wait list
+      waitList.push(orgPromise)
+    }
+
+    // wait for all organizations
+    const orgImpls = await Promise.all(waitList)
+
+    // add organizations to collection
+    for (const org of orgImpls) {
       // add organization to collection
       this.organizations.push(org)
-
-      // dispatch event, organization added
-      this.dispatch({
-        type: OrganizationsEvent.ADDED,
-        data: org
-      })
     }
   }
-
 }
