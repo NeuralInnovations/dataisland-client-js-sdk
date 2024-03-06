@@ -19,7 +19,6 @@
 
 - [ask](Chat.md#ask)
 - [getAnswer](Chat.md#getanswer)
-- [update](Chat.md#update)
 
 ## Constructors
 
@@ -115,15 +114,3 @@ Get answer by id
 #### Returns
 
 `Answer`
-
-___
-
-### update
-
-▸ **update**(): `Promise`\<`void`\>
-
-Update chat
-
-#### Returns
-
-`Promise`\<`void`\>
