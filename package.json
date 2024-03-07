@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.0.1-dev25",
+  "version": "0.0.1-dev26",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -11,6 +11,15 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/NeuralInnovations/dataisland-client-js-sdk.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint --ext .ts,.tsx src test",
+    "lint:fix": "eslint --fix --ext .ts,.tsx src test",
+    "docs": "typedoc --disableSources --includeVersion --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js",
+    "version-up-dev": "node scripts/version/up-dev.js && rm package-lock.json && npm install && npm run build && npm run lint:fix && npm run docs",
+    "release": "rm package-lock.json && npm install && npm run build && npm run lint:fix && npm run docs"
   },
   "publishConfig": {
     "access": "public"
@@ -32,15 +41,6 @@
   ],
   "engines": {
     "node": ">=16"
-  },
-  "scripts": {
-    "build": "tsc",
-    "test": "jest",
-    "lint": "eslint --ext .ts,.tsx src test",
-    "lint:fix": "eslint --fix --ext .ts,.tsx src test",
-    "docs": "typedoc --disableSources --includeVersion --plugin typedoc-plugin-markdown --out docs src/index.ts && node scripts/docs/index.js",
-    "version-up-dev": "node scripts/version/up-dev.js && rm package-lock.json && npm install && npm run build && npm run lint:fix && npm run docs",
-    "release": "rm package-lock.json && npm install && npm run build && npm run lint:fix && npm run docs"
   },
   "keywords": [
     "dataisland",
