@@ -214,7 +214,7 @@ You can access all chats list using **collection** property.
 const chats = organization.chats.collection
 ```
 
-Main chat functionality is answer handling. You can create, fetch and cancel answer in the chat. Answer is a data object which contains question, answer, answer steps and sources for them.
+Main chat functionality is answer handling. You can create and cancel answer in the chat. Answer is a data object which contains question, answer (tokens), and answer sources.
 
 Here are some examples:
 
@@ -222,49 +222,33 @@ Here are some examples:
 const answer = await chat.ask("Hello!", ChatAnswerType.SHORT)
 
 await chat.getAnswer(answer.id).cancel()
-
 ```
 
-Answer can be updated using fetch method.
-
-```
-await chat.getAnswer(answer.id).fetch()
-```
-
-Answer have two main states: running and done. This states is represented in answer status propery.
+```Answer have two main states: running and done. This states is represented in answer status propery.
 Main statuses are RUNNING, SUCCESS, CANCELED, FAIL. You can use them to correctly draw answer in chat.
 
 ```
 status = chat.getAnswer(answer.id).status
 ```
-
-Answer is consists of step. Main steps are Prepare, Generate answer, Sources and Done. Each step also includes tokens that model generate during execution. You can access them using fetch_tokens method.
-
-```
-const tokens = await chat.getAnswer(answer.id).fetchTokens(StepType.DONE, 0)
-```
-
-Every step also includes Sources that were used during execution. Step "Sources" contains all sources of all answer steps.
+You can access answer for your question in "tokens" property, question is stored in "question' property.
 
 ```
-const sources = await chat.getAnswer(answer.id).sources(StepType.SOURCES)
+const tokens = await chat.getAnswer(answer.id).tokens
+const question = await chat.getAnswer(answer.id).question
 ```
+Every step also includes Sources that were used during execution. Property "sources" contains all sources of all answer steps.
 
+```
+const sources = await chat.getAnswer(answer.id).sources
+```
 If you want to get chat history, you can access chat.collection property
 
 ```
 const answers = chat.collection
 ```
-
-After some answer is done, it's content property is become available. There you can have answer data object to draw an answer in history.Every answer from history is accessed from collection after it status is changed from RUNNING.
-
-```
-const answer = chat.getAnswer(id).content
-```
-
 #### Events
 
-Chat object have a variety of events. You can track chat and answer creation and deletion. Answer also contains "update" event.
+Chat object have a variety of events. You can track chat and answer creation and deletion. Answer also contains "update" event for updating answer view and stream answer tokens.
 
 Chat events:
 
@@ -282,7 +266,6 @@ Event subscribe example:
 ```
 chat.answer.subscribe((event) => { const answer = event.data }, AnswerEvent.UPDATED)
 ```
-
 ---
 
 ### Use access groups
@@ -300,7 +283,6 @@ const group = await organization.accessGroups.create(
 
 await organization.accessGroups.delete(group.id)
 ```
-
 ---
 
 ### Use Invites

@@ -3,7 +3,7 @@ export enum UnitTest {
   DO_NOT_START = 1 << 0,
   DO_NOT_PRINT_INITIALIZED_LOG = 1 << 1,
 
-  DEFAULT = DO_NOT_START | DO_NOT_PRINT_INITIALIZED_LOG
+  DO_NOT_START_SDK = DO_NOT_START | DO_NOT_PRINT_INITIALIZED_LOG
 }
 
 export type UnitTestProfileSyncAction = () => void
@@ -17,7 +17,7 @@ class AppSdkUnitTest {
   }
 
   public static async test(
-    unitTest: UnitTest = UnitTest.DEFAULT,
+    unitTest: UnitTest = UnitTest.DO_NOT_START_SDK,
     func: UnitTestProfileSyncAction | UnitTestProfileAsyncAction
   ): Promise<void> {
     this._stack.push(unitTest)
@@ -38,7 +38,7 @@ class AppSdkUnitTest {
 }
 
 export const appTest = async (
-  unitTest: UnitTest = UnitTest.DEFAULT,
+  unitTest: UnitTest = UnitTest.DO_NOT_START_SDK,
   func: UnitTestProfileSyncAction | UnitTestProfileAsyncAction
 ): Promise<void> => {
   await AppSdkUnitTest.test(unitTest, func)

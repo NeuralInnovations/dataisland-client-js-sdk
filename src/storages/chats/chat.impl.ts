@@ -1,6 +1,6 @@
 import { Chat, ChatAnswerType } from "./chat"
 import { Disposable } from "../../disposable"
-import { Answer } from "./answer"
+import { Answer, AnswerId } from "./answer"
 import { ChatDto } from "../../dto/chatResponse"
 import { Context } from "../../context"
 import { AnswerImpl } from "./answer.impl"
@@ -27,7 +27,7 @@ export class ChatImpl extends Chat implements Disposable {
     // init answers
     for (const ans of chat.answers) {
       // create answer implementation
-      const answer = await new AnswerImpl(this, this.context).initFromData(ans)
+      const answer = new AnswerImpl(this, this.context).initFromHistory(ans)
 
       // add answer to the collection
       this._answers.push(answer)
@@ -52,9 +52,9 @@ export class ChatImpl extends Chat implements Disposable {
     return this._isDisposed
   }
 
-  public getAnswer(id: string): Answer {
+  public getAnswer(id: AnswerId): Answer {
     const answer = this._answers.find(answer => answer.id === id)
-    if (answer){
+    if (answer) {
       return answer
     }
     throw new Error(`Answer with id ${id} is not found`)
@@ -80,43 +80,12 @@ export class ChatImpl extends Chat implements Disposable {
     const id = (await response!.json()).id
 
     // create answer implementation
-    const answer = await new AnswerImpl(this, this.context).initFromId(id)
+    const answer = await new AnswerImpl(this, this.context).initNew(id, message)
 
     // add answer to the collection
     this._answers.push(answer)
 
     return answer
-  }
-
-  async update(): Promise<void>{
-    const response = await this.context
-      .resolve(RpcService)
-      ?.requestBuilder("api/v1/Chats")
-      .searchParam("id", this.id)
-      .sendGet()
-
-    // check response status
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to update chat ${this.id}`, response)
-    }
-
-    const chat = (await response!.json()).chat as ChatDto
-
-    this._content = chat
-
-    for (const ans of chat.answers) {
-      let answer = this._answers.find(answer => answer.id === ans.id)
-      if (!answer){
-        // create answer implementation
-        answer = new AnswerImpl(this, this.context).initFromData(ans)
-      }else{
-        this._answers.splice(this._answers.indexOf(answer), 1)
-
-        answer.initFromData(ans)
-      }
-      // add answer to the collection
-      this._answers.push(answer)
-    }
   }
 
   dispose(): void {

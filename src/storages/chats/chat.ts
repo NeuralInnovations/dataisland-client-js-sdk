@@ -41,9 +41,5 @@ export abstract class Chat {
    */
   abstract ask(message: string, answerType: ChatAnswerType): Promise<Answer>
 
-  /**
-   * Update chat
-   */
-  abstract update(): Promise<void>
 }
 

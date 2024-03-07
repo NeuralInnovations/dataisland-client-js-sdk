@@ -20,6 +20,10 @@ import { OrganizationService } from "../services/organizationService"
 import { Organizations } from "../storages/organizations/organizations"
 import { UserProfile } from "../storages/user/userProfile"
 import { isUnitTest, UnitTest } from "../unitTest"
+import {
+  DeleteUserFullCommand,
+  DeleteUserFullCommandHandler
+} from "../commands/deleteUserFullCommandHandler"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -82,6 +86,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     // register commands
     builder.registerCommand(StartCommand, (context: Context) => {
       return new StartCommandHandler(context)
+    })
+    builder.registerCommand(DeleteUserFullCommand, (context: Context) => {
+      return new DeleteUserFullCommandHandler(context)
     })
 
     // register services

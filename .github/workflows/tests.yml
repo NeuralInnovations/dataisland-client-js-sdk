@@ -15,9 +15,6 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    concurrency:
-      group: unitTests
-      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
 
@@ -35,4 +32,6 @@ jobs:
         run: |
           echo "HOST=${{ secrets.TEST_HOST }}" > .env.test
           echo "TOKEN=${{ secrets.TEST_TOKEN }}" >> .env.test
+          echo "UNITTEST_TOKEN=${{ secrets.UNITTEST_TOKEN }}" >> .env.test
+          echo "UNITTEST_RUNNER_ID=${{ github.run_id }}" >> .env.test
           npm run test >> $GITHUB_STEP_SUMMARY
