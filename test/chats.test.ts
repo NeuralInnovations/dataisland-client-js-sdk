@@ -1,8 +1,9 @@
-import { AnswerStatus, ChatAnswerType, SourceDto, StepType } from "../src"
+import { AnswerStatus, ChatAnswerType } from "../src"
 import { AnswerImpl } from "../src/storages/chats/answer.impl"
 import { ChatImpl } from "../src/storages/chats/chat.impl"
 import { testInOrganization } from "./setup"
 import { appTest, UnitTest } from "../src/unitTest"
+import { AnswerEvent } from "../src/storages/chats/answer"
 
 test("Chat create, ask question, delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -31,56 +32,34 @@ test("Chat create, ask question, delete", async () => {
       // check not throw
       await expect(askPromise).resolves.not.toThrow()
 
-      let answer = await askPromise
+      const answer = await askPromise
 
       expect(answer.id).toBeTruthy()
       expect(answer.status).toBe(AnswerStatus.RUNNING)
+      expect(answer.question).toBe(question)
 
-      while (answer.status !== AnswerStatus.SUCCESS) {
-        await new Promise(r => setTimeout(r, 300))
-        await chat.getAnswer(answer.id).fetch()
-        answer = chat.getAnswer(answer.id)
+      let tokens = ""
+      let answer_ready = false
+
+      answer.subscribe((event) => {
+        if (event.type == AnswerEvent.UPDATED) {
+          expect(event.data).toBeTruthy()
+          expect(event.data.id).not.toBeUndefined()
+          expect(event.data.status).not.toBeUndefined()
+
+          process.stdout.write(event.data.tokens.substring(tokens.length))
+
+          tokens = event.data.tokens
+
+          if (event.data.status != AnswerStatus.RUNNING) {
+            answer_ready = true
+          }
+        }
+      })
+
+      while (!answer_ready) {
+        await new Promise(f => setTimeout(f, 500))
       }
-
-      expect(answer).toBeTruthy()
-      expect(answer.id).not.toBeUndefined()
-      expect(answer.status).not.toBeUndefined()
-
-      expect(chat.getAnswer(answer.id).content).not.toBeUndefined()
-
-      const tokens = await answer.fetchTokens(StepType.DONE, 0)
-
-      expect(tokens.step_tokens.length).toBeGreaterThan(0)
-
-      await expect(answer.fetchTokens(StepType.PREPARE, 0)).rejects.toThrow(`Step with type ${StepType.PREPARE} is not found`)
-
-      await expect(answer.cancel()).rejects.toThrow() // ???
-
-      const answerImpl = new AnswerImpl(chat, app.context)
-      const type = StepType.SOURCES
-
-      const answerDto = {
-        id: answer.id,
-        sources: [],
-        chatId: chat.id,
-        question: question,
-        context: app.name,
-        timestamp: 123
-      }
-
-      answerImpl.initFromData(answerDto)
-      expect(answer.id).toBe(answer.id)
-
-      const wrongStepTpe = StepType.PREPARE
-      const sources: SourceDto[] = []
-
-      await expect(answer.sources(wrongStepTpe)).rejects.toThrow(`Step with type ${wrongStepTpe} is not found, answer: ${answer.id}, organization: ${chat.organization.id}`)
-
-      const fetchSpy = jest.spyOn(answer, "fetch").mockResolvedValueOnce()
-      const result = await answer.sources(type)
-
-      expect(fetchSpy).toHaveBeenCalled()
-      expect(result).toEqual(sources)
 
       // check delete
       await expect(org.chats.delete(chat.id)).resolves.not.toThrow()

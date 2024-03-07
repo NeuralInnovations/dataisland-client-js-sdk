@@ -4,7 +4,6 @@ import {
   AnswerStatus,
   AnswerStepDto,
   FetchAnswerResponse,
-  FetchTokensResponse,
   SourceDto,
   StepType
 } from "../../dto/chatResponse"
@@ -14,11 +13,13 @@ import { Answer, AnswerEvent, AnswerId } from "./answer"
 import { Chat } from "./chat"
 
 export class AnswerImpl extends Answer {
-  private _content?: AnswerDto
 
   private _steps?: AnswerStepDto[]
   private _status?: AnswerStatus
   private _id?: AnswerId
+  private _question?: string
+  private _sources?: SourceDto[]
+  private _answer?: string
 
   constructor(
     private readonly chat: Chat,
@@ -26,75 +27,53 @@ export class AnswerImpl extends Answer {
     super()
   }
 
-  initFromData(answer: AnswerDto): AnswerImpl {
-    this._content = answer
+  initFromHistory(answer: AnswerDto): AnswerImpl {
     this._id = answer.id
+    this._question = answer.question
+    this._answer = answer.context
+    this._sources = answer.sources
 
     return this
   }
 
-  async initFromId(id: AnswerId): Promise<AnswerImpl> {
+  async initNew(id: AnswerId, question: string): Promise<AnswerImpl> {
     this._id = id
+    this._question = question
+    this._answer = ""
 
-    // fetch answer
     await this.fetch()
 
-    this.dispatch({
-      type: AnswerEvent.ADDED,
-      data: this
-    })
-
     return this
   }
 
-  get id(): string {
-    return <string>this._id
+  get id(): AnswerId {
+    return <AnswerId>this._id
   }
 
   get status(): AnswerStatus {
     return <AnswerStatus>this._status
   }
 
-  get content(): AnswerDto {
-    if (this.status != AnswerStatus.RUNNING){
-      return <AnswerDto>this._content
+  get question(): string {
+    return <string>this._question
+  }
+
+  get sources(): SourceDto[] {
+    return <SourceDto[]>this._sources
+  }
+
+  get tokens(): string {
+    return <string>this._answer
+  }
+
+  public fetchAfter() {
+    if (this._status === undefined || this._status === AnswerStatus.RUNNING) {
+      setTimeout(async () => await this.fetch(), 300)
     }
-    throw new Error("Answer status is running, please use fetch() or fetch_tokens()")
   }
 
   private getStep(type: StepType): AnswerStepDto | undefined {
     return this._steps?.find(step => step.type === type)
-  }
-
-  async sources(type: StepType): Promise<SourceDto[]> {
-    // fetch answer
-    await this.fetch()
-    // get step
-    const step = this.getStep(type)
-
-    // check step
-    if (!step) {
-      throw new Error(`Step with type ${type.toString()} is not found, answer: ${this.id}, organization: ${this.chat.organization.id}`)
-    }
-
-    // get sources
-    const response = await this.context
-      .resolve(RpcService)
-      ?.requestBuilder("api/v1/Chats/answer/sources")
-      .searchParam("chat_uid", this.chat.id)
-      .searchParam("uid", this.id)
-      .searchParam("step_id", step.id)
-      .sendGet()
-
-    // check response status
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to get sources for ${type.toString()}, answer: ${this.id}, organization: ${this.chat.organization.id}`, response)
-    }
-
-    // parse sources from the server's response
-    const sources = (await response!.json()).sources as SourceDto[]
-
-    return sources
   }
 
   async fetch(): Promise<void> {
@@ -121,46 +100,22 @@ export class AnswerImpl extends Answer {
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
 
+    if (this.getStep(StepType.GENERATE_ANSWER) !== undefined) {
+      const step = this.getStep(StepType.GENERATE_ANSWER)
+      this._answer = step?.tokens.join("")
+    }
+
+    if (this.getStep(StepType.SOURCES) !== undefined) {
+      const sources_step = this.getStep(StepType.SOURCES)
+      this._sources = sources_step?.sources
+    }
+
     this.dispatch({
       type: AnswerEvent.UPDATED,
       data: this
     })
 
-    if (this._status != AnswerStatus.RUNNING){
-      await this.chat.update()
-    }
-  }
-
-  async fetchTokens(type: StepType, token_start_at: number): Promise<FetchTokensResponse> {
-    // fetch answer
-    await this.fetch()
-    // get step
-    const step = this.getStep(type)
-
-    // check step
-    if (!step) {
-      throw new Error(`Step with type ${type.toString()} is not found`)
-    }
-
-    // get tokens
-    const response = await this.context
-      .resolve(RpcService)
-      ?.requestBuilder("api/v1/Chats/answer/fetch/tokens")
-      .searchParam("chat_uid", this.chat.id)
-      .searchParam("uid", this.id)
-      .searchParam("step_id", step.id)
-      .searchParam("token_start_at", token_start_at.toString())
-      .sendGet()
-
-    // check response status
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to get sources for ${type.toString()}`, response)
-    }
-
-    // parse tokens from the server's response
-    const tokens = (await response!.json()) as FetchTokensResponse
-
-    return tokens
+    this.fetchAfter()
   }
 
   async cancel(): Promise<void> {

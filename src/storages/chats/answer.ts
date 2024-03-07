@@ -1,9 +1,6 @@
 import {
-  AnswerDto,
   AnswerStatus,
-  FetchTokensResponse,
-  SourceDto,
-  StepType
+  SourceDto
 } from "../../dto/chatResponse"
 import { EventDispatcher } from "../../events"
 
@@ -13,6 +10,7 @@ export type StepId = string
 export enum AnswerEvent {
   ADDED = "added",
   CANCALLED = "cancelled",
+  FAILED = "failed",
   UPDATED = "updated"
 }
 
@@ -26,7 +24,12 @@ export abstract class Answer extends EventDispatcher<AnswerEvent, Answer> {
   /**
    * Answer data object
    */
-  abstract get content(): AnswerDto
+  abstract get question(): string
+
+  /**
+   * Answer tokens
+   */
+  abstract get tokens(): string
 
   /**
    * Answer status.
@@ -36,17 +39,7 @@ export abstract class Answer extends EventDispatcher<AnswerEvent, Answer> {
   /**
    * Answer sources.
    */
-  abstract sources(type: StepType): Promise<SourceDto[]>
-
-  /**
-   * Fetch answer.
-   */
-  abstract fetch(): Promise<void>
-
-  /**
-   * Fetch answer.
-   */
-  abstract fetchTokens(type: StepType, tokenStartAt: number): Promise<FetchTokensResponse>
+  abstract get sources(): SourceDto[]
 
   /**
    * Cancel answer
