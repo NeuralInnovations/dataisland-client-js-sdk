@@ -102,18 +102,28 @@ export class AnswerImpl extends Answer {
 
     if (this.getStep(StepType.GENERATE_ANSWER) !== undefined) {
       const step = this.getStep(StepType.GENERATE_ANSWER)
-      this._answer = step?.tokens.join("")
+      const step_tokens = step?.tokens.join("")
+      if (this._answer !== step_tokens){
+        this._answer = step_tokens
+
+        this.dispatch({
+          type: AnswerEvent.UPDATED,
+          data: this
+        })
+      }
     }
 
-    if (this.getStep(StepType.SOURCES) !== undefined) {
+    if (this.getStep(StepType.SOURCES) !== undefined && this._sources === undefined) {
       const sources_step = this.getStep(StepType.SOURCES)
-      this._sources = sources_step?.sources
+      this._sources = sources_step?.sources 
+      
+      this.dispatch({
+        type: AnswerEvent.UPDATED,
+        data: this
+      })
     }
 
-    this.dispatch({
-      type: AnswerEvent.UPDATED,
-      data: this
-    })
+   
 
     this.fetchAfter()
   }
