@@ -43,14 +43,6 @@ export class AnswerImpl extends Answer {
 
     await this.fetch()
 
-    this.dispatch({
-      type: AnswerEvent.ADDED,
-      data: this
-    })
-
-
-    this.start_ticker()
-
     return this
   }
 
@@ -74,8 +66,10 @@ export class AnswerImpl extends Answer {
     return <string>this._answer
   }
 
-  public start_ticker() {
-    setTimeout(async () => await this.fetch(), 300)
+  public fetchAfter() {
+    if (this._status === undefined || this._status === AnswerStatus.RUNNING) {
+      setTimeout(async () => await this.fetch(), 300)
+    }
   }
 
   private getStep(type: StepType): AnswerStepDto | undefined {
@@ -106,12 +100,12 @@ export class AnswerImpl extends Answer {
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
 
-    if (this.getStep(StepType.GENERATE_ANSWER) != undefined){
+    if (this.getStep(StepType.GENERATE_ANSWER) !== undefined) {
       const step = this.getStep(StepType.GENERATE_ANSWER)
       this._answer = step?.tokens.join("")
     }
 
-    if (this.getStep(StepType.SOURCES) != undefined){
+    if (this.getStep(StepType.SOURCES) !== undefined) {
       const sources_step = this.getStep(StepType.SOURCES)
       this._sources = sources_step?.sources
     }
@@ -121,10 +115,7 @@ export class AnswerImpl extends Answer {
       data: this
     })
 
-    if (this._status == AnswerStatus.RUNNING){
-      setTimeout(async () => await this.fetch(), 300)
-    }
-
+    this.fetchAfter()
   }
 
   async cancel(): Promise<void> {

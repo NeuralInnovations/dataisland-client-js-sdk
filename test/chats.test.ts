@@ -42,28 +42,27 @@ test("Chat create, ask question, delete", async () => {
       let answer_ready = false
 
       answer.subscribe((event) => {
-        if (event.type == AnswerEvent.UPDATED){
+        if (event.type == AnswerEvent.UPDATED) {
           expect(event.data).toBeTruthy()
           expect(event.data.id).not.toBeUndefined()
           expect(event.data.status).not.toBeUndefined()
-          
+
           process.stdout.write(event.data.tokens.substring(tokens.length))
 
           tokens = event.data.tokens
 
-          if (event.data.status != AnswerStatus.RUNNING){
+          if (event.data.status != AnswerStatus.RUNNING) {
             answer_ready = true
           }
         }
       })
 
-      while (!answer_ready){
-        await new Promise(f => setTimeout(f, 2000))
+      while (!answer_ready) {
+        await new Promise(f => setTimeout(f, 500))
       }
 
       // check delete
       await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
-
     })
   })
 })

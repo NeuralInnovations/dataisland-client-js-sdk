@@ -82,8 +82,6 @@ export class ChatImpl extends Chat implements Disposable {
     // create answer implementation
     const answer = await new AnswerImpl(this, this.context).initNew(id, message)
 
-    answer.start_ticker()
-
     // add answer to the collection
     this._answers.push(answer)
 
