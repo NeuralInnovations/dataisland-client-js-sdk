@@ -1,3 +1,7 @@
+import { AnswerId, StepId } from "../storages/chats/answer"
+import { ChatId } from "../storages/chats/chat"
+import { UserId } from "../storages/user/userProfile"
+
 export interface SourceDto {
   id: string;
   name: string;
@@ -7,8 +11,8 @@ export interface SourceDto {
 }
 
 export interface AnswerDto {
-  id: string;
-  chatId: string;
+  id: AnswerId;
+  chatId: ChatId;
   question: string;
   context: string;
   sources: SourceDto[];
@@ -16,11 +20,11 @@ export interface AnswerDto {
 }
 
 export interface ChatDto {
-  id: string;
+  id: ChatId;
   name: string;
   createdAt: number;
   modifiedAt: number;
-  userId: string;
+  userId: UserId;
   organizationId: string;
   workspaceId: string;
   answers: AnswerDto[];
@@ -38,7 +42,7 @@ export enum AnswerStatus {
 }
 
 export interface AnswerStepDto {
-  id: string;
+  id: StepId;
   type: StepType;
   status: StepStatus;
   start_at: string;
@@ -48,7 +52,7 @@ export interface AnswerStepDto {
 }
 
 export interface FetchAnswerResponse {
-  id: string;
+  id: AnswerId;
   status: AnswerStatus;
   steps: AnswerStepDto[];
 }

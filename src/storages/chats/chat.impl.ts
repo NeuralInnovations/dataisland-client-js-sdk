@@ -1,6 +1,6 @@
 import { Chat, ChatAnswerType } from "./chat"
 import { Disposable } from "../../disposable"
-import { Answer } from "./answer"
+import { Answer, AnswerId } from "./answer"
 import { ChatDto } from "../../dto/chatResponse"
 import { Context } from "../../context"
 import { AnswerImpl } from "./answer.impl"
@@ -27,7 +27,7 @@ export class ChatImpl extends Chat implements Disposable {
     // init answers
     for (const ans of chat.answers) {
       // create answer implementation
-      const answer = await new AnswerImpl(this, this.context).initFromHistory(ans)
+      const answer = new AnswerImpl(this, this.context).initFromHistory(ans)
 
       // add answer to the collection
       this._answers.push(answer)
@@ -52,9 +52,9 @@ export class ChatImpl extends Chat implements Disposable {
     return this._isDisposed
   }
 
-  public getAnswer(id: string): Answer {
+  public getAnswer(id: AnswerId): Answer {
     const answer = this._answers.find(answer => answer.id === id)
-    if (answer){
+    if (answer) {
       return answer
     }
     throw new Error(`Answer with id ${id} is not found`)

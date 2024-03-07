@@ -46,8 +46,8 @@ export class AnswerImpl extends Answer {
     return this
   }
 
-  get id(): string {
-    return <string>this._id
+  get id(): AnswerId {
+    return <AnswerId>this._id
   }
 
   get status(): AnswerStatus {
