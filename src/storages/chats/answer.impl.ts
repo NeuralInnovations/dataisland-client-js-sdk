@@ -20,6 +20,7 @@ export class AnswerImpl extends Answer {
   private _question?: string
   private _sources?: SourceDto[]
   private _answer?: string
+  private _timestamp?: number
 
   constructor(
     private readonly chat: Chat,
@@ -32,6 +33,7 @@ export class AnswerImpl extends Answer {
     this._question = answer.question
     this._answer = answer.context
     this._sources = answer.sources
+    this._timestamp = answer.timestamp
 
     return this
   }
@@ -64,6 +66,10 @@ export class AnswerImpl extends Answer {
 
   get tokens(): string {
     return <string>this._answer
+  }
+
+  get timestamp(): number {
+    return <number>this._timestamp
   }
 
   public fetchAfter() {
@@ -99,6 +105,7 @@ export class AnswerImpl extends Answer {
     // update answer
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
+    
 
     if (this.getStep(StepType.GENERATE_ANSWER) !== undefined) {
       const step = this.getStep(StepType.GENERATE_ANSWER)
@@ -123,7 +130,10 @@ export class AnswerImpl extends Answer {
       })
     }
 
-   
+    if (this.getStep(StepType.DONE) !== undefined){
+      const step = this.getStep(StepType.DONE)
+      this._timestamp = Date.parse(step!.end_at)
+    }
 
     this.fetchAfter()
   }
