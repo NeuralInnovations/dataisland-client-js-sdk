@@ -20,6 +20,7 @@ export class AppBuilderImplementation extends AppBuilder {
   commands: Array<
     [Constructor<any>, (context: Context) => CommandHandler<any>]
   > = []
+  additional_arguments: Map<string, any> = new Map()
 
   get env(): Record<string, any> {
     return this.envData
@@ -45,6 +46,15 @@ export class AppBuilderImplementation extends AppBuilder {
       throw new Error("useCredential, credential is undefined|null")
     }
     this.credential = credential
+    return this
+  }
+
+  useAdditionalArguments(add_arguments: Map<string, any>): AppBuilder {
+    if (add_arguments === undefined || add_arguments === null) {
+      throw new Error("useAdditionalArguments, additionall arguments is undefined|null")
+    }
+
+    this.additional_arguments = add_arguments
     return this
   }
 

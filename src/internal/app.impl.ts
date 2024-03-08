@@ -180,7 +180,7 @@ export class DataIslandAppImpl extends DataIslandApp {
 
     // start app, execute start command
     if (!isUnitTest(UnitTest.DO_NOT_START)) {
-      await this.context.execute(new StartCommand())
+      await this.context.execute(new StartCommand(builder.additional_arguments))
     }
 
     // log app initialized

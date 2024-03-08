@@ -13,6 +13,19 @@ export class UserProfileService extends Service {
     return this.impl
   }
 
+  async merge(anonymous_token: string) {
+    const rpc = this.resolve(RpcService) as RpcService
+    const response = await rpc.requestBuilder("api/v1/Users/anonymous/merge").sendPostJson({
+      "anonymousToken":anonymous_token
+    })
+    
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to merge anonymous user", response)
+    }
+
+    await this.fetch()
+  }
+
   async fetch() {
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Users/self2").sendGet()

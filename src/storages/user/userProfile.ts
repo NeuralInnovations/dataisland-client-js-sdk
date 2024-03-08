@@ -31,6 +31,11 @@ export abstract class UserProfile extends EventDispatcher<
   abstract get isDeleted(): boolean
 
   /**
+   * Is user anonymous
+   */
+  abstract get isAnonymous(): boolean
+
+  /**
    * Created at.
    */
   abstract get createdAt(): Date
