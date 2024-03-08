@@ -27,7 +27,6 @@ File.
 
 - [dispatch](File.md#dispatch)
 - [subscribe](File.md#subscribe)
-- [updateStatus](File.md#updatestatus)
 - [url](File.md#url)
 
 ## Constructors
@@ -86,6 +85,8 @@ ___
 
 • `get` **status**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
 
+File progress status
+
 #### Returns
 
 [`FileProgressDto`](../interfaces/FileProgressDto.md)
@@ -130,18 +131,6 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
-
-___
-
-### updateStatus
-
-▸ **updateStatus**(): `Promise`\<`void`\>
-
-Get file status.
-
-#### Returns
-
-`Promise`\<`void`\>
 
 ___
 

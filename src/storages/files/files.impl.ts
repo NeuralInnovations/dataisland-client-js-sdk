@@ -135,7 +135,7 @@ export class FilesImpl extends Files {
     for (const fl of files.files) {
 
       // create file implementation
-      const file = new FileImpl(this.context).initFrom(fl)
+      const file = await new FileImpl(this.context).initFrom(fl)
 
       // add file to the collection
       filesList.files.push(file)
@@ -175,7 +175,7 @@ export class FilesImpl extends Files {
     const result = (await response!.json()).file as FileDto
 
     // create file implementation
-    const fileImpl = new FileImpl(this.context).initFrom(result)
+    const fileImpl = await new FileImpl(this.context).initFrom(result)
 
     // TODO: why is this here?
     this.filesList?.files.push(fileImpl)

@@ -26,6 +26,9 @@ File
    */
   abstract get createdAt(): number
 
+  /** 
+   * File progress status
+   */
   abstract get status(): FileProgressDto
 
   /**
@@ -33,8 +36,4 @@ File
    */
   abstract url(): Promise<string>
 
-  /**
-   * Get file status.
-   */
-  abstract updateStatus(): Promise<void>
 }

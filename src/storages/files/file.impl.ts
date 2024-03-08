@@ -16,8 +16,10 @@ export class FileImpl extends File implements Disposable {
     super()
   }
 
-  public initFrom(file: FileDto): File {
+  async initFrom(file: FileDto): Promise<File> {
     this._content = file
+
+    await this.updateStatus()
 
     return this
   }
@@ -63,6 +65,13 @@ export class FileImpl extends File implements Disposable {
     return (await response!.json()).url
   }
 
+  public fetchAfter() {
+    if (this._status === undefined || this._status.success === null ||
+      (this._status.success && this._status.completed_parts_count !== this.status.file_parts_count)) {
+      setTimeout(async () => await this.updateStatus(), 1000)
+    }
+  }
+
   async updateStatus(): Promise<void> {
     const response = await this.context
       .resolve(RpcService)
@@ -74,14 +83,19 @@ export class FileImpl extends File implements Disposable {
       await ResponseUtils.throwError(`Failed to get file ${this.id}`, response)
     }
 
-    this._status = (await response!.json()).progress as FileProgressDto
+    const new_status = (await response!.json()).progress as FileProgressDto
 
+    if (this._status !== undefined && new_status.success !== null &&
+      (new_status.completed_parts_count > this._status?.completed_parts_count || !new_status.success)){
+      // dispatch event, file updated
+      this.dispatch({
+        type: FilesEvent.UPDATED,
+        data: this
+      })
+    }
 
-    // dispatch event, file updated
-    this.dispatch({
-      type: FilesEvent.UPDATED,
-      data: this
-    })
+    this._status = new_status
 
+    this.fetchAfter()
   }
 }
