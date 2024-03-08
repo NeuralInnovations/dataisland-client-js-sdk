@@ -20,6 +20,7 @@ export class AnswerImpl extends Answer {
   private _question?: string
   private _sources?: SourceDto[]
   private _answer?: string
+  private _timestamp?: number
 
   constructor(
     private readonly chat: Chat,
@@ -32,6 +33,7 @@ export class AnswerImpl extends Answer {
     this._question = answer.question
     this._answer = answer.context
     this._sources = answer.sources
+    this._timestamp = answer.timestamp
 
     return this
   }
@@ -64,6 +66,10 @@ export class AnswerImpl extends Answer {
 
   get tokens(): string {
     return <string>this._answer
+  }
+
+  get timestamp(): number {
+    return <number>this._timestamp
   }
 
   public fetchAfter() {
@@ -99,21 +105,35 @@ export class AnswerImpl extends Answer {
     // update answer
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
+    
 
     if (this.getStep(StepType.GENERATE_ANSWER) !== undefined) {
       const step = this.getStep(StepType.GENERATE_ANSWER)
-      this._answer = step?.tokens.join("")
+      const step_tokens = step?.tokens.join("")
+      if (this._answer !== step_tokens){
+        this._answer = step_tokens
+
+        this.dispatch({
+          type: AnswerEvent.UPDATED,
+          data: this
+        })
+      }
     }
 
-    if (this.getStep(StepType.SOURCES) !== undefined) {
+    if (this.getStep(StepType.SOURCES) !== undefined && this._sources === undefined) {
       const sources_step = this.getStep(StepType.SOURCES)
-      this._sources = sources_step?.sources
+      this._sources = sources_step?.sources 
+      
+      this.dispatch({
+        type: AnswerEvent.UPDATED,
+        data: this
+      })
     }
 
-    this.dispatch({
-      type: AnswerEvent.UPDATED,
-      data: this
-    })
+    if (this.getStep(StepType.DONE) !== undefined){
+      const step = this.getStep(StepType.DONE)
+      this._timestamp = Date.parse(step!.end_at)
+    }
 
     this.fetchAfter()
   }

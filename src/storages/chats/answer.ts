@@ -42,6 +42,11 @@ export abstract class Answer extends EventDispatcher<AnswerEvent, Answer> {
   abstract get sources(): SourceDto[]
 
   /**
+   * Answer time.
+   */
+  abstract get timestamp(): number
+
+  /**
    * Cancel answer
    */
   abstract cancel(): Promise<void>
