@@ -16,6 +16,8 @@ DataIsland App credential.
 
   ↳ [`BearerCredential`](BearerCredential.md)
 
+  ↳ [`AnonymousCredential`](AnonymousCredential.md)
+
 ## Table of contents
 
 ### Constructors

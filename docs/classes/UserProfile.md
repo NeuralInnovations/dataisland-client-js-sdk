@@ -19,6 +19,7 @@
 - [createdAt](UserProfile.md#createdat)
 - [email](UserProfile.md#email)
 - [id](UserProfile.md#id)
+- [isAnonymous](UserProfile.md#isanonymous)
 - [isDeleted](UserProfile.md#isdeleted)
 - [modifiedAt](UserProfile.md#modifiedat)
 - [name](UserProfile.md#name)
@@ -77,6 +78,18 @@ User id.
 #### Returns
 
 `string`
+
+___
+
+### isAnonymous
+
+• `get` **isAnonymous**(): `boolean`
+
+Is user anonymous
+
+#### Returns
+
+`boolean`
 
 ___
 

@@ -23,6 +23,7 @@
 
 ### Classes
 
+- [AnonymousCredential](classes/AnonymousCredential.md)
 - [AppBuilder](classes/AppBuilder.md)
 - [BasicCredential](classes/BasicCredential.md)
 - [BearerCredential](classes/BearerCredential.md)

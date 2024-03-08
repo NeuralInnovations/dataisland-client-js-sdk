@@ -17,7 +17,7 @@ export class StartCommandHandler extends CommandHandler<StartCommand> {
     const service = this.context.resolve(
       UserProfileService
     ) as UserProfileService
-    const anonymous_token = message.additional_arguments.get('anonymous_token')
+    const anonymous_token = message.additional_arguments.get("anonymous_token")
     if (anonymous_token !== undefined){
       await service.merge(anonymous_token)
     }else{
