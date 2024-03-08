@@ -83,3 +83,26 @@ export class BearerCredential extends CredentialBase {
     )
   }
 }
+
+
+export class AnonymousCredential extends CredentialBase {
+  readonly token: string
+
+  constructor(token: string) {
+    super()
+    this.token = token
+  }
+
+  onRegister(lifetime: Lifetime, context: Context): void {
+    const service = context.resolve(MiddlewareService)
+    if (service === undefined) {
+      throw new Error("MiddlewareService is not registered.")
+    }
+    lifetime.add(
+      service.useMiddleware(async (req, next) => {
+        req.headers.set("Authorization", `InternalJWT ${this.token}`)
+        return await next(req)
+      })
+    )
+  }
+}
