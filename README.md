@@ -156,12 +156,16 @@ Default file upload example:
 const file = await workspace.files.upload([file])
 ```
 
-The file uploading process always takes some time, so you can track its uploading status using subscription for files UPDATED event. The status object includes a success indicator, the total count of file parts, the count of uploaded file parts, and an error field. The success indicator represents whether the last file part was uploaded successfully or not. If one of the parts fails, the uploading process is stopped, and the "error" field contains the text of the failure reason. 
+The file uploading process always takes some time, so you can track its uploading status using subscription for files UPDATED event. Status tracking starts with "status" property of file. It can be UPLOADING, SUCCESS or FAILED. The "progress" property includes detailed view on file uploading progress, including a success indicator, the total count of file parts, the count of uploaded file parts, and an error field. The success indicator represents whether the last file part was uploaded successfully or not. If one of the parts fails, the uploading process is stopped, and the "error" field contains the text of the failure reason. Remeber to check file status before making a subscription, because it could be already SUCCESS or FAILED
 
 ```
-file.subscribe((event) => {
-  const status = event.data.status()
-})
+if (file.status !== FileStatus.UPLOADING) {
+ // Show results
+} else {
+  file.subscribe((event) => {
+    const progress = event.data.progress()
+  })
+}
 ```
 
 Delete file example:

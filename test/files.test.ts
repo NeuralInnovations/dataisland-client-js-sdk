@@ -1,7 +1,7 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
 import { FileImpl } from "../src/storages/files/file.impl"
-import { Context, DisposableContainer, FilesEvent } from "../src"
+import { Context, DisposableContainer, FileStatus, FilesEvent } from "../src"
 import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
 import { Registry } from "../src/internal/registry"
 import { appTest, UnitTest } from "../src/unitTest"
@@ -22,26 +22,31 @@ test("Files", async () => {
         type: "application/pdf"
       })
 
-      const upload_files = [file_obj, file_obj_second]
+      const upload_files = [file_obj_second, file_obj]
 
       const filePromise = ws.files.upload(upload_files)
       await expect(filePromise).resolves.not.toThrow()
       const files = await filePromise
 
-      const queryPromise = ws.files.query("", 0, 20)
-      await expect(queryPromise).resolves.not.toThrow()
-      const filePage = await queryPromise
-      expect(filePage).not.toBeUndefined()
-      expect(filePage).not.toBeNull()
-      expect(filePage.files.length).toBe(2)
-      expect(filePage.pages).toBe(1)
-
       const ids: string[] = []
-
       const loaded_ids: string[] = []
-      let files_loaded = false
 
-
+      const process_file_status = (file) => {
+        switch (file.status){
+        case FileStatus.SUCCESS:
+        {
+          loaded_ids.push(file.id)
+          break
+        }
+        case FileStatus.FAILED:
+        {
+          console.error(file.progress.error)
+          loaded_ids.push(file.id)
+          break
+        }
+        }
+      }
+      
       for (const file of files) {
         expect(file).not.toBeUndefined()
         expect(file).not.toBeNull()
@@ -54,40 +59,48 @@ test("Files", async () => {
 
         ids.push(file.id)
 
-        expect(file.status).not.toBeUndefined()
-        expect(file.status).not.toBeNull()
-        expect(file.status.file_id).toBe(file.id)
+        expect(file.progress).not.toBeUndefined()
+        expect(file.progress).not.toBeNull()
+        expect(file.progress.file_id).toBe(file.id)
 
-        file.subscribe((evt) => {
-          if (evt.type === FilesEvent.UPDATED){
-            if (!file.status.success && file.status.error) {
-              console.error(file.status.error)
-              loaded_ids.push(evt.data.id)
-            }
-            else if ( file.status.completed_parts_count === file.status.file_parts_count){
-              loaded_ids.push(evt.data.id)
-            }
-          }
-        })
+        if (file.status !== FileStatus.UPLOADING){
+          process_file_status(file)
+        } else {
+          file.subscribe((evt) => {
+            process_file_status(evt.data)
+          }, FilesEvent.UPDATED)
+        }
       }
 
+
+      let files_loaded = false
+
       while (!files_loaded) {
-        await new Promise(f => setTimeout(f, 1000))
+        await new Promise(f => setTimeout(f, 500))
         for (const id of ids ){
           files_loaded = loaded_ids.some(l_id => l_id === id)
         }
       }
 
+      const queryPromise = ws.files.query("", 0, 20)
+      await expect(queryPromise).resolves.not.toThrow()
+      const filePage = await queryPromise
+      expect(filePage).not.toBeUndefined()
+      expect(filePage).not.toBeNull()
+      expect(filePage.files.length).toBe(2)
+      expect(filePage.pages).toBe(1)
+
       // Check loading was successfull
       for (const id of ids ){
-        const status = filePage.files.find(fl => fl.id === id)?.status
+        const fileLoaded = filePage.files.find(fl => fl.id === id)
 
-        expect(status?.success)
-        expect(status?.completed_parts_count).toBe(
-          status?.file_parts_count
+        expect(fileLoaded?.status).toBe(FileStatus.SUCCESS)
+        expect(fileLoaded?.progress?.completed_parts_count).toBe(
+          fileLoaded?.progress?.file_parts_count
         )
       }
 
+  
       let filesCount = await ws.filesCount()
       expect(filesCount).toBe(2)
 
@@ -99,6 +112,8 @@ test("Files", async () => {
     })
   })
 })
+
+
 
 describe("FilesPageImpl", () => {
   let filesPage: FilesPageImpl

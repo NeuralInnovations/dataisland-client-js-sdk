@@ -21,12 +21,14 @@ File.
 - [createdAt](File.md#createdat)
 - [id](File.md#id)
 - [name](File.md#name)
+- [progress](File.md#progress)
 - [status](File.md#status)
 
 ### Methods
 
 - [dispatch](File.md#dispatch)
 - [subscribe](File.md#subscribe)
+- [updateStatus](File.md#updatestatus)
 - [url](File.md#url)
 
 ## Constructors
@@ -81,15 +83,27 @@ File name.
 
 ___
 
-### status
+### progress
 
-• `get` **status**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
+• `get` **progress**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
 
-File progress status
+File uploading progress
 
 #### Returns
 
 [`FileProgressDto`](../interfaces/FileProgressDto.md)
+
+___
+
+### status
+
+• `get` **status**(): [`FileStatus`](../enums/FileStatus.md)
+
+File uploading status
+
+#### Returns
+
+[`FileStatus`](../enums/FileStatus.md)
 
 ## Methods
 
@@ -131,6 +145,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### updateStatus
+
+▸ **updateStatus**(): `Promise`\<`void`\>
+
+Get file status.
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 

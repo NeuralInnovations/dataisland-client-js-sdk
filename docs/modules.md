@@ -9,6 +9,7 @@
 - [AnswerStatus](enums/AnswerStatus.md)
 - [ChatAnswerType](enums/ChatAnswerType.md)
 - [ChatsEvent](enums/ChatsEvent.md)
+- [FileStatus](enums/FileStatus.md)
 - [FilesEvent](enums/FilesEvent.md)
 - [GroupEvent](enums/GroupEvent.md)
 - [GroupsEvent](enums/GroupsEvent.md)

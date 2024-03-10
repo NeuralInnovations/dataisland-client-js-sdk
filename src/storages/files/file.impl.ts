@@ -3,13 +3,13 @@ import { Disposable } from "../../disposable"
 import { FileDto, FileProgressDto } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
-import { File } from "./file"
+import { File, FileStatus } from "./file"
 import { FilesEvent } from "./files"
 
 export class FileImpl extends File implements Disposable {
   private _isDisposed: boolean = false
   private _content?: FileDto
-  private _status?: FileProgressDto
+  private _progress?: FileProgressDto
 
 
   constructor(private readonly context: Context) {
@@ -44,8 +44,19 @@ export class FileImpl extends File implements Disposable {
     return <number>this._content?.createdAt
   }
 
-  get status(): FileProgressDto {
-    return <FileProgressDto>this._status
+  get progress(): FileProgressDto {
+    return <FileProgressDto>this._progress
+  }
+
+  get status(): FileStatus {
+    if (this._progress === undefined || this._progress.success === null || 
+      (this._progress.success && this._progress.completed_parts_count !== this._progress.file_parts_count)){
+      return FileStatus.UPLOADING
+    } else if (this._progress.success){
+      return FileStatus.SUCCESS
+    } else {
+      return FileStatus.FAILED
+    }
   }
 
   async url(): Promise<string> {
@@ -66,9 +77,8 @@ export class FileImpl extends File implements Disposable {
   }
 
   public fetchAfter() {
-    if (this._status === undefined || this._status.success === null ||
-      (this._status.success && this._status.completed_parts_count !== this.status.file_parts_count)) {
-      setTimeout(async () => await this.updateStatus(), 1000)
+    if (this.status === FileStatus.UPLOADING) {
+      setTimeout(async () => await this.updateStatus(), 500)
     }
   }
 
@@ -83,18 +93,19 @@ export class FileImpl extends File implements Disposable {
       await ResponseUtils.throwError(`Failed to get file ${this.id}`, response)
     }
 
-    const new_status = (await response!.json()).progress as FileProgressDto
+    const prev_progress = this._progress
+    this._progress = (await response!.json()).progress as FileProgressDto
 
-    if (this._status !== undefined && new_status.success !== null &&
-      (new_status.completed_parts_count > this._status?.completed_parts_count || !new_status.success)){
+    if (prev_progress === undefined || 
+      (this.progress.success !== null && this.progress.completed_parts_count > prev_progress.completed_parts_count) || 
+       this.status === FileStatus.SUCCESS || 
+       this.status === FileStatus.FAILED){
       // dispatch event, file updated
       this.dispatch({
         type: FilesEvent.UPDATED,
         data: this
       })
     }
-
-    this._status = new_status
 
     this.fetchAfter()
   }
