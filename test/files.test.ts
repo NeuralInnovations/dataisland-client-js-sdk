@@ -1,9 +1,8 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
 import { FileImpl } from "../src/storages/files/file.impl"
-import { Context, DisposableContainer, FileStatus, FilesEvent } from "../src"
+import { Context, FileStatus, FilesEvent } from "../src"
 import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
-import { Registry } from "../src/internal/registry"
 import { appTest, UnitTest } from "../src/unitTest"
 
 test("Files", async () => {
