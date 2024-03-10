@@ -1,27 +1,23 @@
+import { getCookie, removeCookie } from "typescript-cookie"
 import { CommandHandler, Command } from "../services/commandService"
 import { UserProfileService } from "../services/userProfileService"
 
-export class StartCommand extends Command {
-
-  additional_arguments: Map<string, any> = new Map()
-
-  constructor(additional_arguments: Map<string, any>){
-    super()
-    this.additional_arguments = additional_arguments
-  }
-}
+export class StartCommand extends Command {}
 
 export class StartCommandHandler extends CommandHandler<StartCommand> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async execute(message: StartCommand): Promise<void> {
-    const service = this.context.resolve(
+    const user_service = this.context.resolve(
       UserProfileService
     ) as UserProfileService
-    const anonymous_token = message.additional_arguments.get("anonymous_token")
+    const anonymous_token = getCookie("anonymous-token")
     if (anonymous_token !== undefined){
-      await service.merge(anonymous_token)
+      await user_service.merge(anonymous_token)
+      removeCookie("anonymous-token")
     }else{
-      await service.fetch()
+      await user_service.fetch()
     }
   }
+
+  
 }

@@ -7,7 +7,7 @@ import { DisposableContainer, type Lifetime } from "../disposable"
 import { type Service, ServiceContext } from "../services/service"
 import { CredentialService } from "../services/credentialService"
 import { MiddlewareService } from "../services/middlewareService"
-import { type CredentialBase } from "../credentials"
+import { DefaultCredential, type CredentialBase, AnonymousCredential } from "../credentials"
 import { DataIslandApp } from "../dataIslandApp"
 import { RpcService } from "../services/rpcService"
 import { CommandService } from "../services/commandService"
@@ -24,6 +24,9 @@ import {
   DeleteUserFullCommand,
   DeleteUserFullCommandHandler
 } from "../commands/deleteUserFullCommandHandler"
+import { getCookie, setCookie } from "typescript-cookie"
+import { ResponseUtils } from "../services/responseUtils"
+import { detect } from "detect-browser"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -146,7 +149,35 @@ export class DataIslandAppImpl extends DataIslandApp {
       this.resolve(CommandService)?.register(command[0], command[1])
     })
 
-    this.credential = builder.credential
+    if (builder.credential instanceof DefaultCredential){
+      let token = getCookie("anonymous-token")
+      if (token === undefined){
+        const browser = detect()
+        const response = await this.context
+          .resolve(RpcService)
+          ?.requestBuilder("api/v1/Users/anonymous")
+          .sendPutJson({
+            ipAddress: "192.168.0.0",
+            info: {
+              browser,
+            }
+          })
+
+        if (ResponseUtils.isFail(response)) {
+          await ResponseUtils.throwError("Failed to create anonymous token", response)
+        }
+
+        token = (await response!.json()).token
+
+        setCookie("anonymous-token", token, { expires: 30 })
+      }
+
+      if (token !== undefined){
+        this.credential = new AnonymousCredential(token)
+      }
+    } else {
+      this.credential = builder.credential
+    }
 
     //-------------------------------------------------------------------------
     // register services
@@ -180,7 +211,7 @@ export class DataIslandAppImpl extends DataIslandApp {
 
     // start app, execute start command
     if (!isUnitTest(UnitTest.DO_NOT_START)) {
-      await this.context.execute(new StartCommand(builder.additional_arguments))
+      await this.context.execute(new StartCommand())
     }
 
     // log app initialized
