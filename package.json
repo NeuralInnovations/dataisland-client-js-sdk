@@ -68,7 +68,6 @@
     "@typescript-eslint/parser": "^6.19.0",
     "babel-jest": "^29.7.0",
     "babel-loader": "8.3.0",
-    "detect-browser": "5.3.0",
     "eslint": "^8.56.0",
     "eslint-config-semistandard": "^17.0.0",
     "eslint-config-standard": "^17.1.0",
@@ -90,7 +89,6 @@
     "typedoc": "^0.25.7",
     "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.3.3",
-    "typescript-cookie": "^1.0.6",
     "watch": "^0.13.0",
     "webpack": "5.76.0",
     "yargs": "17.7.2"
