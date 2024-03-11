@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev26](../../README.md) / [Exports](../modules.md) / File
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev27](../../README.md) / [Exports](../modules.md) / File
 
 # Class: File
 
@@ -28,7 +28,6 @@ File.
 
 - [dispatch](File.md#dispatch)
 - [subscribe](File.md#subscribe)
-- [updateStatus](File.md#updatestatus)
 - [url](File.md#url)
 
 ## Constructors
@@ -145,18 +144,6 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
-
-___
-
-### updateStatus
-
-▸ **updateStatus**(): `Promise`\<`void`\>
-
-Get file status.
-
-#### Returns
-
-`Promise`\<`void`\>
 
 ___
 
