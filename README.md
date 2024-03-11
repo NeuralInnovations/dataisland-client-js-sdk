@@ -156,11 +156,16 @@ Default file upload example:
 const file = await workspace.files.upload([file])
 ```
 
-The file uploading process always takes some time, so you can track its uploading status using the "status" property. The status object includes a success indicator, the total count of file parts, the count of uploaded file parts, and an error field. The success indicator represents whether the last file part was uploaded successfully or not. If one of the parts fails, the uploading process is stopped, and the "error" field contains the text of the failure reason. FIle status can be updated manually with update_status() method, or through events.
+The file uploading process always takes some time, so you can track its uploading status using subscription for files UPDATED event. Status tracking starts with "status" property of file. It can be UPLOADING, SUCCESS or FAILED. The "progress" property includes detailed view on file uploading progress, including a success indicator, the total count of file parts, the count of uploaded file parts, and an error field. The success indicator represents whether the last file part was uploaded successfully or not. If one of the parts fails, the uploading process is stopped, and the "error" field contains the text of the failure reason. Remeber to check file status before making a subscription, because it could be already SUCCESS or FAILED
 
 ```
-await file.update_status()
-let status = file.status()
+if (file.status !== FileStatus.UPLOADING) {
+ // Show results
+} else {
+  file.subscribe((event) => {
+    const progress = event.data.progress()
+  })
+}
 ```
 
 Delete file example:
@@ -224,28 +229,31 @@ const answer = await chat.ask("Hello!", ChatAnswerType.SHORT)
 await chat.getAnswer(answer.id).cancel()
 ```
 
-```Answer have two main states: running and done. This states is represented in answer status propery.
 Main statuses are RUNNING, SUCCESS, CANCELED, FAIL. You can use them to correctly draw answer in chat.
 
 ```
 status = chat.getAnswer(answer.id).status
 ```
+
 You can access answer for your question in "tokens" property, question is stored in "question' property.
 
 ```
 const tokens = await chat.getAnswer(answer.id).tokens
 const question = await chat.getAnswer(answer.id).question
 ```
+
 Every step also includes Sources that were used during execution. Property "sources" contains all sources of all answer steps.
 
 ```
 const sources = await chat.getAnswer(answer.id).sources
 ```
+
 If you want to get chat history, you can access chat.collection property
 
 ```
 const answers = chat.collection
 ```
+
 #### Events
 
 Chat object have a variety of events. You can track chat and answer creation and deletion. Answer also contains "update" event for updating answer view and stream answer tokens.
@@ -266,7 +274,6 @@ Event subscribe example:
 ```
 chat.answer.subscribe((event) => { const answer = event.data }, AnswerEvent.UPDATED)
 ```
----
 
 ### Use access groups
 
@@ -274,21 +281,20 @@ You can manage users access to workspaces and different features using access gr
 
 ```
 const group = await organization.accessGroups.create(
-  "your_group_name",
-  permits: {
-    isAdmin: bool is user admin,
-  },
-  memberIds[] - array of group members ids,
+      "your_group_name",
+      permits: {
+        isAdmin: bool is user admin,
+      },
+      memberIds[] - array of group members ids,
 )
 
 await organization.accessGroups.delete(group.id)
 ```
----
 
 ### Use Invites
 
 You can invite users to organization with provided emails and selected access groups. Use create invite link method of seleted organization.
 
 ```
-await organiation.createInviteLink(emails[], accessGroups[])  
+await organiation.createInviteLink(emails[], accessGroups[])
 ```
