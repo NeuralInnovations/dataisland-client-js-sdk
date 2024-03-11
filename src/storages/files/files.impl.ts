@@ -22,14 +22,14 @@ export class FilesImpl extends Files {
 
   async upload(files: any[]): Promise<File[]> {
     const loaded_files = []
-    for ( const file of files ){
+    for (const file of files) {
       loaded_files.push(await this.internalUpload(file))
     }
     return loaded_files
   }
 
   async delete(ids: string[]): Promise<void> {
-    for ( const id of ids ){
+    for (const id of ids) {
       await this.internalDeleteFile(id)
     }
   }
