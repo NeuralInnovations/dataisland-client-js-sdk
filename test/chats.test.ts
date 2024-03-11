@@ -42,7 +42,7 @@ test("Chat create, ask question, delete", async () => {
       let answer_ready = false
 
       answer.subscribe((event) => {
-        if (event.type == AnswerEvent.UPDATED) {
+        if (event.type === AnswerEvent.UPDATED) {
           expect(event.data).toBeTruthy()
           expect(event.data.id).not.toBeUndefined()
           expect(event.data.status).not.toBeUndefined()

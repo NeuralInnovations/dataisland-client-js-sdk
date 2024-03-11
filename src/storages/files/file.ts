@@ -4,12 +4,18 @@ import { FilesEvent } from "./files"
 
 export type FileId = string
 
+export enum FileStatus {
+  UPLOADING = "uploading",
+  SUCCESS = "success",
+  FAILED = "failed"
+}
+
 /**
  * File.
  */
 export abstract class File extends EventDispatcher<
-FilesEvent,
-File
+  FilesEvent,
+  File
 > {
   /**
    * File id.
@@ -26,15 +32,18 @@ File
    */
   abstract get createdAt(): number
 
-  abstract get status(): FileProgressDto
+  /**
+   * File uploading progress
+   */
+  abstract get progress(): FileProgressDto
+
+  /**
+   * File uploading status
+   */
+  abstract get status(): FileStatus
 
   /**
    * Get temporary url.
    */
   abstract url(): Promise<string>
-
-  /**
-   * Get file status.
-   */
-  abstract updateStatus(): Promise<void>
 }

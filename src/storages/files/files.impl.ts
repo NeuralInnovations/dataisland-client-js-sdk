@@ -22,14 +22,14 @@ export class FilesImpl extends Files {
 
   async upload(files: any[]): Promise<File[]> {
     const loaded_files = []
-    for ( const file of files ){
+    for (const file of files) {
       loaded_files.push(await this.internalUpload(file))
     }
     return loaded_files
   }
 
   async delete(ids: string[]): Promise<void> {
-    for ( const id of ids ){
+    for (const id of ids) {
       await this.internalDeleteFile(id)
     }
   }
@@ -135,7 +135,7 @@ export class FilesImpl extends Files {
     for (const fl of files.files) {
 
       // create file implementation
-      const file = new FileImpl(this.context).initFrom(fl)
+      const file = await new FileImpl(this.context).initFrom(fl)
 
       // add file to the collection
       filesList.files.push(file)
@@ -175,7 +175,9 @@ export class FilesImpl extends Files {
     const result = (await response!.json()).file as FileDto
 
     // create file implementation
-    const fileImpl = new FileImpl(this.context).initFrom(result)
+    const fileImpl = new FileImpl(this.context)
+
+    await fileImpl.initFrom(result)
 
     // TODO: why is this here?
     this.filesList?.files.push(fileImpl)

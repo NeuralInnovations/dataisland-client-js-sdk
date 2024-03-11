@@ -21,6 +21,7 @@ File.
 - [createdAt](File.md#createdat)
 - [id](File.md#id)
 - [name](File.md#name)
+- [progress](File.md#progress)
 - [status](File.md#status)
 
 ### Methods
@@ -82,13 +83,27 @@ File name.
 
 ___
 
-### status
+### progress
 
-• `get` **status**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
+• `get` **progress**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
+
+File uploading progress
 
 #### Returns
 
 [`FileProgressDto`](../interfaces/FileProgressDto.md)
+
+___
+
+### status
+
+• `get` **status**(): [`FileStatus`](../enums/FileStatus.md)
+
+File uploading status
+
+#### Returns
+
+[`FileStatus`](../enums/FileStatus.md)
 
 ## Methods
 
