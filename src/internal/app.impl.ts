@@ -182,7 +182,7 @@ export class DataIslandAppImpl extends DataIslandApp {
     if (builder.credential instanceof DefaultCredential){
       let token = getCookie("anonymous-token")
       if (token === null){
-        const fingerprint = createFingerprint();
+        const fingerprint = createFingerprint()
         const response = await this.context
           .resolve(RpcService)
           ?.requestBuilder("api/v1/Users/anonymous")
