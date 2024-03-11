@@ -14,8 +14,8 @@ export enum FileStatus {
  * File.
  */
 export abstract class File extends EventDispatcher<
-FilesEvent,
-File
+  FilesEvent,
+  File
 > {
   /**
    * File id.
@@ -46,9 +46,4 @@ File
    * Get temporary url.
    */
   abstract url(): Promise<string>
-
-  /**
-   * Get file status.
-   */
-  abstract updateStatus(): Promise<void>
 }

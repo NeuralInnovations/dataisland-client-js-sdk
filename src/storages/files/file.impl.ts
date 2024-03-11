@@ -11,7 +11,6 @@ export class FileImpl extends File implements Disposable {
   private _content?: FileDto
   private _progress?: FileProgressDto
 
-
   constructor(private readonly context: Context) {
     super()
   }
@@ -49,10 +48,10 @@ export class FileImpl extends File implements Disposable {
   }
 
   get status(): FileStatus {
-    if (this._progress === undefined || this._progress.success === null || 
-      (this._progress.success && this._progress.completed_parts_count !== this._progress.file_parts_count)){
+    if (this._progress === undefined || this._progress.success === null ||
+      (this._progress.success && this._progress.completed_parts_count !== this._progress.file_parts_count)) {
       return FileStatus.UPLOADING
-    } else if (this._progress.success){
+    } else if (this._progress.success) {
       return FileStatus.SUCCESS
     } else {
       return FileStatus.FAILED
@@ -96,10 +95,10 @@ export class FileImpl extends File implements Disposable {
     const prev_progress = this._progress
     this._progress = (await response!.json()).progress as FileProgressDto
 
-    if (prev_progress === undefined || 
-      (this.progress.success !== null && this.progress.completed_parts_count > prev_progress.completed_parts_count) || 
-       this.status === FileStatus.SUCCESS || 
-       this.status === FileStatus.FAILED){
+    if (prev_progress === undefined ||
+      (this.progress.success !== null && this.progress.completed_parts_count > prev_progress.completed_parts_count) ||
+      this.status === FileStatus.SUCCESS ||
+      this.status === FileStatus.FAILED) {
       // dispatch event, file updated
       this.dispatch({
         type: FilesEvent.UPDATED,
