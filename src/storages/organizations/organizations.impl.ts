@@ -147,7 +147,9 @@ export class OrganizationsImpl extends Organizations {
         response
       )
     }
-    const content = (await response!.json()).organization as OrganizationDto
+    const content = (await response!.json() as {
+      organization: OrganizationDto
+    }).organization as OrganizationDto
 
     // create organization and init from content
     const org = await new OrganizationImpl(this.context).initFrom(content, true)

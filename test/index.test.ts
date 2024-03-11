@@ -17,6 +17,8 @@ import {
   DeleteUserFullCommand
 } from "../src/commands/deleteUserFullCommandHandler"
 
+import { Request, Response } from "node-fetch"
+
 test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)
 })
@@ -90,7 +92,7 @@ test("SDK, middleware", async () => {
       new Request("https://localhost:8080"),
       async (req: Request): Promise<Response> => {
         expect(req.headers.get("X-Test")).toBe("test-value")
-        return new Response("", { status: 400 })
+        return new ResponseInstance("", { status: 400 })
       }
     )
     expect(response2).not.toBeUndefined()

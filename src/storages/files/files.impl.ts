@@ -8,6 +8,7 @@ import { ResponseUtils } from "../../services/responseUtils"
 import { File } from "./file"
 import { FilesPage } from "./filesPage"
 import { FilesPageImpl } from "./filesPage.impl"
+import FormData from "form-data"
 
 export class FilesImpl extends Files {
   constructor(
@@ -172,7 +173,7 @@ export class FilesImpl extends Files {
     }
 
     // parse file from the server's response
-    const result = (await response!.json()).file as FileDto
+    const result = (await response!.json() as { file: FileDto }).file as FileDto
 
     // create file implementation
     const fileImpl = new FileImpl(this.context)

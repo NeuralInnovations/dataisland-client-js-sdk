@@ -72,7 +72,7 @@ export class FileImpl extends File implements Disposable {
       )
     }
 
-    return (await response!.json()).url
+    return (await response!.json() as { url: string }).url
   }
 
   public fetchAfter() {
@@ -93,7 +93,9 @@ export class FileImpl extends File implements Disposable {
     }
 
     const prev_progress = this._progress
-    this._progress = (await response!.json()).progress as FileProgressDto
+    this._progress = (await response!.json() as {
+      progress: FileProgressDto
+    }).progress as FileProgressDto
 
     if (prev_progress === undefined ||
       (this.progress.success !== null && this.progress.completed_parts_count > prev_progress.completed_parts_count) ||

@@ -108,7 +108,9 @@ export class WorkspacesImpl extends Workspaces {
     }
 
     // parse workspace from the server's response
-    const content = (await response!.json()).workspace as WorkspaceDto
+    const content = ((await response!.json()) as {
+      workspace: WorkspaceDto
+    }).workspace as WorkspaceDto
 
     // create workspace implementation
     const workspace = new WorkspaceImpl(this.organization, this.context)

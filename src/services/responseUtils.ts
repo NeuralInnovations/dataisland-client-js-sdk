@@ -1,3 +1,5 @@
+import { Response } from "./response"
+
 export class ResponseUtils {
   public static isOk(response?: Response | null): boolean {
     return response !== undefined && response !== null && response.ok

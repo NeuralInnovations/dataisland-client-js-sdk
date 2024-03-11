@@ -1,7 +1,7 @@
 export const setCookie = (name: string, value: string) => {
   document.cookie = `${name}=${value || ""};`
 }
-  
+
 export const getCookie = (name: string) => {
   const nameValidator = `${name}=`
   const cookieItems = document.cookie.split(";")
@@ -9,11 +9,13 @@ export const getCookie = (name: string) => {
   for (let index = 0; index < cookieItems.length; index++) {
     let cookie = cookieItems[index]
 
-    while (cookie.charAt(0) === " ")
+    while (cookie.charAt(0) === " ") {
       cookie = cookie.substring(1, cookie.length)
+    }
 
-    if (cookie.indexOf(nameValidator) === 0)
+    if (cookie.indexOf(nameValidator) === 0) {
       return cookie.substring(nameValidator.length, cookie.length)
+    }
   }
 
   return null

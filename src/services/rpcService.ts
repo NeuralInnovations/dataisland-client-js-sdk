@@ -1,6 +1,10 @@
 import { Service, type ServiceContext } from "./service"
 import { MiddlewareService } from "./middlewareService"
 import { RequestBuilder } from "./requestBuilder"
+import { Request } from "node-fetch"
+import { Response } from "./response"
+import fetch from "node-fetch"
+import { Headers } from "node-fetch"
 
 /**
  * Options for the RpcService.
@@ -58,7 +62,7 @@ export class RpcService extends Service {
     const middlewareService = this.resolve(MiddlewareService)
     if (middlewareService !== undefined) {
       return await middlewareService.process(req, async req => {
-        return (await this.options?.fetchMethod?.(req)) ?? (await fetch(req))
+        return (await this.options?.fetchMethod?.(req)) ?? (await fetch(req.url))
       })
     }
     return (await this.options?.fetchMethod?.(req)) ?? (await fetch(req))

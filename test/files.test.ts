@@ -30,22 +30,20 @@ test("Files", async () => {
       const ids: string[] = []
       const loaded_ids: string[] = []
 
-      const process_file_status = (file) => {
-        switch (file.status){
-        case FileStatus.SUCCESS:
-        {
+      const process_file_status = (file: any) => {
+        switch (file.status) {
+        case FileStatus.SUCCESS: {
           loaded_ids.push(file.id)
           break
         }
-        case FileStatus.FAILED:
-        {
+        case FileStatus.FAILED: {
           console.error(file.progress.error)
           loaded_ids.push(file.id)
           break
         }
         }
       }
-      
+
       for (const file of files) {
         expect(file).not.toBeUndefined()
         expect(file).not.toBeNull()
@@ -62,7 +60,7 @@ test("Files", async () => {
         expect(file.progress).not.toBeNull()
         expect(file.progress.file_id).toBe(file.id)
 
-        if (file.status !== FileStatus.UPLOADING){
+        if (file.status !== FileStatus.UPLOADING) {
           process_file_status(file)
         } else {
           file.subscribe((evt) => {
@@ -71,12 +69,11 @@ test("Files", async () => {
         }
       }
 
-
       let files_loaded = false
 
       while (!files_loaded) {
         await new Promise(f => setTimeout(f, 500))
-        for (const id of ids ){
+        for (const id of ids) {
           files_loaded = loaded_ids.some(l_id => l_id === id)
         }
       }
@@ -90,7 +87,7 @@ test("Files", async () => {
       expect(filePage.pages).toBe(1)
 
       // Check loading was successfull
-      for (const id of ids ){
+      for (const id of ids) {
         const fileLoaded = filePage.files.find(fl => fl.id === id)
 
         expect(fileLoaded?.status).toBe(FileStatus.SUCCESS)
@@ -99,7 +96,6 @@ test("Files", async () => {
         )
       }
 
-  
       let filesCount = await ws.filesCount()
       expect(filesCount).toBe(2)
 
@@ -111,8 +107,6 @@ test("Files", async () => {
     })
   })
 })
-
-
 
 describe("FilesPageImpl", () => {
   let filesPage: FilesPageImpl
@@ -199,7 +193,7 @@ describe("FileImpl", () => {
     expect(file.isDisposed).toBeTruthy()
   })
 
-  // Disable this test because of updated "initFrom method", which now calls updateStatus 
+  // Disable this test because of updated "initFrom method", which now calls updateStatus
   // it("should initialize from FileDto", () => {
   //   const fileDto: FileDto = {
   //     id: "fileId",

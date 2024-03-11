@@ -13,8 +13,9 @@ import { CredentialService } from "../src/services/credentialService"
 import { MiddlewareService } from "../src/services/middlewareService"
 import { RequestBuilder } from "../src/services/requestBuilder"
 import { ResponseUtils } from "../src/services/responseUtils"
-// import { RpcService } from "../src/services/rpcService"
 import { UnitTest, appTest } from "../src/unitTest"
+import { ResponseInstance } from "../src/services/response"
+import { Request } from "../src/services/request"
 
 test("CredentialService", async () => {
   await appTest(UnitTest.DO_NOT_START_SDK, async () => {
@@ -65,7 +66,7 @@ test("CredentialService", async () => {
     await middleware.process(
       new Request("https://localhost:8080"),
       async () => {
-        return new Response("", { status: 200 })
+        return new ResponseInstance("", { status: 200 })
       }
     )
     emailPasswordDisposable?.dispose()
@@ -83,7 +84,7 @@ test("CredentialService", async () => {
     await middleware.process(
       new Request("https://localhost:8080"),
       async () => {
-        return new Response("", { status: 200 })
+        return new ResponseInstance("", { status: 200 })
       }
     )
     defaultDisposable?.dispose()
@@ -91,7 +92,7 @@ test("CredentialService", async () => {
 })
 
 test("ResponseUtils", async () => {
-  const response = new Response("", { status: 200 })
+  const response = new ResponseInstance("", { status: 200 })
   const result = ResponseUtils.isOk(response)
   const undefinedResponse = undefined
   const nullResponse = null
@@ -112,7 +113,7 @@ test("ResponseUtils", async () => {
     `${message}. Response is null`
   )
 
-  const response2 = new Response("", {
+  const response2 = new ResponseInstance("", {
     status,
     statusText
   })

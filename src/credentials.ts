@@ -84,7 +84,6 @@ export class BearerCredential extends CredentialBase {
   }
 }
 
-
 export class AnonymousCredential extends CredentialBase {
   readonly token: string
 

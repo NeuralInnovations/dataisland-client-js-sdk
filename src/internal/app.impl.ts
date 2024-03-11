@@ -7,7 +7,11 @@ import { DisposableContainer, type Lifetime } from "../disposable"
 import { type Service, ServiceContext } from "../services/service"
 import { CredentialService } from "../services/credentialService"
 import { MiddlewareService } from "../services/middlewareService"
-import { DefaultCredential, type CredentialBase, AnonymousCredential } from "../credentials"
+import {
+  DefaultCredential,
+  type CredentialBase,
+  AnonymousCredential
+} from "../credentials"
 import { DataIslandApp } from "../dataIslandApp"
 import { RpcService } from "../services/rpcService"
 import { CommandService } from "../services/commandService"
@@ -179,16 +183,22 @@ export class DataIslandAppImpl extends DataIslandApp {
     //-------------------------------------------------------------------------
 
     // Check anonymous authorization
-    if (builder.credential instanceof DefaultCredential){
+    if (!isUnitTest(UnitTest.DO_NOT_START) && builder.credential instanceof DefaultCredential) {
       let token = getCookie("anonymous-token")
-      if (token === null){
+      if (token === null) {
         const fingerprint = createFingerprint()
         const response = await this.context
           .resolve(RpcService)
           ?.requestBuilder("api/v1/Users/anonymous")
           .sendPutJson({
             info: {
-              fingerprint,
+              fingerprint: JSON.stringify({
+                userAgent: fingerprint.get("userAgent"),
+                language: fingerprint.get("language"),
+                hardwareConcurrency: fingerprint.get("hardware_concurrency"),
+                cookieEnabled: fingerprint.get("cookie_enabled"),
+                pixelRatio: fingerprint.get("pixel_ratio")
+              })
             }
           })
 
@@ -196,12 +206,12 @@ export class DataIslandAppImpl extends DataIslandApp {
           await ResponseUtils.throwError("Failed to create anonymous token", response)
         }
 
-        token = (await response!.json()).token
+        token = (await response!.json() as { token: string }).token
 
         setCookie("anonymous-token", token!)
       }
 
-      if (token !== null){
+      if (token !== null) {
         this.credential = new AnonymousCredential(token)
       }
     } else {
