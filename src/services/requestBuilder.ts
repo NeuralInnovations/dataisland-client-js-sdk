@@ -1,4 +1,5 @@
 import { Request, Response, Headers } from "node-fetch"
+import FormData from "form-data"
 
 export class RequestBuilder {
   private readonly _headers: Headers
@@ -50,7 +51,7 @@ export class RequestBuilder {
     return this
   }
 
-  public async sendPostFormData(body: any): Promise<Response> {
+  public async sendPostFormData(body: FormData): Promise<Response> {
     const url = this._url
 
     // set search params
