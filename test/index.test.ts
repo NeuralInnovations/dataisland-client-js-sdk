@@ -17,6 +17,8 @@ import {
   DeleteUserFullCommand
 } from "../src/commands/deleteUserFullCommandHandler"
 
+import { Request, Response } from "node-fetch"
+
 test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)
 })

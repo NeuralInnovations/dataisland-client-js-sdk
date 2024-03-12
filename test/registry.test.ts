@@ -1,7 +1,8 @@
 import { Registry } from "../src/internal/registry"
 
 class TestClass {
-  constructor(public readonly value: string) {}
+  constructor(public readonly value: string) {
+  }
 }
 
 test("Registry, test factory", () => {

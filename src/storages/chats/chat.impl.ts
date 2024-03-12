@@ -77,7 +77,7 @@ export class ChatImpl extends Chat implements Disposable {
     }
 
     // parse answer id from the server's response
-    const id = (await response!.json()).id
+    const id = (await response!.json() as { id: string }).id
 
     // create answer implementation
     const answer = await new AnswerImpl(this, this.context).initNew(id, message)

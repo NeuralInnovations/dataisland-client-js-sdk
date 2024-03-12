@@ -3,7 +3,8 @@ import { Context } from "../context"
 import { Constructor } from "../internal/registry"
 
 export abstract class CommandHandler<T> {
-  constructor(protected readonly context: Context) {}
+  constructor(protected readonly context: Context) {
+  }
 
   resolve<T>(type: Constructor<T>): T | undefined {
     return this.context.resolve<T>(type)
@@ -12,7 +13,8 @@ export abstract class CommandHandler<T> {
   abstract execute(message: T): Promise<void>
 }
 
-export abstract class Command {}
+export abstract class Command {
+}
 
 export class CommandService extends Service {
   private readonly _registry: Map<

@@ -105,12 +105,11 @@ export class AnswerImpl extends Answer {
     // update answer
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
-    
 
     if (this.getStep(StepType.GENERATE_ANSWER) !== undefined) {
       const step = this.getStep(StepType.GENERATE_ANSWER)
       const step_tokens = step?.tokens.join("")
-      if (this._answer !== step_tokens){
+      if (this._answer !== step_tokens) {
         this._answer = step_tokens
 
         this.dispatch({
@@ -122,15 +121,15 @@ export class AnswerImpl extends Answer {
 
     if (this.getStep(StepType.SOURCES) !== undefined && this._sources === undefined) {
       const sources_step = this.getStep(StepType.SOURCES)
-      this._sources = sources_step?.sources 
-      
+      this._sources = sources_step?.sources
+
       this.dispatch({
         type: AnswerEvent.UPDATED,
         data: this
       })
     }
 
-    if (this.getStep(StepType.DONE) !== undefined){
+    if (this.getStep(StepType.DONE) !== undefined) {
       const step = this.getStep(StepType.DONE)
       this._timestamp = Date.parse(step!.end_at)
     }

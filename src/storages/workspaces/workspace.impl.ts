@@ -63,7 +63,7 @@ export class WorkspaceImpl extends Workspace {
       )
     }
 
-    return (await response!.json()).count
+    return ((await response!.json()) as { count: number }).count
   }
 
   async change(name: string, description: string): Promise<void> {

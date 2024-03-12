@@ -38,7 +38,7 @@ export class GroupImpl extends Group implements Disposable {
 
     // wait for all promises
     await Promise.all([groupPromise, workspacePromise])
-    
+
     return this
   }
 

@@ -12,7 +12,7 @@ DataIsland App context.
 
 ### Properties
 
-- [appName](Context.md#appname)
+- [app](Context.md#app)
 - [lifetime](Context.md#lifetime)
 - [registry](Context.md#registry)
 
@@ -25,7 +25,7 @@ DataIsland App context.
 
 ### constructor
 
-• **new Context**(`registry`, `lifetime`, `appName`): [`Context`](Context.md)
+• **new Context**(`registry`, `lifetime`, `app`): [`Context`](Context.md)
 
 #### Parameters
 
@@ -33,7 +33,7 @@ DataIsland App context.
 | :------ | :------ |
 | `registry` | `Registry` |
 | `lifetime` | [`Lifetime`](Lifetime.md) |
-| `appName` | `string` |
+| `app` | [`DataIslandApp`](DataIslandApp.md) |
 
 #### Returns
 
@@ -41,9 +41,9 @@ DataIsland App context.
 
 ## Properties
 
-### appName
+### app
 
-• `Readonly` **appName**: `string`
+• `Readonly` **app**: [`DataIslandApp`](DataIslandApp.md)
 
 ___
 

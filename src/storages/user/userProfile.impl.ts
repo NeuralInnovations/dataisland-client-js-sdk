@@ -32,6 +32,13 @@ export class UserProfileImpl extends UserProfile {
     throw new Error("The profile is not loaded.")
   }
 
+  get isAnonymous(): boolean {
+    if (this.content) {
+      return this.content.user.isAnonymousMode
+    }
+    throw new Error("The profile is not loaded.")
+  }
+
   get createdAt(): Date {
     if (this.content) {
       return new Date(this.content.user.created_at)

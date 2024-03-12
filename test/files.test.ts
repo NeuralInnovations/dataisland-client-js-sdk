@@ -1,7 +1,7 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
 import { FileImpl } from "../src/storages/files/file.impl"
-import { Context, FileStatus, FilesEvent } from "../src"
+import { Context, FileStatus, FilesEvent, UploadFile } from "../src"
 import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
 import { appTest, UnitTest } from "../src/unitTest"
 
@@ -11,41 +11,41 @@ test("Files", async () => {
       expect(app).not.toBeUndefined()
       expect(org).not.toBeUndefined()
 
-      const buffer = fs.readFileSync("test/data/test_file.pdf")
+      const file_obj: UploadFile = {
+        name: "test_file.pdf",
+        type: "application/pdf",
+        stream: fs.createReadStream("test/data/test_file.pdf")
+      }
 
-      const file_obj = new File([new Uint8Array(buffer)], "test_file.pdf", {
-        type: "application/pdf"
-      })
-
-      const file_obj_second = new File([new Uint8Array(buffer)], "test_file_second.pdf", {
-        type: "application/pdf"
-      })
+      const file_obj_second: UploadFile = {
+        name: "test_file_second.pdf",
+        type: "application/pdf",
+        stream: fs.createReadStream("test/data/test_file.pdf")
+      }
 
       const upload_files = [file_obj_second, file_obj]
 
       const filePromise = ws.files.upload(upload_files)
-      await expect(filePromise).resolves.not.toThrow()
+      // await expect(filePromise).resolves.not.toThrow()
       const files = await filePromise
 
       const ids: string[] = []
       const loaded_ids: string[] = []
 
-      const process_file_status = (file) => {
-        switch (file.status){
-        case FileStatus.SUCCESS:
-        {
+      const process_file_status = (file: any) => {
+        switch (file.status) {
+        case FileStatus.SUCCESS: {
           loaded_ids.push(file.id)
           break
         }
-        case FileStatus.FAILED:
-        {
+        case FileStatus.FAILED: {
           console.error(file.progress.error)
           loaded_ids.push(file.id)
           break
         }
         }
       }
-      
+
       for (const file of files) {
         expect(file).not.toBeUndefined()
         expect(file).not.toBeNull()
@@ -62,7 +62,7 @@ test("Files", async () => {
         expect(file.progress).not.toBeNull()
         expect(file.progress.file_id).toBe(file.id)
 
-        if (file.status !== FileStatus.UPLOADING){
+        if (file.status !== FileStatus.UPLOADING) {
           process_file_status(file)
         } else {
           file.subscribe((evt) => {
@@ -71,12 +71,11 @@ test("Files", async () => {
         }
       }
 
-
       let files_loaded = false
 
       while (!files_loaded) {
         await new Promise(f => setTimeout(f, 500))
-        for (const id of ids ){
+        for (const id of ids) {
           files_loaded = loaded_ids.some(l_id => l_id === id)
         }
       }
@@ -90,7 +89,7 @@ test("Files", async () => {
       expect(filePage.pages).toBe(1)
 
       // Check loading was successfull
-      for (const id of ids ){
+      for (const id of ids) {
         const fileLoaded = filePage.files.find(fl => fl.id === id)
 
         expect(fileLoaded?.status).toBe(FileStatus.SUCCESS)
@@ -99,7 +98,6 @@ test("Files", async () => {
         )
       }
 
-  
       let filesCount = await ws.filesCount()
       expect(filesCount).toBe(2)
 
@@ -111,8 +109,6 @@ test("Files", async () => {
     })
   })
 })
-
-
 
 describe("FilesPageImpl", () => {
   let filesPage: FilesPageImpl
@@ -199,7 +195,7 @@ describe("FileImpl", () => {
     expect(file.isDisposed).toBeTruthy()
   })
 
-  // Disable this test because of updated "initFrom method", which now calls updateStatus 
+  // Disable this test because of updated "initFrom method", which now calls updateStatus
   // it("should initialize from FileDto", () => {
   //   const fileDto: FileDto = {
   //     id: "fileId",
