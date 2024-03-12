@@ -1,7 +1,7 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
 import { FileImpl } from "../src/storages/files/file.impl"
-import { Context, FileStatus, FilesEvent } from "../src"
+import { Context, FileStatus, FilesEvent, UploadFile } from "../src"
 import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
 import { appTest, UnitTest } from "../src/unitTest"
 
@@ -11,20 +11,22 @@ test("Files", async () => {
       expect(app).not.toBeUndefined()
       expect(org).not.toBeUndefined()
 
-      const buffer = fs.readFileSync("test/data/test_file.pdf")
+      const file_obj: UploadFile = {
+        name: "test_file.pdf",
+        type: "application/pdf",
+        stream: fs.createReadStream("test/data/test_file.pdf")
+      }
 
-      const file_obj = new File([new Uint8Array(buffer)], "test_file.pdf", {
-        type: "application/pdf"
-      })
-
-      const file_obj_second = new File([new Uint8Array(buffer)], "test_file_second.pdf", {
-        type: "application/pdf"
-      })
+      const file_obj_second: UploadFile = {
+        name: "test_file_second.pdf",
+        type: "application/pdf",
+        stream: fs.createReadStream("test/data/test_file.pdf")
+      }
 
       const upload_files = [file_obj_second, file_obj]
 
       const filePromise = ws.files.upload(upload_files)
-      await expect(filePromise).resolves.not.toThrow()
+      // await expect(filePromise).resolves.not.toThrow()
       const files = await filePromise
 
       const ids: string[] = []

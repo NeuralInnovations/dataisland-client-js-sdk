@@ -97,6 +97,7 @@
   },
   "dependencies": {
     "dotenv": "^16.3.2",
+    "form-data": "^4.0.0",
     "jsdom": "^23.2.0",
     "node-fetch": "^2.7.0"
   }

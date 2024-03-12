@@ -21,7 +21,7 @@ export class FilesImpl extends Files {
   // Object used as files page data, returned by "query"
   public filesList?: FilesPage
 
-  async upload(files: any[]): Promise<File[]> {
+  async upload(files: UploadFile[]): Promise<File[]> {
     const loaded_files = []
     for (const file of files) {
       loaded_files.push(await this.internalUpload(file))
@@ -159,7 +159,7 @@ export class FilesImpl extends Files {
     form.append("organizationId", this.workspace.organization.id)
     form.append("workspaceId", this.workspace.id)
     form.append("name", file.name)
-    form.append("file", file, file.name)
+    form.append("file", file.stream, file.name)
 
     // send request to the server
     const response = await this.context

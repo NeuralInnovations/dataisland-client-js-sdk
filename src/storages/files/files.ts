@@ -14,7 +14,11 @@ export enum FilesEvent {
 /**
  * Upload file.
  */
-export type UploadFile = globalThis.File
+export type UploadFile = {
+  name: string
+  type: "application/pdf"
+  stream: ReadableStream
+}
 
 /**
  * Files storage.

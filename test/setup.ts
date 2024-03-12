@@ -5,7 +5,7 @@ import { jest } from "@jest/globals"
 
 export const HOST = <string>process.env.HOST
 const UNITTEST_TOKEN = <string>process.env.UNITTEST_TOKEN
-const UNITTEST_RUNNER_ID = <string>process.env.RUNNER_ID
+const UNITTEST_RUNNER_ID = <string>process.env.UNITTEST_RUNNER_ID
 
 let globalIndex = 0
 const map = new Set<string>()

@@ -92,7 +92,7 @@ test("SDK, middleware", async () => {
       new Request("https://localhost:8080"),
       async (req: Request): Promise<Response> => {
         expect(req.headers.get("X-Test")).toBe("test-value")
-        return new ResponseInstance("", { status: 400 })
+        return new Response("", { status: 400 })
       }
     )
     expect(response2).not.toBeUndefined()

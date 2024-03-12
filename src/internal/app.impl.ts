@@ -30,6 +30,8 @@ import {
 } from "../commands/deleteUserFullCommandHandler"
 import { ResponseUtils } from "../services/responseUtils"
 import { createFingerprint, getCookie, setCookie } from "../utils/browserUtils"
+import { CookieService } from "../services/cookieService"
+import { AnonymousService } from "../services/anonymousService"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -44,7 +46,7 @@ export class DataIslandAppImpl extends DataIslandApp {
     this.name = name
     this._registry = new Registry()
     this._disposable = new DisposableContainer()
-    this._context = new Context(this._registry, this._disposable.lifetime, name)
+    this._context = new Context(this._registry, this._disposable.lifetime, this)
 
     this._registry.map(Context).asValue(this._context)
   }
@@ -98,6 +100,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     })
 
     // register services
+    builder.registerService(CookieService, (context: ServiceContext) => {
+      return new CookieService(context)
+    })
     builder.registerService(CredentialService, (context: ServiceContext) => {
       return new CredentialService(context)
     })
@@ -115,6 +120,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     })
     builder.registerService(OrganizationService, (context: ServiceContext) => {
       return new OrganizationService(context)
+    })
+    builder.registerService(AnonymousService, (context: ServiceContext) => {
+      return new AnonymousService(context)
     })
 
     // call customer setup
@@ -182,40 +190,20 @@ export class DataIslandAppImpl extends DataIslandApp {
     await Promise.all(waitList)
     //-------------------------------------------------------------------------
 
+    // set credential
+    this.credential = builder.credential
+
     // Check anonymous authorization
     if (!isUnitTest(UnitTest.DO_NOT_START) && builder.credential instanceof DefaultCredential) {
-      let token = getCookie("anonymous-token")
-      if (token === null) {
-        const fingerprint = createFingerprint()
-        const response = await this.context
-          .resolve(RpcService)
-          ?.requestBuilder("api/v1/Users/anonymous")
-          .sendPutJson({
-            info: {
-              fingerprint: JSON.stringify({
-                userAgent: fingerprint.get("userAgent"),
-                language: fingerprint.get("language"),
-                hardwareConcurrency: fingerprint.get("hardware_concurrency"),
-                cookieEnabled: fingerprint.get("cookie_enabled"),
-                pixelRatio: fingerprint.get("pixel_ratio")
-              })
-            }
-          })
+      const anonymous = this.resolve(AnonymousService)!
+      const {
+        token,
+        isValid
+      } = await anonymous.getToken()
 
-        if (ResponseUtils.isFail(response)) {
-          await ResponseUtils.throwError("Failed to create anonymous token", response)
-        }
-
-        token = (await response!.json() as { token: string }).token
-
-        setCookie("anonymous-token", token!)
-      }
-
-      if (token !== null) {
+      if (isValid) {
         this.credential = new AnonymousCredential(token)
       }
-    } else {
-      this.credential = builder.credential
     }
 
     // start app, execute start command

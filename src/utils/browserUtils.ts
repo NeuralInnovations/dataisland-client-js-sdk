@@ -1,10 +1,44 @@
-export const setCookie = (name: string, value: string) => {
-  document.cookie = `${name}=${value || ""};`
+const getDocument = () => {
+  if (!(globalThis as any).document) {
+    (globalThis as any).document = {
+      cookie: ""
+    }
+  }
+  return document
 }
 
-export const getCookie = (name: string) => {
+const getNavigator = () => {
+  if (!(globalThis as any).navigator) {
+    (globalThis as any).navigator = {
+      userAgent: "",
+      language: "",
+      hardwareConcurrency: 0,
+      cookieEnabled: false
+    }
+  }
+  return navigator
+}
+
+const getWidow = () => {
+  if (!(globalThis as any).window) {
+    (globalThis as any).window = {
+      devicePixelRatio: 16 / 9.0,
+      sessionStorage: {},
+      localStorage: {}
+    }
+  }
+  return window
+}
+
+export const setCookie = (name: string, value: string | undefined): void => {
+  const doc = getDocument()
+  doc.cookie = `${name}=${value || ""};`
+}
+
+export const getCookie = (name: string): string | undefined => {
+  const doc = getDocument()
   const nameValidator = `${name}=`
-  const cookieItems = document.cookie.split(";")
+  const cookieItems = doc.cookie.split(";")
 
   for (let index = 0; index < cookieItems.length; index++) {
     let cookie = cookieItems[index]
@@ -18,19 +52,21 @@ export const getCookie = (name: string) => {
     }
   }
 
-  return null
+  return undefined
 }
 
 export const createFingerprint = () => {
+  const nav = getNavigator()
+  const win = getWidow()
   const fingerprint = new Map<string, any>()
 
-  fingerprint.set("userAgent", navigator.userAgent)
-  fingerprint.set("language", navigator.language)
-  fingerprint.set("hardware_concurrency", navigator.hardwareConcurrency)
-  fingerprint.set("cookie_enabled", navigator.cookieEnabled)
-  fingerprint.set("pixel_ratio", window.devicePixelRatio)
-  fingerprint.set("session_storage", window.sessionStorage)
-  fingerprint.set("local_storage", window.localStorage)
+  fingerprint.set("userAgent", nav.userAgent)
+  fingerprint.set("language", nav.language)
+  fingerprint.set("hardware_concurrency", nav.hardwareConcurrency)
+  fingerprint.set("cookie_enabled", nav.cookieEnabled)
+  fingerprint.set("pixel_ratio", win.devicePixelRatio)
+  fingerprint.set("session_storage", win.sessionStorage)
+  fingerprint.set("local_storage", win.localStorage)
 
   return fingerprint
 }

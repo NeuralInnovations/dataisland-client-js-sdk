@@ -135,7 +135,7 @@ const config: Config = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: ["./jest.setup.ts"]
+  setupFiles: ["./jest.setup.ts"],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
@@ -148,6 +148,7 @@ const config: Config = {
 
   // The test environment that will be used for testing
   // testEnvironment: "jest-environment-node",
+  "testEnvironment": "jsdom",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -195,7 +196,7 @@ const config: Config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-  ,"testEnvironment": "jsdom"
+
 }
 
 export default config

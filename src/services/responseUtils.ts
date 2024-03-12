@@ -1,4 +1,4 @@
-import { Response } from "./response"
+import { Response } from "node-fetch"
 
 export class ResponseUtils {
   public static isOk(response?: Response | null): boolean {

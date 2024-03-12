@@ -1,10 +1,8 @@
 import { Service } from "./service"
 import { type Middleware } from "../middleware"
 import { type Disposable } from "../disposable"
-// import { Request } from "./request"
 import { Request } from "node-fetch"
-import { Response } from "./response"
-
+import { Response } from "node-fetch"
 
 export class MiddlewareService extends Service {
   private _middlewares: Middleware[] = []

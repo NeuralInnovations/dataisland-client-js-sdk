@@ -53,7 +53,7 @@ export class RequestBuilder {
     return this
   }
 
-  public async sendPostFormData(body: FormData): Promise<Response> {
+  public async sendPostFormData(body: any): Promise<Response> {
     const url = this._url
 
     // set search params
