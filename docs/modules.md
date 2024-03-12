@@ -162,9 +162,17 @@ ___
 
 ### UploadFile
 
-Ƭ **UploadFile**: `globalThis.File`
+Ƭ **UploadFile**: `Object`
 
 Upload file.
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `stream` | `ReadableStream` |
+| `type` | ``"application/pdf"`` |
 
 ___
 

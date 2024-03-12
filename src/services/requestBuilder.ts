@@ -1,7 +1,4 @@
-import { Request } from "node-fetch"
-import { Response } from "node-fetch"
-import { Headers } from "node-fetch"
-import FormData = require("form-data");
+import { Request, Response, Headers } from "node-fetch"
 
 export class RequestBuilder {
   private readonly _headers: Headers

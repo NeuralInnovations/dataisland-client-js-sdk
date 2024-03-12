@@ -28,8 +28,6 @@ import {
   DeleteUserFullCommand,
   DeleteUserFullCommandHandler
 } from "../commands/deleteUserFullCommandHandler"
-import { ResponseUtils } from "../services/responseUtils"
-import { createFingerprint, getCookie, setCookie } from "../utils/browserUtils"
 import { CookieService } from "../services/cookieService"
 import { AnonymousService } from "../services/anonymousService"
 

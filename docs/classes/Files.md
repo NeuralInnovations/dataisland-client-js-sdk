@@ -129,7 +129,7 @@ Upload file.
 
 | Name | Type |
 | :------ | :------ |
-| `files` | `File`[] |
+| `files` | [`UploadFile`](../modules.md#uploadfile)[] |
 
 #### Returns
 

@@ -1,6 +1,5 @@
 import { CommandHandler, Command } from "../services/commandService"
 import { UserProfileService } from "../services/userProfileService"
-import { getCookie, setCookie } from "../utils/browserUtils"
 import { CookieService } from "../services/cookieService"
 import { AnonymousCredential } from "../credentials"
 
