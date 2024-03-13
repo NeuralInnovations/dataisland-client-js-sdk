@@ -13,8 +13,8 @@ import { CredentialService } from "../src/services/credentialService"
 import { MiddlewareService } from "../src/services/middlewareService"
 import { RequestBuilder } from "../src/services/requestBuilder"
 import { ResponseUtils } from "../src/services/responseUtils"
-// import { RpcService } from "../src/services/rpcService"
 import { UnitTest, appTest } from "../src/unitTest"
+import { Request, Response, Headers } from "node-fetch"
 
 test("CredentialService", async () => {
   await appTest(UnitTest.DO_NOT_START_SDK, async () => {

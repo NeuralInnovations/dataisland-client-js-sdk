@@ -94,7 +94,9 @@ export class OrganizationImpl extends Organization implements Disposable {
       )
     }
 
-    return (await response!.json()).members as UserDto[]
+    return (await response!.json() as {
+      members: UserDto[]
+    }).members as UserDto[]
   }
 
   async change(name: string, description: string): Promise<void> {
@@ -143,7 +145,7 @@ export class OrganizationImpl extends Organization implements Disposable {
       data: this
     })
   }
-  
+
   async createInviteLink(emails: string[], accessGroups: string[]): Promise<void> {
     const response = await this.context
       .resolve(RpcService)

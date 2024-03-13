@@ -7,7 +7,11 @@ import { DisposableContainer, type Lifetime } from "../disposable"
 import { type Service, ServiceContext } from "../services/service"
 import { CredentialService } from "../services/credentialService"
 import { MiddlewareService } from "../services/middlewareService"
-import { type CredentialBase } from "../credentials"
+import {
+  DefaultCredential,
+  type CredentialBase,
+  AnonymousCredential
+} from "../credentials"
 import { DataIslandApp } from "../dataIslandApp"
 import { RpcService } from "../services/rpcService"
 import { CommandService } from "../services/commandService"
@@ -24,6 +28,8 @@ import {
   DeleteUserFullCommand,
   DeleteUserFullCommandHandler
 } from "../commands/deleteUserFullCommandHandler"
+import { CookieService } from "../services/cookieService"
+import { AnonymousService } from "../services/anonymousService"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -38,7 +44,7 @@ export class DataIslandAppImpl extends DataIslandApp {
     this.name = name
     this._registry = new Registry()
     this._disposable = new DisposableContainer()
-    this._context = new Context(this._registry, this._disposable.lifetime, name)
+    this._context = new Context(this._registry, this._disposable.lifetime, this)
 
     this._registry.map(Context).asValue(this._context)
   }
@@ -92,6 +98,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     })
 
     // register services
+    builder.registerService(CookieService, (context: ServiceContext) => {
+      return new CookieService(context)
+    })
     builder.registerService(CredentialService, (context: ServiceContext) => {
       return new CredentialService(context)
     })
@@ -109,6 +118,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     })
     builder.registerService(OrganizationService, (context: ServiceContext) => {
       return new OrganizationService(context)
+    })
+    builder.registerService(AnonymousService, (context: ServiceContext) => {
+      return new AnonymousService(context)
     })
 
     // call customer setup
@@ -146,8 +158,6 @@ export class DataIslandAppImpl extends DataIslandApp {
       this.resolve(CommandService)?.register(command[0], command[1])
     })
 
-    this.credential = builder.credential
-
     //-------------------------------------------------------------------------
     // register services
     //-------------------------------------------------------------------------
@@ -177,6 +187,22 @@ export class DataIslandAppImpl extends DataIslandApp {
     // wait for all services to start
     await Promise.all(waitList)
     //-------------------------------------------------------------------------
+
+    // set credential
+    this.credential = builder.credential
+
+    // Check anonymous authorization
+    if (!isUnitTest(UnitTest.DO_NOT_START) && builder.credential instanceof DefaultCredential) {
+      const anonymous = this.resolve(AnonymousService)!
+      const {
+        token,
+        isValid
+      } = await anonymous.getToken()
+
+      if (isValid) {
+        this.credential = new AnonymousCredential(token)
+      }
+    }
 
     // start app, execute start command
     if (!isUnitTest(UnitTest.DO_NOT_START)) {

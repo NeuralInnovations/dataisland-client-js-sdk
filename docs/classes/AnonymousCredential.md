@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev28](../../README.md) / [Exports](../modules.md) / BasicCredential
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev28](../../README.md) / [Exports](../modules.md) / AnonymousCredential
 
-# Class: BasicCredential
+# Class: AnonymousCredential
 
 DataIsland App credential.
 
@@ -8,39 +8,37 @@ DataIsland App credential.
 
 - [`CredentialBase`](CredentialBase.md)
 
-  ↳ **`BasicCredential`**
+  ↳ **`AnonymousCredential`**
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](BasicCredential.md#constructor)
+- [constructor](AnonymousCredential.md#constructor)
 
 ### Properties
 
-- [email](BasicCredential.md#email)
-- [password](BasicCredential.md#password)
+- [token](AnonymousCredential.md#token)
 
 ### Methods
 
-- [onRegister](BasicCredential.md#onregister)
+- [onRegister](AnonymousCredential.md#onregister)
 
 ## Constructors
 
 ### constructor
 
-• **new BasicCredential**(`email`, `password`): [`BasicCredential`](BasicCredential.md)
+• **new AnonymousCredential**(`token`): [`AnonymousCredential`](AnonymousCredential.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `email` | `string` |
-| `password` | `string` |
+| `token` | `string` |
 
 #### Returns
 
-[`BasicCredential`](BasicCredential.md)
+[`AnonymousCredential`](AnonymousCredential.md)
 
 #### Overrides
 
@@ -48,15 +46,9 @@ DataIsland App credential.
 
 ## Properties
 
-### email
+### token
 
-• `Readonly` **email**: `string`
-
-___
-
-### password
-
-• `Readonly` **password**: `string`
+• `Readonly` **token**: `string`
 
 ## Methods
 

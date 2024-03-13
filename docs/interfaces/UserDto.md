@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev27](../../README.md) / [Exports](../modules.md) / UserDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev28](../../README.md) / [Exports](../modules.md) / UserDto
 
 # Interface: UserDto
 
@@ -8,6 +8,7 @@
 
 - [created\_at](UserDto.md#created_at)
 - [id](UserDto.md#id)
+- [isAnonymousMode](UserDto.md#isanonymousmode)
 - [isDeleted](UserDto.md#isdeleted)
 - [modified\_at](UserDto.md#modified_at)
 - [profile](UserDto.md#profile)
@@ -24,6 +25,12 @@ ___
 ### id
 
 • **id**: `string`
+
+___
+
+### isAnonymousMode
+
+• **isAnonymousMode**: `boolean`
 
 ___
 

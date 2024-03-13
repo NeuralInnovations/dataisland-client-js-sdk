@@ -11,6 +11,7 @@ export interface UserInfoResponse {
 export interface UserDto {
   id: UserId
   isDeleted: boolean
+  isAnonymousMode: boolean
   created_at: number
   modified_at: number
   profile: ProfileDto

@@ -84,7 +84,9 @@ export class ChatsImpl extends Chats {
     }
 
     // parse workspace from the server's response
-    const content = (await response!.json()).chat as ChatDto
+    const content = (await response!.json() as {
+      chat: ChatDto
+    }).chat as ChatDto
 
     // create workspace implementation
     const chat = new ChatImpl(this.context, this.organization)

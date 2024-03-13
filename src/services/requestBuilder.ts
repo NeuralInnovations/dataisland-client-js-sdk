@@ -1,3 +1,6 @@
+import { Request, Response, Headers } from "node-fetch"
+import FormData from "form-data"
+
 export class RequestBuilder {
   private readonly _headers: Headers
   private readonly _searchParams: URLSearchParams
@@ -58,7 +61,7 @@ export class RequestBuilder {
     const req = new Request(url, {
       method: "POST",
       headers: this._headers,
-      body
+      body: body
     })
 
     // discard content type
@@ -73,7 +76,7 @@ export class RequestBuilder {
   public async sendPostJson(body: object | null | undefined): Promise<Response> {
     const url = this._url
     url.search = this._searchParams.toString()
-    let json: string | null | undefined = null
+    let json: string | undefined = undefined
     if (body !== undefined && body !== null && typeof body === "object") {
       json = JSON.stringify(body)
     }
@@ -112,7 +115,7 @@ export class RequestBuilder {
   public async sendPutJson(body: object | null | undefined): Promise<Response> {
     const url = this._url
     url.search = this._searchParams.toString()
-    let json: string | null | undefined = null
+    let json: string | undefined = undefined
     if (body !== undefined && body !== null && typeof body === "object") {
       json = JSON.stringify(body)
     }

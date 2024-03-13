@@ -1,11 +1,12 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev27](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev28](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev27
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev28
 
 ## Table of contents
 
 ### Enumerations
 
+- [AnswerEvent](enums/AnswerEvent.md)
 - [AnswerStatus](enums/AnswerStatus.md)
 - [ChatAnswerType](enums/ChatAnswerType.md)
 - [ChatsEvent](enums/ChatsEvent.md)
@@ -23,6 +24,8 @@
 
 ### Classes
 
+- [AnonymousCredential](classes/AnonymousCredential.md)
+- [Answer](classes/Answer.md)
 - [AppBuilder](classes/AppBuilder.md)
 - [BasicCredential](classes/BasicCredential.md)
 - [BearerCredential](classes/BearerCredential.md)
@@ -85,11 +88,13 @@
 
 ### Type Aliases
 
+- [AnswerId](modules.md#answerid)
 - [ChatId](modules.md#chatid)
 - [FileId](modules.md#fileid)
 - [GroupId](modules.md#groupid)
 - [Middleware](modules.md#middleware)
 - [OrganizationId](modules.md#organizationid)
+- [StepId](modules.md#stepid)
 - [UploadFile](modules.md#uploadfile)
 - [UserId](modules.md#userid)
 - [WorkspaceId](modules.md#workspaceid)
@@ -107,6 +112,12 @@
 - [disposable](modules.md#disposable)
 
 ## Type Aliases
+
+### AnswerId
+
+Ƭ **AnswerId**: `string`
+
+___
 
 ### ChatId
 
@@ -159,11 +170,25 @@ Organization id.
 
 ___
 
+### StepId
+
+Ƭ **StepId**: `string`
+
+___
+
 ### UploadFile
 
-Ƭ **UploadFile**: `globalThis.File`
+Ƭ **UploadFile**: `Object`
 
 Upload file.
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `stream` | `ReadableStream` |
+| `type` | ``"application/pdf"`` |
 
 ___
 

@@ -1,6 +1,7 @@
 import { type Constructor, type Registry } from "./internal/registry"
 import { type Lifetime } from "./disposable"
 import { Command, CommandService } from "./services/commandService"
+import { DataIslandApp } from "./dataIslandApp"
 
 /**
  * DataIsland App context.
@@ -9,7 +10,7 @@ export class Context {
   constructor(
     private readonly registry: Registry,
     public readonly lifetime: Lifetime,
-    public readonly appName: string
+    public readonly app: DataIslandApp
   ) {
   }
 

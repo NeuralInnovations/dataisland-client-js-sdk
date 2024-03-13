@@ -6,7 +6,6 @@ import { EventDispatcher } from "../../events"
 import { UserDto } from "../../dto/userInfoResponse"
 import { GroupId } from "../groups/group"
 
-
 /**
  * Organization event.
  */
@@ -18,9 +17,9 @@ export enum OrganizationEvent {
  * Organization.
  */
 export abstract class Organization extends EventDispatcher<
-OrganizationEvent,
-Organization
->  {
+  OrganizationEvent,
+  Organization
+> {
   /**
    * Organization id.
    */
