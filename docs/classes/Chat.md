@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev27](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev28](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -34,13 +34,13 @@
 
 ### collection
 
-• `get` **collection**(): readonly `Answer`[]
+• `get` **collection**(): readonly [`Answer`](Answer.md)[]
 
 Answers list.
 
 #### Returns
 
-readonly `Answer`[]
+readonly [`Answer`](Answer.md)[]
 
 ___
 
@@ -82,7 +82,7 @@ Organization.
 
 ### ask
 
-▸ **ask**(`message`, `answerType`): `Promise`\<`Answer`\>
+▸ **ask**(`message`, `answerType`): `Promise`\<[`Answer`](Answer.md)\>
 
 Ask new question in chat.
 
@@ -95,13 +95,13 @@ Ask new question in chat.
 
 #### Returns
 
-`Promise`\<`Answer`\>
+`Promise`\<[`Answer`](Answer.md)\>
 
 ___
 
 ### getAnswer
 
-▸ **getAnswer**(`id`): `Answer`
+▸ **getAnswer**(`id`): [`Answer`](Answer.md)
 
 Get answer by id
 
@@ -113,4 +113,4 @@ Get answer by id
 
 #### Returns
 
-`Answer`
+[`Answer`](Answer.md)
