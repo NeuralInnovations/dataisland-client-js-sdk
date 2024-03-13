@@ -25,6 +25,7 @@ export * from "./storages/files/file"
 export * from "./storages/files/filesPage"
 export * from "./storages/chats/chats"
 export * from "./storages/chats/chat"
+export * from "./storages/chats/answer"
 
 // map of apps that are not ready to be used
 const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
