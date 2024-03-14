@@ -1,6 +1,5 @@
-// import { Request } from "./services/request"
-import { Request } from "node-fetch"
-import { Response } from "node-fetch"
+import { Request, Response } from "./utils/request"
+
 /**
  * DataIsland App request middleware.
  */

@@ -8,7 +8,7 @@ import { ResponseUtils } from "../../services/responseUtils"
 import { File } from "./file"
 import { FilesPage } from "./filesPage"
 import { FilesPageImpl } from "./filesPage.impl"
-import FormData from "form-data"
+// import { FormData } from "../../utils/request"
 
 export class FilesImpl extends Files {
   constructor(
@@ -154,12 +154,19 @@ export class FilesImpl extends Files {
       throw new Error("File upload, file is undefined or null")
     }
 
+    let data: Blob | undefined = undefined
+    if (file instanceof globalThis.File) {
+      data = <Blob>file
+    } else {
+      data = new Blob([file.data])
+    }
+
     // form data to send
     const form = new FormData()
     form.append("organizationId", this.workspace.organization.id)
     form.append("workspaceId", this.workspace.id)
     form.append("name", file.name)
-    form.append("file", file.stream, file.name)
+    form.append("file", data!, file.name)
 
     // send request to the server
     const response = await this.context

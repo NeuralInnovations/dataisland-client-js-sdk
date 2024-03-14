@@ -14,16 +14,15 @@ test("Files", async () => {
       const file_obj: UploadFile = {
         name: "test_file.pdf",
         type: "application/pdf",
-        stream: fs.createReadStream("test/data/test_file.pdf")
+        data: fs.readFileSync("test/data/test_file.pdf")
       }
 
-      const file_obj_second: UploadFile = {
-        name: "test_file_second.pdf",
-        type: "application/pdf",
-        stream: fs.createReadStream("test/data/test_file.pdf")
-      }
+      const buffer = fs.readFileSync("test/data/test_file.pdf")
+      const file_obj_second: UploadFile = new File([new Uint8Array(buffer)], "test_file.pdf", {
+        type: "application/pdf"
+      })
 
-      const upload_files = [file_obj_second, file_obj]
+      const upload_files = [file_obj, file_obj_second]
 
       const filePromise = ws.files.upload(upload_files)
       // await expect(filePromise).resolves.not.toThrow()
