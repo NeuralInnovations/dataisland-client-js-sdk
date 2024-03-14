@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev30](../../README.md) / [Exports](../modules.md) / Files
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev31](../../README.md) / [Exports](../modules.md) / Files
 
 # Class: Files
 
@@ -129,7 +129,7 @@ Upload file.
 
 | Name | Type |
 | :------ | :------ |
-| `files` | [`UploadFile`](../modules.md#uploadfile)[] |
+| `files` | `File`[] |
 
 #### Returns
 

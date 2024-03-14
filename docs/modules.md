@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev30](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev31](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev30
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev31
 
 ## Table of contents
 
@@ -178,7 +178,7 @@ ___
 
 ### UploadFile
 
-Ƭ **UploadFile**: \{ `data`: `Buffer` ; `name`: `string` ; `type`: ``"application/pdf"``  } \| `globalThis.File`
+Ƭ **UploadFile**: `globalThis.File`
 
 Upload file.
 
