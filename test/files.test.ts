@@ -11,14 +11,12 @@ test("Files", async () => {
       expect(app).not.toBeUndefined()
       expect(org).not.toBeUndefined()
 
-      const file_obj: UploadFile = {
-        name: "test_file.pdf",
-        type: "application/pdf",
-        data: fs.readFileSync("test/data/test_file.pdf")
-      }
-
       const buffer = fs.readFileSync("test/data/test_file.pdf")
-      const file_obj_second: UploadFile = new File([new Uint8Array(buffer)], "test_file.pdf", {
+      const file_obj: UploadFile = new File([new Blob([buffer])], "test_file.pdf", {
+        type: "application/pdf"
+      })
+
+      const file_obj_second: UploadFile = new File([new Uint8Array(buffer)], "test_file2.pdf", {
         type: "application/pdf"
       })
 
