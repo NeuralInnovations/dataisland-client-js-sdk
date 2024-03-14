@@ -27,6 +27,17 @@ export * from "./storages/chats/chats"
 export * from "./storages/chats/chat"
 export * from "./storages/chats/answer"
 
+export {
+  OrganizationId, Organizations, OrganizationsEvent
+} from "./storages/organizations/organizations"
+export {
+  WorkspaceId, Workspaces, WorkspacesEvent
+} from "./storages/workspaces/workspaces"
+export { FileId, File, FileStatus } from "./storages/files/file"
+export { UploadFile, Files, FilesEvent } from "./storages/files/files"
+export { Group, GroupEvent, GroupId } from "./storages/groups/group"
+export { AnswerId, Answer, StepId, AnswerEvent } from "./storages/chats/answer"
+
 // map of apps that are not ready to be used
 const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
 // map of apps that are ready to be used
@@ -97,7 +108,3 @@ export async function dataIslandApp(
   }
   return await appPromise
 }
-
-export { Group } from "./storages/groups/group"
-export { GroupEvent } from "./storages/groups/group"
-export { GroupId } from "./storages/groups/group"
