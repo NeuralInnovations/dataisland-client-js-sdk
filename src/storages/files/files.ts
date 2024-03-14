@@ -14,11 +14,7 @@ export enum FilesEvent {
 /**
  * Upload file.
  */
-export type UploadFile = {
-  name: string
-  type: "application/pdf"
-  data: Buffer
-} | globalThis.File
+export type UploadFile = globalThis.File
 
 /**
  * Files storage.
