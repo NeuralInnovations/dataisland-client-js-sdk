@@ -1,20 +1,19 @@
-import { Request, Response, Headers } from "node-fetch"
-import FormData from "form-data"
+// import { Request, Response, Headers, FormData } from "../utils/request"
 
 export class RequestBuilder {
-  private readonly _headers: Headers
+  private readonly _headers: Record<string, string>
   private readonly _searchParams: URLSearchParams
 
   constructor(
     private readonly _url: URL,
     private readonly _request: (req: Request) => Promise<Response>
   ) {
-    this._headers = new Headers()
+    this._headers = {}
     this._searchParams = new URLSearchParams()
   }
 
   public header(name: string, value: string): RequestBuilder {
-    this._headers.set(name, value)
+    this._headers[name] = value
     return this
   }
 
@@ -26,11 +25,11 @@ export class RequestBuilder {
     }
     if (headers instanceof Headers) {
       headers.forEach((value, name) => {
-        this._headers.set(name, value)
+        this._headers[name] = value
       })
     } else {
       Object.entries(headers).forEach(([name, value]) => {
-        this._headers.set(name, value)
+        this._headers[name] = value
       })
     }
     return this
