@@ -16,8 +16,7 @@ import { HOST, randomHash, newTestUserToken } from "./setup"
 import {
   DeleteUserFullCommand
 } from "../src/commands/deleteUserFullCommandHandler"
-
-import { Request, Response } from "node-fetch"
+// import { Request, Response } from "../src/utils/request"
 
 test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)

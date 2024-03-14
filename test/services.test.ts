@@ -14,7 +14,7 @@ import { MiddlewareService } from "../src/services/middlewareService"
 import { RequestBuilder } from "../src/services/requestBuilder"
 import { ResponseUtils } from "../src/services/responseUtils"
 import { UnitTest, appTest } from "../src/unitTest"
-import { Request, Response, Headers } from "node-fetch"
+// import { Request, Response } from "../src/utils/request"
 
 test("CredentialService", async () => {
   await appTest(UnitTest.DO_NOT_START_SDK, async () => {
@@ -31,7 +31,7 @@ test("CredentialService", async () => {
     const credential = new BasicCredential("email", "password")
     const disposableContainer = new DisposableContainer()
     const lifetime = new Lifetime(disposableContainer)
-    const context = new Context(new Registry(), lifetime, "TestApp")
+    const context = new Context(new Registry(), lifetime, app)
     expect(() => credential.onRegister(lifetime, context)).toThrow(
       "MiddlewareService is not registered."
     )
@@ -138,7 +138,7 @@ describe("RequestBuilder", () => {
     test("sets header correctly", () => {
       const requestBuilder = new RequestBuilder(url, requestFunction)
       requestBuilder.header("Content-Type", "application/json")
-      expect(requestBuilder["_headers"].get("Content-Type")).toBe(
+      expect(requestBuilder["_headers"]["Content-Type"]).toBe(
         "application/json"
       )
     })
@@ -160,10 +160,10 @@ describe("RequestBuilder", () => {
           "Authorization": "Bearer token"
         })
 
-        expect(requestBuilder["_headers"].get("Content-Type")).toBe(
+        expect(requestBuilder["_headers"]["Content-Type"]).toBe(
           "application/json"
         )
-        expect(requestBuilder["_headers"].get("Authorization")).toBe(
+        expect(requestBuilder["_headers"]["Authorization"]).toBe(
           "Bearer token"
         )
       })
@@ -172,30 +172,30 @@ describe("RequestBuilder", () => {
         const requestBuilder = new RequestBuilder(url, requestFunction)
         requestBuilder.headers(undefined)
 
-        expect(requestBuilder["_headers"].get("Content-Type")).toBe(null)
-        expect(requestBuilder["_headers"].get("Authorization")).toBe(null)
+        expect(requestBuilder["_headers"]["Content-Type"]).toBe(undefined)
+        expect(requestBuilder["_headers"]["Authorization"]).toBe(undefined)
       })
 
       test("does not set headers if argument is null", () => {
         const requestBuilder = new RequestBuilder(url, requestFunction)
         requestBuilder.headers(undefined)
 
-        expect(requestBuilder["_headers"].get("Content-Type")).toBe(null)
-        expect(requestBuilder["_headers"].get("Authorization")).toBe(null)
+        expect(requestBuilder["_headers"]["Content-Type"]).toBe(undefined)
+        expect(requestBuilder["_headers"]["Authorization"]).toBe(undefined)
       })
 
       test("sets headers correctly from Headers object", () => {
         const requestBuilder = new RequestBuilder(url, requestFunction)
-        const headers = new Headers({
+        const headers = {
           "Content-Type": "application/json",
           "Authorization": "Bearer token"
-        })
+        }
         requestBuilder.headers(headers)
 
-        expect(requestBuilder["_headers"].get("Content-Type")).toBe(
+        expect(requestBuilder["_headers"]["Content-Type"]).toBe(
           "application/json"
         )
-        expect(requestBuilder["_headers"].get("Authorization")).toBe(
+        expect(requestBuilder["_headers"]["Authorization"]).toBe(
           "Bearer token"
         )
       })

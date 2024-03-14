@@ -1,8 +1,7 @@
 import { Service, type ServiceContext } from "./service"
 import { MiddlewareService } from "./middlewareService"
 import { RequestBuilder } from "./requestBuilder"
-import { Request, Response, Headers } from "node-fetch"
-import fetch from "node-fetch"
+// import { Request, Response, Headers, fetch } from "../utils/request"
 
 /**
  * Options for the RpcService.
