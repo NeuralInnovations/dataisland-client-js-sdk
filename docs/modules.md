@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev31](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev31
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev33
 
 ## Table of contents
 
@@ -110,6 +110,8 @@
 - [dataIslandApp](modules.md#dataislandapp)
 - [dataIslandInstances](modules.md#dataislandinstances)
 - [disposable](modules.md#disposable)
+- [isEmptyNullOrUndefined](modules.md#isemptynullorundefined)
+- [isNullOrUndefined](modules.md#isnullorundefined)
 
 ## Type Aliases
 
@@ -283,3 +285,35 @@ Creates a disposable.
 [`Disposable`](interfaces/Disposable.md)
 
 The disposable.
+
+___
+
+### isEmptyNullOrUndefined
+
+▸ **isEmptyNullOrUndefined**(`object`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `object` | `unknown` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### isNullOrUndefined
+
+▸ **isNullOrUndefined**(`object`): object is undefined \| null
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `object` | `unknown` |
+
+#### Returns
+
+object is undefined \| null
