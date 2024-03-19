@@ -20,6 +20,7 @@ Files storage.
 
 - [delete](Files.md#delete)
 - [dispatch](Files.md#dispatch)
+- [get](Files.md#get)
 - [query](Files.md#query)
 - [subscribe](Files.md#subscribe)
 - [upload](Files.md#upload)
@@ -75,6 +76,24 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### get
+
+▸ **get**(`fileId`): `Promise`\<[`File`](File.md)\>
+
+Get file by ID
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fileId` | `string` |
+
+#### Returns
+
+`Promise`\<[`File`](File.md)\>
 
 ___
 

@@ -1,6 +1,6 @@
 import { Context } from "../../context"
 import { Disposable } from "../../disposable"
-import { FileDto, FileProgressDto } from "../../dto/workspacesResponse"
+import { FileDto, FileProgressDto, FileUrlDto } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { File, FileStatus } from "./file"
@@ -58,7 +58,7 @@ export class FileImpl extends File implements Disposable {
     }
   }
 
-  async url(): Promise<string> {
+  async url(): Promise<FileUrlDto> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files/url")
@@ -72,7 +72,7 @@ export class FileImpl extends File implements Disposable {
       )
     }
 
-    return (await response!.json() as { url: string }).url
+    return await response!.json() as FileUrlDto
   }
 
   public fetchAfter() {
