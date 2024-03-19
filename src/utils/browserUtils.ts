@@ -11,7 +11,7 @@ const getNavigator = () => {
   if (!(globalThis as any).navigator) {
     (globalThis as any).navigator = {
       userAgent: "",
-      language: "",
+      language: "ua",
       hardwareConcurrency: 0,
       cookieEnabled: false
     }

@@ -24,6 +24,7 @@ Chats storage.
 ### Methods
 
 - [create](Chats.md#create)
+- [createWithFile](Chats.md#createwithfile)
 - [delete](Chats.md#delete)
 - [dispatch](Chats.md#dispatch)
 - [get](Chats.md#get)
@@ -75,6 +76,24 @@ Organization.
 ▸ **create**(): `Promise`\<[`Chat`](Chat.md)\>
 
 Create new chat.
+
+#### Returns
+
+`Promise`\<[`Chat`](Chat.md)\>
+
+___
+
+### createWithFile
+
+▸ **createWithFile**(`fileId`): `Promise`\<[`Chat`](Chat.md)\>
+
+Create chat with specific file
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fileId` | `string` |
 
 #### Returns
 

@@ -26,6 +26,11 @@ export abstract class Chat {
   abstract get name(): string
 
   /**
+   * Connected file ID.
+   */
+  abstract get fileId(): string
+
+  /**
    * Answers list.
    */
   abstract get collection(): ReadonlyArray<Answer>

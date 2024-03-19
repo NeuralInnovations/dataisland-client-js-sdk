@@ -21,14 +21,15 @@ File.
 - [createdAt](File.md#createdat)
 - [id](File.md#id)
 - [name](File.md#name)
+- [previewUrl](File.md#previewurl)
 - [progress](File.md#progress)
 - [status](File.md#status)
+- [url](File.md#url)
 
 ### Methods
 
 - [dispatch](File.md#dispatch)
 - [subscribe](File.md#subscribe)
-- [url](File.md#url)
 
 ## Constructors
 
@@ -82,6 +83,18 @@ File name.
 
 ___
 
+### previewUrl
+
+• `get` **previewUrl**(): `string`
+
+Get temporary url.
+
+#### Returns
+
+`string`
+
+___
+
 ### progress
 
 • `get` **progress**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
@@ -103,6 +116,18 @@ File uploading status
 #### Returns
 
 [`FileStatus`](../enums/FileStatus.md)
+
+___
+
+### url
+
+• `get` **url**(): `string`
+
+Get temporary url.
+
+#### Returns
+
+`string`
 
 ## Methods
 
@@ -144,15 +169,3 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
-
-___
-
-### url
-
-▸ **url**(): `Promise`\<[`FileUrlDto`](../interfaces/FileUrlDto.md)\>
-
-Get temporary url.
-
-#### Returns
-
-`Promise`\<[`FileUrlDto`](../interfaces/FileUrlDto.md)\>

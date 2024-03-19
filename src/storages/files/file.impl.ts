@@ -1,6 +1,6 @@
 import { Context } from "../../context"
 import { Disposable } from "../../disposable"
-import { FileDto, FileProgressDto, FileUrlDto } from "../../dto/workspacesResponse"
+import { FileDto, FileProgressDto } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { File, FileStatus } from "./file"
@@ -42,6 +42,14 @@ export class FileImpl extends File implements Disposable {
   get createdAt(): number {
     return <number>this._content?.createdAt
   }
+  
+  get url(): string {
+    return <string>this._content?.url
+  }
+
+  get previewUrl(): string {
+    return <string>this._content?.previewUrl
+  }
 
   get progress(): FileProgressDto {
     return <FileProgressDto>this._progress
@@ -56,23 +64,6 @@ export class FileImpl extends File implements Disposable {
     } else {
       return FileStatus.FAILED
     }
-  }
-
-  async url(): Promise<FileUrlDto> {
-    const response = await this.context
-      .resolve(RpcService)
-      ?.requestBuilder("api/v1/Files/url")
-      .searchParam("id", this.id)
-      .sendGet()
-
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(
-        `Failed to get file ${this.id} url`,
-        response
-      )
-    }
-
-    return await response!.json() as FileUrlDto
   }
 
   public fetchAfter() {

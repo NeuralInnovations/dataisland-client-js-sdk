@@ -14,6 +14,7 @@
 - [modifiedAt](FileDto.md#modifiedat)
 - [name](FileDto.md#name)
 - [organizationId](FileDto.md#organizationid)
+- [previewUrl](FileDto.md#previewurl)
 - [url](FileDto.md#url)
 - [workspaceId](FileDto.md#workspaceid)
 
@@ -64,6 +65,12 @@ ___
 ### organizationId
 
 • **organizationId**: `string`
+
+___
+
+### previewUrl
+
+• **previewUrl**: `string`
 
 ___
 

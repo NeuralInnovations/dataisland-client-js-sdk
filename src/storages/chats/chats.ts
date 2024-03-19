@@ -28,6 +28,12 @@ export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
   abstract create(): Promise<Chat>
 
   /**
+   * Create chat with specific file
+   * @param fileId 
+   */
+  abstract createWithFile(fileId: string): Promise<Chat>
+
+  /**
    * Get chat by id.
    * @param id
    */

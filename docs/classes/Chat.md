@@ -11,6 +11,7 @@
 ### Accessors
 
 - [collection](Chat.md#collection)
+- [fileId](Chat.md#fileid)
 - [id](Chat.md#id)
 - [name](Chat.md#name)
 - [organization](Chat.md#organization)
@@ -41,6 +42,18 @@ Answers list.
 #### Returns
 
 readonly [`Answer`](Answer.md)[]
+
+___
+
+### fileId
+
+• `get` **fileId**(): `string`
+
+Connected file ID.
+
+#### Returns
+
+`string`
 
 ___
 

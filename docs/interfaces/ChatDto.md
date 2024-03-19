@@ -8,6 +8,7 @@
 
 - [answers](ChatDto.md#answers)
 - [createdAt](ChatDto.md#createdat)
+- [fileId](ChatDto.md#fileid)
 - [id](ChatDto.md#id)
 - [modifiedAt](ChatDto.md#modifiedat)
 - [name](ChatDto.md#name)
@@ -26,6 +27,12 @@ ___
 ### createdAt
 
 • **createdAt**: `number`
+
+___
+
+### fileId
+
+• **fileId**: `string`
 
 ___
 

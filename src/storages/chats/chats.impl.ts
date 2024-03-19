@@ -71,11 +71,10 @@ export class ChatsImpl extends Chats {
   }
 
   async create(): Promise<Chat> {
-
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Chats")
+      ?.requestBuilder("api/v1/Chats/workspaces")
       .sendPostJson({ organizationId: this.organization.id })
 
     // check response status
@@ -103,6 +102,50 @@ export class ChatsImpl extends Chats {
 
     return chat
   }
+
+  async createWithFile(fileId: string): Promise<Chat> {
+    if (fileId === undefined || fileId === null) {
+      throw new Error("Create chat with file, id is undefined or null")
+    }
+    if (fileId.length === 0 || fileId.trim().length === 0) {
+      throw new Error("Create chat with file, id is empty")
+    }
+
+    // send create request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Chats/file")
+      .sendPostJson({ 
+        organizationId: this.organization.id,
+        fileId: fileId
+      })
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to create chat, organization: ${this.organization.id}`, response)
+    }
+
+    // parse workspace from the server's response
+    const content = (await response!.json() as {
+      chat: ChatDto
+    }).chat as ChatDto
+
+    // create workspace implementation
+    const chat = new ChatImpl(this.context, this.organization)
+    await chat.initFrom(content)
+
+    // add chat to the collection
+    this._chats.push(chat)
+
+    // dispatch event
+    this.dispatch({
+      type: ChatsEvent.ADDED,
+      data: chat
+    })
+
+    return chat
+  }
+
 
   async delete(id: string): Promise<void> {
     // get chat by id

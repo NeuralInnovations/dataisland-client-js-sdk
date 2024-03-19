@@ -95,6 +95,7 @@ export class FilesImpl extends Files {
       ?.requestBuilder("/api/v1/Files")
       .searchParam("id", id)
       .sendDelete()
+      
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`File ${id} delete, failed`, response)
     }
@@ -214,9 +215,6 @@ export class FilesImpl extends Files {
     const fileImpl = new FileImpl(this.context)
 
     await fileImpl.initFrom(result)
-
-    // TODO: why is this here?
-    this.filesList?.files.push(fileImpl)
 
     // dispatch event, file added
     this.dispatch({
