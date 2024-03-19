@@ -26,6 +26,12 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   abstract upload(files: UploadFile[]): Promise<File[]>
 
   /**
+   * Get file by ID
+   * @param fileId 
+   */
+  abstract get(fileId: FileId): Promise<File>
+
+  /**
    * Delete files.
    * @param ids
    */

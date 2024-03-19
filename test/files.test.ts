@@ -87,12 +87,17 @@ test("Files", async () => {
 
       // Check loading was successfull
       for (const id of ids) {
-        const fileLoaded = filePage.files.find(fl => fl.id === id)
+        const fileGet = await ws.files.get(id)
 
-        expect(fileLoaded?.status).toBe(FileStatus.SUCCESS)
-        expect(fileLoaded?.progress?.completed_parts_count).toBe(
-          fileLoaded?.progress?.file_parts_count
+        expect(fileGet.id).toBe(id)
+
+        expect(fileGet?.status).toBe(FileStatus.SUCCESS)
+        expect(fileGet?.progress?.completed_parts_count).toBe(
+          fileGet?.progress?.file_parts_count
         )
+
+        expect(fileGet.url).not.toBe("")
+        expect(fileGet.previewUrl).not.toBe("")
       }
 
       let filesCount = await ws.filesCount()

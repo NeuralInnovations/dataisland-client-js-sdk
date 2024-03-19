@@ -45,5 +45,10 @@ export abstract class File extends EventDispatcher<
   /**
    * Get temporary url.
    */
-  abstract url(): Promise<string>
+  abstract get url(): string
+
+  /**
+   * Get temporary url.
+   */
+  abstract get previewUrl(): string
 }

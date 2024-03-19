@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev31](../../README.md) / [Exports](../modules.md) / FileUrlDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev32](../../README.md) / [Exports](../modules.md) / FileUrlDto
 
 # Interface: FileUrlDto
 
@@ -6,9 +6,16 @@
 
 ### Properties
 
+- [previewUrl](FileUrlDto.md#previewurl)
 - [url](FileUrlDto.md#url)
 
 ## Properties
+
+### previewUrl
+
+• **previewUrl**: `string`
+
+___
 
 ### url
 

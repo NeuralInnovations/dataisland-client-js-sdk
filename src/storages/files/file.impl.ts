@@ -5,6 +5,7 @@ import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { File, FileStatus } from "./file"
 import { FilesEvent } from "./files"
+import { isNullOrUndefined } from "../../utils/utils"
 
 export class FileImpl extends File implements Disposable {
   private _isDisposed: boolean = false
@@ -42,37 +43,30 @@ export class FileImpl extends File implements Disposable {
   get createdAt(): number {
     return <number>this._content?.createdAt
   }
+  
+  get url(): string {
+    return <string>this._content?.url
+  }
+
+  get previewUrl(): string {
+    return <string>this._content?.previewUrl
+  }
 
   get progress(): FileProgressDto {
     return <FileProgressDto>this._progress
   }
 
   get status(): FileStatus {
-    if (this._progress === undefined || this._progress.success === null ||
-      (this._progress.success && this._progress.completed_parts_count !== this._progress.file_parts_count)) {
+
+    if (
+      isNullOrUndefined(this._progress) || isNullOrUndefined(this._progress.success)
+      || (this._progress.success && this._progress.completed_parts_count < this._progress.file_parts_count)) {
       return FileStatus.UPLOADING
     } else if (this._progress.success) {
       return FileStatus.SUCCESS
     } else {
       return FileStatus.FAILED
     }
-  }
-
-  async url(): Promise<string> {
-    const response = await this.context
-      .resolve(RpcService)
-      ?.requestBuilder("api/v1/Files/url")
-      .searchParam("id", this.id)
-      .sendGet()
-
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(
-        `Failed to get file ${this.id} url`,
-        response
-      )
-    }
-
-    return (await response!.json() as { url: string }).url
   }
 
   public fetchAfter() {
@@ -97,8 +91,8 @@ export class FileImpl extends File implements Disposable {
       progress: FileProgressDto
     }).progress as FileProgressDto
 
-    if (prev_progress === undefined ||
-      (this.progress.success !== null && this.progress.completed_parts_count > prev_progress.completed_parts_count) ||
+    if (isNullOrUndefined(prev_progress) ||
+      (!isNullOrUndefined(this.progress.success) && this.progress.completed_parts_count > prev_progress.completed_parts_count) ||
       this.status === FileStatus.SUCCESS ||
       this.status === FileStatus.FAILED) {
       // dispatch event, file updated

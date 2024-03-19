@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev31](../../README.md) / [Exports](../modules.md) / Answer
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev32](../../README.md) / [Exports](../modules.md) / Answer
 
 # Class: Answer
 
