@@ -59,7 +59,7 @@ export class FileImpl extends File implements Disposable {
   get status(): FileStatus {
 
     if (
-      isNullOrUndefined(this._progress)
+      isNullOrUndefined(this._progress) || isNullOrUndefined(this._progress.success)
       || (this._progress.success && this._progress.completed_parts_count < this._progress.file_parts_count)) {
       return FileStatus.UPLOADING
     } else if (this._progress.success) {
