@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../../README.md) / [Exports](../modules.md) / DataIslandApp
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev32](../../README.md) / [Exports](../modules.md) / DataIslandApp
 
 # Class: DataIslandApp
 

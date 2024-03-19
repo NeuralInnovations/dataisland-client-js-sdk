@@ -174,10 +174,11 @@ You can get file simply using get method:
 const file = await workspace.files.get(fileId)
 ```
 
-File url's for preview or full view are available with url method of file:
+File url's for preview or full view are available with url properties of file:
 
 ```
-const urls = await file.url() // Urls dto contains url and previewUrl properties
+const url = file.url
+const previewUrl = file.previewUrl
 ```
 
 Delete file example:
