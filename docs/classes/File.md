@@ -149,10 +149,10 @@ ___
 
 ### url
 
-▸ **url**(): `Promise`\<`string`\>
+▸ **url**(): `Promise`\<[`FileUrlDto`](../interfaces/FileUrlDto.md)\>
 
 Get temporary url.
 
 #### Returns
 
-`Promise`\<`string`\>
+`Promise`\<[`FileUrlDto`](../interfaces/FileUrlDto.md)\>

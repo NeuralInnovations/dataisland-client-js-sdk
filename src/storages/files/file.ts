@@ -1,4 +1,4 @@
-import { FileProgressDto } from "../../dto/workspacesResponse"
+import { FileProgressDto, FileUrlDto } from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
 import { FilesEvent } from "./files"
 
@@ -45,5 +45,5 @@ export abstract class File extends EventDispatcher<
   /**
    * Get temporary url.
    */
-  abstract url(): Promise<string>
+  abstract url(): Promise<FileUrlDto>
 }

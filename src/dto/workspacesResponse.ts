@@ -18,7 +18,8 @@ export interface WorkspacesResponse {
 }
 
 export interface FileUrlDto {
-  url: string
+  url: string,
+  previewUrl: string
 }
 
 export interface FileProgressDto {

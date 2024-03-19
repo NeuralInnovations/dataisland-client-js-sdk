@@ -168,6 +168,18 @@ if (file.status !== FileStatus.UPLOADING) {
 }
 ```
 
+You can get file simply using get method:
+
+```
+const file = await workspace.files.get(fileId)
+```
+
+File url's for preview or full view are available with url method of file:
+
+```
+const urls = await file.url() // Urls dto contains url and previewUrl properties
+```
+
 Delete file example:
 
 ```

@@ -29,6 +29,10 @@ export class FilesImpl extends Files {
     return loaded_files
   }
 
+  async get(fileId: string): Promise<File>{
+    return await this.internalGetFile(fileId)
+  }
+
   async delete(ids: string[]): Promise<void> {
     for (const id of ids) {
       await this.internalDeleteFile(id)
@@ -42,6 +46,37 @@ export class FilesImpl extends Files {
   //----------------------------------------------------------------------------
   // INTERNALS
   //----------------------------------------------------------------------------
+
+
+  async internalGetFile(id: string): Promise<File>{
+    if (id === undefined || id === null) {
+      throw new Error("File get, id is undefined or null")
+    }
+    if (id.length === 0 || id.trim().length === 0) {
+      throw new Error("File get, id is empty")
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Files")
+      .searchParam("id", id)
+      .sendGet()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed to get file ${id}`,
+        response
+      )
+    }
+
+    // parse file from the server's response
+    const result = (await response!.json() as { file: FileDto }).file as FileDto
+
+    // create file implementation
+    const fileImpl = new FileImpl(this.context)
+
+    return await fileImpl.initFrom(result)
+  }
 
   /**
    * Delete file.

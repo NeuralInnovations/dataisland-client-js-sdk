@@ -6,9 +6,16 @@
 
 ### Properties
 
+- [previewUrl](FileUrlDto.md#previewurl)
 - [url](FileUrlDto.md#url)
 
 ## Properties
+
+### previewUrl
+
+• **previewUrl**: `string`
+
+___
 
 ### url
 
