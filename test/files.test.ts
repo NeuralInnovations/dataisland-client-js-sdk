@@ -96,13 +96,8 @@ test("Files", async () => {
           fileGet?.progress?.file_parts_count
         )
 
-        const urls = await fileGet.url()
-
-        expect(urls).not.toBeUndefined()
-        expect(urls).not.toBeNull()
-
-        expect(urls.url).not.toBe("")
-        expect(urls.previewUrl).not.toBe("")
+        expect(fileGet.url).not.toBe("")
+        expect(fileGet.previewUrl).not.toBe("")
       }
 
       let filesCount = await ws.filesCount()

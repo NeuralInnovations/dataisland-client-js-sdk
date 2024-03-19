@@ -37,6 +37,7 @@ export interface FileDto {
   name: string
   description: string
   url: string
+  previewUrl: string
   hash: string
   organizationId: string
   workspaceId: string
