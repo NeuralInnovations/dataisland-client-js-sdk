@@ -37,6 +37,7 @@ export { FileId, File, FileStatus } from "./storages/files/file"
 export { UploadFile, Files, FilesEvent } from "./storages/files/files"
 export { Group, GroupEvent, GroupId } from "./storages/groups/group"
 export { AnswerId, Answer, StepId, AnswerEvent } from "./storages/chats/answer"
+export { isNullOrUndefined, isEmptyNullOrUndefined } from "./utils/utils"
 
 // map of apps that are not ready to be used
 const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
