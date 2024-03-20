@@ -11,9 +11,7 @@ const getNavigator = () => {
   if (!(globalThis as any).navigator) {
     (globalThis as any).navigator = {
       userAgent: "",
-      language: "ua",
-      hardwareConcurrency: 0,
-      cookieEnabled: false
+      hardwareConcurrency: 0
     }
   }
   return navigator
@@ -61,9 +59,7 @@ export const createFingerprint = () => {
   const fingerprint = new Map<string, any>()
 
   fingerprint.set("userAgent", nav.userAgent)
-  fingerprint.set("language", nav.language)
   fingerprint.set("hardware_concurrency", nav.hardwareConcurrency)
-  fingerprint.set("cookie_enabled", nav.cookieEnabled)
   fingerprint.set("pixel_ratio", win.devicePixelRatio)
   fingerprint.set("session_storage", win.sessionStorage)
   fingerprint.set("local_storage", win.localStorage)
