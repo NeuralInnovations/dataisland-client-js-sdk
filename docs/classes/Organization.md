@@ -31,7 +31,10 @@ Organization.
 - [createInviteLink](Organization.md#createinvitelink)
 - [dispatch](Organization.md#dispatch)
 - [members](Organization.md#members)
+- [membersStatistics](Organization.md#membersstatistics)
+- [statistics](Organization.md#statistics)
 - [subscribe](Organization.md#subscribe)
+- [userStatistic](Organization.md#userstatistic)
 
 ## Constructors
 
@@ -191,6 +194,44 @@ Get organization members
 
 ___
 
+### membersStatistics
+
+▸ **membersStatistics**(`dateFrom`, `dateTo`): `Promise`\<[`UsersStatisticsResponse`](../interfaces/UsersStatisticsResponse.md)\>
+
+Get organization statistics
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `dateFrom` | `number` |
+| `dateTo` | `number` |
+
+#### Returns
+
+`Promise`\<[`UsersStatisticsResponse`](../interfaces/UsersStatisticsResponse.md)\>
+
+___
+
+### statistics
+
+▸ **statistics**(`dateFrom`, `dateTo`): `Promise`\<`StatisticsResponse`\>
+
+Get organization statistics
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `dateFrom` | `number` |
+| `dateTo` | `number` |
+
+#### Returns
+
+`Promise`\<`StatisticsResponse`\>
+
+___
+
 ### subscribe
 
 ▸ **subscribe**(`callback`, `type?`): [`Disposable`](../interfaces/Disposable.md)
@@ -209,3 +250,23 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### userStatistic
+
+▸ **userStatistic**(`userid`, `dateFrom`, `dateTo`): `Promise`\<`StatisticsResponse`\>
+
+Get statistics for user
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `userid` | `string` |
+| `dateFrom` | `number` |
+| `dateTo` | `number` |
+
+#### Returns
+
+`Promise`\<`StatisticsResponse`\>

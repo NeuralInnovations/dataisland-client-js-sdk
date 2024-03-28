@@ -16,8 +16,9 @@ The DataIsland Client SDK is a TypeScript library designed to seamlessly integra
 5. [Use workspaces](#use-workspaces)
 6. [Use files](#use-files)
 7. [Use access groups](#use-access-groups)
-8. [Use invites](#use-invites)
-9. [References](docs/modules.md)
+8. [Use statistics](#use-statistics)
+9. [Use invites](#use-invites)
+10. [References](docs/modules.md)
 
 ---
 
@@ -163,7 +164,7 @@ if (file.status !== FileStatus.UPLOADING) {
  // Show results
 } else {
   file.subscribe((event) => {
-    const progress = event.data.progress()
+    const progress = event.data.progress
   })
 }
 ```
@@ -302,6 +303,16 @@ const group = await organization.accessGroups.create(
 )
 
 await organization.accessGroups.delete(group.id)
+```
+
+### Use Statistics
+
+Statistics access methods are stored in organization object. There are several methods for different statistics data, and all of them includes dateFrom and dateTo parameters. These parameters are numbers that represent current time in seconds ( UNIX Epoch) . Here are some examples:
+
+```
+const organizationStatistics = await org.statistics(dateFrom, dateTo)
+const organizationMembersStatistics = await org.membersStatistics(dateFrom, dateTo)
+const userStatistics = await org.userStatistic(userId, dateFrom, dateTo)
 ```
 
 ### Use Invites

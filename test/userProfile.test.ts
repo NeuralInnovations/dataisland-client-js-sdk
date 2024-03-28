@@ -17,6 +17,7 @@ describe("UserProfileImpl", () => {
         name: "John Doe",
         email: "john.doe@example.com"
       },
+      isAnonymousMode: false,
       isDeleted: false,
       created_at: 0,
       modified_at: 0

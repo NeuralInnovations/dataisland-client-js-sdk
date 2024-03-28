@@ -1,6 +1,7 @@
 import { WorkspaceDto } from "./workspacesResponse"
 import { UserId } from "../storages/user/userProfile"
 import { OrganizationId } from "../storages/organizations/organizations"
+import { StatisticsData } from "./statisticsResponse"
 
 export interface UserInfoResponse {
   adminInOrganization: string[]
@@ -47,4 +48,15 @@ export interface OrganizationWorkspaces extends OrganizationDto {
 
 export interface MembersResponse {
   members: UserDto
+}
+
+export interface UsersStatisticsResponse {
+  dateFrom: number
+  dateTo: number
+  membersData: UsetStatisticsData[]
+}
+
+export interface UsetStatisticsData {
+    userId: UserId
+    data: StatisticsData[]
 }

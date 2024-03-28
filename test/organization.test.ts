@@ -75,6 +75,9 @@ test("Organization", async () => {
 
     expect(org.description.trim()).toBe(test_description)
 
+    expect(org.statistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
+    expect(org.membersStatistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
+
     // delete organization
     await expect(app.organizations.delete(org.id)).resolves.not.toThrow()
     expect((<OrganizationImpl>org).isDisposed).toBe(true)
