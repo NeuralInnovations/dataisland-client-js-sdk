@@ -1,6 +1,6 @@
 import { OrganizationId } from "./organizations"
 import { Disposable } from "../../disposable"
-import { OrganizationDto, UserDto } from "../../dto/userInfoResponse"
+import { OrganizationDto, UserDto, UsersStatisticsResponse } from "../../dto/userInfoResponse"
 import { Workspaces } from "../workspaces/workspaces"
 import { WorkspacesImpl } from "../workspaces/workspaces.impl"
 import { Context } from "../../context"
@@ -11,6 +11,7 @@ import { ChatsImpl } from "../chats/chats.impl"
 import { Chats } from "../chats/chats"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
+import { StatisticsResponse } from "../../dto/statisticsResponse"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -144,6 +145,70 @@ export class OrganizationImpl extends Organization implements Disposable {
       type: OrganizationEvent.CHANGED,
       data: this
     })
+  }
+
+  async statistics(dateFrom: number, dateTo: number): Promise<StatisticsResponse> {
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Stats/organization")
+      .searchParam("organizationId", this.id)
+      .searchParam("dateFrom", dateFrom.toString())
+      .searchParam("dateTo", dateTo.toString())
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during fetch of organization statistics ${this.id}`,
+        response
+      )
+    }
+
+    return await response!.json() as StatisticsResponse
+  }
+
+  async membersStatistics(dateFrom: number, dateTo: number): Promise<UsersStatisticsResponse> {
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Stats/organization/members")
+      .searchParam("organizationId", this.id)
+      .searchParam("dateFrom", dateFrom.toString())
+      .searchParam("dateTo", dateTo.toString())
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during fetch of organization members statistics ${this.id}`,
+        response
+      )
+    }
+
+    return await response!.json() as UsersStatisticsResponse
+  }
+
+  async userStatistic(userId: string, dateFrom: number, dateTo: number): Promise<StatisticsResponse> {
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Stats/user")
+      .searchParam("userId", userId)
+      .searchParam("organizationId", this.id)
+      .searchParam("dateFrom", dateFrom.toString())
+      .searchParam("dateTo", dateTo.toString())
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during fetch of user statistics ${this.id}`,
+        response
+      )
+    }
+
+    return await response!.json() as StatisticsResponse
   }
 
   async createInviteLink(emails: string[], accessGroups: string[]): Promise<void> {

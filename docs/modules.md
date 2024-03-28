@@ -82,6 +82,8 @@
 - [UserDto](interfaces/UserDto.md)
 - [UserInfoResponse](interfaces/UserInfoResponse.md)
 - [UserSettings](interfaces/UserSettings.md)
+- [UsersStatisticsResponse](interfaces/UsersStatisticsResponse.md)
+- [UsetStatisticsData](interfaces/UsetStatisticsData.md)
 - [WorkspaceDto](interfaces/WorkspaceDto.md)
 - [WorkspaceProfileDto](interfaces/WorkspaceProfileDto.md)
 - [WorkspacesResponse](interfaces/WorkspacesResponse.md)
