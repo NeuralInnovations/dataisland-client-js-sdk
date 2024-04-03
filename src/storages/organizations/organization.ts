@@ -3,8 +3,9 @@ import { OrganizationId } from "./organizations"
 import { Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
 import { EventDispatcher } from "../../events"
-import { UserDto } from "../../dto/userInfoResponse"
+import { UserDto, UsersStatisticsResponse } from "../../dto/userInfoResponse"
 import { GroupId } from "../groups/group"
+import { StatisticsResponse } from "../../dto/statisticsResponse"
 
 /**
  * Organization event.
@@ -54,6 +55,29 @@ export abstract class Organization extends EventDispatcher<
    * Get organization members
    */
   abstract members(): Promise<UserDto[]>
+
+  /**
+   *  Get organization statistics
+   * @param dateFrom 
+   * @param dateTo 
+   */
+  abstract statistics(dateFrom: number, dateTo: number): Promise<StatisticsResponse>
+
+
+  /**
+   *  Get organization statistics
+   * @param dateFrom 
+   * @param dateTo 
+   */
+  abstract membersStatistics(dateFrom: number, dateTo: number): Promise<UsersStatisticsResponse>
+
+
+  /**
+   * Get statistics for user
+   * @param dateFrom 
+   * @param dateTo 
+   */
+  abstract userStatistic(userid: string, dateFrom: number, dateTo: number): Promise<StatisticsResponse>
 
   /**
    * Change organization name and description.

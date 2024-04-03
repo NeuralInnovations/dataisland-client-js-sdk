@@ -4,6 +4,7 @@ import { UserInfoResponse } from "../../dto/userInfoResponse"
 export class UserProfileImpl extends UserProfile {
   private content?: UserInfoResponse
 
+
   get id(): string {
     if (this.content) {
       return this.content.user.id
@@ -60,4 +61,5 @@ export class UserProfileImpl extends UserProfile {
       data: this
     })
   }
+
 }

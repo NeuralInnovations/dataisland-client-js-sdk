@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev32](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev32
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev33
 
 ## Table of contents
 
@@ -82,6 +82,8 @@
 - [UserDto](interfaces/UserDto.md)
 - [UserInfoResponse](interfaces/UserInfoResponse.md)
 - [UserSettings](interfaces/UserSettings.md)
+- [UsersStatisticsResponse](interfaces/UsersStatisticsResponse.md)
+- [UsetStatisticsData](interfaces/UsetStatisticsData.md)
 - [WorkspaceDto](interfaces/WorkspaceDto.md)
 - [WorkspaceProfileDto](interfaces/WorkspaceProfileDto.md)
 - [WorkspacesResponse](interfaces/WorkspacesResponse.md)
