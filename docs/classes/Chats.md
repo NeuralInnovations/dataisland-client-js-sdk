@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 
@@ -73,19 +73,19 @@ Organization.
 
 ### create
 
-▸ **create**(): `Promise`\<[`Chat`](Chat.md)\>
+▸ **create**(): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
 
 Create new chat.
 
 #### Returns
 
-`Promise`\<[`Chat`](Chat.md)\>
+`Promise`\<`undefined` \| [`Chat`](Chat.md)\>
 
 ___
 
 ### createWithFile
 
-▸ **createWithFile**(`fileId`): `Promise`\<[`Chat`](Chat.md)\>
+▸ **createWithFile**(`fileId`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
 
 Create chat with specific file
 
@@ -97,7 +97,7 @@ Create chat with specific file
 
 #### Returns
 
-`Promise`\<[`Chat`](Chat.md)\>
+`Promise`\<`undefined` \| [`Chat`](Chat.md)\>
 
 ___
 

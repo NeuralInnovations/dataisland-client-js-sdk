@@ -2,6 +2,7 @@ import { WorkspaceDto } from "./workspacesResponse"
 import { UserId } from "../storages/user/userProfile"
 import { OrganizationId } from "../storages/organizations/organizations"
 import { StatisticsData } from "./statisticsResponse"
+import { LimitActionType, SegmentData } from "./limitsResponse"
 
 export interface UserInfoResponse {
   adminInOrganization: string[]
@@ -27,6 +28,7 @@ export interface ProfileDto {
 export interface UserSettings {
   activeOrganizationId: string
   activeWorkspaceId: string
+  limitSegmentKey: string
 }
 
 export interface OrganizationProfileDto {
@@ -59,4 +61,42 @@ export interface UsersStatisticsResponse {
 export interface UsetStatisticsData {
     userId: UserId
     data: StatisticsData[]
+}
+
+export interface OrganizationSegmentData {
+  segment: SegmentData
+}
+
+export interface UserLimitsData {
+  userSegment: SegmentData
+  userLimits: UserLimitData[]
+}
+
+export interface UserLimitData {
+  action: LimitActionType
+  records: UserLimitRecordData[]
+}
+
+export interface UserLimitRecordData {
+  daysCount: number
+  countLimit: number
+  tokenLimit?: number
+  activeTill: number
+}
+
+export interface CurrentLimitsData {
+  segment: string
+  limits: CurrentLimitItem[]
+}
+
+export interface CurrentLimitItem {
+  action: LimitActionType
+  records: CurrentLimitRecordData[]
+}
+
+export interface CurrentLimitRecordData  {
+  daysCount: number
+  used: number
+  all: number
+  activeTill: number
 }

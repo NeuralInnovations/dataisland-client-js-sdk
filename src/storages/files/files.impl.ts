@@ -24,7 +24,10 @@ export class FilesImpl extends Files {
   async upload(files: UploadFile[]): Promise<File[]> {
     const loaded_files = []
     for (const file of files) {
-      loaded_files.push(await this.internalUpload(file))
+      const loaded_file = await this.internalUpload(file)
+      if (loaded_file != undefined){
+        loaded_files.push(loaded_file)
+      }
     }
     return loaded_files
   }
@@ -184,7 +187,7 @@ export class FilesImpl extends Files {
     return filesList
   }
 
-  async internalUpload(file: UploadFile): Promise<File> {
+  async internalUpload(file: UploadFile): Promise<File | undefined> {
     // check file
     if (file === undefined || file === null) {
       throw new Error("File upload, file is undefined or null")
@@ -205,6 +208,10 @@ export class FilesImpl extends Files {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
+      
       await ResponseUtils.throwError(`File upload ${file.name}`, response)
     }
 

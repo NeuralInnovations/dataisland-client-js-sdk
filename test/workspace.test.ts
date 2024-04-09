@@ -43,10 +43,10 @@ test("Workspace create / delete", async () => {
       expect(ws).not.toBeNull()
 
       // check name
-      expect(ws.name).toBe("test-workspace")
+      expect(ws!.name).toBe("test-workspace")
 
       // check description
-      expect(ws.description).toBe("test-workspace-description")
+      expect(ws!.description).toBe("test-workspace-description")
 
       // check collection length
       expect(app.organizations.get(org.id).workspaces.collection.length).toBe(
@@ -57,18 +57,18 @@ test("Workspace create / delete", async () => {
       expect(org.workspaces.collection.length).toBe(initWorkspaceCount + 1)
 
       // check get
-      expect(org.workspaces.get(ws.id)).toBe(ws)
+      expect(org.workspaces.get(ws!.id)).toBe(ws)
 
       // check tryGet
-      expect(org.workspaces.tryGet(ws.id)).toBe(ws)
+      expect(org.workspaces.tryGet(ws!.id)).toBe(ws)
 
       // check contains
-      expect(org.workspaces.contains(ws.id)).toBe(true)
+      expect(org.workspaces.contains(ws!.id)).toBe(true)
 
       // check delete
-      await expect(org.workspaces.delete(ws.id)).resolves.not.toThrow()
+      await expect(org.workspaces.delete(ws!.id)).resolves.not.toThrow()
 
-      expect(org.workspaces.contains(ws.id)).toBe(false)
+      expect(org.workspaces.contains(ws!.id)).toBe(false)
 
       const organization = new OrganizationImpl(app.context)
       const workspace = new WorkspaceImpl(organization, app.context)
