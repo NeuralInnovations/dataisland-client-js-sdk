@@ -48,7 +48,7 @@ export abstract class Workspaces extends EventDispatcher<
     isCreateNewGroup: boolean,
     newGroupName: string,
     groupIds: string[]
-  }): Promise<Workspace>
+  }): Promise<Workspace | undefined>
 
   /**
    * Delete workspace.

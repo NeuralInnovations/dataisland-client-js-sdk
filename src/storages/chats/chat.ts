@@ -44,7 +44,7 @@ export abstract class Chat {
   /**
    * Ask new question in chat.
    */
-  abstract ask(message: string, answerType: ChatAnswerType): Promise<Answer>
+  abstract ask(message: string, answerType: ChatAnswerType): Promise<Answer | undefined>
 
 }
 

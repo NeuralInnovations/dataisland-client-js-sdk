@@ -64,7 +64,8 @@ export class ChatImpl extends Chat implements Disposable {
     throw new Error(`Answer with id ${id} is not found`)
   }
 
-  async ask(message: string, answerType: ChatAnswerType): Promise<Answer> {
+  async ask(message: string, answerType: ChatAnswerType): Promise<Answer | undefined> {
+
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
@@ -77,6 +78,9 @@ export class ChatImpl extends Chat implements Disposable {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
       await ResponseUtils.throwError(`Failed to ask a question, organization: ${this.organization.id}`, response)
     }
 

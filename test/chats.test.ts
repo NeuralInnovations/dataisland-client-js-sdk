@@ -25,25 +25,25 @@ test("Chat create, ask question, delete", async () => {
       expect(chat).not.toBeNull()
 
       // check get
-      expect(org.chats.get(chat.id)).toBe(chat)
+      expect(org.chats.get(chat!.id)).toBe(chat)
 
       const question = "Hello!"
 
-      const askPromise = chat.ask(question, ChatAnswerType.SHORT)
+      const askPromise = chat!.ask(question, ChatAnswerType.SHORT)
 
       // check not throw
       await expect(askPromise).resolves.not.toThrow()
 
       const answer = await askPromise
 
-      expect(answer.id).toBeTruthy()
-      expect(answer.status).toBe(AnswerStatus.RUNNING)
-      expect(answer.question).toBe(question)
+      expect(answer!.id).toBeTruthy()
+      expect(answer!.status).toBe(AnswerStatus.RUNNING)
+      expect(answer!.question).toBe(question)
 
       let tokens = ""
       let answer_ready = false
 
-      answer.subscribe((event) => {
+      answer!.subscribe((event) => {
         if (event.type === AnswerEvent.UPDATED) {
           expect(event.data).toBeTruthy()
           expect(event.data.id).not.toBeUndefined()
@@ -64,7 +64,7 @@ test("Chat create, ask question, delete", async () => {
       }
 
       // check delete
-      await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
+      await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
     })
   })
 })
@@ -110,25 +110,25 @@ test("Chat create with file, ask and delete", async () => {
       expect(chat).not.toBeNull()
 
       // check get
-      expect(org.chats.get(chat.id)).toBe(chat)
+      expect(org.chats.get(chat!.id)).toBe(chat)
 
       const question = "Хто учасники навчального проекту?"
 
-      const askPromise = chat.ask(question, ChatAnswerType.SHORT)
+      const askPromise = chat!.ask(question, ChatAnswerType.SHORT)
 
       // check not throw
       await expect(askPromise).resolves.not.toThrow()
 
       const answer = await askPromise
 
-      expect(answer.id).toBeTruthy()
-      expect(answer.status).toBe(AnswerStatus.RUNNING)
-      expect(answer.question).toBe(question)
+      expect(answer!.id).toBeTruthy()
+      expect(answer!.status).toBe(AnswerStatus.RUNNING)
+      expect(answer!.question).toBe(question)
 
       let tokens = ""
       let answer_ready = false
 
-      answer.subscribe((event) => {
+      answer!.subscribe((event) => {
         if (event.type === AnswerEvent.UPDATED) {
           expect(event.data).toBeTruthy()
           expect(event.data.id).not.toBeUndefined()
@@ -148,12 +148,12 @@ test("Chat create with file, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      for (const source of answer.sources){
+      for (const source of answer!.sources){
         await expect(source.id).toBe(file.id)
       }
 
       // check delete
-      await expect(org.chats.delete(chat.id)).resolves.not.toThrow()
+      await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 
       await ws.files.query("", 0, 20)
       await ws.files.delete([file.id])

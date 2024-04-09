@@ -70,7 +70,7 @@ export class ChatsImpl extends Chats {
     return this._chats.find(chat => chat.id === id)
   }
 
-  async create(): Promise<Chat> {
+  async create(): Promise<Chat | undefined> {
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
@@ -79,6 +79,10 @@ export class ChatsImpl extends Chats {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
+
       await ResponseUtils.throwError(`Failed to create chat, organization: ${this.organization.id}`, response)
     }
 
@@ -103,7 +107,7 @@ export class ChatsImpl extends Chats {
     return chat
   }
 
-  async createWithFile(fileId: string): Promise<Chat> {
+  async createWithFile(fileId: string): Promise<Chat | undefined> {
     if (fileId === undefined || fileId === null) {
       throw new Error("Create chat with file, id is undefined or null")
     }
@@ -122,6 +126,10 @@ export class ChatsImpl extends Chats {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
+
       await ResponseUtils.throwError(`Failed to create chat, organization: ${this.organization.id}`, response)
     }
 
