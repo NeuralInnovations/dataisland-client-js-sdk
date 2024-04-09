@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -95,7 +95,7 @@ Organization.
 
 ### ask
 
-▸ **ask**(`message`, `answerType`): `Promise`\<[`Answer`](Answer.md)\>
+▸ **ask**(`message`, `answerType`): `Promise`\<`undefined` \| [`Answer`](Answer.md)\>
 
 Ask new question in chat.
 
@@ -108,7 +108,7 @@ Ask new question in chat.
 
 #### Returns
 
-`Promise`\<[`Answer`](Answer.md)\>
+`Promise`\<`undefined` \| [`Answer`](Answer.md)\>
 
 ___
 

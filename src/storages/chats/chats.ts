@@ -25,13 +25,13 @@ export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
   /**
    * Create new chat.
    */
-  abstract create(): Promise<Chat>
+  abstract create(): Promise<Chat | undefined>
 
   /**
    * Create chat with specific file
    * @param fileId 
    */
-  abstract createWithFile(fileId: string): Promise<Chat>
+  abstract createWithFile(fileId: string): Promise<Chat | undefined>
 
   /**
    * Get chat by id.

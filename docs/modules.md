@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev33
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev34
 
 ## Table of contents
 
@@ -61,6 +61,9 @@
 - [AnswerStepDto](interfaces/AnswerStepDto.md)
 - [ChatDto](interfaces/ChatDto.md)
 - [ChatListResponse](interfaces/ChatListResponse.md)
+- [CurrentLimitItem](interfaces/CurrentLimitItem.md)
+- [CurrentLimitRecordData](interfaces/CurrentLimitRecordData.md)
+- [CurrentLimitsData](interfaces/CurrentLimitsData.md)
 - [Disposable](interfaces/Disposable.md)
 - [Event](interfaces/Event.md)
 - [EventSubscriber](interfaces/EventSubscriber.md)
@@ -74,6 +77,7 @@
 - [MembersResponse](interfaces/MembersResponse.md)
 - [OrganizationDto](interfaces/OrganizationDto.md)
 - [OrganizationProfileDto](interfaces/OrganizationProfileDto.md)
+- [OrganizationSegmentData](interfaces/OrganizationSegmentData.md)
 - [OrganizationWorkspaces](interfaces/OrganizationWorkspaces.md)
 - [PermitsDto](interfaces/PermitsDto.md)
 - [ProfileDto](interfaces/ProfileDto.md)
@@ -81,6 +85,9 @@
 - [SourceDto](interfaces/SourceDto.md)
 - [UserDto](interfaces/UserDto.md)
 - [UserInfoResponse](interfaces/UserInfoResponse.md)
+- [UserLimitData](interfaces/UserLimitData.md)
+- [UserLimitRecordData](interfaces/UserLimitRecordData.md)
+- [UserLimitsData](interfaces/UserLimitsData.md)
 - [UserSettings](interfaces/UserSettings.md)
 - [UsersStatisticsResponse](interfaces/UsersStatisticsResponse.md)
 - [UsetStatisticsData](interfaces/UsetStatisticsData.md)

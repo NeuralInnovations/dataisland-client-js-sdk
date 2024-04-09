@@ -1,3 +1,4 @@
+import { BadRequest } from "../dto/badRequestResponse"
 import { Response } from "../utils/request"
 
 export class ResponseUtils {
@@ -7,6 +8,15 @@ export class ResponseUtils {
 
   public static isFail(response?: Response | null): boolean {
     return !ResponseUtils.isOk(response)
+  }
+
+  public static async isLimitReached(response?: Response | null): Promise<boolean> {
+    if (response?.status == 15){
+      if (((await response?.json()) as BadRequest).code == 15){
+        return true
+      }
+    }
+    return false
   }
 
   public static async throwError(

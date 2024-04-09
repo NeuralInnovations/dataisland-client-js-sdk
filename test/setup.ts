@@ -93,10 +93,10 @@ export const testInWorkspace = async (func: (app: DataIslandApp, org: Organizati
     const randomName = `workspace-${randomHash()}`
     const workspace = await org.workspaces.create(randomName, `description of ${randomName}`)
     try {
-      await func(app, org, workspace)
+      await func(app, org, workspace!)
     } finally {
-      if (org.workspaces.tryGet(workspace.id)) {
-        await org.workspaces.delete(workspace.id)
+      if (org.workspaces.tryGet(workspace!.id)) {
+        await org.workspaces.delete(workspace!.id)
       }
     }
   }, config)

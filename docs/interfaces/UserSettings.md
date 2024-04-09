@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../../README.md) / [Exports](../modules.md) / UserSettings
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../../README.md) / [Exports](../modules.md) / UserSettings
 
 # Interface: UserSettings
 
@@ -8,6 +8,7 @@
 
 - [activeOrganizationId](UserSettings.md#activeorganizationid)
 - [activeWorkspaceId](UserSettings.md#activeworkspaceid)
+- [limitSegmentKey](UserSettings.md#limitsegmentkey)
 
 ## Properties
 
@@ -20,3 +21,9 @@ ___
 ### activeWorkspaceId
 
 • **activeWorkspaceId**: `string`
+
+___
+
+### limitSegmentKey
+
+• **limitSegmentKey**: `string`

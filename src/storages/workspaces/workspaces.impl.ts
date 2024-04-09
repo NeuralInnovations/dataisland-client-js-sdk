@@ -51,7 +51,7 @@ export class WorkspacesImpl extends Workspaces {
       newGroupName: string
       groupIds: string[]
     }
-  ): Promise<Workspace> {
+  ): Promise<Workspace | undefined> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Name is required, must be not empty")
     }
@@ -104,6 +104,10 @@ export class WorkspacesImpl extends Workspaces {
 
     // check response status
     if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
+      
       await ResponseUtils.throwError(`Failed to create workspace, in organization: ${this.organization.id}`, response)
     }
 

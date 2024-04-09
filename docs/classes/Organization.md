@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -30,10 +30,13 @@ Organization.
 - [change](Organization.md#change)
 - [createInviteLink](Organization.md#createinvitelink)
 - [dispatch](Organization.md#dispatch)
+- [limitSegments](Organization.md#limitsegments)
 - [members](Organization.md#members)
 - [membersStatistics](Organization.md#membersstatistics)
+- [organizationLimits](Organization.md#organizationlimits)
 - [statistics](Organization.md#statistics)
 - [subscribe](Organization.md#subscribe)
+- [userLimits](Organization.md#userlimits)
 - [userStatistic](Organization.md#userstatistic)
 
 ## Constructors
@@ -182,6 +185,18 @@ ___
 
 ___
 
+### limitSegments
+
+▸ **limitSegments**(): `Promise`\<`SegmentData`[]\>
+
+Get all available segments data
+
+#### Returns
+
+`Promise`\<`SegmentData`[]\>
+
+___
+
 ### members
 
 ▸ **members**(): `Promise`\<[`UserDto`](../interfaces/UserDto.md)[]\>
@@ -210,6 +225,18 @@ Get organization statistics
 #### Returns
 
 `Promise`\<[`UsersStatisticsResponse`](../interfaces/UsersStatisticsResponse.md)\>
+
+___
+
+### organizationLimits
+
+▸ **organizationLimits**(): `Promise`\<`SegmentData`\>
+
+Get default organization limits
+
+#### Returns
+
+`Promise`\<`SegmentData`\>
 
 ___
 
@@ -250,6 +277,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### userLimits
+
+▸ **userLimits**(): `Promise`\<[`CurrentLimitsData`](../interfaces/CurrentLimitsData.md)\>
+
+Get user limits data
+
+#### Returns
+
+`Promise`\<[`CurrentLimitsData`](../interfaces/CurrentLimitsData.md)\>
 
 ___
 

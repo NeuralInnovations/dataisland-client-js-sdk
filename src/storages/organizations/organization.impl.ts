@@ -1,6 +1,6 @@
 import { OrganizationId } from "./organizations"
 import { Disposable } from "../../disposable"
-import { OrganizationDto, UserDto, UsersStatisticsResponse } from "../../dto/userInfoResponse"
+import { CurrentLimitItem, CurrentLimitRecordData, CurrentLimitsData, OrganizationDto, OrganizationSegmentData, UserDto, UserLimitsData, UsersStatisticsResponse } from "../../dto/userInfoResponse"
 import { Workspaces } from "../workspaces/workspaces"
 import { WorkspacesImpl } from "../workspaces/workspaces.impl"
 import { Context } from "../../context"
@@ -12,6 +12,7 @@ import { Chats } from "../chats/chats"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { StatisticsResponse } from "../../dto/statisticsResponse"
+import { LimitActionType, SegmentData, SegmentsData } from "../../dto/limitsResponse"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -209,6 +210,96 @@ export class OrganizationImpl extends Organization implements Disposable {
     }
 
     return await response!.json() as StatisticsResponse
+  }
+
+  async userLimits(): Promise<CurrentLimitsData> {
+    // fetch limits
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/Users/limits")
+      .searchParam("organizationId", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get limits in organization: ${this.id}`, response)
+    }
+
+    // parse limits from the server's response
+    const limits = (await response!.json()) as UserLimitsData
+
+    const currentLimits = { segment: limits.userSegment.key, limits : [] } as CurrentLimitsData
+    for (const limit of limits.userLimits){
+      const type = limit.action as LimitActionType
+      const currentItem = { action : type, records: []} as CurrentLimitItem
+
+      if (limit.records.length == 0) continue
+
+      for (const record of limit.records) {
+        const segmentRecord = limits.userSegment.dayItems.find(item => item.daysCount == record.daysCount)
+        if (segmentRecord == null){
+          await ResponseUtils.throwError(`Invalid response during get limits in organization: ${this.id}. Days count with ${type} not found in segment ${limits.userSegment.key}`, response)
+          continue
+        }
+        const actionRecord = segmentRecord?.actionItems.find(item => item.type == type)
+        if (actionRecord == null){
+          await ResponseUtils.throwError(`Invalid response during get limits in organization: ${this.id}. Type ${type} not found in segment ${limits.userSegment.key}`, response)
+          continue
+        }
+
+        const currentRecord = {} as CurrentLimitRecordData
+        currentRecord.daysCount = record.daysCount
+        currentRecord.activeTill = record.activeTill
+        currentRecord.all = actionRecord?.tokenLimit ?? actionRecord?.countLimit 
+        
+        const available = record.tokenLimit ?? record.countLimit   
+        currentRecord.used = currentRecord.all - available
+
+        currentItem.records.push(currentRecord)
+      }
+
+      currentLimits.limits.push(currentItem)
+    }
+
+    return currentLimits
+  }
+
+  async organizationLimits(): Promise<SegmentData> {
+    // fetch limits
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/Descriptions/limits/organization")
+      .searchParam("organizationId", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get limits in organization: ${this.id}`, response)
+    }
+
+    const json = await response!.json()
+
+    // parse limits from the server's response
+    const limits = (json as OrganizationSegmentData).segment
+
+    return limits
+  }
+
+  async limitSegments(): Promise<SegmentData[]> {
+    // fetch limits
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/Descriptions/limits/segments")
+      .searchParam("organizationId", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get limits in organization: ${this.id}`, response)
+    }
+    const json = await response!.json()
+
+    // parse limits from the server's response
+    const limits = (json as SegmentsData).segments
+
+    return limits
   }
 
   async createInviteLink(emails: string[], accessGroups: string[]): Promise<void> {

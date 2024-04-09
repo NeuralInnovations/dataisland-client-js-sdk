@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev33](../../README.md) / [Exports](../modules.md) / Workspaces
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../../README.md) / [Exports](../modules.md) / Workspaces
 
 # Class: Workspaces
 
@@ -78,7 +78,7 @@ ___
 
 ### create
 
-▸ **create**(`name`, `description`, `regulation?`): `Promise`\<[`Workspace`](Workspace.md)\>
+▸ **create**(`name`, `description`, `regulation?`): `Promise`\<`undefined` \| [`Workspace`](Workspace.md)\>
 
 Create workspace.
 
@@ -95,7 +95,7 @@ Create workspace.
 
 #### Returns
 
-`Promise`\<[`Workspace`](Workspace.md)\>
+`Promise`\<`undefined` \| [`Workspace`](Workspace.md)\>
 
 ___
 
