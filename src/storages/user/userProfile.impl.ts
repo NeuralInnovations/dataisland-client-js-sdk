@@ -1,9 +1,16 @@
 import { UserEvent, UserProfile } from "./userProfile"
 import { UserInfoResponse } from "../../dto/userInfoResponse"
+import { Context } from "../../context"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
 
 export class UserProfileImpl extends UserProfile {
   private content?: UserInfoResponse
 
+
+  constructor(private readonly context: Context) {
+    super()
+  }
 
   get id(): string {
     if (this.content) {
@@ -22,6 +29,13 @@ export class UserProfileImpl extends UserProfile {
   get email(): string {
     if (this.content) {
       return this.content.user.profile.email
+    }
+    throw new Error("The profile is not loaded.")
+  }
+
+  get binanceId(): string {
+    if (this.content) {
+      return this.content.user.profile.binanceId
     }
     throw new Error("The profile is not loaded.")
   }
@@ -60,6 +74,54 @@ export class UserProfileImpl extends UserProfile {
       type: UserEvent.CHANGED,
       data: this
     })
+  }
+
+  async updateUser(newName: string, newId: string): Promise<void>{
+    if (!this.content) {
+      throw new Error("User is not loaded.")
+    }
+
+    if (newName === this.name && newId === this.binanceId) {
+      return Promise.resolve()
+    }
+    
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Users")
+      .sendPutJson({
+        profile: {
+          newName,
+          undefined,
+          newId,
+        }
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to change organization", response)
+    }
+
+    if (this.content) {
+      this.content!.user.profile.name = newName
+      this.content!.user.profile.binanceId = newId
+    }
+
+    this.dispatch({
+      type: UserEvent.CHANGED,
+      data: this
+    })
+  }
+
+  async deleteUser(): Promise<boolean>{
+    const response = await this.context
+      .resolve(RpcService)?.
+      requestBuilder("/api/v1/Users/self")
+      .sendDelete()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to delete user", response)
+    }
+
+    return true
   }
 
 }

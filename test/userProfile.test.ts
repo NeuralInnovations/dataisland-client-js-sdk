@@ -1,11 +1,47 @@
-import { UserEvent, UserInfoResponse } from "../src"
+import { Context, DebugCredential, UserEvent, UserInfoResponse, dataIslandApp } from "../src"
 import { UserProfileImpl } from "../src/storages/user/userProfile.impl" // Update the import path based on your project structure
+import { UnitTest, appTest } from "../src/unitTest"
+import { HOST, newTestUserToken, randomHash } from "./setup"
+
+test("UserProfile", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    // make random name
+    const randomName = `org-test-${randomHash(20)}`
+
+    // create app
+    const app = await dataIslandApp(randomName, async builder => {
+      builder.useHost(HOST)
+      builder.useCredential(new DebugCredential(newTestUserToken()))
+    })
+
+    const userProfile = app.userProfile
+
+    const updatedName = "newName"
+    const updatedId = "newId"
+
+    await userProfile.updateUser(updatedName, updatedId)
+
+    expect(userProfile.name).toBe(updatedName)
+    expect(userProfile.binanceId).toBe(updatedId)
+  })})
 
 describe("UserProfileImpl", () => {
   let userProfile: UserProfileImpl
+  let contextMock: Context
 
   beforeEach(() => {
-    userProfile = new UserProfileImpl()
+    // Создаем заглушки для зависимостей
+    contextMock = {
+      resolve: jest.fn(() => ({
+        requestBuilder: jest.fn(() => ({
+          searchParam: jest.fn(() => ({
+            sendGet: jest.fn()
+          }))
+        }))
+      }))
+    } as any
+
+    userProfile = new UserProfileImpl(contextMock)
   })
 
   const mockUserInfoResponse: UserInfoResponse = {
@@ -15,7 +51,8 @@ describe("UserProfileImpl", () => {
       id: "user123",
       profile: {
         name: "John Doe",
-        email: "john.doe@example.com"
+        email: "john.doe@example.com",
+        binanceId: "12345"
       },
       isAnonymousMode: false,
       isDeleted: false,
