@@ -23,6 +23,7 @@ export interface UserDto {
 export interface ProfileDto {
   name: string
   email: string
+  binanceId: string
 }
 
 export interface UserSettings {
