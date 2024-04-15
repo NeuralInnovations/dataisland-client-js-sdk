@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../../README.md) / [Exports](../modules.md) / ProfileDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev35](../../README.md) / [Exports](../modules.md) / ProfileDto
 
 # Interface: ProfileDto
 
@@ -6,10 +6,17 @@
 
 ### Properties
 
+- [binanceId](ProfileDto.md#binanceid)
 - [email](ProfileDto.md#email)
 - [name](ProfileDto.md#name)
 
 ## Properties
+
+### binanceId
+
+• **binanceId**: `string`
+
+___
 
 ### email
 

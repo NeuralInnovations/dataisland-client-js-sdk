@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev34](../../README.md) / [Exports](../modules.md) / UserProfile
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev35](../../README.md) / [Exports](../modules.md) / UserProfile
 
 # Class: UserProfile
 
@@ -16,6 +16,7 @@
 
 ### Accessors
 
+- [binanceId](UserProfile.md#binanceid)
 - [createdAt](UserProfile.md#createdat)
 - [email](UserProfile.md#email)
 - [id](UserProfile.md#id)
@@ -26,8 +27,10 @@
 
 ### Methods
 
+- [deleteUser](UserProfile.md#deleteuser)
 - [dispatch](UserProfile.md#dispatch)
 - [subscribe](UserProfile.md#subscribe)
+- [updateUser](UserProfile.md#updateuser)
 
 ## Constructors
 
@@ -44,6 +47,18 @@
 [EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
 
 ## Accessors
+
+### binanceId
+
+• `get` **binanceId**(): `string`
+
+Additional binance ID
+
+#### Returns
+
+`string`
+
+___
 
 ### createdAt
 
@@ -129,6 +144,18 @@ User name.
 
 ## Methods
 
+### deleteUser
+
+▸ **deleteUser**(): `Promise`\<`boolean`\>
+
+Delete User
+
+#### Returns
+
+`Promise`\<`boolean`\>
+
+___
+
 ### dispatch
 
 ▸ **dispatch**(`input`): `void`
@@ -167,3 +194,22 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### updateUser
+
+▸ **updateUser**(`newName`, `newId`): `Promise`\<`void`\>
+
+Update user profile
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `newName` | `string` |
+| `newId` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>

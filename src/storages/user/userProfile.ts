@@ -26,6 +26,11 @@ export abstract class UserProfile extends EventDispatcher<
   abstract get email(): string
 
   /**
+   * Additional binance ID
+   */
+  abstract get binanceId(): string
+
+  /**
    * Is user deleted.
    */
   abstract get isDeleted(): boolean
@@ -44,4 +49,16 @@ export abstract class UserProfile extends EventDispatcher<
    * Modified at.
    */
   abstract get modifiedAt(): Date
+
+  /**
+   * Update user profile
+   * @param newName 
+   * @param newId 
+   */
+  abstract updateUser(newName: string, newId: string): Promise<void>
+
+  /**
+   * Delete User
+   */
+  abstract deleteUser(): Promise<boolean>
 }

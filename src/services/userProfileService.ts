@@ -7,7 +7,7 @@ import { UserProfileImpl } from "../storages/user/userProfile.impl"
 import { ResponseUtils } from "./responseUtils"
 
 export class UserProfileService extends Service {
-  private readonly impl: UserProfileImpl = new UserProfileImpl()
+  private readonly impl: UserProfileImpl = new UserProfileImpl(this.context)
 
   get userProfile(): UserProfile {
     return this.impl
