@@ -27,5 +27,7 @@ export enum LimitActionType {
     UploadFile = 0,
     CreateChat = 1,
     AskQuestion = 2,
-    CreateWorkspace = 3
+    CreateWorkspace = 3,
+    CreateOrganization = 4,
+    FileSizeKb = 5
 }

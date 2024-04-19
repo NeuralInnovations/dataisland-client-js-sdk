@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev35](../../README.md) / [Exports](../modules.md) / UserProfile
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev36](../../README.md) / [Exports](../modules.md) / UserProfile
 
 # Class: UserProfile
 
@@ -18,6 +18,7 @@
 
 - [binanceId](UserProfile.md#binanceid)
 - [createdAt](UserProfile.md#createdat)
+- [educationalInstitution](UserProfile.md#educationalinstitution)
 - [email](UserProfile.md#email)
 - [id](UserProfile.md#id)
 - [isAnonymous](UserProfile.md#isanonymous)
@@ -69,6 +70,18 @@ Created at.
 #### Returns
 
 `Date`
+
+___
+
+### educationalInstitution
+
+• `get` **educationalInstitution**(): `string`
+
+Additional educational institution
+
+#### Returns
+
+`string`
 
 ___
 
@@ -199,7 +212,7 @@ ___
 
 ### updateUser
 
-▸ **updateUser**(`newName`, `newId`): `Promise`\<`void`\>
+▸ **updateUser**(`newName`, `newId`, `newEducationalInstitution`): `Promise`\<`void`\>
 
 Update user profile
 
@@ -209,6 +222,7 @@ Update user profile
 | :------ | :------ |
 | `newName` | `string` |
 | `newId` | `string` |
+| `newEducationalInstitution` | `string` |
 
 #### Returns
 
