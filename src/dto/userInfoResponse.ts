@@ -24,6 +24,7 @@ export interface ProfileDto {
   name: string
   email: string
   binanceId: string
+  educationalInstitution: string
 }
 
 export interface UserSettings {
