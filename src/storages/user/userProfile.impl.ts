@@ -40,6 +40,13 @@ export class UserProfileImpl extends UserProfile {
     throw new Error("The profile is not loaded.")
   }
 
+  get educationalInstitution(): string {
+    if (this.content){
+      return this.content.user.profile.educationalInstitution
+    }
+    throw new Error("The profile is not loaded.")
+  }
+
   get isDeleted(): boolean {
     if (this.content) {
       return this.content.user.isDeleted
@@ -76,12 +83,12 @@ export class UserProfileImpl extends UserProfile {
     })
   }
 
-  async updateUser(newName: string, newId: string): Promise<void>{
+  async updateUser(newName: string, newId: string, newEducationalInstitution: string): Promise<void>{
     if (!this.content) {
       throw new Error("User is not loaded.")
     }
 
-    if (newName === this.name && newId === this.binanceId) {
+    if (newName === this.name && newId === this.binanceId && newEducationalInstitution === this.educationalInstitution) {
       return Promise.resolve()
     }
     
@@ -93,6 +100,7 @@ export class UserProfileImpl extends UserProfile {
           newName,
           undefined,
           newId,
+          newEducationalInstitution
         }
       })
 
@@ -103,6 +111,7 @@ export class UserProfileImpl extends UserProfile {
     if (this.content) {
       this.content!.user.profile.name = newName
       this.content!.user.profile.binanceId = newId
+      this.content!.user.profile.educationalInstitution = newEducationalInstitution
     }
 
     this.dispatch({

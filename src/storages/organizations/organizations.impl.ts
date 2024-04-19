@@ -139,7 +139,8 @@ export class OrganizationsImpl extends Organizations {
         profile: {
           name: name,
           description: description
-        }
+        },
+        currentOrganizationId: this.currentOrganizationId
       })
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
