@@ -237,13 +237,11 @@ export class OrganizationImpl extends Organization implements Disposable {
       for (const record of limit.records) {
         const segmentRecord = limits.userSegment.dayItems.find(item => item.daysCount == record.daysCount)
         if (segmentRecord == null){
-          await ResponseUtils.throwError(`Invalid response during get limits in organization: ${this.id}. Days count with ${type} not found in segment ${limits.userSegment.key}`, response)
-          continue
+          throw new Error(`Invalid response during get limits in organization: ${this.id}. Days count with ${type} not found in segment ${limits.userSegment.key}`)
         }
         const actionRecord = segmentRecord?.actionItems.find(item => item.type == type)
         if (actionRecord == null){
-          await ResponseUtils.throwError(`Invalid response during get limits in organization: ${this.id}. Type ${type} not found in segment ${limits.userSegment.key}`, response)
-          continue
+          throw new Error(`Invalid response during get limits in organization: ${this.id}. Type ${type} not found in segment ${limits.userSegment.key}`) 
         }
 
         const currentRecord = {} as CurrentLimitRecordData
