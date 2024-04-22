@@ -54,7 +54,8 @@ describe("UserProfileImpl", () => {
       profile: {
         name: "John Doe",
         email: "john.doe@example.com",
-        binanceId: "12345"
+        binanceId: "12345",
+        educationalInstitution: "Test"
       },
       isAnonymousMode: false,
       isDeleted: false,
