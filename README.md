@@ -317,8 +317,15 @@ const userStatistics = await org.userStatistic(userId, dateFrom, dateTo)
 
 ### Use Invites
 
-You can invite users to organization with provided emails and selected access groups. Use create invite link method of seleted organization.
+You can invite users to organization with provided emails and selected access groups. Use invite users method of seleted organization.
 
 ```
-await organiation.createInviteLink(emails[], accessGroups[])
+await organization.inviteUsers(emails[], accessGroups[])
+```
+
+You can also use univarsal invite code, and then validate it to add user to group or organization.
+
+```
+await organization.createInviteCode(accessGroups[])
+await organization.validateInviteCode(inviteCode)
 ```

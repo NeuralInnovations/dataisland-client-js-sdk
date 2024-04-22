@@ -13,6 +13,7 @@ import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { StatisticsResponse } from "../../dto/statisticsResponse"
 import { LimitActionType, SegmentData, SegmentsData } from "../../dto/limitsResponse"
+import { InviteCodeResponse } from "../../dto/accessGroupResponse"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -300,7 +301,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return limits
   }
 
-  async createInviteLink(emails: string[], accessGroups: string[]): Promise<void> {
+  async inviteUsers(emails: string[], accessGroups: string[]): Promise<void> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Invites")
@@ -311,7 +312,44 @@ export class OrganizationImpl extends Organization implements Disposable {
       })
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
-        `Invite link creation failed for organization ${this.id}`,
+        `Invite users failed for organization ${this.id}`,
+        response
+      )
+    }
+  }
+
+  async createInviteCode(accessGroups: string[]): Promise<string> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Invites/link")
+      .sendPostJson({
+        organizationId: this.id,
+        accessGroupIds: accessGroups
+      })
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Invite code creation failed for organization ${this.id}`,
+        response
+      )
+    }
+
+    const json = await response!.json()
+
+    const code = (json as InviteCodeResponse).code
+
+    return code
+  }
+
+  async validateInviteCode(code: number): Promise<void> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Invites/apply")
+      .sendPutJson({
+        code: code,
+      })
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Invite code validation failed for organization ${this.id}`,
         response
       )
     }
