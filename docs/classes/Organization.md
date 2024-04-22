@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev37](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev38](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -28,8 +28,9 @@ Organization.
 ### Methods
 
 - [change](Organization.md#change)
-- [createInviteLink](Organization.md#createinvitelink)
+- [createInviteCode](Organization.md#createinvitecode)
 - [dispatch](Organization.md#dispatch)
+- [inviteUsers](Organization.md#inviteusers)
 - [limitSegments](Organization.md#limitsegments)
 - [members](Organization.md#members)
 - [membersStatistics](Organization.md#membersstatistics)
@@ -38,6 +39,7 @@ Organization.
 - [subscribe](Organization.md#subscribe)
 - [userLimits](Organization.md#userlimits)
 - [userStatistic](Organization.md#userstatistic)
+- [validateInviteCode](Organization.md#validateinvitecode)
 
 ## Constructors
 
@@ -146,22 +148,21 @@ Change organization name and description.
 
 ___
 
-### createInviteLink
+### createInviteCode
 
-▸ **createInviteLink**(`emails`, `accessGroups`): `Promise`\<`void`\>
+▸ **createInviteCode**(`accessGroups`): `Promise`\<`string`\>
 
-Create invite link
+Create invite code for users outside organization
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `emails` | `string`[] |
 | `accessGroups` | `string`[] |
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<`string`\>
 
 ___
 
@@ -182,6 +183,25 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### inviteUsers
+
+▸ **inviteUsers**(`emails`, `accessGroups`): `Promise`\<`void`\>
+
+Invite users with given emails to organization
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `emails` | `string`[] |
+| `accessGroups` | `string`[] |
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 
@@ -309,3 +329,21 @@ Get statistics for user
 #### Returns
 
 `Promise`\<`StatisticsResponse`\>
+
+___
+
+### validateInviteCode
+
+▸ **validateInviteCode**(`code`): `Promise`\<`void`\>
+
+Validate invite code for user
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `code` | `number` |
+
+#### Returns
+
+`Promise`\<`void`\>

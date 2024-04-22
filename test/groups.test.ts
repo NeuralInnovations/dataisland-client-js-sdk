@@ -53,6 +53,12 @@ test("Groups", async () => {
 
       await expect(group.setName("")).rejects.toThrow("Groups change, name is empty")
 
+      // Invite
+      const code = await org.createInviteCode([group.id])
+
+      expect(code).not.toBeUndefined()
+      expect(code).not.toBeNull()
+
       // setPermits
       const permits = { isAdmin: true }
       await expect(group.setPermits(permits)).resolves.not.toThrow()

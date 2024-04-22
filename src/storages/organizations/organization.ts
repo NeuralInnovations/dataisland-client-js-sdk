@@ -102,7 +102,17 @@ export abstract class Organization extends EventDispatcher<
   abstract change(name: string, description: string): Promise<void>
 
   /**
-   * Create invite link
+   * Invite users with given emails to organization 
    */
-  abstract createInviteLink(emails: string[], accessGroups: GroupId[]): Promise<void>
+  abstract inviteUsers(emails: string[], accessGroups: GroupId[]): Promise<void>
+
+  /**
+   * Create invite code for users outside organization
+   */
+  abstract createInviteCode(accessGroups: GroupId[]): Promise<string>
+
+  /**
+   * Validate invite code for user
+   */
+  abstract validateInviteCode(code: number): Promise<void>
 }

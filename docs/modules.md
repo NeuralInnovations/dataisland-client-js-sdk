@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev37](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev38](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev37
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev38
 
 ## Table of contents
 
@@ -74,6 +74,7 @@
 - [FileProgressDto](interfaces/FileProgressDto.md)
 - [FileUrlDto](interfaces/FileUrlDto.md)
 - [Input](interfaces/Input.md)
+- [InviteCodeResponse](interfaces/InviteCodeResponse.md)
 - [MembersResponse](interfaces/MembersResponse.md)
 - [OrganizationDto](interfaces/OrganizationDto.md)
 - [OrganizationProfileDto](interfaces/OrganizationProfileDto.md)

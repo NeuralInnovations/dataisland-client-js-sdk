@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev37](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev38](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 

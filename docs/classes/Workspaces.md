@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev37](../../README.md) / [Exports](../modules.md) / Workspaces
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev38](../../README.md) / [Exports](../modules.md) / Workspaces
 
 # Class: Workspaces
 
@@ -89,9 +89,9 @@ Create workspace.
 | `name` | `string` |
 | `description` | `string` |
 | `regulation?` | `Object` |
-| `regulation.groupIds` | `string`[] |
+| `regulation.groupIds?` | `string`[] |
 | `regulation.isCreateNewGroup` | `boolean` |
-| `regulation.newGroupName` | `string` |
+| `regulation.newGroupName?` | `string` |
 
 #### Returns
 
