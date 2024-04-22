@@ -89,9 +89,9 @@ Create workspace.
 | `name` | `string` |
 | `description` | `string` |
 | `regulation?` | `Object` |
-| `regulation.groupIds` | `string`[] |
+| `regulation.groupIds?` | `string`[] |
 | `regulation.isCreateNewGroup` | `boolean` |
-| `regulation.newGroupName` | `string` |
+| `regulation.newGroupName?` | `string` |
 
 #### Returns
 
