@@ -48,8 +48,8 @@ export class WorkspacesImpl extends Workspaces {
     description: string,
     regulation?: {
       isCreateNewGroup: boolean
-      newGroupName: string
-      groupIds: string[]
+      newGroupName?: string
+      groupIds?: string[]
     }
   ): Promise<Workspace | undefined> {
     if (name === undefined || name === null || name.trim() === "") {
@@ -69,20 +69,6 @@ export class WorkspacesImpl extends Workspaces {
       ) {
         throw new Error("isCreateNewGroup is required, must be not empty")
       }
-      if (
-        regulation.newGroupName === undefined ||
-        regulation.newGroupName === null ||
-        regulation.newGroupName.trim() === ""
-      ) {
-        throw new Error("newGroupName is required, must be not empty")
-      }
-      if (
-        regulation.groupIds === undefined ||
-        regulation.groupIds === null ||
-        regulation.groupIds.length === 0
-      ) {
-        throw new Error("groupIds is required, must be not empty")
-      }
     }
 
     // send create request to the server
@@ -96,9 +82,9 @@ export class WorkspacesImpl extends Workspaces {
           description: description
         },
         regulation: {
-          isCreateNewGroup: regulation?.isCreateNewGroup ?? false,
-          newGroupName: regulation?.newGroupName ?? "",
-          groupIds: regulation?.groupIds ?? []
+          isCreateNewGroup: regulation?.isCreateNewGroup,
+          newGroupName: regulation?.newGroupName,
+          groupIds: regulation?.groupIds
         }
       })
 

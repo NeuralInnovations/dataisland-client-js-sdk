@@ -17,8 +17,7 @@ test("Workspace create / delete", async () => {
         "test-workspace-description",
         {
           isCreateNewGroup: true,
-          newGroupName: "Group 1",
-          groupIds: ["group1"]
+          newGroupName: "Group 1"
         }
       )
       // check not throw
@@ -26,12 +25,6 @@ test("Workspace create / delete", async () => {
       await expect(org.workspaces.create("", "test-workspace-description")).rejects.toThrow("Name is required, must be not empty")
       await expect(org.workspaces.create("test-workspace", "")).rejects.toThrow("Description is required, must be not empty")
 
-      // check to throw
-      await expect(org.workspaces.create("test-workspace", "test-workspace-description", {
-        isCreateNewGroup: true,
-        newGroupName: "Group 1",
-        groupIds: []
-      })).rejects.toThrow("groupIds is required, must be not empty")
 
       // get workspace
       const ws = await wsPromise

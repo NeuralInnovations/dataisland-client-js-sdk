@@ -18,11 +18,13 @@ test("UserProfile", async () => {
 
     const updatedName = "newName"
     const updatedId = "newId"
+    const updatedEducationInstitution = "newEducationInstitution"
 
-    await userProfile.updateUser(updatedName, updatedId)
+    await userProfile.updateUser(updatedName, updatedId, updatedEducationInstitution)
 
     expect(userProfile.name).toBe(updatedName)
     expect(userProfile.binanceId).toBe(updatedId)
+    expect(userProfile.educationalInstitution).toBe(updatedEducationInstitution)
   })})
 
 describe("UserProfileImpl", () => {

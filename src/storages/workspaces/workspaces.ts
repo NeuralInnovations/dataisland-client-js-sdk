@@ -46,8 +46,8 @@ export abstract class Workspaces extends EventDispatcher<
    */
   abstract create(name: string, description: string, regulation?: {
     isCreateNewGroup: boolean,
-    newGroupName: string,
-    groupIds: string[]
+    newGroupName?: string,
+    groupIds?: string[]
   }): Promise<Workspace | undefined>
 
   /**
