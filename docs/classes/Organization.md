@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev38](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev39](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -342,7 +342,7 @@ Validate invite code for user
 
 | Name | Type |
 | :------ | :------ |
-| `code` | `number` |
+| `code` | `string` |
 
 #### Returns
 

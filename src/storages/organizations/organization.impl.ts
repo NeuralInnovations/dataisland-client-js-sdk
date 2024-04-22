@@ -340,7 +340,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return code
   }
 
-  async validateInviteCode(code: number): Promise<void> {
+  async validateInviteCode(code: string): Promise<void> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Invites/apply")

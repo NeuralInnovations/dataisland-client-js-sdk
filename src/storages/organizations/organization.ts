@@ -114,5 +114,5 @@ export abstract class Organization extends EventDispatcher<
   /**
    * Validate invite code for user
    */
-  abstract validateInviteCode(code: number): Promise<void>
+  abstract validateInviteCode(code: string): Promise<void>
 }
