@@ -33,6 +33,10 @@ export abstract class File extends EventDispatcher<
   abstract get createdAt(): number
 
   /**
+   * File date modified.
+   */
+  abstract get modifiedAt(): number
+  /**
    * File uploading progress
    */
   abstract get progress(): FileProgressDto

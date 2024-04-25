@@ -29,7 +29,7 @@ export class UserProfileService extends Service {
 
   async fetch() {
     const rpc = this.resolve(RpcService) as RpcService
-    const response = await rpc.requestBuilder("api/v1/Users/self2").sendGet()
+    const response = await rpc.requestBuilder("api/v2/Users/self").sendGet()
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError("Failed to fetch user profile", response)
     }

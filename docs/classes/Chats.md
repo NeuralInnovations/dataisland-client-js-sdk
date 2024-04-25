@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev39](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev40](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 
@@ -73,9 +73,15 @@ Organization.
 
 ### create
 
-▸ **create**(): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+▸ **create**(`model`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
 
 Create new chat.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `model` | `string` |
 
 #### Returns
 

@@ -10,7 +10,7 @@ import { UploadFile } from "../src"
 test("Chat create, ask question, delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
-      const chatPromise = org.chats.create()
+      const chatPromise = org.chats.create("search")
 
       // check not throw
       await expect(chatPromise).resolves.not.toThrow()
@@ -26,6 +26,7 @@ test("Chat create, ask question, delete", async () => {
 
       // check get
       expect(org.chats.get(chat!.id)).toBe(chat)
+      expect(chat?.model).toBe("search")
 
       const question = "Hello!"
 
@@ -173,6 +174,7 @@ test("Chat Impl Test", async () => {
         organizationId: "org123",
         workspaceId: "workspace123",
         fileId: "file123",
+        model: "search",
         answers: []
       }
 

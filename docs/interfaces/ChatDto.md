@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev39](../../README.md) / [Exports](../modules.md) / ChatDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev40](../../README.md) / [Exports](../modules.md) / ChatDto
 
 # Interface: ChatDto
 
@@ -10,6 +10,7 @@
 - [createdAt](ChatDto.md#createdat)
 - [fileId](ChatDto.md#fileid)
 - [id](ChatDto.md#id)
+- [model](ChatDto.md#model)
 - [modifiedAt](ChatDto.md#modifiedat)
 - [name](ChatDto.md#name)
 - [organizationId](ChatDto.md#organizationid)
@@ -39,6 +40,12 @@ ___
 ### id
 
 • **id**: `string`
+
+___
+
+### model
+
+• **model**: `string`
 
 ___
 
