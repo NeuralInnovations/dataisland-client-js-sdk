@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev39](../../README.md) / [Exports](../modules.md) / File
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev40](../../README.md) / [Exports](../modules.md) / File
 
 # Class: File
 
@@ -20,6 +20,7 @@ File.
 
 - [createdAt](File.md#createdat)
 - [id](File.md#id)
+- [modifiedAt](File.md#modifiedat)
 - [name](File.md#name)
 - [previewUrl](File.md#previewurl)
 - [progress](File.md#progress)
@@ -68,6 +69,18 @@ File id.
 #### Returns
 
 `string`
+
+___
+
+### modifiedAt
+
+• `get` **modifiedAt**(): `number`
+
+File date modified.
+
+#### Returns
+
+`number`
 
 ___
 

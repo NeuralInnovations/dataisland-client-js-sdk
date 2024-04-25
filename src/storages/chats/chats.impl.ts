@@ -70,12 +70,20 @@ export class ChatsImpl extends Chats {
     return this._chats.find(chat => chat.id === id)
   }
 
-  async create(): Promise<Chat | undefined> {
+  async create(model: string): Promise<Chat | undefined> {
+    if (model === undefined || model === null) {
+      throw new Error("Create chat, model is undefined or null")
+    }
+
+    if (model.length === 0) {
+      throw new Error("Create chat, model is empty")
+    }
+
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/workspaces")
-      .sendPostJson({ organizationId: this.organization.id })
+      .sendPostJson({ organizationId: this.organization.id, model: model })
 
     // check response status
     if (ResponseUtils.isFail(response)) {
@@ -121,7 +129,8 @@ export class ChatsImpl extends Chats {
       ?.requestBuilder("api/v1/Chats/file")
       .sendPostJson({ 
         organizationId: this.organization.id,
-        fileId: fileId
+        fileId: fileId,
+        model: "search"
       })
 
     // check response status
