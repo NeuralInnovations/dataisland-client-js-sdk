@@ -28,6 +28,7 @@ export interface ChatDto {
   organizationId: string;
   workspaceId: string;
   fileId: string;
+  model: string;
   answers: AnswerDto[];
 }
 

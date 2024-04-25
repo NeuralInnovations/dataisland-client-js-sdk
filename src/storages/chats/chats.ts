@@ -25,7 +25,7 @@ export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
   /**
    * Create new chat.
    */
-  abstract create(): Promise<Chat | undefined>
+  abstract create(model: string): Promise<Chat | undefined>
 
   /**
    * Create chat with specific file

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev39](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev40](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -13,6 +13,7 @@
 - [collection](Chat.md#collection)
 - [fileId](Chat.md#fileid)
 - [id](Chat.md#id)
+- [model](Chat.md#model)
 - [name](Chat.md#name)
 - [organization](Chat.md#organization)
 
@@ -62,6 +63,18 @@ ___
 • `get` **id**(): `string`
 
 Chat id.
+
+#### Returns
+
+`string`
+
+___
+
+### model
+
+• `get` **model**(): `string`
+
+Model.
 
 #### Returns
 

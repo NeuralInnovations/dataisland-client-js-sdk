@@ -31,6 +31,11 @@ export abstract class Chat {
   abstract get fileId(): string
 
   /**
+   * Model.
+   */
+  abstract get model(): string
+
+  /**
    * Answers list.
    */
   abstract get collection(): ReadonlyArray<Answer>

@@ -48,6 +48,10 @@ export class ChatImpl extends Chat implements Disposable {
     return <string>this._content?.fileId
   }
 
+  get model(): string {
+    return <string>this._content?.model
+  }
+
   get collection(): readonly Answer[] {
     return <Answer[]>this._answers
   }
