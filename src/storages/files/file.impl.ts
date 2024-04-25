@@ -43,6 +43,10 @@ export class FileImpl extends File implements Disposable {
   get createdAt(): number {
     return <number>this._content?.createdAt
   }
+
+  get modifiedAt(): number {
+    return <number>this._content?.modifiedAt
+  }
   
   get url(): string {
     return <string>this._content?.url
