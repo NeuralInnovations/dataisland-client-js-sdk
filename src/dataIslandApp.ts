@@ -4,6 +4,7 @@ import { Context } from "./context"
 import type { Constructor } from "./internal/registry"
 import { Organizations } from "./storages/organizations/organizations"
 import { UserProfile } from "./storages/user/userProfile"
+import { AcquiringService } from "./services/acquiringService"
 
 /**
  * DataIsland App instance.
@@ -45,6 +46,11 @@ export abstract class DataIslandApp {
    * User's organizations.
    */
   abstract get organizations(): Organizations
+
+  /**
+   * Acquiring
+   */
+  abstract get acquiring(): AcquiringService
 
   /**
    * User's profile.
