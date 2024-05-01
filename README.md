@@ -295,9 +295,9 @@ chat.answer.subscribe((event) => { const answer = event.data }, AnswerEvent.UPDA
 Users can buy subscriptions if they want to increase their limits. You can create an order for subscriptions passing key of selected plan. All available aubscription plans, as well as order creation and user active plan you can get in acquiring service.
 
 ```
-const plans = app.acquiring.get_plans()
-const subscription_request_data = app.acquiring.create_order(selected_plan_key)
-const userPlan = app.acquiring.get_user_plan()
+const plans = app.acquiring.getPlans()
+const subscription_request_data = app.acquiring.createOrder(selected_plan_key)
+const userPlan = app.acquiring.getUserPlan()
 ```
 
 ### Use access groups
