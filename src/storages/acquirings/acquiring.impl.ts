@@ -21,7 +21,8 @@ export class AcquiringImpl implements Acquiring {
     const rpc = this.context.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/order")
       .sendPostJson({
-        key: key
+        key: key,
+        organizationId: this.organization.id
       })
 
     if (ResponseUtils.isFail(response)) {
