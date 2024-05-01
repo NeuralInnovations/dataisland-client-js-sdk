@@ -51,11 +51,11 @@ export class UserProfileService extends Service {
     )
 
     organizationService.organizations.subscribe(async (event) => {
-      this.updateUserActiveOrganization(event.data.id, content.user.settings!.activeWorkspaceId)
+      this.updateUserSettings(event.data.id)
     }, OrganizationsEvent.CURRENT_CHANGED)
   }
 
-  async updateUserActiveOrganization(activeOrgId: string, activeWorkspaceId: string): Promise<void>{
+  async updateUserSettings(activeOrgId?: string, activeWorkspaceId?: string): Promise<void>{
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Users/settings").sendPutJson({
       settings: {
