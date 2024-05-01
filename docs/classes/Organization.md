@@ -19,6 +19,7 @@ Organization.
 ### Accessors
 
 - [accessGroups](Organization.md#accessgroups)
+- [acquiring](Organization.md#acquiring)
 - [chats](Organization.md#chats)
 - [description](Organization.md#description)
 - [id](Organization.md#id)
@@ -66,6 +67,18 @@ Groups.
 #### Returns
 
 [`Groups`](Groups.md)
+
+___
+
+### acquiring
+
+• `get` **acquiring**(): `Acquiring`
+
+Acquiring
+
+#### Returns
+
+`Acquiring`
 
 ___
 
