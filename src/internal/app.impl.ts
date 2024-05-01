@@ -30,7 +30,8 @@ import {
 } from "../commands/deleteUserFullCommandHandler"
 import { CookieService } from "../services/cookieService"
 import { AnonymousService } from "../services/anonymousService"
-import { AcquiringService } from "../services/acquiringService"
+import { AcquiringImpl } from "../storages/acquirings/acquiring.impl"
+import { Acquiring } from "../storages/acquirings/acquiring"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -84,8 +85,8 @@ export class DataIslandAppImpl extends DataIslandApp {
     return this.resolve(UserProfileService)?.userProfile as UserProfile
   }
 
-  get acquiring(): AcquiringService {
-    return this.resolve(AcquiringService) as AcquiringService
+  get acquiring(): Acquiring {
+    return this.resolve(AcquiringImpl) as AcquiringImpl
   }
 
   async initialize(
@@ -127,10 +128,6 @@ export class DataIslandAppImpl extends DataIslandApp {
     builder.registerService(AnonymousService, (context: ServiceContext) => {
       return new AnonymousService(context)
     })
-    builder.registerService(AcquiringService, (context: ServiceContext) => {
-      return new AcquiringService(context)
-    })
-
 
     // call customer setup
     if (setup !== undefined) {

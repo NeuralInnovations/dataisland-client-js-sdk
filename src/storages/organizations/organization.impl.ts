@@ -1,6 +1,15 @@
 import { OrganizationId } from "./organizations"
 import { Disposable } from "../../disposable"
-import { CurrentLimitItem, CurrentLimitRecordData, CurrentLimitsData, OrganizationDto, OrganizationSegmentData, UserDto, UserLimitsData, UsersStatisticsResponse } from "../../dto/userInfoResponse"
+import {
+  CurrentLimitItem,
+  CurrentLimitRecordData,
+  CurrentLimitsData,
+  OrganizationDto,
+  OrganizationSegmentData,
+  UserDto,
+  UserLimitsData,
+  UsersStatisticsResponse
+} from "../../dto/userInfoResponse"
 import { Workspaces } from "../workspaces/workspaces"
 import { WorkspacesImpl } from "../workspaces/workspaces.impl"
 import { Context } from "../../context"
@@ -12,8 +21,14 @@ import { Chats } from "../chats/chats"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { StatisticsResponse } from "../../dto/statisticsResponse"
-import { LimitActionType, SegmentData, SegmentsData } from "../../dto/limitsResponse"
+import {
+  LimitActionType,
+  SegmentData,
+  SegmentsData
+} from "../../dto/limitsResponse"
 import { InviteCodeResponse } from "../../dto/accessGroupResponse"
+import { type Acquiring } from "../acquirings/acquiring"
+import { AcquiringImpl } from "../acquirings/acquiring.impl"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -22,12 +37,14 @@ export class OrganizationImpl extends Organization implements Disposable {
   private readonly _workspaces: WorkspacesImpl
   private readonly _accessGroups: GroupsImpl
   private readonly _chats: ChatsImpl
+  private readonly _acquiring: AcquiringImpl
 
   constructor(private readonly context: Context) {
     super()
     this._workspaces = new WorkspacesImpl(this, this.context)
     this._accessGroups = new GroupsImpl(this, this.context)
     this._chats = new ChatsImpl(this, this.context)
+    this._acquiring = new AcquiringImpl(this, this.context)
   }
 
   public async initFrom(
@@ -79,6 +96,10 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get chats(): Chats {
     return this._chats
+  }
+
+  get acquiring(): Acquiring {
+    return this._acquiring
   }
 
   async members(): Promise<UserDto[]> {
@@ -228,29 +249,35 @@ export class OrganizationImpl extends Organization implements Disposable {
     // parse limits from the server's response
     const limits = (await response!.json()) as UserLimitsData
 
-    const currentLimits = { segment: limits.userSegment.key, limits : [] } as CurrentLimitsData
-    for (const limit of limits.userLimits){
+    const currentLimits = {
+      segment: limits.userSegment.key,
+      limits: []
+    } as CurrentLimitsData
+    for (const limit of limits.userLimits) {
       const type = limit.action as LimitActionType
-      const currentItem = { action : type, records: []} as CurrentLimitItem
+      const currentItem = {
+        action: type,
+        records: []
+      } as CurrentLimitItem
 
       if (limit.records.length == 0) continue
 
       for (const record of limit.records) {
         const segmentRecord = limits.userSegment.dayItems.find(item => item.daysCount == record.daysCount)
-        if (segmentRecord == null){
+        if (segmentRecord == null) {
           throw new Error(`Invalid response during get limits in organization: ${this.id}. Days count with ${type} not found in segment ${limits.userSegment.key}`)
         }
         const actionRecord = segmentRecord?.actionItems.find(item => item.type == type)
-        if (actionRecord == null){
-          throw new Error(`Invalid response during get limits in organization: ${this.id}. Type ${type} not found in segment ${limits.userSegment.key}`) 
+        if (actionRecord == null) {
+          throw new Error(`Invalid response during get limits in organization: ${this.id}. Type ${type} not found in segment ${limits.userSegment.key}`)
         }
 
         const currentRecord = {} as CurrentLimitRecordData
         currentRecord.daysCount = record.daysCount
         currentRecord.activeTill = record.activeTill
-        currentRecord.all = actionRecord?.tokenLimit ?? actionRecord?.countLimit 
-        
-        const available = record.tokenLimit ?? record.countLimit   
+        currentRecord.all = actionRecord?.tokenLimit ?? actionRecord?.countLimit
+
+        const available = record.tokenLimit ?? record.countLimit
         currentRecord.used = currentRecord.all - available
 
         currentItem.records.push(currentRecord)
@@ -345,7 +372,7 @@ export class OrganizationImpl extends Organization implements Disposable {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Invites/apply")
       .sendPutJson({
-        code: code,
+        code: code
       })
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
