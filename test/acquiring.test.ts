@@ -15,7 +15,7 @@ test("Acquiring", async () => {
       builder.useCredential(new DebugCredential(newTestUserToken()))
     })
 
-    const plans = await app.acquiring.get_plans()
+    const plans = await app.acquiring.getPlans()
 
     expect(plans).not.toBeUndefined()
     expect(plans).not.toBeNull()
@@ -34,7 +34,7 @@ test("Acquiring", async () => {
     expect(segment).not.toBeUndefined()
     expect(segment).not.toBeNull()
   
-    const userPlan = await app.acquiring.get_user_plan()
+    const userPlan = await app.acquiring.getUserPlan()
 
     expect(userPlan).not.toBeUndefined()
     expect(userPlan).not.toBeNull()
