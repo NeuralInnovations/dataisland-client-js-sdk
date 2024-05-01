@@ -3,10 +3,15 @@ import { OrganizationId } from "./organizations"
 import { Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
 import { EventDispatcher } from "../../events"
-import { CurrentLimitsData, UserDto, UsersStatisticsResponse } from "../../dto/userInfoResponse"
+import {
+  CurrentLimitsData,
+  UserDto,
+  UsersStatisticsResponse
+} from "../../dto/userInfoResponse"
 import { GroupId } from "../groups/group"
 import { StatisticsResponse } from "../../dto/statisticsResponse"
 import { SegmentData } from "../../dto/limitsResponse"
+import { Acquiring } from "../acquirings/acquiring"
 
 /**
  * Organization event.
@@ -59,27 +64,24 @@ export abstract class Organization extends EventDispatcher<
 
   /**
    *  Get organization statistics
-   * @param dateFrom 
-   * @param dateTo 
+   * @param dateFrom
+   * @param dateTo
    */
   abstract statistics(dateFrom: number, dateTo: number): Promise<StatisticsResponse>
 
-
   /**
    *  Get organization statistics
-   * @param dateFrom 
-   * @param dateTo 
+   * @param dateFrom
+   * @param dateTo
    */
   abstract membersStatistics(dateFrom: number, dateTo: number): Promise<UsersStatisticsResponse>
 
-
   /**
    * Get statistics for user
-   * @param dateFrom 
-   * @param dateTo 
+   * @param dateFrom
+   * @param dateTo
    */
   abstract userStatistic(userid: string, dateFrom: number, dateTo: number): Promise<StatisticsResponse>
-
 
   /**
    * Get user limits data
@@ -102,7 +104,7 @@ export abstract class Organization extends EventDispatcher<
   abstract change(name: string, description: string): Promise<void>
 
   /**
-   * Invite users with given emails to organization 
+   * Invite users with given emails to organization
    */
   abstract inviteUsers(emails: string[], accessGroups: GroupId[]): Promise<void>
 
@@ -115,4 +117,9 @@ export abstract class Organization extends EventDispatcher<
    * Validate invite code for user
    */
   abstract validateInviteCode(code: string): Promise<void>
+
+  /**
+   * Acquiring
+   */
+  abstract get acquiring(): Acquiring
 }
