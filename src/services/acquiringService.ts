@@ -5,7 +5,7 @@ import { AcquiringPlansResponse, CreateOrderResponse, CreateOrederData as Create
 
 export class AcquiringService extends Service {
 
-  async create_order(key: string): Promise<CreateOrderData>{
+  async createOrder(key: string): Promise<CreateOrderData>{
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/order")
       .sendPostJson({
@@ -22,7 +22,7 @@ export class AcquiringService extends Service {
     return order.data
   }
 
-  async get_plans(): Promise<AcquiringPlansResponse> {
+  async getPlans(): Promise<AcquiringPlansResponse> {
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/plans").sendGet()
 
@@ -35,7 +35,7 @@ export class AcquiringService extends Service {
     return content
   }
 
-  async get_user_plan(): Promise<UserAcquiringPlan> {
+  async getUserPlan(): Promise<UserAcquiringPlan> {
     const rpc = this.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/user/subscription").sendGet()
 

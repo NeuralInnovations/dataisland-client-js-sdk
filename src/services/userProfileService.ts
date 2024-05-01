@@ -5,6 +5,7 @@ import { UserInfoResponse } from "../dto/userInfoResponse"
 import { OrganizationService } from "./organizationService"
 import { UserProfileImpl } from "../storages/user/userProfile.impl"
 import { ResponseUtils } from "./responseUtils"
+import { OrganizationsEvent } from "../storages/organizations/organizations"
 
 export class UserProfileService extends Service {
   private readonly impl: UserProfileImpl = new UserProfileImpl(this.context)
@@ -48,5 +49,22 @@ export class UserProfileService extends Service {
       content.organizations,
       content.user.settings
     )
+
+    organizationService.organizations.subscribe(async (event) => {
+      this.updateUserActiveOrganization(event.data.id, content.user.settings!.activeWorkspaceId)
+    }, OrganizationsEvent.CURRENT_CHANGED)
+  }
+
+  async updateUserActiveOrganization(activeOrgId: string, activeWorkspaceId: string): Promise<void>{
+    const rpc = this.resolve(RpcService) as RpcService
+    const response = await rpc.requestBuilder("api/v1/Users/settings").sendPutJson({
+      settings: {
+        activeOrganizationId: activeOrgId,
+        activeWorkspaceId: activeWorkspaceId
+      }
+    })
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to update user settings", response)
+    }
   }
 }
