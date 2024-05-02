@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev45](../../README.md) / [Exports](../modules.md) / UserLimitsData
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev46](../../README.md) / [Exports](../modules.md) / UserLimitsData
 
 # Interface: UserLimitsData
 
@@ -19,4 +19,4 @@ ___
 
 ### userSegment
 
-• **userSegment**: `SegmentData`
+• **userSegment**: [`SegmentData`](SegmentData.md)

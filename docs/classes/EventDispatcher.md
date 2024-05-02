@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev45](../../README.md) / [Exports](../modules.md) / EventDispatcher
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev46](../../README.md) / [Exports](../modules.md) / EventDispatcher
 
 # Class: EventDispatcher\<EventType, DataType\>
 
@@ -25,15 +25,15 @@
 
   ↳ [`Answer`](Answer.md)
 
-  ↳ [`Organization`](Organization.md)
-
-  ↳ [`Workspace`](Workspace.md)
+  ↳ [`Chats`](Chats.md)
 
   ↳ [`Groups`](Groups.md)
 
+  ↳ [`Organization`](Organization.md)
+
   ↳ [`UserProfile`](UserProfile.md)
 
-  ↳ [`Chats`](Chats.md)
+  ↳ [`Workspace`](Workspace.md)
 
 ## Implements
 

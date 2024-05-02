@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev45](../../README.md) / [Exports](../modules.md) / OrganizationSegmentData
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev46](../../README.md) / [Exports](../modules.md) / OrganizationSegmentData
 
 # Interface: OrganizationSegmentData
 
@@ -12,4 +12,4 @@
 
 ### segment
 
-• **segment**: `SegmentData`
+• **segment**: [`SegmentData`](SegmentData.md)
