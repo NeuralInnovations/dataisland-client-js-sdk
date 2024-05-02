@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev45](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev46](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -220,13 +220,13 @@ ___
 
 ### limitSegments
 
-▸ **limitSegments**(): `Promise`\<`SegmentData`[]\>
+▸ **limitSegments**(): `Promise`\<[`SegmentData`](../interfaces/SegmentData.md)[]\>
 
 Get all available segments data
 
 #### Returns
 
-`Promise`\<`SegmentData`[]\>
+`Promise`\<[`SegmentData`](../interfaces/SegmentData.md)[]\>
 
 ___
 
@@ -263,19 +263,19 @@ ___
 
 ### organizationLimits
 
-▸ **organizationLimits**(): `Promise`\<`SegmentData`\>
+▸ **organizationLimits**(): `Promise`\<[`SegmentData`](../interfaces/SegmentData.md)\>
 
 Get default organization limits
 
 #### Returns
 
-`Promise`\<`SegmentData`\>
+`Promise`\<[`SegmentData`](../interfaces/SegmentData.md)\>
 
 ___
 
 ### statistics
 
-▸ **statistics**(`dateFrom`, `dateTo`): `Promise`\<`StatisticsResponse`\>
+▸ **statistics**(`dateFrom`, `dateTo`): `Promise`\<[`StatisticsResponse`](../interfaces/StatisticsResponse.md)\>
 
 Get organization statistics
 
@@ -288,7 +288,7 @@ Get organization statistics
 
 #### Returns
 
-`Promise`\<`StatisticsResponse`\>
+`Promise`\<[`StatisticsResponse`](../interfaces/StatisticsResponse.md)\>
 
 ___
 
@@ -327,7 +327,7 @@ ___
 
 ### userStatistic
 
-▸ **userStatistic**(`userid`, `dateFrom`, `dateTo`): `Promise`\<`StatisticsResponse`\>
+▸ **userStatistic**(`userid`, `dateFrom`, `dateTo`): `Promise`\<[`StatisticsResponse`](../interfaces/StatisticsResponse.md)\>
 
 Get statistics for user
 
@@ -341,7 +341,7 @@ Get statistics for user
 
 #### Returns
 
-`Promise`\<`StatisticsResponse`\>
+`Promise`\<[`StatisticsResponse`](../interfaces/StatisticsResponse.md)\>
 
 ___
 
