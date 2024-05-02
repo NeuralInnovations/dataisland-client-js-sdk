@@ -1,6 +1,6 @@
 import {
   AcquiringPlansResponse,
-  CreateOrederData as CreateOrderData,
+  CreateOrderData as CreateOrderData, GetOrderStateResponse,
   UserAcquiringPlan
 } from "../../dto/acquiringResponse"
 
@@ -24,4 +24,10 @@ export abstract class Acquiring {
    * Get user plan
    */
   abstract getUserPlan(): Promise<UserAcquiringPlan>
+
+  /**
+   * Get order
+   * @param orderId
+   */
+  abstract getOrder(orderId: string): Promise<GetOrderStateResponse>
 }
