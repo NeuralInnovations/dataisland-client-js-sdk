@@ -3,8 +3,8 @@ import { ResponseUtils } from "../../services/responseUtils"
 import {
   AcquiringPlansResponse,
   CreateOrderResponse,
-  CreateOrederData as CreateOrderData,
-  UserAcquiringPlan
+  CreateOrderData as CreateOrderData,
+  UserAcquiringPlan, GetOrderStateResponse
 } from "../../dto/acquiringResponse"
 import { Acquiring } from "./acquiring"
 import { Context } from "../../context"
@@ -61,6 +61,22 @@ export class AcquiringImpl implements Acquiring {
     }
 
     const content = (await response.json()) as UserAcquiringPlan
+
+    return content
+  }
+
+  async getOrder(orderId: string): Promise<GetOrderStateResponse> {
+    const rpc = this.context.resolve(RpcService) as RpcService
+    const response = await rpc
+      .requestBuilder("api/v1/Acquiring/order/state")
+      .searchParam("orderId", orderId)
+      .sendGet()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to get order", response)
+    }
+
+    const content = (await response.json()) as GetOrderStateResponse
 
     return content
   }
