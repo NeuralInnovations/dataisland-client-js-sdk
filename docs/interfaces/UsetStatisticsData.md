@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev45](../../README.md) / [Exports](../modules.md) / UsetStatisticsData
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev46](../../README.md) / [Exports](../modules.md) / UsetStatisticsData
 
 # Interface: UsetStatisticsData
 
@@ -13,7 +13,7 @@
 
 ### data
 
-• **data**: `StatisticsData`[]
+• **data**: [`StatisticsData`](StatisticsData.md)[]
 
 ___
 
