@@ -1,5 +1,6 @@
 import {
-  AcquiringPlansResponse,
+  AcquiringPlan,
+  AcquiringPlansResponse, AcquiringSegmentData,
   CreateOrderData as CreateOrderData, GetOrderStateResponse,
   UserAcquiringPlan
 } from "../../dto/acquiringResponse"
@@ -10,18 +11,33 @@ import {
 export abstract class Acquiring {
 
   /**
+   * Plan
+   */
+  abstract get userPlan(): UserAcquiringPlan
+
+  /**
+   * Plans
+   */
+  abstract get plans(): AcquiringPlan[]
+
+  /**
+   * Limit segments
+   */
+  abstract get limitSegments(): AcquiringSegmentData[]
+
+  /**
    * Create order
    * @param key
    */
   abstract createOrder(key: string): Promise<CreateOrderData>
 
   /**
-   * Get plans
+   * Update plans
    */
   abstract getPlans(): Promise<AcquiringPlansResponse>
 
   /**
-   * Get user plan
+   * Update user plan
    */
   abstract getUserPlan(): Promise<UserAcquiringPlan>
 

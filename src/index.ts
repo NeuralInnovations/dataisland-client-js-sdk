@@ -42,7 +42,22 @@ export { UploadFile, Files, FilesEvent } from "./storages/files/files"
 export { Group, GroupEvent, GroupId } from "./storages/groups/group"
 export { AnswerId, Answer, StepId, AnswerEvent } from "./storages/chats/answer"
 export { isNullOrUndefined, isEmptyNullOrUndefined } from "./utils/utils"
-export { OrderState } from "./dto/acquiringResponse"
+export {
+  AcquiringPlan,
+  AcquiringSegmentData,
+  CreateOrderData,
+  CreateOrderResponse,
+  GetOrderStateResponse,
+  OrderState,
+  UserAcquiringPlan
+} from "./dto/acquiringResponse"
+export {
+  LimitActionType,
+  SegmentActionData,
+  SegmentData,
+  SegmentItemData,
+  SegmentsData
+} from "./dto/limitsResponse"
 
 // map of apps that are not ready to be used
 const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
