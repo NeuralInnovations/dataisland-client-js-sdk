@@ -55,9 +55,14 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._isAdmin = isAdmin
 
     // init workspaces by organization id
-    await this._workspaces.initFrom(content.id)
-    await this._chats.initFrom(content.id)
-    await this._accessGroups.initialize()
+    const promises = [
+      this._workspaces.initFrom(content.id),
+      this._chats.initFrom(content.id),
+      this._accessGroups.initialize(),
+      this._acquiring.initialize()
+    ]
+
+    await Promise.all(promises)
 
     return this
   }
