@@ -2,8 +2,8 @@ import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import {
   AcquiringPlansResponse,
-  CreateOrderResponse,
-  CreateOrderData as CreateOrderData,
+  OrderResponse,
+  OrderData,
   UserAcquiringPlan, GetOrderStateResponse, AcquiringPlan, AcquiringSegmentData
 } from "../../dto/acquiringResponse"
 import { Acquiring } from "./acquiring"
@@ -50,7 +50,7 @@ export class AcquiringImpl implements Acquiring {
     this._limitSegments = limitSegments
   }
 
-  async createOrder(key: string): Promise<CreateOrderData> {
+  async createOrder(key: string): Promise<OrderData> {
     const rpc = this.context.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/order")
       .sendPostJson({
@@ -62,7 +62,20 @@ export class AcquiringImpl implements Acquiring {
       await ResponseUtils.throwError("Failed to create order", response)
     }
 
-    const order = (await response.json()) as CreateOrderResponse
+    const order = (await response.json()) as OrderResponse
+
+    return order.data
+  }
+
+  async unsubscribe(): Promise<OrderData> {
+    const rpc = this.context.resolve(RpcService) as RpcService
+    const response = await rpc.requestBuilder("api/v1/Acquiring/unsubscribe").sendDelete()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to unsubscribe", response)
+    }
+
+    const order = (await response.json()) as OrderResponse
 
     return order.data
   }

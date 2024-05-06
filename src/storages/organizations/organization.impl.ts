@@ -243,7 +243,6 @@ export class OrganizationImpl extends Organization implements Disposable {
     // fetch limits
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Users/limits")
-      .searchParam("organizationId", this.id)
       .sendGet()
 
     // check response status
@@ -318,7 +317,6 @@ export class OrganizationImpl extends Organization implements Disposable {
     // fetch limits
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Descriptions/limits/segments")
-      .searchParam("organizationId", this.id)
       .sendGet()
 
     // check response status
