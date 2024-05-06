@@ -30,7 +30,6 @@ test("Default SDK", async () => {
       builder.useCredential(new DebugCredential(newTestUserToken()))
     })
     expect(app).not.toBeUndefined()
-    await app.context.execute(new DeleteUserFullCommand())
   })
 })
 
