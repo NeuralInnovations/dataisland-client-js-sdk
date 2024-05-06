@@ -45,8 +45,8 @@ export { isNullOrUndefined, isEmptyNullOrUndefined } from "./utils/utils"
 export {
   AcquiringPlan,
   AcquiringSegmentData,
-  CreateOrderData,
-  CreateOrderResponse,
+  OrderData,
+  OrderResponse,
   GetOrderStateResponse,
   OrderState,
   UserAcquiringPlan

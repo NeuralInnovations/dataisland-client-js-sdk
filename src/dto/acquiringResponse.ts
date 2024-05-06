@@ -1,14 +1,13 @@
 import { SegmentItemData } from "./limitsResponse"
 
-export interface CreateOrderResponse {
-  data: CreateOrderData
+export interface OrderResponse {
+    data: OrderData
 }
 
-export interface CreateOrderData {
-  data: string,
-  signature: string
+export interface OrderData {
+    data: string,
+    signature: string
 }
-
 export interface GetOrderStateResponse {
   isValid: boolean,
   state: OrderState,
