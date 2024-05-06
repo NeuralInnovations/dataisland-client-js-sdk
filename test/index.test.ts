@@ -13,10 +13,6 @@ import { RpcService } from "../src/services/rpcService"
 import { AppBuilder } from "../src"
 import { UnitTest, appTest } from "../src/unitTest"
 import { HOST, randomHash, newTestUserToken } from "./setup"
-import {
-  DeleteUserFullCommand
-} from "../src/commands/deleteUserFullCommandHandler"
-// import { Request, Response } from "../src/utils/request"
 
 test("SDK_VERSION", () => {
   expect(SDK_VERSION).toBe(version)
