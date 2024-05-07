@@ -27,8 +27,6 @@ import {
   SegmentsData
 } from "../../dto/limitsResponse"
 import { InviteCodeResponse } from "../../dto/accessGroupResponse"
-import { type Acquiring } from "../acquirings/acquiring"
-import { AcquiringImpl } from "../acquirings/acquiring.impl"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -37,14 +35,12 @@ export class OrganizationImpl extends Organization implements Disposable {
   private readonly _workspaces: WorkspacesImpl
   private readonly _accessGroups: GroupsImpl
   private readonly _chats: ChatsImpl
-  private readonly _acquiring: AcquiringImpl
 
   constructor(private readonly context: Context) {
     super()
     this._workspaces = new WorkspacesImpl(this, this.context)
     this._accessGroups = new GroupsImpl(this, this.context)
     this._chats = new ChatsImpl(this, this.context)
-    this._acquiring = new AcquiringImpl(this, this.context)
   }
 
   public async initFrom(
@@ -58,8 +54,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     const promises = [
       this._workspaces.initFrom(content.id),
       this._chats.initFrom(content.id),
-      this._accessGroups.initialize(),
-      this._acquiring.initialize()
+      this._accessGroups.initialize()
     ]
 
     await Promise.all(promises)
@@ -101,10 +96,6 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get chats(): Chats {
     return this._chats
-  }
-
-  get acquiring(): Acquiring {
-    return this._acquiring
   }
 
   async members(): Promise<UserDto[]> {
@@ -243,7 +234,6 @@ export class OrganizationImpl extends Organization implements Disposable {
     // fetch limits
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Users/limits")
-      .searchParam("organizationId", this.id)
       .sendGet()
 
     // check response status
@@ -318,7 +308,6 @@ export class OrganizationImpl extends Organization implements Disposable {
     // fetch limits
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Descriptions/limits/segments")
-      .searchParam("organizationId", this.id)
       .sendGet()
 
     // check response status

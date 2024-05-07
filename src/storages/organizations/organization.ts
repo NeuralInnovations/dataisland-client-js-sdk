@@ -11,7 +11,6 @@ import {
 import { GroupId } from "../groups/group"
 import { StatisticsResponse } from "../../dto/statisticsResponse"
 import { SegmentData } from "../../dto/limitsResponse"
-import { Acquiring } from "../acquirings/acquiring"
 
 /**
  * Organization event.
@@ -78,6 +77,7 @@ export abstract class Organization extends EventDispatcher<
 
   /**
    * Get statistics for user
+   * @param userid
    * @param dateFrom
    * @param dateTo
    */
@@ -117,9 +117,4 @@ export abstract class Organization extends EventDispatcher<
    * Validate invite code for user
    */
   abstract validateInviteCode(code: string): Promise<void>
-
-  /**
-   * Acquiring
-   */
-  abstract get acquiring(): Acquiring
 }

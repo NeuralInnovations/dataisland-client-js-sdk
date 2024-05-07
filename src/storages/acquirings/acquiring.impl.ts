@@ -2,13 +2,12 @@ import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import {
   AcquiringPlansResponse,
-  CreateOrderResponse,
-  CreateOrderData as CreateOrderData,
+  OrderResponse,
+  OrderData,
   UserAcquiringPlan, GetOrderStateResponse, AcquiringPlan, AcquiringSegmentData
 } from "../../dto/acquiringResponse"
 import { Acquiring } from "./acquiring"
 import { Context } from "../../context"
-import { Organization } from "../organizations/organization"
 
 export class AcquiringImpl implements Acquiring {
   private _userPlan?: UserAcquiringPlan
@@ -16,7 +15,6 @@ export class AcquiringImpl implements Acquiring {
   private _limitSegments?: AcquiringSegmentData[]
 
   constructor(
-    private readonly organization: Organization,
     private readonly context: Context) {
   }
 
@@ -50,19 +48,31 @@ export class AcquiringImpl implements Acquiring {
     this._limitSegments = limitSegments
   }
 
-  async createOrder(key: string): Promise<CreateOrderData> {
+  async createOrder(key: string): Promise<OrderData> {
     const rpc = this.context.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/order")
       .sendPostJson({
-        key: key,
-        organizationId: this.organization.id
+        key: key
       })
 
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError("Failed to create order", response)
     }
 
-    const order = (await response.json()) as CreateOrderResponse
+    const order = (await response.json()) as OrderResponse
+
+    return order.data
+  }
+
+  async unsubscribe(): Promise<OrderData> {
+    const rpc = this.context.resolve(RpcService) as RpcService
+    const response = await rpc.requestBuilder("api/v1/Acquiring/unsubscribe").sendDelete()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to unsubscribe", response)
+    }
+
+    const order = (await response.json()) as OrderResponse
 
     return order.data
   }
@@ -88,7 +98,6 @@ export class AcquiringImpl implements Acquiring {
     const rpc = this.context.resolve(RpcService) as RpcService
     const response = await rpc
       .requestBuilder("api/v1/Acquiring/user/subscription")
-      .searchParam("organizationId", <string>this.organization.id)
       .sendGet()
 
     if (ResponseUtils.isFail(response)) {
