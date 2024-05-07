@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev48](../../README.md) / [Exports](../modules.md) / OrderState
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev49](../../README.md) / [Exports](../modules.md) / OrderState
 
 # Enumeration: OrderState
 
@@ -6,38 +6,31 @@
 
 ### Enumeration Members
 
-- [Canceled](OrderState.md#canceled)
+- [Cancelled](OrderState.md#cancelled)
+- [Created](OrderState.md#created)
 - [Paid](OrderState.md#paid)
-- [Reserved](OrderState.md#reserved)
-- [Suspended](OrderState.md#suspended)
-- [Verified](OrderState.md#verified)
+- [WaitingForPayment](OrderState.md#waitingforpayment)
 
 ## Enumeration Members
 
-### Canceled
+### Cancelled
 
-• **Canceled** = ``100``
+• **Cancelled** = ``30``
+
+___
+
+### Created
+
+• **Created** = ``0``
 
 ___
 
 ### Paid
 
-• **Paid** = ``10``
+• **Paid** = ``20``
 
 ___
 
-### Reserved
+### WaitingForPayment
 
-• **Reserved** = ``0``
-
-___
-
-### Suspended
-
-• **Suspended** = ``30``
-
-___
-
-### Verified
-
-• **Verified** = ``20``
+• **WaitingForPayment** = ``10``
