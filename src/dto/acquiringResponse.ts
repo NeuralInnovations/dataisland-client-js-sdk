@@ -41,9 +41,8 @@ export interface AcquiringSegmentData {
 }
 
 export enum OrderState {
-  Reserved = 0,
-  Paid = 10,
-  Verified = 20,
-  Suspended = 30,
-  Canceled = 100
+  Created = 0,
+  WaitingForPayment = 10,
+  Paid = 20,
+  Cancelled = 30
 }
