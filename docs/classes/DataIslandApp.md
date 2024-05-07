@@ -12,6 +12,7 @@ DataIsland App instance.
 
 ### Accessors
 
+- [acquiring](DataIslandApp.md#acquiring)
 - [automaticDataCollectionEnabled](DataIslandApp.md#automaticdatacollectionenabled)
 - [context](DataIslandApp.md#context)
 - [credential](DataIslandApp.md#credential)
@@ -36,6 +37,18 @@ DataIsland App instance.
 [`DataIslandApp`](DataIslandApp.md)
 
 ## Accessors
+
+### acquiring
+
+• `get` **acquiring**(): `Acquiring`
+
+Acquiring.
+
+#### Returns
+
+`Acquiring`
+
+___
 
 ### automaticDataCollectionEnabled
 
