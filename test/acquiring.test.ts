@@ -4,7 +4,9 @@ import { testInOrganization } from "./setup"
 test("Acquiring", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
-      const plans = await org.acquiring.getPlans()
+      expect(org).not.toBeUndefined()
+
+      const plans = await app.acquiring.getPlans()
 
       expect(plans).not.toBeUndefined()
       expect(plans).not.toBeNull()
@@ -23,7 +25,7 @@ test("Acquiring", async () => {
       expect(segment).not.toBeUndefined()
       expect(segment).not.toBeNull()
 
-      const userPlan = await org.acquiring.getUserPlan()
+      const userPlan = await app.acquiring.getUserPlan()
 
       expect(userPlan).not.toBeUndefined()
       expect(userPlan).not.toBeNull()

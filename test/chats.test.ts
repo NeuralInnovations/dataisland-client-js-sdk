@@ -1,11 +1,16 @@
 import fs from "fs"
-import { AnswerStatus, ChatAnswerType, FileStatus, FilesEvent } from "../src"
+import {
+  AnswerStatus,
+  ChatAnswerType,
+  FileStatus,
+  FilesEvent,
+  AnswerEvent,
+  UploadFile
+} from "../src"
 import { AnswerImpl } from "../src/storages/chats/answer.impl"
 import { ChatImpl } from "../src/storages/chats/chat.impl"
 import { testInOrganization, testInWorkspace } from "./setup"
 import { appTest, UnitTest } from "../src/unitTest"
-import { AnswerEvent } from "../src/storages/chats/answer"
-import { UploadFile } from "../src"
 
 test("Chat create, ask question, delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -84,11 +89,10 @@ test("Chat create with file, ask and delete", async () => {
       let file_loaded = false
 
       file.subscribe((evt) => {
-        if (evt.data.status !== FileStatus.UPLOADING){
+        if (evt.data.status !== FileStatus.UPLOADING) {
           file_loaded = true
         }
       }, FilesEvent.UPDATED)
-      
 
       while (!file_loaded) {
         await new Promise(f => setTimeout(f, 500))
@@ -149,7 +153,7 @@ test("Chat create with file, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      for (const source of answer!.sources){
+      for (const source of answer!.sources) {
         await expect(source.id).toBe(file.id)
       }
 
