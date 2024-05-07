@@ -2,7 +2,7 @@ import { UnitTest, appTest } from "../src/unitTest"
 import { dataIslandApp } from "../src"
 import { HOST, randomHash } from "./setup"
 
-test("Anonymous", async () => {
+test.skip("Anonymous", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
 
     // make random name

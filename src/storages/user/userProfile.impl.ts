@@ -83,12 +83,12 @@ export class UserProfileImpl extends UserProfile {
     })
   }
 
-  async updateUser(newName: string, newId: string, newEducationalInstitution: string): Promise<void>{
+  async updateUser(name: string, binanceId: string, educationalInstitution: string): Promise<void>{
     if (!this.content) {
       throw new Error("User is not loaded.")
     }
 
-    if (newName === this.name && newId === this.binanceId && newEducationalInstitution === this.educationalInstitution) {
+    if (name === this.name && binanceId === this.binanceId && educationalInstitution === this.educationalInstitution) {
       return Promise.resolve()
     }
     
@@ -97,10 +97,9 @@ export class UserProfileImpl extends UserProfile {
       ?.requestBuilder("api/v1/Users")
       .sendPutJson({
         profile: {
-          newName,
-          undefined,
-          newId,
-          newEducationalInstitution
+          name,
+          binanceId,
+          educationalInstitution
         }
       })
 
@@ -109,9 +108,9 @@ export class UserProfileImpl extends UserProfile {
     }
 
     if (this.content) {
-      this.content!.user.profile.name = newName
-      this.content!.user.profile.binanceId = newId
-      this.content!.user.profile.educationalInstitution = newEducationalInstitution
+      this.content!.user.profile.name = name
+      this.content!.user.profile.binanceId = binanceId
+      this.content!.user.profile.educationalInstitution = educationalInstitution
     }
 
     this.dispatch({
