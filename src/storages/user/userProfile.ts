@@ -57,8 +57,9 @@ export abstract class UserProfile extends EventDispatcher<
 
   /**
    * Update user profile
-   * @param newName 
-   * @param newId 
+   * @param newName
+   * @param newId
+   * @param newEducationalInstitution
    */
   abstract updateUser(newName: string, newId: string, newEducationalInstitution: string): Promise<void>
 

@@ -14,7 +14,6 @@ import { MiddlewareService } from "../src/services/middlewareService"
 import { RequestBuilder } from "../src/services/requestBuilder"
 import { ResponseUtils } from "../src/services/responseUtils"
 import { UnitTest, appTest } from "../src/unitTest"
-// import { Request, Response } from "../src/utils/request"
 
 test("CredentialService", async () => {
   await appTest(UnitTest.DO_NOT_START_SDK, async () => {

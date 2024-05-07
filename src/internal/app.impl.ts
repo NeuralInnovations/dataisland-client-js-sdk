@@ -30,8 +30,8 @@ import {
 } from "../commands/deleteUserFullCommandHandler"
 import { CookieService } from "../services/cookieService"
 import { AnonymousService } from "../services/anonymousService"
-import { AcquiringImpl } from "../storages/acquirings/acquiring.impl"
 import { Acquiring } from "../storages/acquirings/acquiring"
+import { AcquiringService } from "../services/acquiringService"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -86,7 +86,7 @@ export class DataIslandAppImpl extends DataIslandApp {
   }
 
   get acquiring(): Acquiring {
-    return this.resolve(AcquiringImpl) as AcquiringImpl
+    return (this.resolve(AcquiringService) as AcquiringService).acquiring
   }
 
   async initialize(
@@ -128,6 +128,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     builder.registerService(AnonymousService, (context: ServiceContext) => {
       return new AnonymousService(context)
     })
+    builder.registerService(AcquiringService, (context: ServiceContext) => {
+      return new AcquiringService(context)
+    })
 
     // call customer setup
     if (setup !== undefined) {
@@ -148,10 +151,10 @@ export class DataIslandAppImpl extends DataIslandApp {
         this._context,
         this._disposable.defineNested()
       )
-      serviceContext.lifetime.addCallback(() => {
-        serviceContext.onUnregister()
-      }, serviceContext)
       const serviceInstance = serviceFactory[1](serviceContext)
+      serviceContext.lifetime.addCallback(() => {
+        serviceContext.onUnregister.call(serviceInstance)
+      }, serviceContext)
       services.push([serviceContext, serviceInstance])
       this._registry.map(serviceFactory[0]).asValue(serviceInstance)
     })
@@ -169,9 +172,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     //-------------------------------------------------------------------------
     const waitList: Array<Promise<void>> = []
     // call onRegister service's callback
-    services.forEach(([serviceContext]) => {
+    services.forEach(([serviceContext, service]) => {
       if (typeof serviceContext.onRegister === "function") {
-        waitList.push(serviceContext.onRegister())
+        waitList.push(serviceContext.onRegister.call(service))
       }
     })
 
@@ -184,9 +187,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     //-------------------------------------------------------------------------
     waitList.length = 0
     // call onStart service's callback
-    services.forEach(([serviceContext]) => {
+    services.forEach(([serviceContext, service]) => {
       if (typeof serviceContext.onStart === "function") {
-        waitList.push(serviceContext.onStart())
+        waitList.push(serviceContext.onStart.call(service))
       }
     })
 

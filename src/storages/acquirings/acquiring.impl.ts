@@ -8,7 +8,6 @@ import {
 } from "../../dto/acquiringResponse"
 import { Acquiring } from "./acquiring"
 import { Context } from "../../context"
-import { Organization } from "../organizations/organization"
 
 export class AcquiringImpl implements Acquiring {
   private _userPlan?: UserAcquiringPlan
@@ -16,7 +15,6 @@ export class AcquiringImpl implements Acquiring {
   private _limitSegments?: AcquiringSegmentData[]
 
   constructor(
-    private readonly organization: Organization,
     private readonly context: Context) {
   }
 
@@ -54,8 +52,7 @@ export class AcquiringImpl implements Acquiring {
     const rpc = this.context.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/order")
       .sendPostJson({
-        key: key,
-        organizationId: this.organization.id
+        key: key
       })
 
     if (ResponseUtils.isFail(response)) {
@@ -101,7 +98,6 @@ export class AcquiringImpl implements Acquiring {
     const rpc = this.context.resolve(RpcService) as RpcService
     const response = await rpc
       .requestBuilder("api/v1/Acquiring/user/subscription")
-      .searchParam("organizationId", <string>this.organization.id)
       .sendGet()
 
     if (ResponseUtils.isFail(response)) {
