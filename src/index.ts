@@ -49,7 +49,8 @@ export {
   OrderResponse,
   GetOrderStateResponse,
   OrderState,
-  UserAcquiringPlan
+  UserAcquiringPlan,
+  UnsubscribeResponse
 } from "./dto/acquiringResponse"
 export {
   LimitActionType,
