@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev50](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev51](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev50
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev51
 
 ## Table of contents
 
@@ -99,6 +99,7 @@
 - [SourceDto](interfaces/SourceDto.md)
 - [StatisticsData](interfaces/StatisticsData.md)
 - [StatisticsResponse](interfaces/StatisticsResponse.md)
+- [UnsubscribeResponse](interfaces/UnsubscribeResponse.md)
 - [UserAcquiringPlan](interfaces/UserAcquiringPlan.md)
 - [UserDto](interfaces/UserDto.md)
 - [UserInfoResponse](interfaces/UserInfoResponse.md)
