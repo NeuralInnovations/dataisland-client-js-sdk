@@ -4,7 +4,11 @@ import {
   AcquiringPlansResponse,
   OrderResponse,
   OrderData,
-  UserAcquiringPlan, GetOrderStateResponse, AcquiringPlan, AcquiringSegmentData
+  UserAcquiringPlan,
+  GetOrderStateResponse,
+  AcquiringPlan,
+  AcquiringSegmentData,
+  UnsubscribeResponse
 } from "../../dto/acquiringResponse"
 import { Acquiring } from "./acquiring"
 import { Context } from "../../context"
@@ -64,7 +68,7 @@ export class AcquiringImpl implements Acquiring {
     return order.data
   }
 
-  async unsubscribe(): Promise<OrderData> {
+  async unsubscribe(): Promise<UnsubscribeResponse> {
     const rpc = this.context.resolve(RpcService) as RpcService
     const response = await rpc.requestBuilder("api/v1/Acquiring/unsubscribe").sendDelete()
 
@@ -72,9 +76,9 @@ export class AcquiringImpl implements Acquiring {
       await ResponseUtils.throwError("Failed to unsubscribe", response)
     }
 
-    const order = (await response.json()) as OrderResponse
+    const order = (await response.json()) as UnsubscribeResponse
 
-    return order.data
+    return order
   }
 
   async getPlans(): Promise<AcquiringPlansResponse> {

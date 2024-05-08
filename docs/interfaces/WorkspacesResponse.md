@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev50](../../README.md) / [Exports](../modules.md) / WorkspacesResponse
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev51](../../README.md) / [Exports](../modules.md) / WorkspacesResponse
 
 # Interface: WorkspacesResponse
 
