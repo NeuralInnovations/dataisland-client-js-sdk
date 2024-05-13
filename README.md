@@ -338,5 +338,6 @@ You can also use univarsal invite code, and then validate it to add user to grou
 
 ```
 await organization.createInviteCode(accessGroups[])
-await organization.validateInviteCode(inviteCode)
+// Use app.organizations storage to validate invite codes
+await organizations.validateInviteCode(inviteCode)
 ```
