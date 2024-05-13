@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev51](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev52](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
@@ -23,6 +23,7 @@ Organizations storage.
 
 ### Methods
 
+- [applyInviteCode](Organizations.md#applyinvitecode)
 - [create](Organizations.md#create)
 - [delete](Organizations.md#delete)
 - [dispatch](Organizations.md#dispatch)
@@ -81,6 +82,24 @@ Current organization.
 `void`
 
 ## Methods
+
+### applyInviteCode
+
+▸ **applyInviteCode**(`code`): `Promise`\<`void`\>
+
+Apply invite code for user
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `code` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
 
 ### create
 

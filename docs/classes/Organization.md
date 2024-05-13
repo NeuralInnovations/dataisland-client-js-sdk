@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev51](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev52](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -39,7 +39,6 @@ Organization.
 - [subscribe](Organization.md#subscribe)
 - [userLimits](Organization.md#userlimits)
 - [userStatistic](Organization.md#userstatistic)
-- [validateInviteCode](Organization.md#validateinvitecode)
 
 ## Constructors
 
@@ -329,21 +328,3 @@ Get statistics for user
 #### Returns
 
 `Promise`\<[`StatisticsResponse`](../interfaces/StatisticsResponse.md)\>
-
-___
-
-### validateInviteCode
-
-▸ **validateInviteCode**(`code`): `Promise`\<`void`\>
-
-Validate invite code for user
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `code` | `string` |
-
-#### Returns
-
-`Promise`\<`void`\>

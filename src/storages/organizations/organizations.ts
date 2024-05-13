@@ -53,4 +53,9 @@ export abstract class Organizations extends EventDispatcher<
    * Delete organization.
    */
   abstract delete(id: OrganizationId): Promise<void>
+
+  /**
+   * Apply invite code for user
+   */
+  abstract applyInviteCode(code: string): Promise<void>
 }
