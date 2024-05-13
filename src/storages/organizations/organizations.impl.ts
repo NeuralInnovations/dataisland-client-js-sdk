@@ -61,6 +61,21 @@ export class OrganizationsImpl extends Organizations {
     return this.internalDeleteOrganization(id)
   }
 
+  async applyInviteCode(code: string): Promise<void> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Invites/apply")
+      .sendPutJson({
+        code: code
+      })
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        "Invite code validation failed",
+        response
+      )
+    }
+  }
+
   //----------------------------------------------------------------------------
   // INTERNALS
   //----------------------------------------------------------------------------

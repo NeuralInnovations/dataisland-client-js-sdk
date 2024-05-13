@@ -112,9 +112,4 @@ export abstract class Organization extends EventDispatcher<
    * Create invite code for users outside organization
    */
   abstract createInviteCode(accessGroups: GroupId[]): Promise<string>
-
-  /**
-   * Validate invite code for user
-   */
-  abstract validateInviteCode(code: string): Promise<void>
 }

@@ -360,19 +360,4 @@ export class OrganizationImpl extends Organization implements Disposable {
 
     return code
   }
-
-  async validateInviteCode(code: string): Promise<void> {
-    const response = await this.context
-      .resolve(RpcService)
-      ?.requestBuilder("api/v1/Invites/apply")
-      .sendPutJson({
-        code: code
-      })
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(
-        `Invite code validation failed for organization ${this.id}`,
-        response
-      )
-    }
-  }
 }
