@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev52](../../README.md) / [Exports](../modules.md) / UserProfile
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev53](../../README.md) / [Exports](../modules.md) / UserProfile
 
 # Class: UserProfile
 
@@ -30,6 +30,7 @@
 
 - [deleteUser](UserProfile.md#deleteuser)
 - [dispatch](UserProfile.md#dispatch)
+- [fetch](UserProfile.md#fetch)
 - [subscribe](UserProfile.md#subscribe)
 - [updateUser](UserProfile.md#updateuser)
 
@@ -186,6 +187,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### fetch
+
+▸ **fetch**(): `Promise`\<`void`\>
+
+Fetch user profile
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 

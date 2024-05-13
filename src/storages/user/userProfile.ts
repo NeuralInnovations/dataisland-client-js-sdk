@@ -56,6 +56,11 @@ export abstract class UserProfile extends EventDispatcher<
   abstract get modifiedAt(): Date
 
   /**
+   * Fetch user profile
+   */
+  abstract fetch(): Promise<void>
+
+  /**
    * Update user profile
    * @param newName
    * @param newId

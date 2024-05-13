@@ -9,6 +9,7 @@ import { OrganizationDto, UserSettings } from "../../dto/userInfoResponse"
 import { Context } from "../../context"
 import { Organization } from "./organization"
 import { ResponseUtils } from "../../services/responseUtils"
+import { UserProfileService } from "../../services/userProfileService"
 
 export class OrganizationsImpl extends Organizations {
   constructor(public readonly context: Context) {
@@ -74,6 +75,8 @@ export class OrganizationsImpl extends Organizations {
         response
       )
     }
+
+    await this.context.resolve(UserProfileService)?.fetch()
   }
 
   //----------------------------------------------------------------------------
@@ -193,6 +196,8 @@ export class OrganizationsImpl extends Organizations {
     organizations: OrganizationDto[],
     settings: UserSettings | null | undefined
   ): Promise<void> {
+
+    this.organizations = []
 
     // set current organization
     this.currentOrganizationId = settings?.activeOrganizationId

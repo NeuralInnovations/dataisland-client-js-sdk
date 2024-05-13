@@ -3,6 +3,7 @@ import { UserInfoResponse } from "../../dto/userInfoResponse"
 import { Context } from "../../context"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
+import { UserProfileService } from "../../services/userProfileService"
 
 export class UserProfileImpl extends UserProfile {
   private content?: UserInfoResponse
@@ -81,6 +82,10 @@ export class UserProfileImpl extends UserProfile {
       type: UserEvent.CHANGED,
       data: this
     })
+  }
+
+  async fetch() : Promise<void>{
+    await this.context.resolve(UserProfileService)?.fetch()
   }
 
   async updateUser(name: string, binanceId: string, educationalInstitution: string): Promise<void>{
