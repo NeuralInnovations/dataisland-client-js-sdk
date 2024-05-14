@@ -17,7 +17,7 @@ test("Workspace create / delete", async () => {
         "test-workspace-description",
         {
           isCreateNewGroup: true,
-          newGroupName: "Group 1"
+          newGroupName: "Test Group"
         }
       )
       // check not throw
@@ -57,6 +57,8 @@ test("Workspace create / delete", async () => {
 
       // check contains
       expect(org.workspaces.contains(ws!.id)).toBe(true)
+
+      expect(org.accessGroups.collection.find(group => group.group.name === "Test Group")).not.toBeUndefined()
 
       // check delete
       await expect(org.workspaces.delete(ws!.id)).resolves.not.toThrow()

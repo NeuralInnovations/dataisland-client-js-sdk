@@ -54,6 +54,10 @@ export interface MembersResponse {
   members: UserDto
 }
 
+export interface ApplyInviteCodeResponse {
+  organizationId: string
+}
+
 export interface UsersStatisticsResponse {
   dateFrom: number
   dateTo: number

@@ -5,7 +5,7 @@ import {
 } from "./organizations"
 import { OrganizationImpl } from "./organization.impl"
 import { RpcService } from "../../services/rpcService"
-import { OrganizationDto, UserSettings } from "../../dto/userInfoResponse"
+import { ApplyInviteCodeResponse, OrganizationDto, UserSettings } from "../../dto/userInfoResponse"
 import { Context } from "../../context"
 import { Organization } from "./organization"
 import { ResponseUtils } from "../../services/responseUtils"
@@ -62,7 +62,7 @@ export class OrganizationsImpl extends Organizations {
     return this.internalDeleteOrganization(id)
   }
 
-  async applyInviteCode(code: string): Promise<void> {
+  async applyInviteCode(code: string): Promise<ApplyInviteCodeResponse> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Invites/apply")
@@ -77,6 +77,10 @@ export class OrganizationsImpl extends Organizations {
     }
 
     await this.context.resolve(UserProfileService)?.fetch()
+
+    const result = (await response?.json()) as ApplyInviteCodeResponse
+
+    return result
   }
 
   //----------------------------------------------------------------------------

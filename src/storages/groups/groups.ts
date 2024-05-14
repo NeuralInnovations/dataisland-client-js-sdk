@@ -21,6 +21,11 @@ export abstract class Groups extends EventDispatcher<GroupsEvent, Group> {
   abstract get collection(): ReadonlyArray<Group>
 
   /**
+   * Reload groups
+   */
+  abstract reload(): Promise<void>
+
+  /**
    * Create new group.
    * @param name
    * @param permits

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev53](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev54](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
@@ -85,7 +85,7 @@ Current organization.
 
 ### applyInviteCode
 
-▸ **applyInviteCode**(`code`): `Promise`\<`void`\>
+▸ **applyInviteCode**(`code`): `Promise`\<[`ApplyInviteCodeResponse`](../interfaces/ApplyInviteCodeResponse.md)\>
 
 Apply invite code for user
 
@@ -97,7 +97,7 @@ Apply invite code for user
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<[`ApplyInviteCodeResponse`](../interfaces/ApplyInviteCodeResponse.md)\>
 
 ___
 

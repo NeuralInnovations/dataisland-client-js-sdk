@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev53](../../README.md) / [Exports](../modules.md) / Groups
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev54](../../README.md) / [Exports](../modules.md) / Groups
 
 # Class: Groups
 
@@ -26,6 +26,7 @@ Groups storage.
 - [delete](Groups.md#delete)
 - [dispatch](Groups.md#dispatch)
 - [get](Groups.md#get)
+- [reload](Groups.md#reload)
 - [subscribe](Groups.md#subscribe)
 
 ## Constructors
@@ -130,6 +131,18 @@ Get group by id.
 #### Returns
 
 `undefined` \| [`Group`](Group.md)
+
+___
+
+### reload
+
+▸ **reload**(): `Promise`\<`void`\>
+
+Reload groups
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 

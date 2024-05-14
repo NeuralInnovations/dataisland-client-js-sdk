@@ -25,7 +25,9 @@ test("Invites", async () => {
         builder.useCredential(new DebugCredential(newTestUserToken()))
       })
 
-      await secondUserApp.organizations.applyInviteCode(invite_code)
+      const applyResponse = await secondUserApp.organizations.applyInviteCode(invite_code)
+
+      await expect(applyResponse.organizationId).toBe(org.id)
 
       // Check duplicate invite for second user
       await expect(secondUserApp.organizations.applyInviteCode(invite_code)).rejects.toThrow("Invite code validation failed.")
