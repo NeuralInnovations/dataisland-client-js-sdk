@@ -1,3 +1,4 @@
+import { ApplyInviteCodeResponse } from "../../dto/userInfoResponse"
 import { EventDispatcher } from "../../events"
 import { Organization } from "./organization"
 
@@ -57,5 +58,5 @@ export abstract class Organizations extends EventDispatcher<
   /**
    * Apply invite code for user
    */
-  abstract applyInviteCode(code: string): Promise<void>
+  abstract applyInviteCode(code: string): Promise<ApplyInviteCodeResponse>
 }

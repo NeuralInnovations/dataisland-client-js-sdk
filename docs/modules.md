@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev53](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev54](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev53
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev54
 
 ## Table of contents
 
@@ -64,6 +64,7 @@
 - [AnswerDto](interfaces/AnswerDto.md)
 - [AnswerSourcesResponse](interfaces/AnswerSourcesResponse.md)
 - [AnswerStepDto](interfaces/AnswerStepDto.md)
+- [ApplyInviteCodeResponse](interfaces/ApplyInviteCodeResponse.md)
 - [BadRequest](interfaces/BadRequest.md)
 - [ChatDto](interfaces/ChatDto.md)
 - [ChatListResponse](interfaces/ChatListResponse.md)
