@@ -109,6 +109,8 @@ export class WorkspacesImpl extends Workspaces {
     // add workspace to the collection
     this._workspaces.push(workspace)
 
+    await this.organization.accessGroups.reload()
+
     // dispatch event
     this.dispatch({
       type: WorkspacesEvent.ADDED,

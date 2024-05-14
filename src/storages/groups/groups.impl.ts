@@ -29,6 +29,11 @@ export class GroupsImpl extends Groups {
     await this.internalInit()
   }
 
+  async reload(){
+    this._groups = []
+    await this.internalInit()
+  }
+
   async create(name: string, permits: {
     isAdmin: boolean
   }, memberIds: string[]): Promise<Group> {
