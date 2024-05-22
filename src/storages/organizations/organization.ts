@@ -1,4 +1,4 @@
-import { Workspaces } from "../workspaces/workspaces"
+import {WorkspaceId, Workspaces} from "../workspaces/workspaces"
 import { OrganizationId } from "./organizations"
 import { Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
@@ -11,6 +11,8 @@ import {
 import { GroupId } from "../groups/group"
 import { StatisticsResponse } from "../../dto/statisticsResponse"
 import { SegmentData } from "../../dto/limitsResponse"
+import {FileId} from "../files/file"
+import {QuizData} from "../../dto/quizResponse"
 
 /**
  * Organization event.
@@ -112,4 +114,13 @@ export abstract class Organization extends EventDispatcher<
    * Create invite code for users outside organization
    */
   abstract createInviteCode(accessGroups: GroupId[]): Promise<string>
+
+  /**
+   * Create quiz for given topic
+   * @param workspaces - workspaces to search for topic
+   * @param query - search query and quiz topic
+   * @param questionsCount - count of quiz tests
+   * @param fileId - file id in case of test-on-file
+   */
+  abstract createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, fileId: FileId): Promise<QuizData>
 }

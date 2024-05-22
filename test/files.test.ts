@@ -103,6 +103,12 @@ test("Files", async () => {
       let filesCount = await ws.filesCount()
       expect(filesCount).toBe(2)
 
+      const quiz = await org.createQuiz([ws.id], "навчальний проект", 1, "")
+      expect(quiz).not.toBeUndefined()
+      expect(quiz).not.toBeNull()
+      expect(quiz.quiz).not.toBeUndefined()
+      expect(quiz.quiz).not.toBeNull()
+
       await expect(ws.files.delete(ids)).resolves.not.toThrow()
 
       filesCount = await ws.filesCount()

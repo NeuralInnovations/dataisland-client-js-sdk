@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev54](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev55](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -29,6 +29,7 @@ Organization.
 
 - [change](Organization.md#change)
 - [createInviteCode](Organization.md#createinvitecode)
+- [createQuiz](Organization.md#createquiz)
 - [dispatch](Organization.md#dispatch)
 - [inviteUsers](Organization.md#inviteusers)
 - [limitSegments](Organization.md#limitsegments)
@@ -162,6 +163,27 @@ Create invite code for users outside organization
 #### Returns
 
 `Promise`\<`string`\>
+
+___
+
+### createQuiz
+
+▸ **createQuiz**(`workspaces`, `query`, `questionsCount`, `fileId`): `Promise`\<[`QuizData`](../interfaces/QuizData.md)\>
+
+Create quiz for given topic
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `workspaces` | `string`[] | workspaces to search for topic |
+| `query` | `string` | search query and quiz topic |
+| `questionsCount` | `number` | count of quiz tests |
+| `fileId` | `string` | file id in case of test-on-file |
+
+#### Returns
+
+`Promise`\<[`QuizData`](../interfaces/QuizData.md)\>
 
 ___
 
