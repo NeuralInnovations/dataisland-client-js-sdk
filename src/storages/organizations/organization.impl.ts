@@ -1,5 +1,5 @@
-import { OrganizationId } from "./organizations"
-import { Disposable } from "../../disposable"
+import {OrganizationId} from "./organizations"
+import {Disposable} from "../../disposable"
 import {
   CurrentLimitItem,
   CurrentLimitRecordData,
@@ -10,23 +10,25 @@ import {
   UserLimitsData,
   UsersStatisticsResponse
 } from "../../dto/userInfoResponse"
-import { Workspaces } from "../workspaces/workspaces"
-import { WorkspacesImpl } from "../workspaces/workspaces.impl"
-import { Context } from "../../context"
-import { Organization, OrganizationEvent } from "./organization"
-import { GroupsImpl } from "../groups/groups.impl"
-import { Groups } from "../groups/groups"
-import { ChatsImpl } from "../chats/chats.impl"
-import { Chats } from "../chats/chats"
-import { RpcService } from "../../services/rpcService"
-import { ResponseUtils } from "../../services/responseUtils"
-import { StatisticsResponse } from "../../dto/statisticsResponse"
+import {WorkspaceId, Workspaces} from "../workspaces/workspaces"
+import {WorkspacesImpl} from "../workspaces/workspaces.impl"
+import {Context} from "../../context"
+import {Organization, OrganizationEvent} from "./organization"
+import {GroupsImpl} from "../groups/groups.impl"
+import {Groups} from "../groups/groups"
+import {ChatsImpl} from "../chats/chats.impl"
+import {Chats} from "../chats/chats"
+import {RpcService} from "../../services/rpcService"
+import {ResponseUtils} from "../../services/responseUtils"
+import {StatisticsResponse} from "../../dto/statisticsResponse"
 import {
   LimitActionType,
   SegmentData,
   SegmentsData
 } from "../../dto/limitsResponse"
-import { InviteCodeResponse } from "../../dto/accessGroupResponse"
+import {InviteCodeResponse} from "../../dto/accessGroupResponse"
+import {FileId} from "../files/file"
+import {QuizData} from "../../dto/quizResponse"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -359,5 +361,26 @@ export class OrganizationImpl extends Organization implements Disposable {
     const code = (json as InviteCodeResponse).code
 
     return code
+  }
+
+  async createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, fileId: FileId): Promise<QuizData> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Quiz")
+      .sendPostJson({
+        query: query,
+        questionsCount: questionsCount,
+        organizationId: this.id,
+        workspaceIds: workspaces,
+        fileId: fileId
+      })
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Quiz creation failed for organization ${this.id} with query ${query}`,
+        response
+      )
+    }
+
+    return (await response!.json()) as QuizData
   }
 }
