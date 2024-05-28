@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev55](../../README.md) / [Exports](../modules.md) / StatisticsData
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev56](../../README.md) / [Exports](../modules.md) / StatisticsData
 
 # Interface: StatisticsData
 

@@ -363,13 +363,14 @@ export class OrganizationImpl extends Organization implements Disposable {
     return code
   }
 
-  async createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, fileId: FileId): Promise<QuizData> {
+  async createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, optionsCount: number, fileId: FileId): Promise<QuizData> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Quiz")
       .sendPostJson({
         query: query,
         questionsCount: questionsCount,
+        optionsCount: optionsCount,
         organizationId: this.id,
         workspaceIds: workspaces,
         fileId: fileId

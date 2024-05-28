@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev55](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev56](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -168,7 +168,7 @@ ___
 
 ### createQuiz
 
-▸ **createQuiz**(`workspaces`, `query`, `questionsCount`, `fileId`): `Promise`\<[`QuizData`](../interfaces/QuizData.md)\>
+▸ **createQuiz**(`workspaces`, `query`, `questionsCount`, `optionsCount`, `fileId`): `Promise`\<[`QuizData`](../interfaces/QuizData.md)\>
 
 Create quiz for given topic
 
@@ -179,6 +179,7 @@ Create quiz for given topic
 | `workspaces` | `string`[] | workspaces to search for topic |
 | `query` | `string` | search query and quiz topic |
 | `questionsCount` | `number` | count of quiz tests |
+| `optionsCount` | `number` | count of one question options |
 | `fileId` | `string` | file id in case of test-on-file |
 
 #### Returns
