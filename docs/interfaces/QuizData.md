@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev55](../../README.md) / [Exports](../modules.md) / QuizData
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev56](../../README.md) / [Exports](../modules.md) / QuizData
 
 # Interface: QuizData
 
@@ -7,9 +7,16 @@
 ### Properties
 
 - [quiz](QuizData.md#quiz)
+- [sources](QuizData.md#sources)
 
 ## Properties
 
 ### quiz
 
 • **quiz**: [`QuestionData`](QuestionData.md)[]
+
+___
+
+### sources
+
+• **sources**: [`SourceDto`](SourceDto.md)[]
