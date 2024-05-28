@@ -120,7 +120,8 @@ export abstract class Organization extends EventDispatcher<
    * @param workspaces - workspaces to search for topic
    * @param query - search query and quiz topic
    * @param questionsCount - count of quiz tests
+   * @param optionsCount - count of one question options
    * @param fileId - file id in case of test-on-file
    */
-  abstract createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, fileId: FileId): Promise<QuizData>
+  abstract createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, optionsCount: number, fileId: FileId): Promise<QuizData>
 }
