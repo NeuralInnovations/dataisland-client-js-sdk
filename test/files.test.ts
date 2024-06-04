@@ -4,6 +4,7 @@ import { FileImpl } from "../src/storages/files/file.impl"
 import { Context, FileStatus, FilesEvent, UploadFile } from "../src"
 import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
 import { appTest, UnitTest } from "../src/unitTest"
+import {TSMap} from "typescript-map"
 
 test("Files", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -22,7 +23,7 @@ test("Files", async () => {
 
       const upload_files = [file_obj, file_obj_second]
 
-      const metadata = new Map()
+      const metadata = new TSMap<string, string>()
       metadata.set("type","test")
       const filePromise = ws.files.upload(upload_files, metadata)
       // await expect(filePromise).resolves.not.toThrow()

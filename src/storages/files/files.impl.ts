@@ -8,6 +8,7 @@ import { ResponseUtils } from "../../services/responseUtils"
 import { File } from "./file"
 import { FilesPage } from "./filesPage"
 import { FilesPageImpl } from "./filesPage.impl"
+import {TSMap} from "typescript-map"
 // import { FormData } from "../../utils/request"
 
 export class FilesImpl extends Files {
@@ -21,7 +22,7 @@ export class FilesImpl extends Files {
   // Object used as files page data, returned by "query"
   public filesList?: FilesPage
 
-  async upload(files: UploadFile[], metadata: Map<string, string>): Promise<File[]> {
+  async upload(files: UploadFile[], metadata: TSMap<string, string>): Promise<File[]> {
     const loaded_files = []
     for (const file of files) {
       const loaded_file = await this.internalUpload(file, metadata)
@@ -187,7 +188,7 @@ export class FilesImpl extends Files {
     return filesList
   }
 
-  async internalUpload(file: UploadFile, metadata: Map<string, string>): Promise<File | undefined> {
+  async internalUpload(file: UploadFile, metadata: TSMap<string, string>): Promise<File | undefined> {
     // check file
     if (file === undefined || file === null) {
       throw new Error("File upload, file is undefined or null")
@@ -199,7 +200,7 @@ export class FilesImpl extends Files {
     form.append("workspaceId", this.workspace.id)
     form.append("name", file.name)
     form.append("file", file, file.name)
-    form.append("metadata", JSON.stringify(Object.fromEntries(metadata)))
+    form.append("metadata", JSON.stringify(metadata.toJSON()))
 
     // send request to the server
     const response = await this.context
