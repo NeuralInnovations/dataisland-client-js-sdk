@@ -22,7 +22,7 @@ test("Files", async () => {
 
       const upload_files = [file_obj, file_obj_second]
 
-      const filePromise = ws.files.upload(upload_files)
+      const filePromise = ws.files.upload(upload_files, new Map().set("type","test"))
       // await expect(filePromise).resolves.not.toThrow()
       const files = await filePromise
 

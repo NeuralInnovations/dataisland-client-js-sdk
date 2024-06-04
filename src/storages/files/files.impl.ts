@@ -21,10 +21,10 @@ export class FilesImpl extends Files {
   // Object used as files page data, returned by "query"
   public filesList?: FilesPage
 
-  async upload(files: UploadFile[]): Promise<File[]> {
+  async upload(files: UploadFile[], metadata: Map<string, string>): Promise<File[]> {
     const loaded_files = []
     for (const file of files) {
-      const loaded_file = await this.internalUpload(file)
+      const loaded_file = await this.internalUpload(file, metadata)
       if (loaded_file != undefined){
         loaded_files.push(loaded_file)
       }
@@ -187,7 +187,7 @@ export class FilesImpl extends Files {
     return filesList
   }
 
-  async internalUpload(file: UploadFile): Promise<File | undefined> {
+  async internalUpload(file: UploadFile, metadata: Map<string, string>): Promise<File | undefined> {
     // check file
     if (file === undefined || file === null) {
       throw new Error("File upload, file is undefined or null")
@@ -199,6 +199,7 @@ export class FilesImpl extends Files {
     form.append("workspaceId", this.workspace.id)
     form.append("name", file.name)
     form.append("file", file, file.name)
+    form.append("metadata", JSON.stringify(Object.fromEntries(metadata)))
 
     // send request to the server
     const response = await this.context

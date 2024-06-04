@@ -23,7 +23,7 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
    * Upload file.
    */
-  abstract upload(files: UploadFile[]): Promise<File[]>
+  abstract upload(files: UploadFile[], metadata: Map<string, string>): Promise<File[]>
 
   /**
    * Get file by ID
