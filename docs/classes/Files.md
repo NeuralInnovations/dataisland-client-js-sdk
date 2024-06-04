@@ -149,7 +149,7 @@ Upload file.
 | Name | Type |
 | :------ | :------ |
 | `files` | `File`[] |
-| `metadata` | `Map`\<`string`, `string`\> |
+| `metadata` | `TSMap`\<`string`, `string`\> |
 
 #### Returns
 
