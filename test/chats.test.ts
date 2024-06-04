@@ -11,6 +11,7 @@ import { AnswerImpl } from "../src/storages/chats/answer.impl"
 import { ChatImpl } from "../src/storages/chats/chat.impl"
 import { testInOrganization, testInWorkspace } from "./setup"
 import { appTest, UnitTest } from "../src/unitTest"
+import {TSMap} from "typescript-map"
 
 test("Chat create, ask question, delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -83,7 +84,9 @@ test("Chat create with file, ask and delete", async () => {
         type: "application/pdf"
       })
 
-      const files = await ws.files.upload([file_obj])
+      const metadata = new TSMap<string, string>()
+      metadata.set("type","test-chat")
+      const files = await ws.files.upload([file_obj], metadata)
 
       const file = files[0]
       let file_loaded = false

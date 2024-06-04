@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev56](../../README.md) / [Exports](../modules.md) / Files
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev57](../../README.md) / [Exports](../modules.md) / Files
 
 # Class: Files
 
@@ -140,7 +140,7 @@ ___
 
 ### upload
 
-▸ **upload**(`files`): `Promise`\<[`File`](File.md)[]\>
+▸ **upload**(`files`, `metadata`): `Promise`\<[`File`](File.md)[]\>
 
 Upload file.
 
@@ -149,6 +149,7 @@ Upload file.
 | Name | Type |
 | :------ | :------ |
 | `files` | `File`[] |
+| `metadata` | `TSMap`\<`string`, `string`\> |
 
 #### Returns
 
