@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev57](../../README.md) / [Exports](../modules.md) / File
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev58](../../README.md) / [Exports](../modules.md) / File
 
 # Class: File
 
@@ -19,7 +19,9 @@ File.
 ### Accessors
 
 - [createdAt](File.md#createdat)
+- [description](File.md#description)
 - [id](File.md#id)
+- [metadata](File.md#metadata)
 - [modifiedAt](File.md#modifiedat)
 - [name](File.md#name)
 - [previewUrl](File.md#previewurl)
@@ -31,6 +33,7 @@ File.
 
 - [dispatch](File.md#dispatch)
 - [subscribe](File.md#subscribe)
+- [update](File.md#update)
 
 ## Constructors
 
@@ -60,11 +63,35 @@ File date added.
 
 ___
 
+### description
+
+• `get` **description**(): `string`
+
+File description.
+
+#### Returns
+
+`string`
+
+___
+
 ### id
 
 • `get` **id**(): `string`
 
 File id.
+
+#### Returns
+
+`string`
+
+___
+
+### metadata
+
+• `get` **metadata**(): `string`
+
+File metadata.
 
 #### Returns
 
@@ -182,3 +209,23 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### update
+
+▸ **update**(`name`, `metadata`, `description?`): `Promise`\<`void`\>
+
+Update file.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `metadata` | `TSMap`\<`string`, `string`\> |
+| `description?` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
