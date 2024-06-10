@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev57](../../README.md) / [Exports](../modules.md) / FileDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev58](../../README.md) / [Exports](../modules.md) / FileDto
 
 # Interface: FileDto
 
@@ -8,6 +8,7 @@
 
 - [createdAt](FileDto.md#createdat)
 - [description](FileDto.md#description)
+- [fileMetadata](FileDto.md#filemetadata)
 - [hash](FileDto.md#hash)
 - [id](FileDto.md#id)
 - [isProcessedSuccessfully](FileDto.md#isprocessedsuccessfully)
@@ -29,6 +30,12 @@ ___
 ### description
 
 • **description**: `string`
+
+___
+
+### fileMetadata
+
+• **fileMetadata**: `string`
 
 ___
 

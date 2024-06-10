@@ -23,9 +23,8 @@ test("Files", async () => {
 
       const upload_files = [file_obj, file_obj_second]
 
-      const metadata = new TSMap<string, string>()
-      metadata.set("type","test")
-      const filePromise = ws.files.upload(upload_files, metadata)
+
+      const filePromise = ws.files.upload(upload_files)
       // await expect(filePromise).resolves.not.toThrow()
       const files = await filePromise
 
@@ -101,6 +100,12 @@ test("Files", async () => {
 
         expect(fileGet.url).not.toBe("")
         expect(fileGet.previewUrl).not.toBe("")
+
+        const metadata = new TSMap<string, string>()
+        metadata.set("type","test")
+        await fileGet.update(fileGet.name, metadata)
+
+        expect(fileGet.metadata).toBe(JSON.stringify(metadata.toJSON()))
       }
 
       let filesCount = await ws.filesCount()

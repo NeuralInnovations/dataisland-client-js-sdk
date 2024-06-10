@@ -1,7 +1,6 @@
 import { EventDispatcher } from "../../events"
 import { File, FileId } from "./file"
 import { FilesPage } from "./filesPage"
-import {TSMap} from "typescript-map"
 
 /**
  * Files event.
@@ -24,7 +23,7 @@ export abstract class Files extends EventDispatcher<FilesEvent, File> {
   /**
    * Upload file.
    */
-  abstract upload(files: UploadFile[], metadata: TSMap<string, string>): Promise<File[]>
+  abstract upload(files: UploadFile[]): Promise<File[]>
 
   /**
    * Get file by ID
