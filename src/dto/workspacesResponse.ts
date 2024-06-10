@@ -36,6 +36,7 @@ export interface FileDto {
   modifiedAt: number
   name: string
   description: string
+  fileMetadata: string
   url: string
   previewUrl: string
   hash: string
