@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev58](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev59](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev58
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev59
 
 ## Table of contents
 
@@ -46,6 +46,7 @@
 - [Group](classes/Group.md)
 - [Groups](classes/Groups.md)
 - [Lifetime](classes/Lifetime.md)
+- [MetadataDto](classes/MetadataDto.md)
 - [Organization](classes/Organization.md)
 - [Organizations](classes/Organizations.md)
 - [StepTypeInfo](classes/StepTypeInfo.md)

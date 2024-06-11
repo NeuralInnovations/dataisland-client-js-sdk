@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.0.1-dev58",
+  "version": "0.0.1-dev59",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -98,7 +98,6 @@
   },
   "dependencies": {
     "dotenv": "^16.3.2",
-    "jsdom": "^23.2.0",
-    "typescript-map": "^0.1.0"
+    "jsdom": "^23.2.0"
   }
 }
