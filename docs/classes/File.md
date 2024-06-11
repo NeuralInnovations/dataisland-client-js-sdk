@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev58](../../README.md) / [Exports](../modules.md) / File
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev59](../../README.md) / [Exports](../modules.md) / File
 
 # Class: File
 
@@ -89,13 +89,13 @@ ___
 
 ### metadata
 
-• `get` **metadata**(): `string`
+• `get` **metadata**(): [`MetadataDto`](MetadataDto.md)[]
 
 File metadata.
 
 #### Returns
 
-`string`
+[`MetadataDto`](MetadataDto.md)[]
 
 ___
 
@@ -223,7 +223,7 @@ Update file.
 | Name | Type |
 | :------ | :------ |
 | `name` | `string` |
-| `metadata` | `TSMap`\<`string`, `string`\> |
+| `metadata` | [`MetadataDto`](MetadataDto.md)[] |
 | `description?` | `string` |
 
 #### Returns

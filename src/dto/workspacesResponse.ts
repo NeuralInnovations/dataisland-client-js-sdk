@@ -45,6 +45,17 @@ export interface FileDto {
   isProcessedSuccessfully: boolean
 }
 
+export class MetadataDto {
+  public key: string
+  public value: string
+
+  constructor(key: string, value: string){
+    this.key = key
+    this.value = value
+  }
+}
+
+
 export interface FileListResponse {
   files: FileDto[]
   totalFilesCount: number

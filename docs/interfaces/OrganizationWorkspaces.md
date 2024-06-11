@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev58](../../README.md) / [Exports](../modules.md) / OrganizationWorkspaces
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev59](../../README.md) / [Exports](../modules.md) / OrganizationWorkspaces
 
 # Interface: OrganizationWorkspaces
 
