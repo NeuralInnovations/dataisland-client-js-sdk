@@ -1,7 +1,6 @@
-import { FileProgressDto } from "../../dto/workspacesResponse"
+import {FileProgressDto, MetadataDto} from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
 import { FilesEvent } from "./files"
-import {TSMap} from "typescript-map"
 
 export type FileId = string
 
@@ -36,7 +35,7 @@ export abstract class File extends EventDispatcher<
   /**
    * File metadata.
    */
-  abstract get metadata(): string
+  abstract get metadata(): MetadataDto[]
 
   /**
    * File date added.
@@ -71,5 +70,5 @@ export abstract class File extends EventDispatcher<
   /**
    * Update file.
    */
-  abstract update(name: string, metadata: TSMap<string, string>, description?: string): Promise<void>
+  abstract update(name: string, metadata: MetadataDto[], description?: string): Promise<void>
 }

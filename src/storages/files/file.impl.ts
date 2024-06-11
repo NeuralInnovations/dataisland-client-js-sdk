@@ -1,12 +1,15 @@
 import {Context} from "../../context"
 import {Disposable} from "../../disposable"
-import {FileDto, FileProgressDto} from "../../dto/workspacesResponse"
+import {
+  FileDto,
+  FileProgressDto,
+  MetadataDto
+} from "../../dto/workspacesResponse"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
 import {File, FileStatus} from "./file"
 import {FilesEvent} from "./files"
 import {isNullOrUndefined} from "../../utils/utils"
-import {TSMap} from "typescript-map"
 
 export class FileImpl extends File implements Disposable {
   private _isDisposed: boolean = false
@@ -45,8 +48,9 @@ export class FileImpl extends File implements Disposable {
     return <string>this._content?.description
   }
 
-  get metadata(): string {
-    return <string>this._content?.fileMetadata
+  get metadata(): MetadataDto[] {
+    const metadataString = <string>this._content?.fileMetadata
+    return <MetadataDto[]>JSON.parse(metadataString)
   }
 
   get createdAt(): number {
@@ -118,7 +122,7 @@ export class FileImpl extends File implements Disposable {
     this.fetchAfter()
   }
 
-  async update(name: string, metadata: TSMap<string, string>, description?: string){
+  async update(name: string, metadata: MetadataDto[], description?: string){
     if (!this._content) {
       throw new Error("File is not loaded.")
     }
@@ -127,6 +131,8 @@ export class FileImpl extends File implements Disposable {
       throw new Error("File update, one of parameters is undefined or null")
     }
 
+    const metadataString = JSON.stringify(metadata)
+
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Files")
@@ -134,7 +140,7 @@ export class FileImpl extends File implements Disposable {
         fileId: this.id,
         name: name,
         description: description ?? this.description,
-        metadata: JSON.stringify(metadata.toJSON())
+        metadata: metadataString
       })
 
     if (ResponseUtils.isFail(response)) {

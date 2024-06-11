@@ -1,10 +1,9 @@
 import fs from "fs"
 import { testInWorkspace } from "./setup"
 import { FileImpl } from "../src/storages/files/file.impl"
-import { Context, FileStatus, FilesEvent, UploadFile } from "../src"
+import { Context, FileStatus, FilesEvent, UploadFile, MetadataDto } from "../src"
 import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
 import { appTest, UnitTest } from "../src/unitTest"
-import {TSMap} from "typescript-map"
 
 test("Files", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -101,11 +100,11 @@ test("Files", async () => {
         expect(fileGet.url).not.toBe("")
         expect(fileGet.previewUrl).not.toBe("")
 
-        const metadata = new TSMap<string, string>()
-        metadata.set("type","test")
+        const metadata: MetadataDto[] = []
+        metadata.push(new MetadataDto("type", "test"))
         await fileGet.update(fileGet.name, metadata)
 
-        expect(fileGet.metadata).toBe(JSON.stringify(metadata.toJSON()))
+        expect(fileGet.metadata).toEqual(metadata)
       }
 
       let filesCount = await ws.filesCount()
