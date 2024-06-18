@@ -70,7 +70,7 @@ export class ChatsImpl extends Chats {
     return this._chats.find(chat => chat.id === id)
   }
 
-  async create(model: string): Promise<Chat | undefined> {
+  async create(model: string, clientContext: string = ""): Promise<Chat | undefined> {
     if (model === undefined || model === null) {
       throw new Error("Create chat, model is undefined or null")
     }
@@ -83,7 +83,7 @@ export class ChatsImpl extends Chats {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Chats/workspaces")
-      .sendPostJson({ organizationId: this.organization.id, model: model })
+      .sendPostJson({ organizationId: this.organization.id, model: model, clientContext: clientContext })
 
     // check response status
     if (ResponseUtils.isFail(response)) {
@@ -162,6 +162,57 @@ export class ChatsImpl extends Chats {
 
     return chat
   }
+
+  async createWithWorkspace(workspaceId: string, clientContext: string = ""): Promise<Chat | undefined> {
+    if (workspaceId === undefined || workspaceId === null) {
+      throw new Error("Create chat with workspace, id is undefined or null")
+    }
+    if (workspaceId.length === 0 || workspaceId.trim().length === 0) {
+      throw new Error("Create chat with workspace, id is empty")
+    }
+
+    // send create request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Chats/workspaces")
+      .sendPostJson({
+        organizationId: this.organization.id,
+        model: "search",
+        clientContext: clientContext,
+        workspaceIds: [workspaceId]
+      })
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
+
+      await ResponseUtils.throwError(`Failed to create chat in workspace, organization: ${this.organization.id}`, response)
+    }
+
+    // parse workspace from the server's response
+    const content = (await response!.json() as {
+      chat: ChatDto
+    }).chat as ChatDto
+
+    // create workspace implementation
+    const chat = new ChatImpl(this.context, this.organization)
+    await chat.initFrom(content)
+
+    // add chat to the collection
+    this._chats.push(chat)
+
+    // dispatch event
+    this.dispatch({
+      type: ChatsEvent.ADDED,
+      data: chat
+    })
+
+    return chat
+  }
+
+
 
 
   async delete(id: string): Promise<void> {

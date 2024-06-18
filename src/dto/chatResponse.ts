@@ -26,9 +26,10 @@ export interface ChatDto {
   modifiedAt: number;
   userId: UserId;
   organizationId: string;
-  workspaceId: string;
+  workspaceIds: string[];
   fileId: string;
   model: string;
+  clientContext: string;
   answers: AnswerDto[];
 }
 
