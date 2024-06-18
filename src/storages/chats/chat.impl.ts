@@ -48,8 +48,16 @@ export class ChatImpl extends Chat implements Disposable {
     return <string>this._content?.fileId
   }
 
+  get workspaceIds(): string[] {
+    return <string[]>this._content?.workspaceIds
+  }
+
   get model(): string {
     return <string>this._content?.model
+  }
+
+  get clientContext(): string {
+    return <string>this._content?.clientContext
   }
 
   get collection(): readonly Answer[] {

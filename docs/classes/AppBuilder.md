@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev59](../../README.md) / [Exports](../modules.md) / AppBuilder
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev60](../../README.md) / [Exports](../modules.md) / AppBuilder
 
 # Class: AppBuilder
 

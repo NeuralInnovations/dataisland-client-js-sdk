@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev59](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev60](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -10,12 +10,14 @@
 
 ### Accessors
 
+- [clientContext](Chat.md#clientcontext)
 - [collection](Chat.md#collection)
 - [fileId](Chat.md#fileid)
 - [id](Chat.md#id)
 - [model](Chat.md#model)
 - [name](Chat.md#name)
 - [organization](Chat.md#organization)
+- [workspaceIds](Chat.md#workspaceids)
 
 ### Methods
 
@@ -33,6 +35,18 @@
 [`Chat`](Chat.md)
 
 ## Accessors
+
+### clientContext
+
+• `get` **clientContext**(): `string`
+
+Added client context.
+
+#### Returns
+
+`string`
+
+___
 
 ### collection
 
@@ -103,6 +117,18 @@ Organization.
 #### Returns
 
 [`Organization`](Organization.md)
+
+___
+
+### workspaceIds
+
+• `get` **workspaceIds**(): `string`[]
+
+Connected workspace ID.
+
+#### Returns
+
+`string`[]
 
 ## Methods
 
