@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev59](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev60](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 
@@ -25,6 +25,7 @@ Chats storage.
 
 - [create](Chats.md#create)
 - [createWithFile](Chats.md#createwithfile)
+- [createWithWorkspace](Chats.md#createwithworkspace)
 - [delete](Chats.md#delete)
 - [dispatch](Chats.md#dispatch)
 - [get](Chats.md#get)
@@ -73,7 +74,7 @@ Organization.
 
 ### create
 
-▸ **create**(`model`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+▸ **create**(`model`, `clientContext`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
 
 Create new chat.
 
@@ -82,6 +83,7 @@ Create new chat.
 | Name | Type |
 | :------ | :------ |
 | `model` | `string` |
+| `clientContext` | `string` |
 
 #### Returns
 
@@ -100,6 +102,25 @@ Create chat with specific file
 | Name | Type |
 | :------ | :------ |
 | `fileId` | `string` |
+
+#### Returns
+
+`Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+
+___
+
+### createWithWorkspace
+
+▸ **createWithWorkspace**(`workspaceId`, `clientContext`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+
+Create chat with specific workspace
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `workspaceId` | `string` |
+| `clientContext` | `string` |
 
 #### Returns
 

@@ -31,9 +31,19 @@ export abstract class Chat {
   abstract get fileId(): string
 
   /**
+   * Connected workspace ID.
+   */
+  abstract get workspaceIds(): string[]
+
+  /**
    * Model.
    */
   abstract get model(): string
+
+  /**
+   * Added client context.
+   */
+  abstract get clientContext(): string
 
   /**
    * Answers list.

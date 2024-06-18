@@ -15,7 +15,7 @@ import { appTest, UnitTest } from "../src/unitTest"
 test("Chat create, ask question, delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
-      const chatPromise = org.chats.create("search")
+      const chatPromise = org.chats.create("search", "Test user")
 
       // check not throw
       await expect(chatPromise).resolves.not.toThrow()
@@ -32,6 +32,7 @@ test("Chat create, ask question, delete", async () => {
       // check get
       expect(org.chats.get(chat!.id)).toBe(chat)
       expect(chat?.model).toBe("search")
+      expect(chat?.clientContext).toBe("Test user")
 
       const question = "Hello!"
 
@@ -116,6 +117,99 @@ test("Chat create with file, ask and delete", async () => {
 
       // check get
       expect(org.chats.get(chat!.id)).toBe(chat)
+
+      const question = "Хто учасники навчального проекту?"
+
+      const askPromise = chat!.ask(question, ChatAnswerType.SHORT)
+
+      // check not throw
+      await expect(askPromise).resolves.not.toThrow()
+
+      const answer = await askPromise
+
+      expect(answer!.id).toBeTruthy()
+      expect(answer!.status).toBe(AnswerStatus.RUNNING)
+      expect(answer!.question).toBe(question)
+
+      let tokens = ""
+      let answer_ready = false
+
+      answer!.subscribe((event) => {
+        if (event.type === AnswerEvent.UPDATED) {
+          expect(event.data).toBeTruthy()
+          expect(event.data.id).not.toBeUndefined()
+          expect(event.data.status).not.toBeUndefined()
+
+          process.stdout.write(event.data.tokens.substring(tokens.length))
+
+          tokens = event.data.tokens
+
+          if (event.data.status !== AnswerStatus.RUNNING) {
+            answer_ready = true
+          }
+        }
+      })
+
+      while (!answer_ready) {
+        await new Promise(f => setTimeout(f, 500))
+      }
+
+      for (const source of answer!.sources) {
+        await expect(source.id).toBe(file.id)
+      }
+
+      // check delete
+      await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
+
+      await ws.files.query("", 0, 20)
+      await ws.files.delete([file.id])
+    })
+  })
+})
+
+test("Chat create with workspace, ask and delete", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    await testInWorkspace(async (app, org, ws) => {
+      const buffer = fs.readFileSync("test/data/test_file.pdf")
+      const file_obj: UploadFile = new File([new Blob([buffer])], "test_file.pdf", {
+        type: "application/pdf"
+      })
+
+      const files = await ws.files.upload([file_obj])
+
+      const file = files[0]
+      let file_loaded = false
+
+      file.subscribe((evt) => {
+        if (evt.data.status !== FileStatus.UPLOADING) {
+          file_loaded = true
+        }
+      }, FilesEvent.UPDATED)
+
+      while (!file_loaded) {
+        await new Promise(f => setTimeout(f, 500))
+      }
+
+      await expect(file.status).toBe(FileStatus.SUCCESS)
+
+      const chatPromise = org.chats.createWithWorkspace(ws.id, "Test user")
+
+      // check not throw
+      await expect(chatPromise).resolves.not.toThrow()
+
+      // get chat
+      const chat = await chatPromise
+
+      // check exists
+      expect(chat).not.toBeUndefined()
+
+      // check exists
+      expect(chat).not.toBeNull()
+
+      // check get
+      expect(org.chats.get(chat!.id)).toBe(chat)
+
+      expect(org.chats.get(chat!.id).workspaceIds[0]).toBe(ws.id)
 
       const question = "Хто учасники навчального проекту?"
 
