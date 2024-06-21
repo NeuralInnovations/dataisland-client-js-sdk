@@ -1,7 +1,7 @@
 import { Chat, ChatAnswerType } from "./chat"
 import { Disposable } from "../../disposable"
 import { Answer, AnswerId } from "./answer"
-import { ChatDto } from "../../dto/chatResponse"
+import {ChatDto} from "../../dto/chatResponse"
 import { Context } from "../../context"
 import { AnswerImpl } from "./answer.impl"
 import { RpcService } from "../../services/rpcService"
@@ -10,7 +10,7 @@ import { Organization } from "../organizations/organization"
 
 export class ChatImpl extends Chat implements Disposable {
   private _isDisposed: boolean = false
-  private readonly _answers: AnswerImpl[] = []
+  private _answers: AnswerImpl[] = []
 
   private _content?: ChatDto
 
@@ -24,6 +24,7 @@ export class ChatImpl extends Chat implements Disposable {
   async initFrom(chat: ChatDto): Promise<ChatImpl> {
     this._content = chat
 
+    this._answers = []
     // init answers
     for (const ans of chat.answers) {
       // create answer implementation
@@ -34,6 +35,27 @@ export class ChatImpl extends Chat implements Disposable {
     }
 
     return this
+  }
+
+  async update(): Promise<void> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Chats")
+      .searchParam("id", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Get chat for id ${this.id} is failed`,
+        response
+      )
+    }
+
+    // parse chat from the server's response
+    const chat = (await response!.json() as { chat: ChatDto }).chat as ChatDto
+
+    await this.initFrom(chat)
   }
 
   get id(): string {
@@ -107,6 +129,8 @@ export class ChatImpl extends Chat implements Disposable {
 
     return answer
   }
+
+
 
   dispose(): void {
     this._isDisposed = true

@@ -100,7 +100,8 @@ test("Files", async () => {
         expect(fileGet.url).not.toBe("")
         expect(fileGet.previewUrl).not.toBe("")
 
-        const metadata: MetadataDto[] = []
+
+        const metadata: MetadataDto[] = fileGet.metadata
         metadata.push(new MetadataDto("type", "test"))
         await fileGet.update(fileGet.name, metadata)
 

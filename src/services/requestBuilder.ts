@@ -111,6 +111,22 @@ export class RequestBuilder {
     )
   }
 
+  public async sendDeleteJson(body: object | null | undefined): Promise<Response> {
+    const url = this._url
+    url.search = this._searchParams.toString()
+    let json: string | undefined = undefined
+    if (body !== undefined && body !== null && typeof body === "object") {
+      json = JSON.stringify(body)
+    }
+    return await this._request(
+      new Request(url, {
+        method: "DELETE",
+        headers: this._headers,
+        body: json
+      })
+    )
+  }
+
   public async sendPutJson(body: object | null | undefined): Promise<Response> {
     const url = this._url
     url.search = this._searchParams.toString()

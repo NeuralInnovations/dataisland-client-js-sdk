@@ -132,9 +132,11 @@ export class AnswerImpl extends Answer {
     if (this.getStep(StepType.DONE) !== undefined) {
       const step = this.getStep(StepType.DONE)
       this._timestamp = Date.parse(step!.end_at)
-    }
 
-    this.fetchAfter()
+      await this.chat.update()
+    } else {
+      this.fetchAfter()
+    }
   }
 
   async cancel(): Promise<void> {

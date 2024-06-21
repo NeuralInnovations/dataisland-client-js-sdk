@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev60](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev61](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -23,6 +23,7 @@
 
 - [ask](Chat.md#ask)
 - [getAnswer](Chat.md#getanswer)
+- [update](Chat.md#update)
 
 ## Constructors
 
@@ -166,3 +167,15 @@ Get answer by id
 #### Returns
 
 [`Answer`](Answer.md)
+
+___
+
+### update
+
+▸ **update**(): `Promise`\<`void`\>
+
+Update chat
+
+#### Returns
+
+`Promise`\<`void`\>
