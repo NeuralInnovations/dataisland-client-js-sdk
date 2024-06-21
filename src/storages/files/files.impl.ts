@@ -37,9 +37,7 @@ export class FilesImpl extends Files {
   }
 
   async delete(ids: string[]): Promise<void> {
-    for (const id of ids) {
-      await this.internalDeleteFile(id)
-    }
+    await this.internalDeleteFiles(ids)
   }
 
   async query(query: string, page: number, limit: number): Promise<FilesPage> {
@@ -83,42 +81,44 @@ export class FilesImpl extends Files {
 
   /**
    * Delete file.
-   * @param id
+   * @param ids array of file ids
    */
-  async internalDeleteFile(id: string): Promise<void> {
-    if (id === undefined || id === null) {
-      throw new Error("File delete, id is undefined or null")
+  async internalDeleteFiles(ids: string[]): Promise<void> {
+    if (ids === undefined || ids === null) {
+      throw new Error("File delete, ids array is undefined or null")
     }
-    if (id.length === 0 || id.trim().length === 0) {
-      throw new Error("File delete, id is empty")
+    if (ids.length === 0) {
+      throw new Error("File delete, array of ids is empty")
     }
 
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("/api/v1/Files")
-      .searchParam("id", id)
-      .sendDelete()
+      .sendDeleteJson(ids)
       
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`File ${id} delete, failed`, response)
-    }
-    const file = <FileImpl>this.filesList!.files.find(f => f.id === id)
-    const index = this.filesList!.files.indexOf(file)
-    if (index < 0) {
-      throw new Error("File delete, index is not found")
+      await ResponseUtils.throwError(`Files ${ids} delete, failed`, response)
     }
 
-    // remove file from collection
-    this.filesList!.files.splice(index, 1)
+    for (const id of ids) {
+      const file = <FileImpl>this.filesList!.files.find(f => f.id === id)
+      const index = this.filesList!.files.indexOf(file)
+      if (index < 0) {
+        throw new Error("File delete, index is not found")
+      }
 
-    // dispatch event, file removed
-    this.dispatch({
-      type: FilesEvent.REMOVED,
-      data: file
-    })
+      // remove file from collection
+      this.filesList!.files.splice(index, 1)
 
-    // dispose file
-    file.dispose()
+      // dispatch event, file removed
+      this.dispatch({
+        type: FilesEvent.REMOVED,
+        data: file
+      })
+
+      // dispose file
+      file.dispose()
+    }
   }
 
   async internalQuery(

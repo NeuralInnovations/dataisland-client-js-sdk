@@ -50,6 +50,9 @@ export class FileImpl extends File implements Disposable {
 
   get metadata(): MetadataDto[] {
     const metadataString = <string>this._content?.fileMetadata
+    if (metadataString === null || metadataString === undefined){
+      return []
+    }
     return <MetadataDto[]>JSON.parse(metadataString)
   }
 
@@ -88,7 +91,7 @@ export class FileImpl extends File implements Disposable {
 
   public fetchAfter() {
     if (this.status === FileStatus.UPLOADING) {
-      setTimeout(async () => await this.updateStatus(), 500)
+      setTimeout(async () => await this.updateStatus(), 2000)
     }
   }
 
