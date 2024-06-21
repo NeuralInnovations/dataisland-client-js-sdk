@@ -57,6 +57,11 @@ export abstract class Chat {
   abstract getAnswer(id: string): Answer
 
   /**
+   * Update chat
+   */
+  abstract update(): Promise<void>
+
+  /**
    * Ask new question in chat.
    */
   abstract ask(message: string, answerType: ChatAnswerType): Promise<Answer | undefined>
