@@ -94,7 +94,9 @@ export class FilesImpl extends Files {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("/api/v1/Files")
-      .sendDeleteJson(ids)
+      .sendDeleteJson({
+        fileIds: ids
+      })
       
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Files ${ids} delete, failed`, response)
