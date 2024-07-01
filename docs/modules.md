@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev62](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev63](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev62
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev63
 
 ## Table of contents
 
@@ -84,6 +84,8 @@
 - [GetOrderStateResponse](interfaces/GetOrderStateResponse.md)
 - [Input](interfaces/Input.md)
 - [InviteCodeResponse](interfaces/InviteCodeResponse.md)
+- [InviteLink](interfaces/InviteLink.md)
+- [InviteResponse](interfaces/InviteResponse.md)
 - [MembersResponse](interfaces/MembersResponse.md)
 - [OrderData](interfaces/OrderData.md)
 - [OrderResponse](interfaces/OrderResponse.md)
@@ -107,12 +109,13 @@
 - [UserAcquiringPlan](interfaces/UserAcquiringPlan.md)
 - [UserDto](interfaces/UserDto.md)
 - [UserInfoResponse](interfaces/UserInfoResponse.md)
+- [UserInviteData](interfaces/UserInviteData.md)
 - [UserLimitData](interfaces/UserLimitData.md)
 - [UserLimitRecordData](interfaces/UserLimitRecordData.md)
 - [UserLimitsData](interfaces/UserLimitsData.md)
 - [UserSettings](interfaces/UserSettings.md)
+- [UserStatisticsData](interfaces/UserStatisticsData.md)
 - [UsersStatisticsResponse](interfaces/UsersStatisticsResponse.md)
-- [UsetStatisticsData](interfaces/UsetStatisticsData.md)
 - [WorkspaceDto](interfaces/WorkspaceDto.md)
 - [WorkspaceProfileDto](interfaces/WorkspaceProfileDto.md)
 - [WorkspacesResponse](interfaces/WorkspacesResponse.md)

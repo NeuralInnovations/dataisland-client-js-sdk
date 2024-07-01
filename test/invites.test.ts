@@ -19,6 +19,13 @@ test("Invites", async () => {
     if (adminGroup) {
       const invite_code = await org.createInviteCode([adminGroup.id])
 
+
+      const user_codes = await firstUserApp.userProfile.getUserInvites()
+      await expect(user_codes.inviteLinks[0].code).toBe(invite_code)
+
+      const org_codes = await org.getOrganizationInvites()
+      await expect(org_codes.inviteLinks[0].code).toBe(invite_code)
+
       // Create second user app
       const secondUserApp = await dataIslandApp(`${randomName}_Second`, async builder => {
         builder.useHost(HOST)
@@ -41,6 +48,9 @@ test("Invites", async () => {
 
       // Check if new org is present on orgranizations list
       await expect(secondUserApp.organizations.collection.find(invitedOrg => invitedOrg.id == org.id)).not.toBeUndefined()
+
+      await expect(org.deleteInviteCode(invite_code)).resolves.not.toThrow()
+
     } else {
       throw new Error(`Admin group is not found for ${org.id}`)
     }

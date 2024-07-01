@@ -4,6 +4,7 @@ import { Context } from "../../context"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { UserProfileService } from "../../services/userProfileService"
+import {InviteResponse} from "../../dto/invitesResponse"
 
 export class UserProfileImpl extends UserProfile {
   private content?: UserInfoResponse
@@ -122,6 +123,22 @@ export class UserProfileImpl extends UserProfile {
       type: UserEvent.CHANGED,
       data: this
     })
+  }
+
+  async getUserInvites(): Promise<InviteResponse>{
+    // get invites
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/Invites/link/user")
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to get invites for current user", response)
+    }
+
+    const json = await response!.json()
+
+    return json as InviteResponse
   }
 
   async deleteUser(): Promise<boolean>{

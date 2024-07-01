@@ -26,9 +26,9 @@ import {
   SegmentData,
   SegmentsData
 } from "../../dto/limitsResponse"
-import {InviteCodeResponse} from "../../dto/accessGroupResponse"
 import {FileId} from "../files/file"
 import {QuizData} from "../../dto/quizResponse"
+import {InviteCodeResponse, InviteResponse} from "../../dto/invitesResponse"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -341,13 +341,22 @@ export class OrganizationImpl extends Organization implements Disposable {
     }
   }
 
-  async createInviteCode(accessGroups: string[]): Promise<string> {
+  async createInviteCode(accessGroups: string[], validateDomain?: string ): Promise<string> {
+
+    let validateObj = null
+    if (validateDomain !== null && validateDomain !== undefined){
+      validateObj = {
+        domain: validateDomain
+      }
+    }
+
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Invites/link")
       .sendPostJson({
         organizationId: this.id,
-        accessGroupIds: accessGroups
+        accessGroupIds: accessGroups,
+        validation: validateObj
       })
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
@@ -361,6 +370,43 @@ export class OrganizationImpl extends Organization implements Disposable {
     const code = (json as InviteCodeResponse).code
 
     return code
+  }
+
+  async deleteInviteCode(code: string): Promise<void>{
+    if (code === undefined || code === null || code.trim() === "") {
+      throw new Error("Invite code is required. Please provide a valid code.")
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Invites/link")
+      .searchParam("code", code)
+      .sendDelete()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed to delete invite for code: ${code}`,
+        response
+      )
+    }
+  }
+
+  async getOrganizationInvites(): Promise<InviteResponse>{
+    // get invites
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/Invites/link/organization")
+      .searchParam("organizationId", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get invites in organization: ${this.id}`, response)
+    }
+
+    const json = await response!.json()
+
+    return json as InviteResponse
   }
 
   async createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, optionsCount: number, fileId: FileId): Promise<QuizData> {
