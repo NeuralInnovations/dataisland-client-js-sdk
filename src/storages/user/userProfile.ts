@@ -1,4 +1,5 @@
 import { EventDispatcher } from "../../events"
+import {InviteResponse} from "../../dto/invitesResponse"
 
 export type UserId = string
 
@@ -67,6 +68,11 @@ export abstract class UserProfile extends EventDispatcher<
    * @param newEducationalInstitution
    */
   abstract updateUser(newName: string, newId: string, newEducationalInstitution: string): Promise<void>
+
+  /**
+   *  Get all invite links for user
+   */
+  abstract getUserInvites(): Promise<InviteResponse>
 
   /**
    * Delete User

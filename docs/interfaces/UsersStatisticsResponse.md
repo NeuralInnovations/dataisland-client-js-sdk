@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev62](../../README.md) / [Exports](../modules.md) / UsersStatisticsResponse
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev63](../../README.md) / [Exports](../modules.md) / UsersStatisticsResponse
 
 # Interface: UsersStatisticsResponse
 
@@ -26,4 +26,4 @@ ___
 
 ### membersData
 
-• **membersData**: [`UsetStatisticsData`](UsetStatisticsData.md)[]
+• **membersData**: [`UserStatisticsData`](UserStatisticsData.md)[]

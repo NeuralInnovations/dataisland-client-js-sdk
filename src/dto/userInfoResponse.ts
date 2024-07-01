@@ -61,12 +61,12 @@ export interface ApplyInviteCodeResponse {
 export interface UsersStatisticsResponse {
   dateFrom: number
   dateTo: number
-  membersData: UsetStatisticsData[]
+  membersData: UserStatisticsData[]
 }
 
-export interface UsetStatisticsData {
-    userId: UserId
-    data: StatisticsData[]
+export interface UserStatisticsData {
+  userId: UserId
+  data: StatisticsData[]
 }
 
 export interface OrganizationSegmentData {

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev62](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev63](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -30,7 +30,9 @@ Organization.
 - [change](Organization.md#change)
 - [createInviteCode](Organization.md#createinvitecode)
 - [createQuiz](Organization.md#createquiz)
+- [deleteInviteCode](Organization.md#deleteinvitecode)
 - [dispatch](Organization.md#dispatch)
+- [getOrganizationInvites](Organization.md#getorganizationinvites)
 - [inviteUsers](Organization.md#inviteusers)
 - [limitSegments](Organization.md#limitsegments)
 - [members](Organization.md#members)
@@ -150,7 +152,7 @@ ___
 
 ### createInviteCode
 
-▸ **createInviteCode**(`accessGroups`): `Promise`\<`string`\>
+▸ **createInviteCode**(`accessGroups`, `validateDomain?`): `Promise`\<`string`\>
 
 Create invite code for users outside organization
 
@@ -159,6 +161,7 @@ Create invite code for users outside organization
 | Name | Type |
 | :------ | :------ |
 | `accessGroups` | `string`[] |
+| `validateDomain?` | `string` |
 
 #### Returns
 
@@ -188,6 +191,24 @@ Create quiz for given topic
 
 ___
 
+### deleteInviteCode
+
+▸ **deleteInviteCode**(`code`): `Promise`\<`void`\>
+
+Delete invite code
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `code` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
+
 ### dispatch
 
 ▸ **dispatch**(`input`): `void`
@@ -205,6 +226,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### getOrganizationInvites
+
+▸ **getOrganizationInvites**(): `Promise`\<[`InviteResponse`](../interfaces/InviteResponse.md)\>
+
+Get all invite links for organization
+
+#### Returns
+
+`Promise`\<[`InviteResponse`](../interfaces/InviteResponse.md)\>
 
 ___
 

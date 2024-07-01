@@ -30,9 +30,7 @@ export interface AccessGroupsResponse {
   groups: AccessGroupDto[];
 }
 
-export interface InviteCodeResponse {
-  code: string
-}
+
 
 
 
