@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev62](../../README.md) / [Exports](../modules.md) / UserProfile
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev63](../../README.md) / [Exports](../modules.md) / UserProfile
 
 # Class: UserProfile
 
@@ -31,6 +31,7 @@
 - [deleteUser](UserProfile.md#deleteuser)
 - [dispatch](UserProfile.md#dispatch)
 - [fetch](UserProfile.md#fetch)
+- [getUserInvites](UserProfile.md#getuserinvites)
 - [subscribe](UserProfile.md#subscribe)
 - [updateUser](UserProfile.md#updateuser)
 
@@ -199,6 +200,18 @@ Fetch user profile
 #### Returns
 
 `Promise`\<`void`\>
+
+___
+
+### getUserInvites
+
+▸ **getUserInvites**(): `Promise`\<[`InviteResponse`](../interfaces/InviteResponse.md)\>
+
+Get all invite links for user
+
+#### Returns
+
+`Promise`\<[`InviteResponse`](../interfaces/InviteResponse.md)\>
 
 ___
 

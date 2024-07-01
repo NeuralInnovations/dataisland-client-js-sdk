@@ -13,6 +13,7 @@ import { StatisticsResponse } from "../../dto/statisticsResponse"
 import { SegmentData } from "../../dto/limitsResponse"
 import {FileId} from "../files/file"
 import {QuizData} from "../../dto/quizResponse"
+import {InviteResponse} from "../../dto/invitesResponse"
 
 /**
  * Organization event.
@@ -113,7 +114,17 @@ export abstract class Organization extends EventDispatcher<
   /**
    * Create invite code for users outside organization
    */
-  abstract createInviteCode(accessGroups: GroupId[]): Promise<string>
+  abstract createInviteCode(accessGroups: GroupId[], validateDomain?: string): Promise<string>
+
+  /**
+   * Delete invite code
+   */
+  abstract deleteInviteCode(code: string): Promise<void>
+
+  /**
+   *  Get all invite links for organization
+   */
+  abstract getOrganizationInvites(): Promise<InviteResponse>
 
   /**
    * Create quiz for given topic
