@@ -75,12 +75,26 @@ test("Organization", async () => {
 
     expect(org.description.trim()).toBe(test_description)
 
-    expect(org.statistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
-    expect(org.membersStatistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
+    await expect(org.statistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
+    await expect(org.membersStatistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
 
-    expect(org.organizationLimits()).resolves.not.toThrow()
-    expect(org.limitSegments()).resolves.not.toThrow()
-    expect(org.userLimits()).resolves.not.toThrow()
+    await expect(org.organizationLimits()).resolves.not.toThrow()
+    await expect(org.limitSegments()).resolves.not.toThrow()
+    await expect(org.userLimits()).resolves.not.toThrow()
+
+    const apiKey = await org.createApiKey("testKey")
+    expect(apiKey).not.toBeNull()
+    expect(apiKey).not.toBeUndefined()
+
+    let keys = await org.getApiKeys()
+
+    expect(keys[0].apiKey).toBe(apiKey)
+
+    await org.deleteApiKey(apiKey)
+
+    keys = await org.getApiKeys()
+
+    expect(keys.length).toBe(0)
 
     // delete organization
     await expect(app.organizations.delete(org.id)).resolves.not.toThrow()

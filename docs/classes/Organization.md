@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev63](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev64](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -28,10 +28,13 @@ Organization.
 ### Methods
 
 - [change](Organization.md#change)
+- [createApiKey](Organization.md#createapikey)
 - [createInviteCode](Organization.md#createinvitecode)
 - [createQuiz](Organization.md#createquiz)
+- [deleteApiKey](Organization.md#deleteapikey)
 - [deleteInviteCode](Organization.md#deleteinvitecode)
 - [dispatch](Organization.md#dispatch)
+- [getApiKeys](Organization.md#getapikeys)
 - [getOrganizationInvites](Organization.md#getorganizationinvites)
 - [inviteUsers](Organization.md#inviteusers)
 - [limitSegments](Organization.md#limitsegments)
@@ -150,6 +153,24 @@ Change organization name and description.
 
 ___
 
+### createApiKey
+
+▸ **createApiKey**(`name`): `Promise`\<`string`\>
+
+Create new Api key for organization
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+
+#### Returns
+
+`Promise`\<`string`\>
+
+___
+
 ### createInviteCode
 
 ▸ **createInviteCode**(`accessGroups`, `validateDomain?`): `Promise`\<`string`\>
@@ -191,6 +212,24 @@ Create quiz for given topic
 
 ___
 
+### deleteApiKey
+
+▸ **deleteApiKey**(`key`): `Promise`\<`void`\>
+
+Delete api key
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `key` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
+
 ### deleteInviteCode
 
 ▸ **deleteInviteCode**(`code`): `Promise`\<`void`\>
@@ -226,6 +265,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### getApiKeys
+
+▸ **getApiKeys**(): `Promise`\<[`OrganizationApiKey`](../interfaces/OrganizationApiKey.md)[]\>
+
+Get all organization api keys
+
+#### Returns
+
+`Promise`\<[`OrganizationApiKey`](../interfaces/OrganizationApiKey.md)[]\>
 
 ___
 
