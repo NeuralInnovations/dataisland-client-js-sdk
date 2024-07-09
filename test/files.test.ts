@@ -16,7 +16,8 @@ test("Files", async () => {
         type: "application/pdf"
       })
 
-      const file_obj_second: UploadFile = new File([new Uint8Array(buffer)], "test_file2.pdf", {
+      const buffer2 = fs.readFileSync("test/data/test_file2.pdf")
+      const file_obj_second: UploadFile = new File([new Uint8Array(buffer2)], "test_file2.pdf", {
         type: "application/pdf"
       })
 
