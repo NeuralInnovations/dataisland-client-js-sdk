@@ -14,6 +14,7 @@ import { SegmentData } from "../../dto/limitsResponse"
 import {FileId} from "../files/file"
 import {QuizData} from "../../dto/quizResponse"
 import {InviteResponse} from "../../dto/invitesResponse"
+import { OrganizationApiKey } from "../../dto/apiKeyResponse"
 
 /**
  * Organization event.
@@ -125,6 +126,22 @@ export abstract class Organization extends EventDispatcher<
    *  Get all invite links for organization
    */
   abstract getOrganizationInvites(): Promise<InviteResponse>
+
+  /**
+   * Create new Api key for organization
+   * @param name
+   */
+  abstract createApiKey(name: string): Promise<string>
+
+  /**
+   * Get all organization api keys
+   */
+  abstract getApiKeys(): Promise<OrganizationApiKey[]>
+
+  /**
+   * Delete api key
+   */
+  abstract deleteApiKey(key: string): Promise<void>
 
   /**
    * Create quiz for given topic
