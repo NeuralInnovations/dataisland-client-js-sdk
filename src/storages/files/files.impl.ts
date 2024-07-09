@@ -93,7 +93,7 @@ export class FilesImpl extends Files {
 
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("/api/v1/Files")
+      ?.requestBuilder("api/v1/Files")
       .sendDeleteJson({
         fileIds: ids
       })

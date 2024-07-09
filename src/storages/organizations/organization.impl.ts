@@ -29,6 +29,11 @@ import {
 import {FileId} from "../files/file"
 import {QuizData} from "../../dto/quizResponse"
 import {InviteCodeResponse, InviteResponse} from "../../dto/invitesResponse"
+import {
+  ApiKeyResponse,
+  OrganizationApiKey,
+  OrganizationKeysResponse
+} from "../../dto/apiKeyResponse"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -407,6 +412,69 @@ export class OrganizationImpl extends Organization implements Disposable {
     const json = await response!.json()
 
     return json as InviteResponse
+  }
+
+  async createApiKey(name: string): Promise<string>{
+    if (name === null || name === undefined || name.trim() === "") {
+      throw new Error("Name is required. Please provide a valid name.")
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Keys/organization/exist")
+      .sendPostJson({
+        organizationId: this.id,
+        keyName: name
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `API key creation failed for organization ${this.id}`,
+        response
+      )
+    }
+
+    const json = await response!.json()
+
+    const key = (json as ApiKeyResponse).apiKey
+
+    return key
+  }
+
+  async getApiKeys(): Promise<OrganizationApiKey[]> {
+    // get invites
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/Keys/organization")
+      .searchParam("organizationId", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get api keys fot organization: ${this.id}`, response)
+    }
+
+    const json = await response!.json()
+
+    const keys = (json as OrganizationKeysResponse).keys
+
+    return keys
+  }
+
+  async deleteApiKey(key: string): Promise<void>{
+    if (key === null || key === undefined || key.trim() === "") {
+      throw new Error("Key is required. Please provide a valid key.")
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Keys/organization")
+      .sendDeleteJson({
+        apiKey: key
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Api key delete error", response)
+    }
   }
 
   async createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, optionsCount: number, fileId: FileId): Promise<QuizData> {
