@@ -82,13 +82,15 @@ test("Organization", async () => {
     await expect(org.limitSegments()).resolves.not.toThrow()
     await expect(org.userLimits()).resolves.not.toThrow()
 
-    const apiKey = await org.createApiKey("testKey")
+    const accesGroupId = org.accessGroups.collection[0].id
+    const apiKey = await org.createApiKey("testKey", [accesGroupId])
     expect(apiKey).not.toBeNull()
     expect(apiKey).not.toBeUndefined()
 
     let keys = await org.getApiKeys()
 
     expect(keys[0].apiKey).toBe(apiKey)
+    expect(keys[0].accessGroupIds[0]).toBe(accesGroupId)
 
     await org.deleteApiKey(apiKey)
 

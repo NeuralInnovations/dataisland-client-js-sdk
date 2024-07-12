@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev64](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev65](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -155,7 +155,7 @@ ___
 
 ### createApiKey
 
-▸ **createApiKey**(`name`): `Promise`\<`string`\>
+▸ **createApiKey**(`name`, `accessGroups`): `Promise`\<`string`\>
 
 Create new Api key for organization
 
@@ -164,6 +164,7 @@ Create new Api key for organization
 | Name | Type |
 | :------ | :------ |
 | `name` | `string` |
+| `accessGroups` | `string`[] |
 
 #### Returns
 
