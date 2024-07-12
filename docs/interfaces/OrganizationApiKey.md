@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev64](../../README.md) / [Exports](../modules.md) / OrganizationApiKey
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev65](../../README.md) / [Exports](../modules.md) / OrganizationApiKey
 
 # Interface: OrganizationApiKey
 
@@ -6,6 +6,7 @@
 
 ### Properties
 
+- [accessGroupIds](OrganizationApiKey.md#accessgroupids)
 - [apiKey](OrganizationApiKey.md#apikey)
 - [createdAt](OrganizationApiKey.md#createdat)
 - [keyName](OrganizationApiKey.md#keyname)
@@ -13,6 +14,12 @@
 - [tokensCreated](OrganizationApiKey.md#tokenscreated)
 
 ## Properties
+
+### accessGroupIds
+
+• **accessGroupIds**: `string`[]
+
+___
 
 ### apiKey
 

@@ -414,7 +414,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return json as InviteResponse
   }
 
-  async createApiKey(name: string): Promise<string>{
+  async createApiKey(name: string, accessGroups: string[]): Promise<string>{
     if (name === null || name === undefined || name.trim() === "") {
       throw new Error("Name is required. Please provide a valid name.")
     }
@@ -424,6 +424,7 @@ export class OrganizationImpl extends Organization implements Disposable {
       ?.requestBuilder("api/v1/Keys/organization/exist")
       .sendPostJson({
         organizationId: this.id,
+        accessGroupIds: accessGroups,
         keyName: name
       })
 
