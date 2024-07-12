@@ -130,8 +130,9 @@ export abstract class Organization extends EventDispatcher<
   /**
    * Create new Api key for organization
    * @param name
+   * @param accessGroups
    */
-  abstract createApiKey(name: string): Promise<string>
+  abstract createApiKey(name: string, accessGroups: string[]): Promise<string>
 
   /**
    * Get all organization api keys
