@@ -105,3 +105,27 @@ export class AnonymousCredential extends CredentialBase {
     )
   }
 }
+
+export class CustomCredential extends CredentialBase {
+  readonly schema: string
+  readonly token: string
+
+  constructor(schema: string, token: string) {
+    super()
+    this.token = token
+    this.schema = schema
+  }
+
+  onRegister(lifetime: Lifetime, context: Context): void {
+    const service = context.resolve(MiddlewareService)
+    if (service === undefined) {
+      throw new Error("MiddlewareService is not registered.")
+    }
+    lifetime.add(
+      service.useMiddleware(async (req, next) => {
+        req.headers.set("Authorization", `${this.schema} ${this.token}`)
+        return await next(req)
+      })
+    )
+  }
+}

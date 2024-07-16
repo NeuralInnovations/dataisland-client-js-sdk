@@ -6,7 +6,8 @@ import {
   DisposableContainer,
   Context,
   DebugCredential,
-  BearerCredential
+  BearerCredential,
+  CustomCredential
 } from "../src"
 import { Registry } from "../src/internal/registry"
 import { CredentialService } from "../src/services/credentialService"
@@ -49,6 +50,12 @@ test("CredentialService", async () => {
     const bearerCredential = new BearerCredential(token)
     expect(bearerCredential.token).toBe(token)
     expect(() => bearerCredential.onRegister(lifetime, context)).toThrow(
+      "MiddlewareService is not registered."
+    )
+
+    const customCredential = new CustomCredential("InternalJWT", token)
+    expect(customCredential.token).toBe(token)
+    expect(() => customCredential.onRegister(lifetime, context)).toThrow(
       "MiddlewareService is not registered."
     )
 
