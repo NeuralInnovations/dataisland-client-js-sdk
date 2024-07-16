@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev65](../../README.md) / [Exports](../modules.md) / RegulationDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../../README.md) / [Exports](../modules.md) / RegulationDto
 
 # Interface: RegulationDto
 

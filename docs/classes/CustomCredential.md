@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../../README.md) / [Exports](../modules.md) / BasicCredential
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../../README.md) / [Exports](../modules.md) / CustomCredential
 
-# Class: BasicCredential
+# Class: CustomCredential
 
 DataIsland App credential.
 
@@ -8,39 +8,39 @@ DataIsland App credential.
 
 - [`CredentialBase`](CredentialBase.md)
 
-  ↳ **`BasicCredential`**
+  ↳ **`CustomCredential`**
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](BasicCredential.md#constructor)
+- [constructor](CustomCredential.md#constructor)
 
 ### Properties
 
-- [email](BasicCredential.md#email)
-- [password](BasicCredential.md#password)
+- [schema](CustomCredential.md#schema)
+- [token](CustomCredential.md#token)
 
 ### Methods
 
-- [onRegister](BasicCredential.md#onregister)
+- [onRegister](CustomCredential.md#onregister)
 
 ## Constructors
 
 ### constructor
 
-• **new BasicCredential**(`email`, `password`): [`BasicCredential`](BasicCredential.md)
+• **new CustomCredential**(`schema`, `token`): [`CustomCredential`](CustomCredential.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `email` | `string` |
-| `password` | `string` |
+| `schema` | `string` |
+| `token` | `string` |
 
 #### Returns
 
-[`BasicCredential`](BasicCredential.md)
+[`CustomCredential`](CustomCredential.md)
 
 #### Overrides
 
@@ -48,15 +48,15 @@ DataIsland App credential.
 
 ## Properties
 
-### email
+### schema
 
-• `Readonly` **email**: `string`
+• `Readonly` **schema**: `string`
 
 ___
 
-### password
+### token
 
-• `Readonly` **password**: `string`
+• `Readonly` **token**: `string`
 
 ## Methods
 

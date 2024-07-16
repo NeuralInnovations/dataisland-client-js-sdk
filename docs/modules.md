@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev65](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev65
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev66
 
 ## Table of contents
 
@@ -35,6 +35,7 @@
 - [Chats](classes/Chats.md)
 - [Context](classes/Context.md)
 - [CredentialBase](classes/CredentialBase.md)
+- [CustomCredential](classes/CustomCredential.md)
 - [DataIslandApp](classes/DataIslandApp.md)
 - [DebugCredential](classes/DebugCredential.md)
 - [DefaultCredential](classes/DefaultCredential.md)

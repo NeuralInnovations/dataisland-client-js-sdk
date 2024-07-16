@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev65](../../README.md) / [Exports](../modules.md) / CredentialBase
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../../README.md) / [Exports](../modules.md) / CredentialBase
 
 # Class: CredentialBase
 
@@ -17,6 +17,8 @@ DataIsland App credential.
   ↳ [`BearerCredential`](BearerCredential.md)
 
   ↳ [`AnonymousCredential`](AnonymousCredential.md)
+
+  ↳ [`CustomCredential`](CustomCredential.md)
 
 ## Table of contents
 
