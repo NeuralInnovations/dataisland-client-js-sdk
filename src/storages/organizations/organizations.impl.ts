@@ -10,6 +10,8 @@ import { Context } from "../../context"
 import { Organization } from "./organization"
 import { ResponseUtils } from "../../services/responseUtils"
 import { UserProfileService } from "../../services/userProfileService"
+import {UploadFile} from "../files/files"
+import {IconDto, IconResponse, ResourceType} from "../../dto/workspacesResponse"
 
 export class OrganizationsImpl extends Organizations {
   constructor(public readonly context: Context) {
@@ -229,5 +231,88 @@ export class OrganizationsImpl extends Organizations {
       // add organization to collection
       this.organizations.push(org)
     }
+  }
+
+
+  async uploadIconGlobal(organizationId: string, resourceId: string, resourceType: ResourceType, icon: UploadFile): Promise<string> {
+
+    // check icon file
+    if (icon === undefined || icon === null) {
+      throw new Error("Organization icon upload, file is undefined or null")
+    }
+
+    const resourceTypeInt: number = resourceType
+
+    // form data to send
+    const form = new FormData()
+    form.append("OrganizationId", organizationId)
+    form.append("ResourceId", resourceId)
+    form.append("ResourceType", resourceTypeInt.toString())
+    form.append("FileName", icon.name)
+    form.append("File", icon, icon.name)
+
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Files/icon")
+      .sendPutFormData(form)
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Organization icon upload ${icon.name}`, response)
+    }
+
+    const iconResponse = await response!.json() as IconResponse
+
+    return iconResponse.iconId
+  }
+
+  async getIconData(id: string): Promise<IconDto> {
+    if (id === null || id === undefined || id.trim() === ""){
+      throw new Error("Icon id is null or empty")
+    }
+
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Files/icon")
+      .searchParam("iconId", id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during get of icon ${id}`,
+        response
+      )
+    }
+
+    return await response!.json() as IconDto
+  }
+
+  async getNewestIcon(resourceId: string, resourceType: ResourceType): Promise<IconDto>{
+    if (resourceId === null || resourceId === undefined || resourceId.trim() === ""){
+      throw new Error("Resource id is null or empty")
+    }
+
+    const resourceTypeInt: number = resourceType
+
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Files/icon/newest")
+      .searchParam("resourceId", resourceId)
+      .searchParam("resourceType", resourceTypeInt.toString())
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during get of icon for ${resourceId} ${resourceType.toString()}`,
+        response
+      )
+    }
+
+    return await response!.json() as IconDto
   }
 }
