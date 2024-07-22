@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev67](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
@@ -28,8 +28,11 @@ Organizations storage.
 - [delete](Organizations.md#delete)
 - [dispatch](Organizations.md#dispatch)
 - [get](Organizations.md#get)
+- [getIconData](Organizations.md#geticondata)
+- [getNewestIcon](Organizations.md#getnewesticon)
 - [subscribe](Organizations.md#subscribe)
 - [tryGet](Organizations.md#tryget)
+- [uploadIconGlobal](Organizations.md#uploadiconglobal)
 
 ## Constructors
 
@@ -176,6 +179,43 @@ Get organization by id.
 
 ___
 
+### getIconData
+
+▸ **getIconData**(`id`): `Promise`\<[`IconDto`](../interfaces/IconDto.md)\>
+
+Get icon url and name for given id
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+
+#### Returns
+
+`Promise`\<[`IconDto`](../interfaces/IconDto.md)\>
+
+___
+
+### getNewestIcon
+
+▸ **getNewestIcon**(`resourceId`, `resourceType`): `Promise`\<[`IconDto`](../interfaces/IconDto.md)\>
+
+Get latest icon for provided resource
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `resourceId` | `string` |
+| `resourceType` | [`ResourceType`](../enums/ResourceType.md) |
+
+#### Returns
+
+`Promise`\<[`IconDto`](../interfaces/IconDto.md)\>
+
+___
+
 ### subscribe
 
 ▸ **subscribe**(`callback`, `type?`): [`Disposable`](../interfaces/Disposable.md)
@@ -212,3 +252,24 @@ Try to get organization by id.
 #### Returns
 
 `undefined` \| [`Organization`](Organization.md)
+
+___
+
+### uploadIconGlobal
+
+▸ **uploadIconGlobal**(`organizationId`, `resourceId`, `resourceType`, `icon`): `Promise`\<`string`\>
+
+Upload icon for any available resource ( organization, user, workspace, chat )
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `organizationId` | `string` |
+| `resourceId` | `string` |
+| `resourceType` | [`ResourceType`](../enums/ResourceType.md) |
+| `icon` | `File` |
+
+#### Returns
+
+`Promise`\<`string`\>

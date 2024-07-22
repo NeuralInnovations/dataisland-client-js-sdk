@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev67](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev66
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev67
 
 ## Table of contents
 
@@ -18,6 +18,7 @@
 - [OrderState](enums/OrderState.md)
 - [OrganizationEvent](enums/OrganizationEvent.md)
 - [OrganizationsEvent](enums/OrganizationsEvent.md)
+- [ResourceType](enums/ResourceType.md)
 - [StepStatus](enums/StepStatus.md)
 - [StepType](enums/StepType.md)
 - [UserEvent](enums/UserEvent.md)
@@ -84,6 +85,8 @@
 - [FileProgressDto](interfaces/FileProgressDto.md)
 - [FileUrlDto](interfaces/FileUrlDto.md)
 - [GetOrderStateResponse](interfaces/GetOrderStateResponse.md)
+- [IconDto](interfaces/IconDto.md)
+- [IconResponse](interfaces/IconResponse.md)
 - [Input](interfaces/Input.md)
 - [InviteCodeResponse](interfaces/InviteCodeResponse.md)
 - [InviteLink](interfaces/InviteLink.md)
