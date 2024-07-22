@@ -15,6 +15,7 @@ import {FileId} from "../files/file"
 import {QuizData} from "../../dto/quizResponse"
 import {InviteResponse} from "../../dto/invitesResponse"
 import { OrganizationApiKey } from "../../dto/apiKeyResponse"
+import {UploadFile} from "../files/files"
 
 /**
  * Organization event.
@@ -106,6 +107,12 @@ export abstract class Organization extends EventDispatcher<
    * Change organization name and description.
    */
   abstract change(name: string, description: string): Promise<void>
+
+  /**
+   * Upload an icon for organization
+   * @param icon
+   */
+  abstract uploadIcon(icon: UploadFile): Promise<string>
 
   /**
    * Invite users with given emails to organization

@@ -142,4 +142,26 @@ export class RequestBuilder {
       })
     )
   }
+
+  public async sendPutFormData(body: FormData): Promise<Response> {
+    const url = this._url
+
+    // set search params
+    url.search = this._searchParams.toString()
+
+    // create request
+    const req = new Request(url, {
+      method: "PUT",
+      headers: this._headers,
+      body: body
+    })
+
+    // discard content type
+    const reqAny = req as any
+    reqAny.discardContentType = true
+
+    return await this._request(
+      req
+    )
+  }
 }

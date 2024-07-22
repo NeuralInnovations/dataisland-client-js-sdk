@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev66](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev67](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -43,6 +43,7 @@ Organization.
 - [organizationLimits](Organization.md#organizationlimits)
 - [statistics](Organization.md#statistics)
 - [subscribe](Organization.md#subscribe)
+- [uploadIcon](Organization.md#uploadicon)
 - [userLimits](Organization.md#userlimits)
 - [userStatistic](Organization.md#userstatistic)
 
@@ -404,6 +405,24 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[subscribe](EventDispatcher.md#subscribe)
+
+___
+
+### uploadIcon
+
+▸ **uploadIcon**(`icon`): `Promise`\<`string`\>
+
+Upload an icon for organization
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `icon` | `File` |
+
+#### Returns
+
+`Promise`\<`string`\>
 
 ___
 

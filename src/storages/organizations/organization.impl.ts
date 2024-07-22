@@ -34,6 +34,8 @@ import {
   OrganizationApiKey,
   OrganizationKeysResponse
 } from "../../dto/apiKeyResponse"
+import {IconResponse} from "../../dto/workspacesResponse"
+import {UploadFile} from "../files/files"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -171,6 +173,34 @@ export class OrganizationImpl extends Organization implements Disposable {
       type: OrganizationEvent.CHANGED,
       data: this
     })
+  }
+
+  async uploadIcon(icon: UploadFile): Promise<string> {
+    // check icon file
+    if (icon === undefined || icon === null) {
+      throw new Error("Organization icon upload, file is undefined or null")
+    }
+
+    // form data to send
+    const form = new FormData()
+    form.append("OrganizationId", this.id)
+    form.append("FileName", icon.name)
+    form.append("File", icon, icon.name)
+
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Organizations/icon")
+      .sendPutFormData(form)
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Organization icon upload ${icon.name}`, response)
+    }
+
+    const iconResponse = await response!.json() as IconResponse
+
+    return iconResponse.iconId
   }
 
   async statistics(dateFrom: number, dateTo: number): Promise<StatisticsResponse> {

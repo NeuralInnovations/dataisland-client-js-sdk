@@ -61,3 +61,24 @@ export interface FileListResponse {
   totalFilesCount: number
   filesPerPage: number
 }
+
+export interface IconResponse {
+  iconId: string
+}
+
+export interface IconDto {
+  iconId: string,
+  iconUrl: string,
+  iconName: string
+}
+
+export enum ResourceType {
+  None = 0,
+  Organization = 1,
+  Workspace = 2,
+  Chat = 3,
+  Group = 4,
+  User = 5,
+  File = 6
+}
+

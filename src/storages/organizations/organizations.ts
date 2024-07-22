@@ -1,6 +1,8 @@
 import { ApplyInviteCodeResponse } from "../../dto/userInfoResponse"
 import { EventDispatcher } from "../../events"
 import { Organization } from "./organization"
+import {IconDto, ResourceType} from "../../dto/workspacesResponse"
+import {UploadFile} from "../files/files"
 
 /**
  * Organization id.
@@ -59,4 +61,27 @@ export abstract class Organizations extends EventDispatcher<
    * Apply invite code for user
    */
   abstract applyInviteCode(code: string): Promise<ApplyInviteCodeResponse>
+
+  /**
+   * Upload icon for any available resource ( organization, user, workspace, chat )
+   * @param organizationId
+   * @param resourceId
+   * @param resourceType
+   * @param icon
+   */
+  abstract uploadIconGlobal(organizationId: string, resourceId: string, resourceType: ResourceType, icon: UploadFile): Promise<string>
+
+  /**
+   * Get icon url and name for given id
+   * @param id
+   */
+  abstract getIconData(id: string): Promise<IconDto>
+
+  /**
+   * Get latest icon for provided resource
+   * @param resourceId
+   * @param resourceType
+   */
+  abstract getNewestIcon(resourceId: string, resourceType: ResourceType): Promise<IconDto>
+
 }
