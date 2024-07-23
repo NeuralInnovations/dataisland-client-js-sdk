@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev67](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev68](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
@@ -26,6 +26,7 @@ Organizations storage.
 - [applyInviteCode](Organizations.md#applyinvitecode)
 - [create](Organizations.md#create)
 - [delete](Organizations.md#delete)
+- [deleteIcon](Organizations.md#deleteicon)
 - [dispatch](Organizations.md#dispatch)
 - [get](Organizations.md#get)
 - [getIconData](Organizations.md#geticondata)
@@ -128,6 +129,24 @@ ___
 ▸ **delete**(`id`): `Promise`\<`void`\>
 
 Delete organization.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
+
+### deleteIcon
+
+▸ **deleteIcon**(`id`): `Promise`\<`void`\>
+
+Delete icon by ID
 
 #### Parameters
 

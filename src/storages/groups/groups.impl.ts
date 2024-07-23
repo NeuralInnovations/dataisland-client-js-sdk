@@ -149,7 +149,7 @@ export class GroupsImpl extends Groups {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("/api/v1/AccessGroups")
+      ?.requestBuilder("api/v1/AccessGroups")
       .searchParam("groupId", id)
       .sendDelete()
 
