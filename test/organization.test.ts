@@ -91,6 +91,8 @@ test("Organization", async () => {
     expect(iconDataDirect.iconId).toBe(iconDataNewest.iconId)
     expect(iconDataDirect.iconUrl).toBe(iconDataNewest.iconUrl)
 
+    await expect(app.organizations.deleteIcon(iconId)).resolves.not.toThrow()
+
     expect(org.description.trim()).toBe(test_description)
 
     await expect(org.statistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
@@ -108,7 +110,7 @@ test("Organization", async () => {
     let keys = await org.getApiKeys()
 
     expect(keys[0].apiKey).toBe(apiKey)
-    //expect(keys[0].accessGroupIds[0]).toBe(accessGroupId)
+    expect(keys[0].accessGroupIds[0]).toBe(accessGroupId)
 
     await org.deleteApiKey(apiKey)
 
