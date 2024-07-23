@@ -84,4 +84,10 @@ export abstract class Organizations extends EventDispatcher<
    */
   abstract getNewestIcon(resourceId: string, resourceType: ResourceType): Promise<IconDto>
 
+  /**
+   * Delete icon by ID
+   * @param id
+   */
+  abstract deleteIcon(id: string): Promise<void>
+
 }

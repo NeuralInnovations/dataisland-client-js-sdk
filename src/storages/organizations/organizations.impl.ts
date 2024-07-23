@@ -315,4 +315,26 @@ export class OrganizationsImpl extends Organizations {
 
     return await response!.json() as IconDto
   }
+
+  async deleteIcon(id: string): Promise<void> {
+    if (id === undefined || id === null) {
+      throw new Error("Icon delete, id is undefined or null")
+    }
+    if (id.length === 0 || id.trim().length === 0) {
+      throw new Error("Icon delete, id is empty")
+    }
+
+    // send request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Files/icon")
+      .searchParam("iconId", id)
+      .sendDelete()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to delete icon: ${id}`, response)
+    }
+
+  }
 }
