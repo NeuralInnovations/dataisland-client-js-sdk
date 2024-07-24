@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev68](../../README.md) / [Exports](../modules.md) / OrganizationProfileDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev69](../../README.md) / [Exports](../modules.md) / OrganizationProfileDto
 
 # Interface: OrganizationProfileDto
 
@@ -7,6 +7,7 @@
 ### Properties
 
 - [description](OrganizationProfileDto.md#description)
+- [iconId](OrganizationProfileDto.md#iconid)
 - [name](OrganizationProfileDto.md#name)
 
 ## Properties
@@ -14,6 +15,12 @@
 ### description
 
 • **description**: `string`
+
+___
+
+### iconId
+
+• **iconId**: `string`
 
 ___
 

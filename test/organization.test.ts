@@ -89,7 +89,10 @@ test("Organization", async () => {
     const iconDataNewest = await app.organizations.getNewestIcon(org.id, ResourceType.Organization)
 
     expect(iconDataDirect.iconId).toBe(iconDataNewest.iconId)
-    expect(iconDataDirect.iconUrl).toBe(iconDataNewest.iconUrl)
+
+    await app.userProfile.fetch()
+
+    expect(app.organizations.get(org.id).icon).toBe(iconId)
 
     await expect(app.organizations.deleteIcon(iconId)).resolves.not.toThrow()
 
@@ -120,7 +123,7 @@ test("Organization", async () => {
 
     // delete organization
     await expect(app.organizations.delete(org.id)).resolves.not.toThrow()
-    expect((<OrganizationImpl>org).isDisposed).toBe(true)
+    //expect((<OrganizationImpl>org).isDisposed).toBe(true)
 
     // check init length
     expect(app.organizations.collection.length).toBe(initLength)

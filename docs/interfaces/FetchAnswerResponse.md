@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev68](../../README.md) / [Exports](../modules.md) / FetchAnswerResponse
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev69](../../README.md) / [Exports](../modules.md) / FetchAnswerResponse
 
 # Interface: FetchAnswerResponse
 
