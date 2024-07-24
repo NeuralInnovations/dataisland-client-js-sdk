@@ -88,11 +88,15 @@ export class OrganizationImpl extends Organization implements Disposable {
   }
 
   get name(): string {
-    return <OrganizationId>this._content?.profile.name
+    return <string>this._content?.profile.name
   }
 
   get description(): string {
-    return <OrganizationId>this._content?.profile.description
+    return <string>this._content?.profile.description
+  }
+
+  get icon(): string {
+    return <string>this._content?.profile.iconId
   }
 
   get workspaces(): Workspaces {

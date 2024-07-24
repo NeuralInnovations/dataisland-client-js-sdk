@@ -36,6 +36,7 @@ export interface UserSettings {
 export interface OrganizationProfileDto {
   name: string
   description: string
+  iconId: string
 }
 
 export interface OrganizationDto {
