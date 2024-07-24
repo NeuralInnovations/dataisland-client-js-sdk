@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev68](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev69](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -21,6 +21,7 @@ Organization.
 - [accessGroups](Organization.md#accessgroups)
 - [chats](Organization.md#chats)
 - [description](Organization.md#description)
+- [icon](Organization.md#icon)
 - [id](Organization.md#id)
 - [name](Organization.md#name)
 - [workspaces](Organization.md#workspaces)
@@ -92,6 +93,18 @@ ___
 • `get` **description**(): `string`
 
 Organization description.
+
+#### Returns
+
+`string`
+
+___
+
+### icon
+
+• `get` **icon**(): `string`
+
+ID of organization icon
 
 #### Returns
 

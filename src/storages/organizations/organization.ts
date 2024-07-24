@@ -47,6 +47,11 @@ export abstract class Organization extends EventDispatcher<
   abstract get description(): string
 
   /**
+   * ID of organization icon
+   */
+  abstract get icon(): string
+
+  /**
    * Workspaces.
    */
   abstract get workspaces(): Workspaces
