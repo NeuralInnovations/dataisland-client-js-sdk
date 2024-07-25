@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev69](../../README.md) / [Exports](../modules.md) / SegmentActionData
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev70](../../README.md) / [Exports](../modules.md) / SegmentActionData
 
 # Interface: SegmentActionData
 
