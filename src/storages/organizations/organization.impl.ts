@@ -503,9 +503,8 @@ export class OrganizationImpl extends Organization implements Disposable {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Keys/organization")
-      .sendDeleteJson({
-        apiKey: key
-      })
+      .searchParam("apiKey", key )
+      .sendDelete()
 
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError("Api key delete error", response)
