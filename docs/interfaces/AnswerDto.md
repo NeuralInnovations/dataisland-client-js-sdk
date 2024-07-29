@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev70](../../README.md) / [Exports](../modules.md) / AnswerDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev71](../../README.md) / [Exports](../modules.md) / AnswerDto
 
 # Interface: AnswerDto
 

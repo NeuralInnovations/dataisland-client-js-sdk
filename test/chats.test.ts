@@ -158,6 +158,16 @@ test("Chat create with file, ask and delete", async () => {
         await expect(source.id).toBe(file.id)
       }
 
+
+      const askCancelPromise = chat!.ask(question, ChatAnswerType.SHORT)
+
+      // check not throw
+      await expect(askCancelPromise).resolves.not.toThrow()
+
+      const cancelAnswer = await askCancelPromise
+
+      await expect(cancelAnswer.cancel()).resolves.not.toThrow()
+
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 
