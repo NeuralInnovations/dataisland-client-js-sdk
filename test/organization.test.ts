@@ -1,6 +1,7 @@
 import {
+  CustomCredential,
   dataIslandApp,
-  DebugCredential,
+  DebugCredential, OrganizationApiKey,
   OrganizationsEvent,
   ResourceType,
   UploadFile
@@ -105,22 +106,6 @@ test("Organization", async () => {
     await expect(org.limitSegments()).resolves.not.toThrow()
     await expect(org.userLimits()).resolves.not.toThrow()
 
-    const accessGroupId = org.accessGroups.collection[0].id
-    const apiKey = await org.createApiKey("testKey", [accessGroupId])
-    expect(apiKey).not.toBeNull()
-    expect(apiKey).not.toBeUndefined()
-
-    let keys = await org.getApiKeys()
-
-    expect(keys[0].apiKey).toBe(apiKey)
-    expect(keys[0].accessGroupIds[0]).toBe(accessGroupId)
-
-    await org.deleteApiKey(apiKey)
-
-    keys = await org.getApiKeys()
-
-    expect(keys.length).toBe(0)
-
     // delete organization
     await expect(app.organizations.delete(org.id)).resolves.not.toThrow()
     //expect((<OrganizationImpl>org).isDisposed).toBe(true)
@@ -150,5 +135,45 @@ test("Organization", async () => {
     })
 
     await app.context.execute(new DeleteUserFullCommand())
+  })
+})
+
+test("API keys and custom credentials test", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    await testInOrganization(async (app, org) => {
+      const accessGroupId = org.accessGroups.collection[0].id
+      const apiKeyOrg: OrganizationApiKey = await org.createApiKey("testKey", [accessGroupId])
+      const apiKey = apiKeyOrg.apiKey
+      expect(apiKey).not.toBeNull()
+      expect(apiKey).not.toBeUndefined()
+
+      let keys = await org.getApiKeys()
+
+      expect(keys[0].apiKey).toBe(apiKey)
+      expect(keys[0].accessGroupIds[0]).toBe(accessGroupId)
+
+      const token = await (org as OrganizationImpl).getTokenFromKey(apiKey, "test", "test", "test")
+
+      const randomName = `org-${randomHash(20)}`
+      const customCredentialsApp = await dataIslandApp(randomName, async builder => {
+        builder.useHost(HOST)
+        builder.useCredential(new CustomCredential(token.authSchemaName, token.userJwtToken))
+        builder.registerMiddleware(async (req, next) => {
+          // const url = req.url
+          // console.log("REQUEST", url, req.method)
+          const response = await next(req)
+          // console.log("RESPONSE", url, response.status)
+          return response
+        })
+      })
+
+      await expect(customCredentialsApp.userProfile.fetch()).resolves.not.toThrow()
+
+      await org.deleteApiKey(apiKey)
+
+      keys = await org.getApiKeys()
+
+      expect(keys.length).toBe(0)
+    })
   })
 })

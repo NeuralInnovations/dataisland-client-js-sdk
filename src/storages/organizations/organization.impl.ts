@@ -32,7 +32,7 @@ import {InviteCodeResponse, InviteResponse} from "../../dto/invitesResponse"
 import {
   ApiKeyResponse,
   OrganizationApiKey,
-  OrganizationKeysResponse
+  OrganizationKeysResponse, TokenResponse
 } from "../../dto/apiKeyResponse"
 import {IconResponse} from "../../dto/workspacesResponse"
 import {UploadFile} from "../files/files"
@@ -448,7 +448,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return json as InviteResponse
   }
 
-  async createApiKey(name: string, accessGroups: string[]): Promise<string>{
+  async createApiKey(name: string, accessGroups: string[]): Promise<OrganizationApiKey>{
     if (name === null || name === undefined || name.trim() === "") {
       throw new Error("Name is required. Please provide a valid name.")
     }
@@ -493,6 +493,26 @@ export class OrganizationImpl extends Organization implements Disposable {
     const keys = (json as OrganizationKeysResponse).keys
 
     return keys
+  }
+
+  async getTokenFromKey(key: string, userId: string, userName: string, userMetadata: string): Promise<TokenResponse> {
+    // get invites
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/Keys/user/token/jwt")
+      .searchParam("apiKey", key)
+      .searchParam("userId", userId)
+      .searchParam("userName", userName)
+      .searchParam("userMetadata", userMetadata)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to get token from key for org: ${this.id}`, response)
+    }
+
+    const json = await response!.json()
+
+    return json as TokenResponse
   }
 
   async deleteApiKey(key: string): Promise<void>{

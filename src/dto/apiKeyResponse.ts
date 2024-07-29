@@ -6,7 +6,7 @@ export interface TokenResponse {
 }
 
 export interface ApiKeyResponse {
-  apiKey: string
+  apiKey: OrganizationApiKey
 }
 
 export interface OrganizationKeysResponse {
