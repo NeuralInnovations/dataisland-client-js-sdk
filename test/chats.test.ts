@@ -70,6 +70,7 @@ test("Chat create, ask question, delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
+      await new Promise(f => setTimeout(f, 1000))
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
     })
@@ -158,6 +159,17 @@ test("Chat create with file, ask and delete", async () => {
         await expect(source.id).toBe(file.id)
       }
 
+
+      const askCancelPromise = chat!.ask(question, ChatAnswerType.SHORT)
+
+      // check not throw
+      await expect(askCancelPromise).resolves.not.toThrow()
+
+      const cancelAnswer = await askCancelPromise
+
+      await expect(cancelAnswer.cancel()).resolves.not.toThrow()
+
+      await new Promise(f => setTimeout(f, 1000))
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 
@@ -251,6 +263,7 @@ test("Chat create with workspace, ask and delete", async () => {
         await expect(source.id).toBe(file.id)
       }
 
+      await new Promise(f => setTimeout(f, 1000))
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 

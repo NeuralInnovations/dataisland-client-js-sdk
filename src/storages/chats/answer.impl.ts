@@ -1,16 +1,17 @@
-import { Context } from "../../context"
+import {Context} from "../../context"
 import {
   AnswerDto,
   AnswerStatus,
   AnswerStepDto,
   FetchAnswerResponse,
   SourceDto,
+  StepStatus,
   StepType
 } from "../../dto/chatResponse"
-import { ResponseUtils } from "../../services/responseUtils"
-import { RpcService } from "../../services/rpcService"
-import { Answer, AnswerEvent, AnswerId } from "./answer"
-import { Chat } from "./chat"
+import {ResponseUtils} from "../../services/responseUtils"
+import {RpcService} from "../../services/rpcService"
+import {Answer, AnswerEvent, AnswerId} from "./answer"
+import {Chat} from "./chat"
 
 export class AnswerImpl extends Answer {
 
@@ -106,6 +107,13 @@ export class AnswerImpl extends Answer {
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
 
+    if (this.status == AnswerStatus.CANCELED || this.status == AnswerStatus.FAIL){
+      this.dispatch({
+        type: AnswerEvent.UPDATED,
+        data: this
+      })
+    }
+
     if (this.getStep(StepType.GENERATE_ANSWER) !== undefined) {
       const step = this.getStep(StepType.GENERATE_ANSWER)
       const step_tokens = step?.tokens.join("")
@@ -129,11 +137,19 @@ export class AnswerImpl extends Answer {
       })
     }
 
-    if (this.getStep(StepType.DONE) !== undefined) {
-      const step = this.getStep(StepType.DONE)
-      this._timestamp = Date.parse(step!.end_at)
+    const doneStep = this.getStep(StepType.DONE)
+    if (doneStep !== undefined) {
+      if (doneStep.status == StepStatus.FAIL || doneStep.status == StepStatus.CANCELED){
+        this.dispatch({
+          type: AnswerEvent.UPDATED,
+          data: this
+        })
+      }else {
+        const step = this.getStep(StepType.DONE)
+        this._timestamp = Date.parse(step!.end_at)
 
-      await this.chat.update()
+        await this.chat.update()
+      }
     } else {
       this.fetchAfter()
     }
