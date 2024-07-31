@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev71](../../README.md) / [Exports](../modules.md) / ApiKeyResponse
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev72](../../README.md) / [Exports](../modules.md) / ApiKeyResponse
 
 # Interface: ApiKeyResponse
 
