@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev71](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev72](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 
@@ -111,7 +111,7 @@ ___
 
 ### createWithWorkspace
 
-▸ **createWithWorkspace**(`workspaceId`, `clientContext`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+▸ **createWithWorkspace**(`workspaceIds`, `clientContext`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
 
 Create chat with specific workspace
 
@@ -119,7 +119,7 @@ Create chat with specific workspace
 
 | Name | Type |
 | :------ | :------ |
-| `workspaceId` | `string` |
+| `workspaceIds` | `string`[] |
 | `clientContext` | `string` |
 
 #### Returns

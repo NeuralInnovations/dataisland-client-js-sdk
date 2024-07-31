@@ -35,10 +35,10 @@ export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
 
   /**
    * Create chat with specific workspace
-   * @param workspaceId
+   * @param workspaceIds
    * @param clientContext
    */
-  abstract createWithWorkspace(workspaceId: string, clientContext: string): Promise<Chat | undefined>
+  abstract createWithWorkspace(workspaceIds: string[], clientContext: string): Promise<Chat | undefined>
 
   /**
    * Get chat by id.
