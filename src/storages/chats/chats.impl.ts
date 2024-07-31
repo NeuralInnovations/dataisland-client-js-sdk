@@ -163,12 +163,12 @@ export class ChatsImpl extends Chats {
     return chat
   }
 
-  async createWithWorkspace(workspaceId: string, clientContext: string = ""): Promise<Chat | undefined> {
-    if (workspaceId === undefined || workspaceId === null) {
-      throw new Error("Create chat with workspace, id is undefined or null")
+  async createWithWorkspace(workspaceIds: string[], clientContext: string = ""): Promise<Chat | undefined> {
+    if (workspaceIds === undefined || workspaceIds === null) {
+      throw new Error("Create chat with workspace, ids are undefined or null")
     }
-    if (workspaceId.length === 0 || workspaceId.trim().length === 0) {
-      throw new Error("Create chat with workspace, id is empty")
+    if (workspaceIds.length === 0) {
+      throw new Error("Create chat with workspace, ids are empty")
     }
 
     // send create request to the server
@@ -179,7 +179,7 @@ export class ChatsImpl extends Chats {
         organizationId: this.organization.id,
         model: "search",
         clientContext: clientContext,
-        workspaceIds: [workspaceId]
+        workspaceIds: workspaceIds
       })
 
     // check response status

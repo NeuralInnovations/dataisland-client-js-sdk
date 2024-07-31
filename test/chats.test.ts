@@ -204,7 +204,7 @@ test("Chat create with workspace, ask and delete", async () => {
 
       await expect(file.status).toBe(FileStatus.SUCCESS)
 
-      const chatPromise = org.chats.createWithWorkspace(ws.id, "Test user")
+      const chatPromise = org.chats.createWithWorkspace([ws.id], "Test user")
 
       // check not throw
       await expect(chatPromise).resolves.not.toThrow()
