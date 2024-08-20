@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev73](../../README.md) / [Exports](../modules.md) / Workspace
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../../README.md) / [Exports](../modules.md) / Workspace
 
 # Class: Workspace
 

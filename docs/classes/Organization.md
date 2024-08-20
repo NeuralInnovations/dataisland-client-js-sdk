@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev73](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -24,6 +24,7 @@ Organization.
 - [icon](Organization.md#icon)
 - [id](Organization.md#id)
 - [name](Organization.md#name)
+- [queryFlows](Organization.md#queryflows)
 - [workspaces](Organization.md#workspaces)
 
 ### Methods
@@ -133,6 +134,18 @@ Organization name.
 #### Returns
 
 `string`
+
+___
+
+### queryFlows
+
+• `get` **queryFlows**(): [`QueryFlows`](QueryFlows.md)
+
+Query flows
+
+#### Returns
+
+[`QueryFlows`](QueryFlows.md)
 
 ___
 
