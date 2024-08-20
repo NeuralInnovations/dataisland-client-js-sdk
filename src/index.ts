@@ -19,6 +19,7 @@ export * from "./dto/userInfoResponse"
 export * from "./dto/workspacesResponse"
 export * from "./dto/invitesResponse"
 export * from "./dto/apiKeyResponse"
+export * from "./dto/queryFlowResponse"
 export * from "./events"
 export * from "./middleware"
 export * from "./storages/chats/answer"
@@ -33,6 +34,8 @@ export * from "./storages/organizations/organizations"
 export * from "./storages/user/userProfile"
 export * from "./storages/workspaces/workspace"
 export * from "./storages/workspaces/workspaces"
+export * from "./storages/queryFlows/queryFlow"
+export * from "./storages/queryFlows/queryFlows"
 
 export {
   OrganizationId, Organizations, OrganizationsEvent

@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev73](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev73
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev74
 
 ## Table of contents
 
@@ -18,6 +18,9 @@
 - [OrderState](enums/OrderState.md)
 - [OrganizationEvent](enums/OrganizationEvent.md)
 - [OrganizationsEvent](enums/OrganizationsEvent.md)
+- [QueryFlowEvent](enums/QueryFlowEvent.md)
+- [QueryFlowStatus](enums/QueryFlowStatus.md)
+- [QueryFlowsEvent](enums/QueryFlowsEvent.md)
 - [ResourceType](enums/ResourceType.md)
 - [StepStatus](enums/StepStatus.md)
 - [StepType](enums/StepType.md)
@@ -51,6 +54,8 @@
 - [MetadataDto](classes/MetadataDto.md)
 - [Organization](classes/Organization.md)
 - [Organizations](classes/Organizations.md)
+- [QueryFlow](classes/QueryFlow.md)
+- [QueryFlows](classes/QueryFlows.md)
 - [StepTypeInfo](classes/StepTypeInfo.md)
 - [UserProfile](classes/UserProfile.md)
 - [Workspace](classes/Workspace.md)
@@ -104,6 +109,10 @@
 - [OrganizationWorkspaces](interfaces/OrganizationWorkspaces.md)
 - [PermitsDto](interfaces/PermitsDto.md)
 - [ProfileDto](interfaces/ProfileDto.md)
+- [QueryFlowDto](interfaces/QueryFlowDto.md)
+- [QueryFlowListResponse](interfaces/QueryFlowListResponse.md)
+- [QueryFlowResponse](interfaces/QueryFlowResponse.md)
+- [QueryFlowResult](interfaces/QueryFlowResult.md)
 - [QuestionData](interfaces/QuestionData.md)
 - [QuizData](interfaces/QuizData.md)
 - [RegulationDto](interfaces/RegulationDto.md)
@@ -135,6 +144,7 @@
 - [AnswerId](modules.md#answerid)
 - [ChatId](modules.md#chatid)
 - [FileId](modules.md#fileid)
+- [FlowId](modules.md#flowid)
 - [GroupId](modules.md#groupid)
 - [Middleware](modules.md#middleware)
 - [OrganizationId](modules.md#organizationid)
@@ -174,6 +184,14 @@ ___
 ### FileId
 
 Ƭ **FileId**: `string`
+
+___
+
+### FlowId
+
+Ƭ **FlowId**: `string`
+
+Query flow id.
 
 ___
 

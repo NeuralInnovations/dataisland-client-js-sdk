@@ -16,6 +16,7 @@ import {QuizData} from "../../dto/quizResponse"
 import {InviteResponse} from "../../dto/invitesResponse"
 import { OrganizationApiKey } from "../../dto/apiKeyResponse"
 import {UploadFile} from "../files/files"
+import {QueryFlows} from "../queryFlows/queryFlows"
 
 /**
  * Organization event.
@@ -65,6 +66,11 @@ export abstract class Organization extends EventDispatcher<
    * Groups.
    */
   abstract get accessGroups(): Groups
+
+  /**
+   * Query flows
+   */
+  abstract get queryFlows(): QueryFlows
 
   /**
    * Get organization members
