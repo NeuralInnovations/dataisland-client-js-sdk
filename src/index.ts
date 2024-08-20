@@ -40,7 +40,7 @@ export {
 export {
   WorkspaceId, Workspaces, WorkspacesEvent
 } from "./storages/workspaces/workspaces"
-export { FileId, File, FileStatus } from "./storages/files/file"
+export { FileId, File } from "./storages/files/file"
 export { UploadFile, Files, FilesEvent } from "./storages/files/files"
 export { Group, GroupEvent, GroupId } from "./storages/groups/group"
 export { AnswerId, Answer, StepId, AnswerEvent } from "./storages/chats/answer"
