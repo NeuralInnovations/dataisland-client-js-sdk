@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev72](../../README.md) / [Exports](../modules.md) / FileDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev73](../../README.md) / [Exports](../modules.md) / FileDto
 
 # Interface: FileDto
 
@@ -11,11 +11,11 @@
 - [fileMetadata](FileDto.md#filemetadata)
 - [hash](FileDto.md#hash)
 - [id](FileDto.md#id)
-- [isProcessedSuccessfully](FileDto.md#isprocessedsuccessfully)
 - [modifiedAt](FileDto.md#modifiedat)
 - [name](FileDto.md#name)
 - [organizationId](FileDto.md#organizationid)
 - [previewUrl](FileDto.md#previewurl)
+- [stage](FileDto.md#stage)
 - [url](FileDto.md#url)
 - [workspaceId](FileDto.md#workspaceid)
 
@@ -51,12 +51,6 @@ ___
 
 ___
 
-### isProcessedSuccessfully
-
-• **isProcessedSuccessfully**: `boolean`
-
-___
-
 ### modifiedAt
 
 • **modifiedAt**: `number`
@@ -78,6 +72,12 @@ ___
 ### previewUrl
 
 • **previewUrl**: `string`
+
+___
+
+### stage
+
+• **stage**: [`FileProcessingStage`](../enums/FileProcessingStage.md)
 
 ___
 

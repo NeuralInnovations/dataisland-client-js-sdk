@@ -1,16 +1,16 @@
 import fs from "fs"
 import {
+  AnswerEvent,
   AnswerStatus,
   ChatAnswerType,
-  FileStatus,
+  FileProcessingStage,
   FilesEvent,
-  AnswerEvent,
   UploadFile
 } from "../src"
-import { AnswerImpl } from "../src/storages/chats/answer.impl"
-import { ChatImpl } from "../src/storages/chats/chat.impl"
-import { testInOrganization, testInWorkspace } from "./setup"
-import { appTest, UnitTest } from "../src/unitTest"
+import {AnswerImpl} from "../src/storages/chats/answer.impl"
+import {ChatImpl} from "../src/storages/chats/chat.impl"
+import {testInOrganization, testInWorkspace} from "./setup"
+import {appTest, UnitTest} from "../src/unitTest"
 
 test("Chat create, ask question, delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -85,13 +85,15 @@ test("Chat create with file, ask and delete", async () => {
         type: "application/pdf"
       })
 
-      const files = await ws.files.upload([file_obj])
+      await ws.files.upload([file_obj])
 
-      const file = files[0]
+      const files = await ws.files.query("", 0, 10)
+
+      const file = files.files[0]
       let file_loaded = false
 
       file.subscribe((evt) => {
-        if (evt.data.status !== FileStatus.UPLOADING) {
+        if (evt.data.status > FileProcessingStage.PROCESSING) {
           file_loaded = true
         }
       }, FilesEvent.UPDATED)
@@ -100,7 +102,7 @@ test("Chat create with file, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      await expect(file.status).toBe(FileStatus.SUCCESS)
+      await expect(file.status).toBe(FileProcessingStage.DONE)
 
       const chatPromise = org.chats.createWithFile(file.id)
 
@@ -173,7 +175,6 @@ test("Chat create with file, ask and delete", async () => {
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 
-      await ws.files.query("", 0, 20)
       await ws.files.delete([file.id])
     })
   })
@@ -187,13 +188,14 @@ test("Chat create with workspace, ask and delete", async () => {
         type: "application/pdf"
       })
 
-      const files = await ws.files.upload([file_obj])
+      await ws.files.upload([file_obj])
+      const files = await ws.files.query("", 0, 10)
 
-      const file = files[0]
+      const file = files.files[0]
       let file_loaded = false
 
       file.subscribe((evt) => {
-        if (evt.data.status !== FileStatus.UPLOADING) {
+        if (evt.data.status > FileProcessingStage.PROCESSING) {
           file_loaded = true
         }
       }, FilesEvent.UPDATED)
@@ -202,7 +204,7 @@ test("Chat create with workspace, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      await expect(file.status).toBe(FileStatus.SUCCESS)
+      await expect(file.status).toBe(FileProcessingStage.DONE)
 
       const chatPromise = org.chats.createWithWorkspace([ws.id], "Test user")
 
@@ -267,7 +269,6 @@ test("Chat create with workspace, ask and delete", async () => {
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 
-      await ws.files.query("", 0, 20)
       await ws.files.delete([file.id])
     })
   })

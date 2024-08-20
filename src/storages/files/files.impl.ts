@@ -1,11 +1,15 @@
 import { Context } from "../../context"
-import { FileDto, FileListResponse } from "../../dto/workspacesResponse"
+import {
+  FileDto,
+  FileListResponse, FileProcessingStage,
+  FilesBatchFetchResponse
+} from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
 import { FileImpl } from "./file.impl"
 import { Files, FilesEvent, UploadFile } from "./files"
 import { WorkspaceImpl } from "../workspaces/workspace.impl"
 import { ResponseUtils } from "../../services/responseUtils"
-import { File } from "./file"
+import {File, FileId} from "./file"
 import { FilesPage } from "./filesPage"
 import { FilesPageImpl } from "./filesPage.impl"
 // import { FormData } from "../../utils/request"
@@ -20,6 +24,8 @@ export class FilesImpl extends Files {
 
   // Object used as files page data, returned by "query"
   public filesList?: FilesPage
+
+  private _fetchList: FileId[] = []
 
   async upload(files: UploadFile[]): Promise<File[]> {
     const loaded_files = []
@@ -48,6 +54,35 @@ export class FilesImpl extends Files {
   // INTERNALS
   //----------------------------------------------------------------------------
 
+  async internalFetchQuery(): Promise<void> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Files/fetch/batch")
+      .searchParam("organizationId", this.workspace.organization.id)
+      .searchParam("fileIds", this._fetchList.join(","))
+      .sendGet()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed to fetch files for org ${this.workspace.organization.id} and workspace ${this.workspace.id}`, response)
+    }
+
+    const progress = (await response!.json()) as FilesBatchFetchResponse
+
+    for (const prg of progress.progress){
+      const file = this.filesList?.files?.find(fl => fl.id == prg.file_id)
+      if (file) {
+        file.updateStatus(prg)
+        if (file.status > FileProcessingStage.PROCESSING){
+          const index = this._fetchList.indexOf(file.id)
+          this._fetchList.splice(index, 1)
+        }
+      }
+    }
+
+    if (this._fetchList.length != 0){
+      setTimeout(async () => await this.internalFetchQuery(), 2000)
+    }
+  }
 
   async internalGetFile(id: string): Promise<File>{
     if (id === undefined || id === null) {
@@ -163,6 +198,8 @@ export class FilesImpl extends Files {
       )
     }
 
+    this._fetchList = []
+
     // parse files from the server's response
     const files = (await response!.json()) as FileListResponse
 
@@ -180,10 +217,18 @@ export class FilesImpl extends Files {
 
       // add file to the collection
       filesList.files.push(file)
+
+      if (file.status <= FileProcessingStage.PROCESSING) {
+        this._fetchList.push(file.id)
+      }
     }
 
     // set files list
     this.filesList = filesList
+
+    if (this._fetchList.length != 0){
+      setTimeout(async () => await this.internalFetchQuery(), 2000)
+    }
 
     return filesList
   }

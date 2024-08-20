@@ -1,14 +1,12 @@
-import {FileProgressDto, MetadataDto} from "../../dto/workspacesResponse"
+import {
+  FileProcessingStage,
+  FileProgressDto,
+  MetadataDto
+} from "../../dto/workspacesResponse"
 import { EventDispatcher } from "../../events"
 import { FilesEvent } from "./files"
 
 export type FileId = string
-
-export enum FileStatus {
-  UPLOADING = "uploading",
-  SUCCESS = "success",
-  FAILED = "failed"
-}
 
 /**
  * File.
@@ -50,12 +48,12 @@ export abstract class File extends EventDispatcher<
   /**
    * File uploading progress
    */
-  abstract get progress(): FileProgressDto
+  abstract get progress(): FileProgressDto | undefined
 
   /**
    * File uploading status
    */
-  abstract get status(): FileStatus
+  abstract get status(): FileProcessingStage
 
   /**
    * Get temporary url.
@@ -71,4 +69,10 @@ export abstract class File extends EventDispatcher<
    * Update file.
    */
   abstract update(name: string, metadata: MetadataDto[], description?: string): Promise<void>
+
+  /**
+   * Update file status
+   * @param progress
+   */
+  abstract updateStatus(progress: FileProgressDto): void
 }

@@ -1,9 +1,15 @@
 import fs from "fs"
-import { testInWorkspace } from "./setup"
-import { FileImpl } from "../src/storages/files/file.impl"
-import { Context, FileStatus, FilesEvent, UploadFile, MetadataDto } from "../src"
-import { FilesPageImpl } from "../src/storages/files/filesPage.impl"
-import { appTest, UnitTest } from "../src/unitTest"
+import {testInWorkspace} from "./setup"
+import {FileImpl} from "../src/storages/files/file.impl"
+import {
+  Context,
+  FileProcessingStage,
+  FilesEvent,
+  MetadataDto,
+  UploadFile
+} from "../src"
+import {FilesPageImpl} from "../src/storages/files/filesPage.impl"
+import {appTest, UnitTest} from "../src/unitTest"
 
 test("Files", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -26,18 +32,21 @@ test("Files", async () => {
 
       const filePromise = ws.files.upload(upload_files)
       // await expect(filePromise).resolves.not.toThrow()
-      const files = await filePromise
+      await filePromise
+
+      const files = await ws.files.query("", 0, 10)
+
 
       const ids: string[] = []
       const loaded_ids: string[] = []
 
-      const process_file_status = (file: any) => {
+      const process_file_status = (file: FileImpl) => {
         switch (file.status) {
-        case FileStatus.SUCCESS: {
+        case FileProcessingStage.DONE: {
           loaded_ids.push(file.id)
           break
         }
-        case FileStatus.FAILED: {
+        case FileProcessingStage.ERROR: {
           console.error(file.progress.error)
           loaded_ids.push(file.id)
           break
@@ -45,7 +54,7 @@ test("Files", async () => {
         }
       }
 
-      for (const file of files) {
+      for (const file of files.files) {
         expect(file).not.toBeUndefined()
         expect(file).not.toBeNull()
         expect(file.createdAt).toBeGreaterThan(0)
@@ -57,15 +66,12 @@ test("Files", async () => {
 
         ids.push(file.id)
 
-        expect(file.progress).not.toBeUndefined()
-        expect(file.progress).not.toBeNull()
-        expect(file.progress.file_id).toBe(file.id)
 
-        if (file.status !== FileStatus.UPLOADING) {
-          process_file_status(file)
+        if (file.status > FileProcessingStage.PROCESSING) {
+          process_file_status(<FileImpl>file)
         } else {
           file.subscribe((evt) => {
-            process_file_status(evt.data)
+            process_file_status(<FileImpl>evt.data)
           }, FilesEvent.UPDATED)
         }
       }
@@ -93,10 +99,7 @@ test("Files", async () => {
 
         expect(fileGet.id).toBe(id)
 
-        expect(fileGet?.status).toBe(FileStatus.SUCCESS)
-        expect(fileGet?.progress?.completed_parts_count).toBe(
-          fileGet?.progress?.file_parts_count
-        )
+        expect(fileGet?.status).toBe(FileProcessingStage.DONE)
 
         expect(fileGet.url).not.toBe("")
         expect(fileGet.previewUrl).not.toBe("")
