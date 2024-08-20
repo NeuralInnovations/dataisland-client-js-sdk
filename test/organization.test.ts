@@ -150,7 +150,7 @@ test("API keys and custom credentials test", async () => {
       let keys = await org.getApiKeys()
 
       expect(keys[0].apiKey).toBe(apiKey)
-      expect(keys[0].accessGroupIds[0]).toBe(accessGroupId)
+      expect(keys[0].accessGroupInfo[0].id).toBe(accessGroupId)
 
       const token = await (org as OrganizationImpl).getTokenFromKey(apiKey, "test", "test", "test")
 

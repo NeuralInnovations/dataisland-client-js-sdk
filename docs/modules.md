@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev72](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev73](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev72
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev73
 
 ## Table of contents
 
@@ -10,7 +10,7 @@
 - [AnswerStatus](enums/AnswerStatus.md)
 - [ChatAnswerType](enums/ChatAnswerType.md)
 - [ChatsEvent](enums/ChatsEvent.md)
-- [FileStatus](enums/FileStatus.md)
+- [FileProcessingStage](enums/FileProcessingStage.md)
 - [FilesEvent](enums/FilesEvent.md)
 - [GroupEvent](enums/GroupEvent.md)
 - [GroupsEvent](enums/GroupsEvent.md)
@@ -59,6 +59,7 @@
 ### Interfaces
 
 - [AccessGroupDto](interfaces/AccessGroupDto.md)
+- [AccessGroupInfo](interfaces/AccessGroupInfo.md)
 - [AccessGroupResponse](interfaces/AccessGroupResponse.md)
 - [AccessGroupsResponse](interfaces/AccessGroupsResponse.md)
 - [AcquiringPlan](interfaces/AcquiringPlan.md)
@@ -84,6 +85,7 @@
 - [FileListResponse](interfaces/FileListResponse.md)
 - [FileProgressDto](interfaces/FileProgressDto.md)
 - [FileUrlDto](interfaces/FileUrlDto.md)
+- [FilesBatchFetchResponse](interfaces/FilesBatchFetchResponse.md)
 - [GetOrderStateResponse](interfaces/GetOrderStateResponse.md)
 - [IconDto](interfaces/IconDto.md)
 - [IconResponse](interfaces/IconResponse.md)

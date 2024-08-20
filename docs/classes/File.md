@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev72](../../README.md) / [Exports](../modules.md) / File
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev73](../../README.md) / [Exports](../modules.md) / File
 
 # Class: File
 
@@ -34,6 +34,7 @@ File.
 - [dispatch](File.md#dispatch)
 - [subscribe](File.md#subscribe)
 - [update](File.md#update)
+- [updateStatus](File.md#updatestatus)
 
 ## Constructors
 
@@ -137,25 +138,25 @@ ___
 
 ### progress
 
-• `get` **progress**(): [`FileProgressDto`](../interfaces/FileProgressDto.md)
+• `get` **progress**(): `undefined` \| [`FileProgressDto`](../interfaces/FileProgressDto.md)
 
 File uploading progress
 
 #### Returns
 
-[`FileProgressDto`](../interfaces/FileProgressDto.md)
+`undefined` \| [`FileProgressDto`](../interfaces/FileProgressDto.md)
 
 ___
 
 ### status
 
-• `get` **status**(): [`FileStatus`](../enums/FileStatus.md)
+• `get` **status**(): [`FileProcessingStage`](../enums/FileProcessingStage.md)
 
 File uploading status
 
 #### Returns
 
-[`FileStatus`](../enums/FileStatus.md)
+[`FileProcessingStage`](../enums/FileProcessingStage.md)
 
 ___
 
@@ -229,3 +230,21 @@ Update file.
 #### Returns
 
 `Promise`\<`void`\>
+
+___
+
+### updateStatus
+
+▸ **updateStatus**(`progress`): `void`
+
+Update file status
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `progress` | [`FileProgressDto`](../interfaces/FileProgressDto.md) |
+
+#### Returns
+
+`void`

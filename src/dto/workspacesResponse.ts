@@ -22,11 +22,19 @@ export interface FileUrlDto {
   previewUrl: string
 }
 
+export enum FileProcessingStage {
+  None = 0,
+  WAITING_CONVERTING = 10,
+  CONVERTING = 11,
+  WAITING_PROCESSING = 20,
+  PROCESSING = 21,
+  ERROR = 99,
+  DONE = 100
+}
+
 export interface FileProgressDto {
   file_id: FileId
-  file_parts_count: number
-  completed_parts_count: number
-  success: boolean
+  stage: FileProcessingStage
   error?: string
 }
 
@@ -42,7 +50,11 @@ export interface FileDto {
   hash: string
   organizationId: string
   workspaceId: string
-  isProcessedSuccessfully: boolean
+  stage: FileProcessingStage
+}
+
+export interface FilesBatchFetchResponse {
+  progress: FileProgressDto[]
 }
 
 export class MetadataDto {

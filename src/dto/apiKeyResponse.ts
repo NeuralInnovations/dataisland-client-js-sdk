@@ -19,5 +19,11 @@ export interface OrganizationApiKey {
   tokensCreated: number
   createdAt: number
   lastTokenCreatedAt: number
-  accessGroupIds: string[]
+  accessGroupInfo: AccessGroupInfo[]
+}
+
+export interface AccessGroupInfo {
+  id: string
+  name: string
+  type: number
 }
