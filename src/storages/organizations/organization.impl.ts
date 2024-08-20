@@ -36,6 +36,8 @@ import {
 } from "../../dto/apiKeyResponse"
 import {IconResponse} from "../../dto/workspacesResponse"
 import {UploadFile} from "../files/files"
+import {QueryFlowsImpl} from "../queryFlows/queryFlows.impl"
+import {QueryFlows} from "../queryFlows/queryFlows"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -43,6 +45,7 @@ export class OrganizationImpl extends Organization implements Disposable {
   private _content?: OrganizationDto
   private readonly _workspaces: WorkspacesImpl
   private readonly _accessGroups: GroupsImpl
+  private readonly _queryFlows: QueryFlowsImpl
   private readonly _chats: ChatsImpl
 
   constructor(private readonly context: Context) {
@@ -50,6 +53,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._workspaces = new WorkspacesImpl(this, this.context)
     this._accessGroups = new GroupsImpl(this, this.context)
     this._chats = new ChatsImpl(this, this.context)
+    this._queryFlows = new QueryFlowsImpl(this, this.context)
   }
 
   public async initFrom(
@@ -63,7 +67,8 @@ export class OrganizationImpl extends Organization implements Disposable {
     const promises = [
       this._workspaces.initFrom(content.id),
       this._chats.initFrom(content.id),
-      this._accessGroups.initialize()
+      this._accessGroups.initialize(),
+      this._queryFlows.init()
     ]
 
     await Promise.all(promises)
@@ -105,6 +110,10 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get accessGroups(): Groups {
     return this._accessGroups
+  }
+
+  get queryFlows(): QueryFlows {
+    return this._queryFlows
   }
 
   get chats(): Chats {
