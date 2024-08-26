@@ -1,15 +1,16 @@
-import fs from "fs"
 import {
   AnswerEvent,
   AnswerStatus,
-  ChatAnswerType,
-  FileProcessingStage,
-  FilesEvent,
-  UploadFile
+  ChatAnswerType, ChatType
 } from "../src"
 import {AnswerImpl} from "../src/storages/chats/answer.impl"
 import {ChatImpl} from "../src/storages/chats/chat.impl"
-import {testInOrganization, testInWorkspace} from "./setup"
+import {
+  testInLibrary,
+  testInOrganization,
+  testInWorkspace,
+  uploadTestFile
+} from "./setup"
 import {appTest, UnitTest} from "../src/unitTest"
 
 test("Chat create, ask question, delete", async () => {
@@ -33,6 +34,9 @@ test("Chat create, ask question, delete", async () => {
       expect(org.chats.get(chat!.id)).toBe(chat)
       expect(chat?.model).toBe("search")
       expect(chat?.clientContext).toBe("Test user")
+
+      const chatResource = org.chats.get(chat!.id).resource
+      expect(chatResource.chatType).toBe(ChatType.Organization)
 
       const question = "Hello!"
 
@@ -80,31 +84,9 @@ test("Chat create, ask question, delete", async () => {
 test("Chat create with file, ask and delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
-      const buffer = fs.readFileSync("test/data/test_file.pdf")
-      const file_obj: UploadFile = new File([new Blob([buffer])], "test_file.pdf", {
-        type: "application/pdf"
-      })
+      const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")
 
-      await ws.files.upload([file_obj])
-
-      const files = await ws.files.query("", 0, 10)
-
-      const file = files.files[0]
-      let file_loaded = false
-
-      file.subscribe((evt) => {
-        if (evt.data.status > FileProcessingStage.PROCESSING) {
-          file_loaded = true
-        }
-      }, FilesEvent.UPDATED)
-
-      while (!file_loaded) {
-        await new Promise(f => setTimeout(f, 500))
-      }
-
-      await expect(file.status).toBe(FileProcessingStage.DONE)
-
-      const chatPromise = org.chats.createWithFile(file.id)
+      const chatPromise = org.chats.createWithFile(file)
 
       // check not throw
       await expect(chatPromise).resolves.not.toThrow()
@@ -120,6 +102,10 @@ test("Chat create with file, ask and delete", async () => {
 
       // check get
       expect(org.chats.get(chat!.id)).toBe(chat)
+
+      const chatResource = org.chats.get(chat!.id).resource
+      expect(chatResource.chatType).toBe(ChatType.File)
+      expect(chatResource.fileId).toBe(file)
 
       const question = "Хто учасники навчального проекту?"
 
@@ -158,7 +144,7 @@ test("Chat create with file, ask and delete", async () => {
       }
 
       for (const source of answer!.sources) {
-        await expect(source.id).toBe(file.id)
+        await expect(source.id).toBe(file)
       }
 
 
@@ -175,7 +161,7 @@ test("Chat create with file, ask and delete", async () => {
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 
-      await ws.files.delete([file.id])
+      await ws.files.delete([file])
     })
   })
 })
@@ -183,28 +169,7 @@ test("Chat create with file, ask and delete", async () => {
 test("Chat create with workspace, ask and delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
-      const buffer = fs.readFileSync("test/data/test_file.pdf")
-      const file_obj: UploadFile = new File([new Blob([buffer])], "test_file.pdf", {
-        type: "application/pdf"
-      })
-
-      await ws.files.upload([file_obj])
-      const files = await ws.files.query("", 0, 10)
-
-      const file = files.files[0]
-      let file_loaded = false
-
-      file.subscribe((evt) => {
-        if (evt.data.status > FileProcessingStage.PROCESSING) {
-          file_loaded = true
-        }
-      }, FilesEvent.UPDATED)
-
-      while (!file_loaded) {
-        await new Promise(f => setTimeout(f, 500))
-      }
-
-      await expect(file.status).toBe(FileProcessingStage.DONE)
+      const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")
 
       const chatPromise = org.chats.createWithWorkspace([ws.id], "Test user")
 
@@ -223,7 +188,9 @@ test("Chat create with workspace, ask and delete", async () => {
       // check get
       expect(org.chats.get(chat!.id)).toBe(chat)
 
-      expect(org.chats.get(chat!.id).workspaceIds[0]).toBe(ws.id)
+      const chatResource = org.chats.get(chat!.id).resource
+      expect(chatResource.chatType).toBe(ChatType.Workspaces)
+      expect(chatResource.workspaceIds[0]).toBe(ws.id)
 
       const question = "Хто учасники навчального проекту?"
 
@@ -262,14 +229,165 @@ test("Chat create with workspace, ask and delete", async () => {
       }
 
       for (const source of answer!.sources) {
-        await expect(source.id).toBe(file.id)
+        await expect(source.id).toBe(file)
       }
 
       await new Promise(f => setTimeout(f, 1000))
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 
-      await ws.files.delete([file.id])
+      await ws.files.delete([file])
+    })
+  })
+})
+
+test("Chat create with library", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    await testInLibrary(async (app, org, ws, lib) => {
+      const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")
+
+      const chatPromise = org.chats.createWithLibraryFolder(lib.id, [ws.id])
+
+      // check not throw
+      await expect(chatPromise).resolves.not.toThrow()
+
+      // get chat
+      const chat = await chatPromise
+
+      // check exists
+      expect(chat).not.toBeUndefined()
+
+      // check exists
+      expect(chat).not.toBeNull()
+
+      // check get
+      expect(org.chats.get(chat!.id)).toBe(chat)
+
+      const chatResource = org.chats.get(chat!.id).resource
+      expect(chatResource.chatType).toBe(ChatType.LibraryWorkspaces)
+      expect(chatResource.workspaceIds).toStrictEqual([ws.id])
+
+
+      const question = "Хто учасники навчального проекту?"
+
+      const askPromise = chat!.ask(question, ChatAnswerType.SHORT)
+
+      // check not throw
+      await expect(askPromise).resolves.not.toThrow()
+
+      const answer = await askPromise
+
+      expect(answer!.id).toBeTruthy()
+      expect(answer!.status).toBe(AnswerStatus.RUNNING)
+      expect(answer!.question).toBe(question)
+
+      let tokens = ""
+      let answer_ready = false
+
+      answer!.subscribe((event) => {
+        if (event.type === AnswerEvent.UPDATED) {
+          expect(event.data).toBeTruthy()
+          expect(event.data.id).not.toBeUndefined()
+          expect(event.data.status).not.toBeUndefined()
+
+          process.stdout.write(event.data.tokens.substring(tokens.length))
+
+          tokens = event.data.tokens
+
+          if (event.data.status !== AnswerStatus.RUNNING) {
+            answer_ready = true
+          }
+        }
+      })
+
+      while (!answer_ready) {
+        await new Promise(f => setTimeout(f, 500))
+      }
+
+      for (const source of answer!.sources) {
+        await expect(source.id).toBe(file)
+      }
+
+      await new Promise(f => setTimeout(f, 1000))
+      // check delete
+      await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
+
+      await ws.files.delete([file])
+    })
+  })
+})
+
+test("Chat create with library file", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    await testInLibrary(async (app, org, ws, lib) => {
+      const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")
+
+      const chatPromise = org.chats.createWithLibraryFile(lib.id, file)
+
+      // check not throw
+      await expect(chatPromise).resolves.not.toThrow()
+
+      // get chat
+      const chat = await chatPromise
+
+      // check exists
+      expect(chat).not.toBeUndefined()
+
+      // check exists
+      expect(chat).not.toBeNull()
+
+      // check get
+      expect(org.chats.get(chat!.id)).toBe(chat)
+
+      const chatResource = org.chats.get(chat!.id).resource
+      expect(chatResource.chatType).toBe(ChatType.LibraryFile)
+      expect(chatResource.fileId).toBe(file)
+
+      const question = "Хто учасники навчального проекту?"
+
+      const askPromise = chat!.ask(question, ChatAnswerType.SHORT)
+
+      // check not throw
+      await expect(askPromise).resolves.not.toThrow()
+
+      const answer = await askPromise
+
+      expect(answer!.id).toBeTruthy()
+      expect(answer!.status).toBe(AnswerStatus.RUNNING)
+      expect(answer!.question).toBe(question)
+
+      let tokens = ""
+      let answer_ready = false
+
+      answer!.subscribe((event) => {
+        if (event.type === AnswerEvent.UPDATED) {
+          expect(event.data).toBeTruthy()
+          expect(event.data.id).not.toBeUndefined()
+          expect(event.data.status).not.toBeUndefined()
+
+          process.stdout.write(event.data.tokens.substring(tokens.length))
+
+          tokens = event.data.tokens
+
+          if (event.data.status !== AnswerStatus.RUNNING) {
+            answer_ready = true
+          }
+        }
+      })
+
+      while (!answer_ready) {
+        await new Promise(f => setTimeout(f, 500))
+      }
+
+      for (const source of answer!.sources) {
+        await expect(source.id).toBe(file)
+      }
+
+      await new Promise(f => setTimeout(f, 1000))
+      // check delete
+      await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
+
+      await ws.files.delete([file])
     })
   })
 })
@@ -282,11 +400,16 @@ test("Chat Impl Test", async () => {
         name: "Chat 1",
         createdAt: 1234567890,
         modifiedAt: 1234567890,
-        userId: "user123",
-        organizationId: "org123",
-        workspaceId: "workspace123",
-        fileId: "file123",
+        userId: "",
+        resources: {
+          chatType: ChatType.Organization,
+          libraryId: "",
+          organizationId: "",
+          workspaceIds: [""],
+          fileId: ""
+        },
         model: "search",
+        clientContext: "",
         answers: []
       }
 
@@ -306,7 +429,6 @@ test("Chat Impl Test", async () => {
 
       expect(chatImpl.id).toBe("chat123")
       expect(chatImpl.name).toBe("Chat 1")
-      expect(chatImpl.fileId).toBe("file123")
       expect(chatImpl.collection.length).toBe(0)
 
       chatImpl.dispose()

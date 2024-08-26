@@ -1,7 +1,15 @@
-import { dataIslandApp, DataIslandApp, DebugCredential } from "../src"
+import {
+  dataIslandApp,
+  DataIslandApp,
+  DebugCredential, FileId,
+  FileProcessingStage, FilesEvent, Library,
+  UploadFile
+} from "../src"
 import { Organization } from "../src"
 import { Workspace } from "../src"
 import { jest } from "@jest/globals"
+import fs from "fs"
+import {LibrariesService} from "../src/services/librariesService"
 
 export const HOST = <string>process.env.HOST
 const UNITTEST_TOKEN = <string>process.env.UNITTEST_TOKEN
@@ -52,6 +60,31 @@ export const randomHash = (length: number = 10) => {
   return hash
 }
 
+export const uploadTestFile = async (org: Organization, ws: Workspace, filepath: string, format: string): Promise<FileId> =>  {
+  const buffer = fs.readFileSync(filepath)
+  const file_obj: UploadFile = new File([new Blob([buffer])], filepath, {
+    type: format
+  })
+  await ws.files.upload([file_obj])
+
+  const files = await ws.files.query("", 0, 10)
+
+  const file = files.files[0]
+  let file_loaded = false
+
+  file.subscribe((evt) => {
+    if (evt.data.status > FileProcessingStage.PROCESSING) {
+      file_loaded = true
+    }
+  }, FilesEvent.UPDATED)
+
+  while (!file_loaded) {
+    await new Promise(f => setTimeout(f, 500))
+  }
+
+  return file.id
+}
+
 export const testInOrganization = async (func: (app: DataIslandApp, org: Organization) => Promise<void>, config ?: {
     host: string,
     token: string
@@ -100,6 +133,31 @@ export const testInWorkspace = async (func: (app: DataIslandApp, org: Organizati
     } finally {
       if (org.workspaces.tryGet(workspace!.id)) {
         await org.workspaces.delete(workspace!.id)
+      }
+    }
+  }, config)
+}
+
+export const testInLibrary = async (func: (app: DataIslandApp, org: Organization, workspace: Workspace, library: Library)
+  => Promise<void>, config?: {
+  host: string,
+  token: string,
+}): Promise<void> => {
+  await testInWorkspace(async (app, org, ws) => {
+    const testLibraryName = "test"
+    const testLibraryRegion = 0
+    const libraryId = await app.libraries.createLibrary(testLibraryName, testLibraryRegion, true)
+    await app.libraries.addOrgToLibrary(libraryId, org.id)
+    await expect(ws.share(true)).resolves.not.toThrow()
+    await app.resolve(LibrariesService).initialize()
+
+    const library = app.libraries.collection.find(lib => lib.id === libraryId)
+    try {
+      await func(app, org, ws, library!)
+    } finally {
+      if ((await app.libraries.getLibraries()).find(lib => lib.id === library.id)) {
+        await app.libraries.deleteOrgFromLibrary(libraryId, org.id)
+        await app.libraries.deleteLibrary(library.id)
       }
     }
   }, config)

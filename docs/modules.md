@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev75](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev74
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev75
 
 ## Table of contents
 
@@ -9,6 +9,7 @@
 - [AnswerEvent](enums/AnswerEvent.md)
 - [AnswerStatus](enums/AnswerStatus.md)
 - [ChatAnswerType](enums/ChatAnswerType.md)
+- [ChatType](enums/ChatType.md)
 - [ChatsEvent](enums/ChatsEvent.md)
 - [FileProcessingStage](enums/FileProcessingStage.md)
 - [FilesEvent](enums/FilesEvent.md)
@@ -50,6 +51,9 @@
 - [FilesPage](classes/FilesPage.md)
 - [Group](classes/Group.md)
 - [Groups](classes/Groups.md)
+- [Library](classes/Library.md)
+- [LibraryFolder](classes/LibraryFolder.md)
+- [LibraryPage](classes/LibraryPage.md)
 - [Lifetime](classes/Lifetime.md)
 - [MetadataDto](classes/MetadataDto.md)
 - [Organization](classes/Organization.md)
@@ -78,6 +82,8 @@
 - [BadRequest](interfaces/BadRequest.md)
 - [ChatDto](interfaces/ChatDto.md)
 - [ChatListResponse](interfaces/ChatListResponse.md)
+- [ChatResourceDto](interfaces/ChatResourceDto.md)
+- [CreateLibraryResponse](interfaces/CreateLibraryResponse.md)
 - [CurrentLimitItem](interfaces/CurrentLimitItem.md)
 - [CurrentLimitRecordData](interfaces/CurrentLimitRecordData.md)
 - [CurrentLimitsData](interfaces/CurrentLimitsData.md)
@@ -98,6 +104,13 @@
 - [InviteCodeResponse](interfaces/InviteCodeResponse.md)
 - [InviteLink](interfaces/InviteLink.md)
 - [InviteResponse](interfaces/InviteResponse.md)
+- [LibrariesResponse](interfaces/LibrariesResponse.md)
+- [LibraryDto](interfaces/LibraryDto.md)
+- [LibraryFolderDto](interfaces/LibraryFolderDto.md)
+- [LibraryFolderResponse](interfaces/LibraryFolderResponse.md)
+- [LibraryOrganizationDto](interfaces/LibraryOrganizationDto.md)
+- [LibraryPageResponse](interfaces/LibraryPageResponse.md)
+- [LibraryResponse](interfaces/LibraryResponse.md)
 - [MembersResponse](interfaces/MembersResponse.md)
 - [OrderData](interfaces/OrderData.md)
 - [OrderResponse](interfaces/OrderResponse.md)
@@ -145,7 +158,9 @@
 - [ChatId](modules.md#chatid)
 - [FileId](modules.md#fileid)
 - [FlowId](modules.md#flowid)
+- [FolderId](modules.md#folderid)
 - [GroupId](modules.md#groupid)
+- [LibraryId](modules.md#libraryid)
 - [Middleware](modules.md#middleware)
 - [OrganizationId](modules.md#organizationid)
 - [StepId](modules.md#stepid)
@@ -195,11 +210,23 @@ Query flow id.
 
 ___
 
+### FolderId
+
+Ƭ **FolderId**: `string`
+
+___
+
 ### GroupId
 
 Ƭ **GroupId**: `string`
 
 Group id.
+
+___
+
+### LibraryId
+
+Ƭ **LibraryId**: `string`
 
 ___
 

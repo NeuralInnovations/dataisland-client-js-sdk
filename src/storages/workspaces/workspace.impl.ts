@@ -42,6 +42,13 @@ export class WorkspaceImpl extends Workspace {
     throw new Error("Workspace is not loaded.")
   }
 
+  get isShared(): boolean {
+    if (this._workspace) {
+      return this._workspace.isShared
+    }
+    throw new Error("Workspace is not loaded.")
+  }
+
   get files(): Files {
     return this._files
   }
@@ -107,6 +114,42 @@ export class WorkspaceImpl extends Workspace {
     if (this._workspace) {
       this._workspace.profile.name = name
       this._workspace.profile.description = description
+    }
+
+    this.dispatch({
+      type: WorkspaceEvent.CHANGED,
+      data: this
+    })
+  }
+
+  async share(isShared: boolean): Promise<void> {
+    if (!this._workspace) {
+      throw new Error("Workspace is not loaded.")
+    }
+    if (this._isMarkAsDeleted) {
+      throw new Error("Workspace is marked as deleted.")
+    }
+    if (isShared === this.isShared) {
+      return Promise.resolve()
+    }
+    if (isShared === undefined || isShared === null) {
+      throw new Error("Is shared parameter is required.")
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/workspaces/library")
+      .sendPutJson({
+        workspaceId: this.id,
+        isShared: isShared
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to change workspace shared state", response)
+    }
+
+    if (this._workspace) {
+      this._workspace.isShared = isShared
     }
 
     this.dispatch({
