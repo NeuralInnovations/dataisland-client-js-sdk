@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../../README.md) / [Exports](../modules.md) / Workspace
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev75](../../README.md) / [Exports](../modules.md) / Workspace
 
 # Class: Workspace
 
@@ -21,6 +21,7 @@ Workspace.
 - [description](Workspace.md#description)
 - [files](Workspace.md#files)
 - [id](Workspace.md#id)
+- [isShared](Workspace.md#isshared)
 - [name](Workspace.md#name)
 - [organization](Workspace.md#organization)
 
@@ -29,6 +30,7 @@ Workspace.
 - [change](Workspace.md#change)
 - [dispatch](Workspace.md#dispatch)
 - [filesCount](Workspace.md#filescount)
+- [share](Workspace.md#share)
 - [subscribe](Workspace.md#subscribe)
 
 ## Constructors
@@ -80,6 +82,16 @@ Workspace id.
 #### Returns
 
 `string`
+
+___
+
+### isShared
+
+• `get` **isShared**(): `boolean`
+
+#### Returns
+
+`boolean`
 
 ___
 
@@ -155,6 +167,24 @@ Workspace files count.
 #### Returns
 
 `Promise`\<`number`\>
+
+___
+
+### share
+
+▸ **share**(`isShared`): `Promise`\<`void`\>
+
+Make workspace available for the library implementation
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `isShared` | `boolean` |
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 

@@ -1,5 +1,6 @@
 import { Answer } from "./answer"
 import { Organization } from "../organizations/organization"
+import {ChatResourceDto} from "../../dto/chatResponse"
 
 export type ChatId = string
 
@@ -26,14 +27,9 @@ export abstract class Chat {
   abstract get name(): string
 
   /**
-   * Connected file ID.
+   * Chat resource info : type ChatType, related entities Ids.
    */
-  abstract get fileId(): string
-
-  /**
-   * Connected workspace ID.
-   */
-  abstract get workspaceIds(): string[]
+  abstract get resource(): ChatResourceDto
 
   /**
    * Model.

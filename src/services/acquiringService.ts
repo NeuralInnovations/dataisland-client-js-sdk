@@ -11,8 +11,8 @@ export class AcquiringService extends Service {
     this._acquiring = new AcquiringImpl(serviceContext.context)
   }
 
-  initialize(): Promise<void> {
-    return this._acquiring.initialize()
+  async initialize(): Promise<void> {
+    return await this._acquiring.initialize()
   }
 
   get acquiring(): Acquiring {

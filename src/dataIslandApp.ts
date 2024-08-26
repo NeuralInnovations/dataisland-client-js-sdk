@@ -5,6 +5,7 @@ import type { Constructor } from "./internal/registry"
 import { Organizations } from "./storages/organizations/organizations"
 import { UserProfile } from "./storages/user/userProfile"
 import { Acquiring } from "./storages/acquirings/acquiring"
+import {Libraries} from "./storages/library/libraries"
 
 /**
  * DataIsland App instance.
@@ -56,6 +57,11 @@ export abstract class DataIslandApp {
    * Acquiring.
    */
   abstract get acquiring(): Acquiring
+
+  /**
+   * Libraries.
+   */
+  abstract get libraries(): Libraries
 
   /**
    * Resolve a service from the app.

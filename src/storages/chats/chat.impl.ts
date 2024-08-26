@@ -1,7 +1,7 @@
 import { Chat, ChatAnswerType } from "./chat"
 import { Disposable } from "../../disposable"
 import { Answer, AnswerId } from "./answer"
-import {ChatDto} from "../../dto/chatResponse"
+import {ChatDto, ChatResourceDto} from "../../dto/chatResponse"
 import { Context } from "../../context"
 import { AnswerImpl } from "./answer.impl"
 import { RpcService } from "../../services/rpcService"
@@ -66,12 +66,8 @@ export class ChatImpl extends Chat implements Disposable {
     return <string>this._content?.name
   }
 
-  get fileId(): string {
-    return <string>this._content?.fileId
-  }
-
-  get workspaceIds(): string[] {
-    return <string[]>this._content?.workspaceIds
+  get resource(): ChatResourceDto {
+    return  <ChatResourceDto>this._content?.resources
   }
 
   get model(): string {

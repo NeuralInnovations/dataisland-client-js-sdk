@@ -212,6 +212,98 @@ export class ChatsImpl extends Chats {
     return chat
   }
 
+  async createWithLibraryFolder(libraryId: string, folderIds: string[] | null = null): Promise<Chat | undefined>{
+    if (libraryId === undefined || libraryId === null || libraryId.trim() === "")  {
+      throw new Error("Create chat with library folder, library id is undefined, null or empty")
+    }
+
+    // send create request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/chats/library/folders")
+      .sendPostJson({
+        libraryId: libraryId,
+        folderIds: folderIds,
+        model: "search",
+        clientContext: "",
+      })
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
+
+      await ResponseUtils.throwError(`Failed to create chat in library with folder, library: ${libraryId}`, response)
+    }
+
+    // parse workspace from the server's response
+    const content = (await response!.json() as {
+      chat: ChatDto
+    }).chat as ChatDto
+
+    // create workspace implementation
+    const chat = new ChatImpl(this.context, this.organization)
+    await chat.initFrom(content)
+
+    // add chat to the collection
+    this._chats.push(chat)
+
+    // dispatch event
+    this.dispatch({
+      type: ChatsEvent.ADDED,
+      data: chat
+    })
+
+    return chat
+  }
+
+  async createWithLibraryFile(libraryId: string, fileId: string): Promise<Chat | undefined>{
+    if (libraryId === undefined || libraryId === null || libraryId.trim() === "")  {
+      throw new Error("Create chat with library file, library id is undefined, null or empty")
+    }
+
+    // send create request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/chats/library/file")
+      .sendPostJson({
+        libraryId: libraryId,
+        fileId: fileId,
+        model: "search",
+        clientContext: "",
+      })
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      if (await ResponseUtils.isLimitReached()){
+        return undefined
+      }
+
+      await ResponseUtils.throwError(`Failed to create chat in library with file, library: ${libraryId}`, response)
+    }
+
+    // parse workspace from the server's response
+    const content = (await response!.json() as {
+      chat: ChatDto
+    }).chat as ChatDto
+
+    // create workspace implementation
+    const chat = new ChatImpl(this.context, this.organization)
+    await chat.initFrom(content)
+
+    // add chat to the collection
+    this._chats.push(chat)
+
+    // dispatch event
+    this.dispatch({
+      type: ChatsEvent.ADDED,
+      data: chat
+    })
+
+    return chat
+  }
+
 
 
 

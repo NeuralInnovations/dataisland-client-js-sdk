@@ -342,3 +342,8 @@ await organization.createInviteCode(accessGroups[])
 // Use app.organizations storage to validate invite codes
 await organizations.validateInviteCode(inviteCode)
 ```
+
+### Use library
+
+Libraries implementation object contains methods for creating and deleting libraries, adding organization to library or remove it. If your oganization is added to library, you can make any workspace in it "shared" using workspace.share() method. Library is implemented as an objects tree, so Library is a root. You can get library content using library.query() method, like in workspaces. The difference is library pages contains not only files but also foldes. You can get next folder content also using libraryFolder.query method. Also chats with library and with library specific file is available in Chats. 
+

@@ -37,6 +37,8 @@ export abstract class Workspace extends EventDispatcher<
    */
   abstract get description(): string
 
+  abstract get isShared(): boolean
+
   /**
    * Workspace files.
    */
@@ -51,4 +53,10 @@ export abstract class Workspace extends EventDispatcher<
    * Change workspace name and description.
    */
   abstract change(name: string, description: string): Promise<void>
+
+  /**
+   * Make workspace available for the library implementation
+   * @param isShared
+   */
+  abstract share(isShared: boolean): Promise<void>
 }
