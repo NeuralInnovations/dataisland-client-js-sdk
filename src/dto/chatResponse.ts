@@ -24,13 +24,31 @@ export interface ChatDto {
   name: string;
   createdAt: number;
   modifiedAt: number;
+  resources: ChatResourceDto;
   userId: UserId;
-  organizationId: string;
-  workspaceIds: string[];
-  fileId: string;
   model: string;
   clientContext: string;
   answers: AnswerDto[];
+}
+
+export interface ChatResourceDto {
+  chatType: ChatType
+  libraryId: string
+  organizationId: string
+  workspaceIds: string[]
+  fileId: string
+}
+
+export enum ChatType {
+  None = 0,
+  Organization = 1,
+  Workspaces = 2,
+  File = 3,
+  Library = 100,
+  LibraryOrganization = 101,
+  LibraryWorkspaces = 102,
+  LibraryFile = 103
+
 }
 
 export interface ChatListResponse {

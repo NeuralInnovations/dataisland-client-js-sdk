@@ -41,6 +41,20 @@ export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
   abstract createWithWorkspace(workspaceIds: string[], clientContext: string): Promise<Chat | undefined>
 
   /**
+   * Create chat with library folders
+   * @param libraryId
+   * @param folderIds
+   */
+  abstract createWithLibraryFolder(libraryId: string, folderIds: string[]): Promise<Chat | undefined>
+
+  /**
+   * Create chat with library file
+   * @param libraryId
+   * @param fileId
+   */
+  abstract createWithLibraryFile(libraryId: string, fileId: string): Promise<Chat | undefined>
+
+  /**
    * Get chat by id.
    * @param id
    */

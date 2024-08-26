@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../../README.md) / [Exports](../modules.md) / DataIslandApp
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev75](../../README.md) / [Exports](../modules.md) / DataIslandApp
 
 # Class: DataIslandApp
 
@@ -17,6 +17,7 @@ DataIsland App instance.
 - [context](DataIslandApp.md#context)
 - [credential](DataIslandApp.md#credential)
 - [host](DataIslandApp.md#host)
+- [libraries](DataIslandApp.md#libraries)
 - [lifetime](DataIslandApp.md#lifetime)
 - [name](DataIslandApp.md#name)
 - [organizations](DataIslandApp.md#organizations)
@@ -107,6 +108,18 @@ The host of this app.
 #### Returns
 
 `string`
+
+___
+
+### libraries
+
+• `get` **libraries**(): `Libraries`
+
+Libraries.
+
+#### Returns
+
+`Libraries`
 
 ___
 

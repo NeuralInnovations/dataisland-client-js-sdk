@@ -32,6 +32,8 @@ import { CookieService } from "../services/cookieService"
 import { AnonymousService } from "../services/anonymousService"
 import { Acquiring } from "../storages/acquirings/acquiring"
 import { AcquiringService } from "../services/acquiringService"
+import {Libraries} from "../storages/library/libraries"
+import {LibrariesService} from "../services/librariesService"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -89,6 +91,10 @@ export class DataIslandAppImpl extends DataIslandApp {
     return (this.resolve(AcquiringService) as AcquiringService).acquiring
   }
 
+  get libraries(): Libraries {
+    return (this.resolve(LibrariesService) as LibrariesService).libraries
+  }
+
   async initialize(
     setup: ((builder: AppBuilder) => Promise<void>) | undefined
   ): Promise<void> {
@@ -130,6 +136,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     })
     builder.registerService(AcquiringService, (context: ServiceContext) => {
       return new AcquiringService(context)
+    })
+    builder.registerService(LibrariesService, (context: ServiceContext) => {
+      return new LibrariesService(context)
     })
 
     // call customer setup

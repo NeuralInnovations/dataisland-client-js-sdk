@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev75](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 
@@ -25,6 +25,8 @@ Chats storage.
 
 - [create](Chats.md#create)
 - [createWithFile](Chats.md#createwithfile)
+- [createWithLibraryFile](Chats.md#createwithlibraryfile)
+- [createWithLibraryFolder](Chats.md#createwithlibraryfolder)
 - [createWithWorkspace](Chats.md#createwithworkspace)
 - [delete](Chats.md#delete)
 - [dispatch](Chats.md#dispatch)
@@ -102,6 +104,44 @@ Create chat with specific file
 | Name | Type |
 | :------ | :------ |
 | `fileId` | `string` |
+
+#### Returns
+
+`Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+
+___
+
+### createWithLibraryFile
+
+▸ **createWithLibraryFile**(`libraryId`, `fileId`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+
+Create chat with library file
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `libraryId` | `string` |
+| `fileId` | `string` |
+
+#### Returns
+
+`Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+
+___
+
+### createWithLibraryFolder
+
+▸ **createWithLibraryFolder**(`libraryId`, `folderIds`): `Promise`\<`undefined` \| [`Chat`](Chat.md)\>
+
+Create chat with library folders
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `libraryId` | `string` |
+| `folderIds` | `string`[] |
 
 #### Returns
 

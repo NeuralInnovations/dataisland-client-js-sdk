@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev74](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev75](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -12,12 +12,11 @@
 
 - [clientContext](Chat.md#clientcontext)
 - [collection](Chat.md#collection)
-- [fileId](Chat.md#fileid)
 - [id](Chat.md#id)
 - [model](Chat.md#model)
 - [name](Chat.md#name)
 - [organization](Chat.md#organization)
-- [workspaceIds](Chat.md#workspaceids)
+- [resource](Chat.md#resource)
 
 ### Methods
 
@@ -58,18 +57,6 @@ Answers list.
 #### Returns
 
 readonly [`Answer`](Answer.md)[]
-
-___
-
-### fileId
-
-• `get` **fileId**(): `string`
-
-Connected file ID.
-
-#### Returns
-
-`string`
 
 ___
 
@@ -121,15 +108,15 @@ Organization.
 
 ___
 
-### workspaceIds
+### resource
 
-• `get` **workspaceIds**(): `string`[]
+• `get` **resource**(): [`ChatResourceDto`](../interfaces/ChatResourceDto.md)
 
-Connected workspace ID.
+Chat resource info : type ChatType, related entities Ids.
 
 #### Returns
 
-`string`[]
+[`ChatResourceDto`](../interfaces/ChatResourceDto.md)
 
 ## Methods
 

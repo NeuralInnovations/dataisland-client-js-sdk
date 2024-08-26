@@ -1,9 +1,7 @@
 import {appTest, UnitTest} from "../src/unitTest"
-import {testInWorkspace} from "./setup"
+import {testInWorkspace, uploadTestFile} from "./setup"
 import fs from "fs"
 import {
-  FileProcessingStage,
-  FilesEvent,
   QueryFlowStatus,
   UploadFile
 } from "../src"
@@ -15,36 +13,14 @@ test("QueryFlows", async () => {
       expect(app).not.toBeUndefined()
       expect(org).not.toBeUndefined()
 
-      const buffer2 = fs.readFileSync("test/data/test_file2.pdf")
-      const file_obj: UploadFile = new File([new Uint8Array(buffer2)], "test_file2.pdf", {
-        type: "application/pdf"
-      })
-
-      await ws.files.upload([file_obj])
-
-      const files = await ws.files.query("", 0, 10)
-
-      const file = files.files[0]
-      let file_loaded = false
-
-      file.subscribe((evt) => {
-        if (evt.data.status > FileProcessingStage.PROCESSING) {
-          file_loaded = true
-        }
-      }, FilesEvent.UPDATED)
-
-      while (!file_loaded) {
-        await new Promise(f => setTimeout(f, 500))
-      }
-
-      await expect(file.status).toBe(FileProcessingStage.DONE)
+      const file = await uploadTestFile(org, ws,"test/data/test_file2.pdf", "application/pdf")
 
       const buffer = fs.readFileSync("test/data/test_csv.csv")
       const test_file: UploadFile = new File([new Uint8Array(buffer)], "test_csv.csv", {
         type: "application/csv"
       })
 
-      const flow_id = await org.queryFlows.create( ws.id, file.id, test_file)
+      const flow_id = await org.queryFlows.create( ws.id, file, test_file)
 
       expect(flow_id).not.toBeUndefined()
       expect(flow_id).not.toBeNull()
@@ -72,7 +48,7 @@ test("QueryFlows", async () => {
 
       expect(flow_obj.status).toBe(QueryFlowStatus.DONE)
 
-      await ws.files.delete([file.id])
+      await ws.files.delete([file])
       await expect(org.queryFlows.delete(flow_id)).resolves.not.toThrow()
     })
   })

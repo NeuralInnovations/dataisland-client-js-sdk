@@ -10,6 +10,7 @@ export interface WorkspaceDto {
   id: WorkspaceId
   createdAt: number
   modifiedAt: number
+  isShared: boolean
   profile: WorkspaceProfileDto
 }
 
