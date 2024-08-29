@@ -8,6 +8,7 @@
 
 - [description](OrganizationProfileDto.md#description)
 - [iconId](OrganizationProfileDto.md#iconid)
+- [isAllowedInLibraries](OrganizationProfileDto.md#isallowedinlibraries)
 - [name](OrganizationProfileDto.md#name)
 
 ## Properties
@@ -21,6 +22,12 @@ ___
 ### iconId
 
 • **iconId**: `string`
+
+___
+
+### isAllowedInLibraries
+
+• **isAllowedInLibraries**: `boolean`
 
 ___
 

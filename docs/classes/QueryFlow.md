@@ -17,6 +17,7 @@
 ### Accessors
 
 - [id](QueryFlow.md#id)
+- [name](QueryFlow.md#name)
 - [resultUrl](QueryFlow.md#resulturl)
 - [status](QueryFlow.md#status)
 
@@ -44,6 +45,16 @@
 ### id
 
 • `get` **id**(): `string`
+
+#### Returns
+
+`string`
+
+___
+
+### name
+
+• `get` **name**(): `string`
 
 #### Returns
 

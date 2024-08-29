@@ -6,10 +6,17 @@
 
 ### Properties
 
+- [name](QueryFlowDto.md#name)
 - [result](QueryFlowDto.md#result)
 - [state](QueryFlowDto.md#state)
 
 ## Properties
+
+### name
+
+• **name**: `string`
+
+___
 
 ### result
 

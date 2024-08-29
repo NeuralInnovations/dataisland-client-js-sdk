@@ -23,6 +23,7 @@ Organization.
 - [description](Organization.md#description)
 - [icon](Organization.md#icon)
 - [id](Organization.md#id)
+- [isAllowedInLibraries](Organization.md#isallowedinlibraries)
 - [name](Organization.md#name)
 - [queryFlows](Organization.md#queryflows)
 - [workspaces](Organization.md#workspaces)
@@ -122,6 +123,18 @@ Organization id.
 #### Returns
 
 `string`
+
+___
+
+### isAllowedInLibraries
+
+• `get` **isAllowedInLibraries**(): `boolean`
+
+If organizations allowed in libraries
+
+#### Returns
+
+`boolean`
 
 ___
 

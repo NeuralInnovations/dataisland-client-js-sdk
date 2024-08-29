@@ -53,12 +53,13 @@
 
 ### create
 
-▸ **create**(`workspaceId`, `fileId`, `file`): `Promise`\<`string`\>
+▸ **create**(`name`, `workspaceId`, `fileId`, `file`): `Promise`\<`string`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
+| `name` | `string` |
 | `workspaceId` | `string` |
 | `fileId` | `string` |
 | `file` | `File` |
