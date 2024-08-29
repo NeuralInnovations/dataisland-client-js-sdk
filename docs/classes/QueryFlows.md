@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev75](../../README.md) / [Exports](../modules.md) / QueryFlows
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev76](../../README.md) / [Exports](../modules.md) / QueryFlows
 
 # Class: QueryFlows
 
@@ -53,12 +53,13 @@
 
 ### create
 
-▸ **create**(`workspaceId`, `fileId`, `file`): `Promise`\<`string`\>
+▸ **create**(`name`, `workspaceId`, `fileId`, `file`): `Promise`\<`string`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
+| `name` | `string` |
 | `workspaceId` | `string` |
 | `fileId` | `string` |
 | `file` | `File` |

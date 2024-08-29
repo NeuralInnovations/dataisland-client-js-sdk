@@ -37,6 +37,7 @@ export interface OrganizationProfileDto {
   name: string
   description: string
   iconId: string
+  isAllowedInLibraries: boolean
 }
 
 export interface OrganizationDto {
