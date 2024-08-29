@@ -88,12 +88,9 @@ export class WorkspaceImpl extends Workspace {
     }
     if (
       description === undefined ||
-      description === null ||
-      description.trim() === ""
+      description === null
     ) {
-      throw new Error(
-        "Description is required. Please provide a valid description."
-      )
+      description = ""
     }
 
     const response = await this.context

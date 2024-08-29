@@ -54,7 +54,14 @@ export class QueryFlowImpl extends QueryFlow {
     if (this._id)
       return this._id
     else
-      throw new Error("Query fLow is not loaded")
+      throw new Error("Query flow is not loaded")
+  }
+
+  get name(): string {
+    if (this._content)
+      return this._content.name
+    else
+      throw new Error("Query flow is not loaded")
   }
 
   get resultUrl(): string {

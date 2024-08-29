@@ -13,6 +13,8 @@ export abstract class QueryFlow extends EventDispatcher<
 
   abstract get id(): FlowId
 
+  abstract get name(): string
+
   abstract get status(): QueryFlowStatus
 
   abstract get resultUrl(): string
