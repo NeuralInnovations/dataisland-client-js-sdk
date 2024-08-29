@@ -104,6 +104,10 @@ export class OrganizationImpl extends Organization implements Disposable {
     return <string>this._content?.profile.iconId
   }
 
+  get isAllowedInLibraries(): boolean {
+    return <boolean>this._content?.profile.isAllowedInLibraries
+  }
+
   get workspaces(): Workspaces {
     return this._workspaces
   }

@@ -20,7 +20,9 @@ test("QueryFlows", async () => {
         type: "application/csv"
       })
 
-      const flow_id = await org.queryFlows.create( ws.id, file, test_file)
+      const flow_name = "test"
+
+      const flow_id = await org.queryFlows.create(flow_name, ws.id, file, test_file)
 
       expect(flow_id).not.toBeUndefined()
       expect(flow_id).not.toBeNull()
@@ -29,6 +31,7 @@ test("QueryFlows", async () => {
 
       expect(flow_obj).not.toBeUndefined()
       expect(flow_obj).not.toBeNull()
+      expect(flow_obj.name).toBe(flow_name)
 
       let flow_ended = false
 

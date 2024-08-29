@@ -39,7 +39,7 @@ export class LibraryImpl extends Library {
 
   get name(): string {
     if (this._library) {
-      return this._library.id
+      return this._library.name
     }
     throw new Error("Library is not loaded.")
   }

@@ -12,6 +12,7 @@ export interface QueryFlowResult {
 
 // GET query flow by ID
 export interface QueryFlowDto {
+  name: string
   state: QueryFlowStatus,
   result: QueryFlowResult
 }
