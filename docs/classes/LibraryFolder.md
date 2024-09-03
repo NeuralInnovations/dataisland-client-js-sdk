@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev76](../../README.md) / [Exports](../modules.md) / LibraryFolder
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev77](../../README.md) / [Exports](../modules.md) / LibraryFolder
 
 # Class: LibraryFolder
 
@@ -10,6 +10,7 @@
 
 ### Accessors
 
+- [description](LibraryFolder.md#description)
 - [folderId](LibraryFolder.md#folderid)
 - [iconId](LibraryFolder.md#iconid)
 - [libraryId](LibraryFolder.md#libraryid)
@@ -32,6 +33,16 @@
 [`LibraryFolder`](LibraryFolder.md)
 
 ## Accessors
+
+### description
+
+• `get` **description**(): `string`
+
+#### Returns
+
+`string`
+
+___
 
 ### folderId
 

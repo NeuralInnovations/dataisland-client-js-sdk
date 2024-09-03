@@ -1,6 +1,5 @@
-import {LibraryId} from "./library"
-import {LibraryPage} from "./libraryPage"
-
+import { LibraryId } from "./library"
+import { LibraryPage } from "./libraryPage"
 
 export type FolderId = string
 
@@ -13,6 +12,8 @@ export abstract class LibraryFolder {
   abstract get folderId(): FolderId
 
   abstract get name(): string
+
+  abstract get description(): string
 
   abstract get iconId(): string
 

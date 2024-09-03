@@ -1,6 +1,6 @@
-import {FileDto} from "./workspacesResponse"
-import {OrganizationId} from "../storages/organizations/organizations"
-import {LibraryId} from "../storages/library/library"
+import { FileDto } from "./workspacesResponse"
+import { OrganizationId } from "../storages/organizations/organizations"
+import { LibraryId } from "../storages/library/library"
 
 export interface LibrariesResponse {
   libraries: LibraryFolderDto[]
@@ -9,6 +9,7 @@ export interface LibrariesResponse {
 export interface LibraryFolderDto {
   id: string
   name: string
+  description: string
   iconId: string
   createdAt: number
   modifiedAt: number

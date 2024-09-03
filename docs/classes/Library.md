@@ -1,6 +1,8 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev76](../../README.md) / [Exports](../modules.md) / Library
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev77](../../README.md) / [Exports](../modules.md) / Library
 
 # Class: Library
+
+Library.
 
 ## Table of contents
 
@@ -34,6 +36,8 @@
 
 • `get` **id**(): `string`
 
+Library id.
+
 #### Returns
 
 `string`
@@ -44,6 +48,8 @@ ___
 
 • `get` **name**(): `string`
 
+Library name.
+
 #### Returns
 
 `string`
@@ -53,6 +59,8 @@ ___
 ### getFolder
 
 ▸ **getFolder**(`folderId`): `Promise`\<[`LibraryFolder`](LibraryFolder.md)\>
+
+Get library folder by id.
 
 #### Parameters
 
@@ -69,6 +77,8 @@ ___
 ### query
 
 ▸ **query**(`query`, `page`, `limit`): `Promise`\<[`LibraryPage`](LibraryPage.md)\>
+
+Get library folders by query.
 
 #### Parameters
 

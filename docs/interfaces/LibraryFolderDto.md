@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev76](../../README.md) / [Exports](../modules.md) / LibraryFolderDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev77](../../README.md) / [Exports](../modules.md) / LibraryFolderDto
 
 # Interface: LibraryFolderDto
 
@@ -7,6 +7,7 @@
 ### Properties
 
 - [createdAt](LibraryFolderDto.md#createdat)
+- [description](LibraryFolderDto.md#description)
 - [iconId](LibraryFolderDto.md#iconid)
 - [id](LibraryFolderDto.md#id)
 - [modifiedAt](LibraryFolderDto.md#modifiedat)
@@ -17,6 +18,12 @@
 ### createdAt
 
 • **createdAt**: `number`
+
+___
+
+### description
+
+• **description**: `string`
 
 ___
 
