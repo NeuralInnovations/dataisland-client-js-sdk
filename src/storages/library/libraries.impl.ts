@@ -1,15 +1,14 @@
-import {Libraries} from "./libraries"
-import {Library, LibraryId} from "./library"
-import {LibraryImpl} from "./library.impl"
-import {Context} from "../../context"
+import { Libraries } from "./libraries"
+import { Library, LibraryId } from "./library"
+import { LibraryImpl } from "./library.impl"
+import { Context } from "../../context"
 import {
   CreateLibraryResponse,
   LibrariesResponse, LibraryDto, LibraryResponse
 } from "../../dto/libraryResponse"
-import {RpcService} from "../../services/rpcService"
-import {ResponseUtils} from "../../services/responseUtils"
-import {OrganizationId} from "../organizations/organizations"
-
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
+import { OrganizationId } from "../organizations/organizations"
 
 export class LibrariesImpl extends Libraries {
   private readonly _libraries: LibraryImpl[] = []
@@ -20,7 +19,7 @@ export class LibrariesImpl extends Libraries {
     super()
   }
 
-  async initialize(){
+  async initialize() {
     // fetch limits
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/libraries")
@@ -36,19 +35,18 @@ export class LibrariesImpl extends Libraries {
     // parse limits from the server's response
     const libraries = (json as LibrariesResponse).libraries
 
-    for (const library of libraries){
+    for (const library of libraries) {
       const impl = new LibraryImpl(this.context)
       await impl.initFrom(library)
       this._libraries.push(impl)
     }
   }
 
-
   get collection(): readonly Library[] {
     return this._libraries
   }
 
-  async createLibrary(name: string, region: number, isPublic: boolean): Promise<LibraryId>{
+  async createLibrary(name: string, region: number, isPublic: boolean): Promise<LibraryId> {
     if (
       name === undefined ||
       name === null ||
@@ -79,13 +77,12 @@ export class LibrariesImpl extends Libraries {
       await ResponseUtils.throwError(`Failed to create library ${name}`, response)
     }
 
-
     const library = (await response!.json()) as CreateLibraryResponse
 
     return library.libraryId
   }
 
-  async addOrgToLibrary(libraryId: LibraryId, organizationId: OrganizationId): Promise<void>{
+  async addOrgToLibrary(libraryId: LibraryId, organizationId: OrganizationId): Promise<void> {
     if (libraryId === undefined || libraryId === null) {
       throw new Error("Organization add to library, libraryId is undefined or null")
     }
@@ -114,7 +111,7 @@ export class LibrariesImpl extends Libraries {
     }
   }
 
-  async getLibraries(): Promise<LibraryDto[]>{
+  async getLibraries(): Promise<LibraryDto[]> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/libraries/management/allowed/organizations")
@@ -134,7 +131,7 @@ export class LibrariesImpl extends Libraries {
     return libraries.libraries
   }
 
-  async deleteOrgFromLibrary(libraryId: LibraryId, organizationId: OrganizationId): Promise<void>{
+  async deleteOrgFromLibrary(libraryId: LibraryId, organizationId: OrganizationId): Promise<void> {
     if (libraryId === undefined || libraryId === null) {
       throw new Error("Organization delete from library, libraryId is undefined or null")
     }
@@ -165,7 +162,7 @@ export class LibrariesImpl extends Libraries {
     }
   }
 
-  async deleteLibrary(libraryId: LibraryId): Promise<void>{
+  async deleteLibrary(libraryId: LibraryId): Promise<void> {
     if (libraryId === undefined || libraryId === null) {
       throw new Error("Library delete, libraryId is undefined or null")
     }

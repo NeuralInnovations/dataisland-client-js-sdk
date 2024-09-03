@@ -1,16 +1,18 @@
-import {LibraryFolder, FolderId} from "./libraryFolder"
-import {LibraryId} from "./library"
-import {LibraryPage} from "./libraryPage"
-import {Context} from "../../context"
-import {LibraryFolderDto, LibraryPageResponse} from "../../dto/libraryResponse"
-import {LibraryImpl} from "./library.impl"
-import {RpcService} from "../../services/rpcService"
-import {ResponseUtils} from "../../services/responseUtils"
-import {LibraryPageImpl} from "./libraryPage.impl"
-import {FileImpl} from "../files/file.impl"
+import { LibraryFolder, FolderId } from "./libraryFolder"
+import { LibraryId } from "./library"
+import { LibraryPage } from "./libraryPage"
+import { Context } from "../../context"
+import {
+  LibraryFolderDto,
+  LibraryPageResponse
+} from "../../dto/libraryResponse"
+import { LibraryImpl } from "./library.impl"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
+import { LibraryPageImpl } from "./libraryPage.impl"
+import { FileImpl } from "../files/file.impl"
 
-
-export class LibraryFolderImpl extends  LibraryFolder {
+export class LibraryFolderImpl extends LibraryFolder {
   private _libFolder?: LibraryFolderDto
 
   public libraryPage?: LibraryPage
@@ -44,6 +46,13 @@ export class LibraryFolderImpl extends  LibraryFolder {
   get name(): string {
     if (this._libFolder) {
       return this._libFolder.name
+    }
+    throw new Error("LibraryFolder is not loaded.")
+  }
+
+  get description(): string {
+    if (this._libFolder) {
+      return this._libFolder.description
     }
     throw new Error("LibraryFolder is not loaded.")
   }

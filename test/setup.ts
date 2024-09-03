@@ -9,7 +9,7 @@ import { Organization } from "../src"
 import { Workspace } from "../src"
 import { jest } from "@jest/globals"
 import fs from "fs"
-import {LibrariesService} from "../src/services/librariesService"
+import { LibrariesService } from "../src/services/librariesService"
 
 export const HOST = <string>process.env.HOST
 const UNITTEST_TOKEN = <string>process.env.UNITTEST_TOKEN
@@ -60,7 +60,7 @@ export const randomHash = (length: number = 10) => {
   return hash
 }
 
-export const uploadTestFile = async (org: Organization, ws: Workspace, filepath: string, format: string): Promise<FileId> =>  {
+export const uploadTestFile = async (org: Organization, ws: Workspace, filepath: string, format: string): Promise<FileId> => {
   const buffer = fs.readFileSync(filepath)
   const file_obj: UploadFile = new File([new Blob([buffer])], filepath, {
     type: format
@@ -149,15 +149,15 @@ export const testInLibrary = async (func: (app: DataIslandApp, org: Organization
     const libraryId = await app.libraries.createLibrary(testLibraryName, testLibraryRegion, true)
     await app.libraries.addOrgToLibrary(libraryId, org.id)
     await expect(ws.share(true)).resolves.not.toThrow()
-    await app.resolve(LibrariesService).initialize()
+    await app.resolve(LibrariesService)!.initialize()
 
     const library = app.libraries.collection.find(lib => lib.id === libraryId)
     try {
       await func(app, org, ws, library!)
     } finally {
-      if ((await app.libraries.getLibraries()).find(lib => lib.id === library.id)) {
+      if ((await app.libraries.getLibraries()).find(lib => lib.id === library!.id)) {
         await app.libraries.deleteOrgFromLibrary(libraryId, org.id)
-        await app.libraries.deleteLibrary(library.id)
+        await app.libraries.deleteLibrary(library!.id)
       }
     }
   }, config)

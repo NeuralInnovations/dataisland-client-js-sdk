@@ -1,18 +1,17 @@
-import {Library, LibraryId} from "./library"
+import { Library, LibraryId } from "./library"
 import {
   LibraryFolderDto,
   LibraryFolderResponse,
   LibraryPageResponse
 } from "../../dto/libraryResponse"
-import {LibraryPage} from "./libraryPage"
-import {RpcService} from "../../services/rpcService"
-import {ResponseUtils} from "../../services/responseUtils"
-import {FileImpl} from "../files/file.impl"
-import {Context} from "../../context"
-import {LibraryPageImpl} from "./libraryPage.impl"
-import {LibraryFolderImpl} from "./libraryFolder.impl"
-import {FolderId, LibraryFolder} from "./libraryFolder"
-
+import { LibraryPage } from "./libraryPage"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
+import { FileImpl } from "../files/file.impl"
+import { Context } from "../../context"
+import { LibraryPageImpl } from "./libraryPage.impl"
+import { LibraryFolderImpl } from "./libraryFolder.impl"
+import { FolderId, LibraryFolder } from "./libraryFolder"
 
 export class LibraryImpl extends Library {
 
@@ -26,7 +25,7 @@ export class LibraryImpl extends Library {
     super()
   }
 
-  async initFrom(library: LibraryFolderDto){
+  async initFrom(library: LibraryFolderDto) {
     this._library = library
   }
 
