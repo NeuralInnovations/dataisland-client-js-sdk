@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev77](../../README.md) / [Exports](../modules.md) / FilesBatchFetchResponse
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev78](../../README.md) / [Exports](../modules.md) / FilesBatchFetchResponse
 
 # Interface: FilesBatchFetchResponse
 
