@@ -11,7 +11,6 @@ import {
   QueryFlowResponse
 } from "../../dto/queryFlowResponse"
 import {QueryFlowImpl} from "./queryFlow.impl"
-import {FileId} from "../files/file"
 import {UploadFile} from "../files/files"
 
 
@@ -64,27 +63,27 @@ export class QueryFlowsImpl extends QueryFlows {
     return this._collection
   }
 
-  async create(name: string, workspaceId: WorkspaceId, fileId: FileId, file: UploadFile ): Promise<FlowId> {
+  async create(name: string, workspaceId: WorkspaceId, file: UploadFile, table: UploadFile ): Promise<FlowId> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Name is required, must be not empty")
     }
     if (workspaceId === undefined || workspaceId === null || workspaceId.trim() === "") {
       throw new Error("WorkspaceId is required, must be not empty")
     }
-    if (fileId === undefined || fileId === null || fileId.trim() === "") {
-      throw new Error("FileId is required, must be not empty")
-    }
     if (file === undefined || file === null) {
       throw new Error("Create query flow, file is undefined or null")
+    }
+    if (table === undefined || table === null) {
+      throw new Error("Create query flow, table is undefined or null")
     }
 
     // form data to send
     const form = new FormData()
     form.append("organizationId", this.organization.id)
     form.append("workspaceId", workspaceId)
-    form.append("fileId", fileId)
     form.append("name", name)
     form.append("file", file, file.name)
+    form.append("tableFile", table, table.name)
 
     // send request to the server
     const response = await this.context

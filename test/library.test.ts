@@ -16,6 +16,9 @@ test("Libraries", async () => {
 
       await expect(app.libraries.addOrgToLibrary(libraryId, org.id)).resolves.not.toThrow()
 
+      // await app.userProfile.fetch()
+      // expect(app.organizations.get(org.id).isAllowedInLibraries).toBe(true)
+
       let libraries = await app.libraries.getLibraries()
 
       let library = libraries.find(lib => lib.id === libraryId)
