@@ -1,13 +1,10 @@
-import { LibraryId } from "./library"
 import { LibraryPage } from "./libraryPage"
-
-export type FolderId = string
+import { FolderId } from "./folderId"
+import { LibraryId } from "./libraryId"
 
 export abstract class LibraryFolder {
 
   abstract get libraryId(): LibraryId
-
-  abstract get parents(): FolderId[]
 
   abstract get folderId(): FolderId
 

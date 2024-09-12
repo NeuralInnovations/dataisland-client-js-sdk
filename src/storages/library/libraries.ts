@@ -1,14 +1,12 @@
-import { Library, LibraryId } from "./library"
+import { Library } from "./library"
 import { OrganizationId } from "../organizations/organizations"
 import { LibraryDto } from "../../dto/libraryResponse"
+import { LibraryId } from "./libraryId"
 
-export abstract class Libraries {
-
-  /**
-   * Collection of libraries
-   */
-  abstract get collection(): ReadonlyArray<Library>
-
+/**
+ * Library management, you must have permissions to manage libraries
+ */
+export abstract class LibraryManagement {
   /**
    * Create a new library
    */
@@ -33,4 +31,26 @@ export abstract class Libraries {
    * Delete a library by id
    */
   abstract deleteLibrary(libraryId: LibraryId): Promise<void>
+}
+
+/**
+ * Libraries
+ */
+export abstract class Libraries {
+
+  /**
+   * Collection of libraries
+   */
+  abstract get collection(): ReadonlyArray<Library>
+
+  /**
+   * Get library by id
+   * @param libraryId
+   */
+  abstract getLibraryById(libraryId: LibraryId): Library | undefined
+
+  /**
+   * You must have permissions to manage libraries
+   */
+  abstract get management(): LibraryManagement
 }

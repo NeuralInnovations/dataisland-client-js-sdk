@@ -70,6 +70,13 @@ export {
   SegmentsData
 } from "./dto/limitsResponse"
 
+export { FolderId } from "./storages/library/folderId"
+export { LibraryId } from "./storages/library/libraryId"
+export { Library } from "./storages/library/library"
+export { Libraries, LibraryManagement } from "./storages/library/libraries"
+export { LibraryPage, LibraryParent } from "./storages/library/libraryPage"
+export { LibraryFolder } from "./storages/library/libraryFolder"
+
 // map of apps that are not ready to be used
 const _appsNotReady = new Map<string, Promise<DataIslandApp>>()
 // map of apps that are ready to be used

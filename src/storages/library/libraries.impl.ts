@@ -1,5 +1,5 @@
-import { Libraries } from "./libraries"
-import { Library, LibraryId } from "./library"
+import { Libraries, LibraryManagement } from "./libraries"
+import { Library } from "./library"
 import { LibraryImpl } from "./library.impl"
 import { Context } from "../../context"
 import {
@@ -9,41 +9,14 @@ import {
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import { OrganizationId } from "../organizations/organizations"
+import { LibraryId } from "./libraryId"
 
-export class LibrariesImpl extends Libraries {
-  private readonly _libraries: LibraryImpl[] = []
+export class LibraryManagementImpl extends LibraryManagement {
+  private context: Context
 
-  constructor(
-    private readonly context: Context
-  ) {
+  constructor(context: Context) {
     super()
-  }
-
-  async initialize() {
-    // fetch limits
-    const response = await this.context.resolve(RpcService)
-      ?.requestBuilder("api/v1/libraries")
-      .sendGet()
-
-    // check response status
-    if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError("Failed to get libraries", response)
-    }
-
-    const json = await response!.json()
-
-    // parse limits from the server's response
-    const libraries = (json as LibrariesResponse).libraries
-
-    for (const library of libraries) {
-      const impl = new LibraryImpl(this.context)
-      await impl.initFrom(library)
-      this._libraries.push(impl)
-    }
-  }
-
-  get collection(): readonly Library[] {
-    return this._libraries
+    this.context = context
   }
 
   async createLibrary(name: string, region: number, isPublic: boolean): Promise<LibraryId> {
@@ -184,6 +157,53 @@ export class LibrariesImpl extends Libraries {
         response
       )
     }
+  }
+}
+
+export class LibrariesImpl extends Libraries {
+  private readonly _libraries: LibraryImpl[] = []
+  private readonly _management
+
+  constructor(
+    private readonly context: Context
+  ) {
+    super()
+    this._management = new LibraryManagementImpl(context)
+  }
+
+  async initialize() {
+    // fetch limits
+    const response = await this.context.resolve(RpcService)
+      ?.requestBuilder("api/v1/libraries")
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to get libraries", response)
+    }
+
+    const json = await response!.json()
+
+    // parse limits from the server's response
+    const libraries = (json as LibrariesResponse).libraries
+
+    for (const library of libraries) {
+      const impl = new LibraryImpl(this.context)
+      await impl.initFrom(library)
+      this._libraries.push(impl)
+    }
+  }
+
+  get collection(): readonly Library[] {
+    return this._libraries
+  }
+
+  getLibraryById(libraryId: LibraryId): Library | undefined {
+    return this._libraries.find((library) => library.id === libraryId)
+  }
+
+  get management(): LibraryManagement {
+    return this._management
   }
 
 }

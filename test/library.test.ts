@@ -1,25 +1,24 @@
-import {appTest, UnitTest} from "../src/unitTest"
-import {testInWorkspace} from "./setup"
-import {LibrariesService} from "../src/services/librariesService"
-
+import { appTest, UnitTest } from "../src/unitTest"
+import { testInWorkspace } from "./setup"
+import { LibrariesService } from "../src/services/librariesService"
 
 test("Libraries", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
       const testLibraryName = "test"
       const testLibraryRegion = 0
-      const libraryId = await app.libraries.createLibrary(testLibraryName, testLibraryRegion, true)
+      const libraryId = await app.libraries.management.createLibrary(testLibraryName, testLibraryRegion, true)
 
       expect(libraryId).not.toBeUndefined()
       expect(libraryId).not.toBeNull()
       expect(libraryId).not.toBe("")
 
-      await expect(app.libraries.addOrgToLibrary(libraryId, org.id)).resolves.not.toThrow()
+      await expect(app.libraries.management.addOrgToLibrary(libraryId, org.id)).resolves.not.toThrow()
 
       // await app.userProfile.fetch()
       // expect(app.organizations.get(org.id).isAllowedInLibraries).toBe(true)
 
-      let libraries = await app.libraries.getLibraries()
+      let libraries = await app.libraries.management.getLibraries()
 
       let library = libraries.find(lib => lib.id === libraryId)
 
@@ -58,9 +57,9 @@ test("Libraries", async () => {
       // Check if workspace folder is available after sharing was turned off
       expect(orgFolderPage.folders.length).toBe(0)
 
-      await expect(app.libraries.deleteOrgFromLibrary(libraryId, org.id)).resolves.not.toThrow()
+      await expect(app.libraries.management.deleteOrgFromLibrary(libraryId, org.id)).resolves.not.toThrow()
 
-      libraries = await app.libraries.getLibraries()
+      libraries = await app.libraries.management.getLibraries()
       library = libraries.find(lib => lib.id === libraryId)
 
       expect(library).not.toBeUndefined()
@@ -69,9 +68,9 @@ test("Libraries", async () => {
       orgLib = library!.organizations.find(o => o.id === org.id)
       expect(orgLib).toBeUndefined()
 
-      await expect(app.libraries.deleteLibrary(libraryId)).resolves.not.toThrow()
+      await expect(app.libraries.management.deleteLibrary(libraryId)).resolves.not.toThrow()
 
-      libraries = await app.libraries.getLibraries()
+      libraries = await app.libraries.management.getLibraries()
 
       library = libraries.find(lib => lib.id === libraryId)
       expect(library).toBeUndefined()

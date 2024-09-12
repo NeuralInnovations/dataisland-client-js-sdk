@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev79](../../README.md) / [Exports](../modules.md) / LibraryPage
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev80](../../README.md) / [Exports](../modules.md) / LibraryPage
 
 # Class: LibraryPage
 
@@ -12,6 +12,7 @@
 
 - [files](LibraryPage.md#files)
 - [folders](LibraryPage.md#folders)
+- [libraryId](LibraryPage.md#libraryid)
 - [page](LibraryPage.md#page)
 - [pages](LibraryPage.md#pages)
 - [parents](LibraryPage.md#parents)
@@ -53,6 +54,18 @@ Get page folders
 
 ___
 
+### libraryId
+
+• `get` **libraryId**(): `string`
+
+Get library id.
+
+#### Returns
+
+`string`
+
+___
+
 ### page
 
 • `get` **page**(): `number`
@@ -79,13 +92,13 @@ ___
 
 ### parents
 
-• `get` **parents**(): `string`[]
+• `get` **parents**(): [`LibraryParent`](LibraryParent.md)[]
 
 Get current page.
 
 #### Returns
 
-`string`[]
+[`LibraryParent`](LibraryParent.md)[]
 
 ___
 
