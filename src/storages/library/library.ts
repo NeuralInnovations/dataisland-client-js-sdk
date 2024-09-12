@@ -26,5 +26,5 @@ export abstract class Library {
   /**
    * Get library folders by query.
    */
-  abstract query(query: string, page: number, limit: number): Promise<LibraryPage>
+  abstract query(query: string, page: number, limit: number, folderId: FolderId | undefined): Promise<LibraryPage>
 }
