@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev78](../../README.md) / [Exports](../modules.md) / WorkspaceDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev79](../../README.md) / [Exports](../modules.md) / WorkspaceDto
 
 # Interface: WorkspaceDto
 
@@ -8,7 +8,6 @@
 
 - [createdAt](WorkspaceDto.md#createdat)
 - [id](WorkspaceDto.md#id)
-- [isShared](WorkspaceDto.md#isshared)
 - [modifiedAt](WorkspaceDto.md#modifiedat)
 - [profile](WorkspaceDto.md#profile)
 
@@ -23,12 +22,6 @@ ___
 ### id
 
 • **id**: `string`
-
-___
-
-### isShared
-
-• **isShared**: `boolean`
 
 ___
 

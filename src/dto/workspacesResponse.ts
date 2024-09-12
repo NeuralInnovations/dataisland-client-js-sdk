@@ -4,13 +4,13 @@ import { FileId } from "../storages/files/file"
 export interface WorkspaceProfileDto {
   name: string
   description: string
+  isShared: boolean
 }
 
 export interface WorkspaceDto {
   id: WorkspaceId
   createdAt: number
   modifiedAt: number
-  isShared: boolean
   profile: WorkspaceProfileDto
 }
 
