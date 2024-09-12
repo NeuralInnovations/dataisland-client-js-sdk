@@ -1,4 +1,4 @@
-import { Library, LibraryId } from "./library"
+import { Library } from "./library"
 import {
   LibraryFolderDto,
   LibraryFolderResponse,
@@ -11,7 +11,9 @@ import { FileImpl } from "../files/file.impl"
 import { Context } from "../../context"
 import { LibraryPageImpl } from "./libraryPage.impl"
 import { LibraryFolderImpl } from "./libraryFolder.impl"
-import { FolderId, LibraryFolder } from "./libraryFolder"
+import { LibraryFolder } from "./libraryFolder"
+import { FolderId } from "./folderId"
+import { LibraryId } from "./libraryId"
 
 export class LibraryImpl extends Library {
 

@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev79](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev80](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev79
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev80
 
 ## Table of contents
 
@@ -51,9 +51,12 @@
 - [FilesPage](classes/FilesPage.md)
 - [Group](classes/Group.md)
 - [Groups](classes/Groups.md)
+- [Libraries](classes/Libraries.md)
 - [Library](classes/Library.md)
 - [LibraryFolder](classes/LibraryFolder.md)
+- [LibraryManagement](classes/LibraryManagement.md)
 - [LibraryPage](classes/LibraryPage.md)
+- [LibraryParent](classes/LibraryParent.md)
 - [Lifetime](classes/Lifetime.md)
 - [MetadataDto](classes/MetadataDto.md)
 - [Organization](classes/Organization.md)

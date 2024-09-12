@@ -1,0 +1,48 @@
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev80](../../README.md) / [Exports](../modules.md) / LibraryParent
+
+# Class: LibraryParent
+
+## Table of contents
+
+### Constructors
+
+- [constructor](LibraryParent.md#constructor)
+
+### Accessors
+
+- [id](LibraryParent.md#id)
+- [name](LibraryParent.md#name)
+
+## Constructors
+
+### constructor
+
+• **new LibraryParent**(): [`LibraryParent`](LibraryParent.md)
+
+#### Returns
+
+[`LibraryParent`](LibraryParent.md)
+
+## Accessors
+
+### id
+
+• `get` **id**(): `string`
+
+Get parent id.
+
+#### Returns
+
+`string`
+
+___
+
+### name
+
+• `get` **name**(): `string`
+
+Get parent name.
+
+#### Returns
+
+`string`

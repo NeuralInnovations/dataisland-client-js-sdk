@@ -146,8 +146,8 @@ export const testInLibrary = async (func: (app: DataIslandApp, org: Organization
   await testInWorkspace(async (app, org, ws) => {
     const testLibraryName = "test"
     const testLibraryRegion = 0
-    const libraryId = await app.libraries.createLibrary(testLibraryName, testLibraryRegion, true)
-    await app.libraries.addOrgToLibrary(libraryId, org.id)
+    const libraryId = await app.libraries.management.createLibrary(testLibraryName, testLibraryRegion, true)
+    await app.libraries.management.addOrgToLibrary(libraryId, org.id)
     await expect(ws.share(true)).resolves.not.toThrow()
     await app.resolve(LibrariesService)!.initialize()
 
@@ -155,9 +155,9 @@ export const testInLibrary = async (func: (app: DataIslandApp, org: Organization
     try {
       await func(app, org, ws, library!)
     } finally {
-      if ((await app.libraries.getLibraries()).find(lib => lib.id === library!.id)) {
-        await app.libraries.deleteOrgFromLibrary(libraryId, org.id)
-        await app.libraries.deleteLibrary(library!.id)
+      if ((await app.libraries.management.getLibraries()).find(lib => lib.id === library!.id)) {
+        await app.libraries.management.deleteOrgFromLibrary(libraryId, org.id)
+        await app.libraries.management.deleteLibrary(library!.id)
       }
     }
   }, config)

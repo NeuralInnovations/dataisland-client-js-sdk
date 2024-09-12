@@ -1,5 +1,4 @@
-import { LibraryFolder, FolderId } from "./libraryFolder"
-import { LibraryId } from "./library"
+import { LibraryFolder } from "./libraryFolder"
 import { LibraryPage } from "./libraryPage"
 import { Context } from "../../context"
 import {
@@ -9,13 +8,13 @@ import {
 import { LibraryImpl } from "./library.impl"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
-import { LibraryPageImpl } from "./libraryPage.impl"
+import { LibraryPageImpl, LibraryParentImpl } from "./libraryPage.impl"
 import { FileImpl } from "../files/file.impl"
+import { FolderId } from "./folderId"
+import { LibraryId } from "./libraryId"
 
 export class LibraryFolderImpl extends LibraryFolder {
   private _libFolder?: LibraryFolderDto
-
-  public libraryPage?: LibraryPage
 
   constructor(
     private readonly libraryImpl: LibraryImpl,
@@ -55,13 +54,6 @@ export class LibraryFolderImpl extends LibraryFolder {
       return this._libFolder.description
     }
     throw new Error("LibraryFolder is not loaded.")
-  }
-
-  get parents(): string[] {
-    if (this.libraryPage) {
-      return this.libraryPage.parents
-    }
-    throw new Error("Library page is not loaded, try query first")
   }
 
   get folderId(): FolderId {
@@ -114,6 +106,16 @@ export class LibraryFolderImpl extends LibraryFolder {
     libraryPage.total = libPageResponse.totalItemsCount
     libraryPage.filesPerPage = libPageResponse.itemsPerPage
     libraryPage.page = page
+    libraryPage.libraryId = this.libraryId
+
+    const parentsWait = []
+    for (const parentId of libPageResponse.parentIds) {
+      parentsWait.push(this.libraryImpl.getFolder(parentId))
+    }
+    const parents = await Promise.all(parentsWait)
+    for (const parent of parents) {
+      libraryPage.parents.push(new LibraryParentImpl(parent.folderId, parent.name))
+    }
 
     // init files from the server's response
     for (const fl of libPageResponse.files) {
@@ -135,9 +137,6 @@ export class LibraryFolderImpl extends LibraryFolder {
       // add folder to the collection
       libraryPage.folders.push(folder)
     }
-
-    // set files list
-    this.libraryPage = libraryPage
 
     return libraryPage
   }

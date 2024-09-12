@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev79](../../README.md) / [Exports](../modules.md) / LibraryFolder
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev80](../../README.md) / [Exports](../modules.md) / LibraryFolder
 
 # Class: LibraryFolder
 
@@ -15,7 +15,6 @@
 - [iconId](LibraryFolder.md#iconid)
 - [libraryId](LibraryFolder.md#libraryid)
 - [name](LibraryFolder.md#name)
-- [parents](LibraryFolder.md#parents)
 
 ### Methods
 
@@ -81,16 +80,6 @@ ___
 #### Returns
 
 `string`
-
-___
-
-### parents
-
-• `get` **parents**(): `string`[]
-
-#### Returns
-
-`string`[]
 
 ## Methods
 
