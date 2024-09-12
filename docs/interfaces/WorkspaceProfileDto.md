@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev78](../../README.md) / [Exports](../modules.md) / WorkspaceProfileDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev79](../../README.md) / [Exports](../modules.md) / WorkspaceProfileDto
 
 # Interface: WorkspaceProfileDto
 
@@ -7,6 +7,7 @@
 ### Properties
 
 - [description](WorkspaceProfileDto.md#description)
+- [isShared](WorkspaceProfileDto.md#isshared)
 - [name](WorkspaceProfileDto.md#name)
 
 ## Properties
@@ -14,6 +15,12 @@
 ### description
 
 • **description**: `string`
+
+___
+
+### isShared
+
+• **isShared**: `boolean`
 
 ___
 
