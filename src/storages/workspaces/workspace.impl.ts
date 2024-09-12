@@ -44,7 +44,7 @@ export class WorkspaceImpl extends Workspace {
 
   get isShared(): boolean {
     if (this._workspace) {
-      return this._workspace.isShared
+      return this._workspace.profile.isShared
     }
     throw new Error("Workspace is not loaded.")
   }
@@ -146,7 +146,7 @@ export class WorkspaceImpl extends Workspace {
     }
 
     if (this._workspace) {
-      this._workspace.isShared = isShared
+      this._workspace.profile.isShared = isShared
     }
 
     this.dispatch({
