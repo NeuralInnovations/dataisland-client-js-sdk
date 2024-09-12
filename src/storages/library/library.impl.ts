@@ -76,7 +76,7 @@ export class LibraryImpl extends Library {
     return libFolder
   }
 
-  async query(query: string, page: number, limit: number): Promise<LibraryPage> {
+  async query(query: string, page: number, limit: number, folderId: FolderId | undefined): Promise<LibraryPage> {
     // check page
     if (page === undefined || page === null) {
       throw new Error("Query library root, page is undefined or null")
@@ -98,7 +98,7 @@ export class LibraryImpl extends Library {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/libraries/content/list")
       .searchParam("libraryId", this.id)
-      .searchParam("nodeId", "")
+      .searchParam("folderId", folderId ?? "")
       .searchParam("query", query)
       .searchParam("page", page.toString())
       .searchParam("limit", limit.toString())

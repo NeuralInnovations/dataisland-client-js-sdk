@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev80](../../README.md) / [Exports](../modules.md) / Library
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev81](../../README.md) / [Exports](../modules.md) / Library
 
 # Class: Library
 
@@ -76,7 +76,7 @@ ___
 
 ### query
 
-▸ **query**(`query`, `page`, `limit`): `Promise`\<[`LibraryPage`](LibraryPage.md)\>
+▸ **query**(`query`, `page`, `limit`, `folderId`): `Promise`\<[`LibraryPage`](LibraryPage.md)\>
 
 Get library folders by query.
 
@@ -87,6 +87,7 @@ Get library folders by query.
 | `query` | `string` |
 | `page` | `number` |
 | `limit` | `number` |
+| `folderId` | `undefined` \| `string` |
 
 #### Returns
 
