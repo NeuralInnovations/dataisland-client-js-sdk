@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev79](../../README.md) / [Exports](../modules.md) / DataIslandApp
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev80](../../README.md) / [Exports](../modules.md) / DataIslandApp
 
 # Class: DataIslandApp
 
@@ -113,13 +113,13 @@ ___
 
 ### libraries
 
-• `get` **libraries**(): `Libraries`
+• `get` **libraries**(): [`Libraries`](Libraries.md)
 
 Libraries.
 
 #### Returns
 
-`Libraries`
+[`Libraries`](Libraries.md)
 
 ___
 

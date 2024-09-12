@@ -1,7 +1,7 @@
 import { LibraryPage } from "./libraryPage"
-import { LibraryFolder, FolderId } from "./libraryFolder"
-
-export type LibraryId = string
+import { LibraryFolder } from "./libraryFolder"
+import { FolderId } from "./folderId"
+import { LibraryId } from "./libraryId"
 
 /**
  * Library.
