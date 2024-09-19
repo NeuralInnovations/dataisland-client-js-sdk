@@ -155,7 +155,7 @@ test("Chat create with file, ask and delete", async () => {
 
       const cancelAnswer = await askCancelPromise
 
-      await expect(cancelAnswer.cancel()).resolves.not.toThrow()
+      await expect(cancelAnswer!.cancel()).resolves.not.toThrow()
 
       await new Promise(f => setTimeout(f, 1000))
       // check delete

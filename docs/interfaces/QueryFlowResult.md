@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev81](../../README.md) / [Exports](../modules.md) / QueryFlowResult
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev82](../../README.md) / [Exports](../modules.md) / QueryFlowResult
 
 # Interface: QueryFlowResult
 
@@ -6,10 +6,10 @@
 
 ### Properties
 
-- [fileUrl](QueryFlowResult.md#fileurl)
+- [files](QueryFlowResult.md#files)
 
 ## Properties
 
-### fileUrl
+### files
 
-• **fileUrl**: `string`
+• **files**: [`QueryFileUrlDto`](QueryFileUrlDto.md)[]

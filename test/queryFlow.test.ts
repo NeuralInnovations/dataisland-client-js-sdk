@@ -1,11 +1,10 @@
-import {appTest, UnitTest} from "../src/unitTest"
-import {testInWorkspace} from "./setup"
+import { appTest, UnitTest } from "../src/unitTest"
+import { testInWorkspace } from "./setup"
 import fs from "fs"
 import {
-  QueryFlowStatus,
+  QueryFlowState,
   UploadFile
 } from "../src"
-
 
 test("QueryFlows", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -34,15 +33,15 @@ test("QueryFlows", async () => {
 
       expect(flow_obj).not.toBeUndefined()
       expect(flow_obj).not.toBeNull()
-      expect(flow_obj.name).toBe(flow_name)
+      expect(flow_obj!.name).toBe(flow_name)
 
       let flow_ended = false
 
-      if (flow_obj.status !== QueryFlowStatus.IN_PROGRESS){
+      if (flow_obj!.state !== QueryFlowState.IN_PROGRESS) {
         flow_ended = true
-      }else {
-        flow_obj.subscribe((evt) => {
-          if (evt.data.status !== QueryFlowStatus.IN_PROGRESS){
+      } else {
+        flow_obj!.subscribe((evt) => {
+          if (evt.data.state !== QueryFlowState.IN_PROGRESS) {
             flow_ended = true
           }
         })
@@ -52,7 +51,7 @@ test("QueryFlows", async () => {
         await new Promise(f => setTimeout(f, 1000))
       }
 
-      //expect(flow_obj.status).toBe(QueryFlowStatus.DONE)
+      expect(flow_obj!.state).toBe(QueryFlowState.DONE)
 
       await expect(org.queryFlows.delete(flow_id)).resolves.not.toThrow()
     })

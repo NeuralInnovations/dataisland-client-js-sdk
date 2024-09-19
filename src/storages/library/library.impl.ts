@@ -76,7 +76,7 @@ export class LibraryImpl extends Library {
     return libFolder
   }
 
-  async query(query: string, page: number, limit: number, folderId: FolderId | undefined): Promise<LibraryPage> {
+  async query(query: string, page: number, limit: number, folderId: FolderId | undefined = undefined): Promise<LibraryPage> {
     // check page
     if (page === undefined || page === null) {
       throw new Error("Query library root, page is undefined or null")
