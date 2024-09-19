@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev81](../../README.md) / [Exports](../modules.md) / QueryFlowStatus
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev82](../../README.md) / [Exports](../modules.md) / QueryFlowStatus
 
 # Enumeration: QueryFlowStatus
 
@@ -7,23 +7,44 @@
 ### Enumeration Members
 
 - [DONE](QueryFlowStatus.md#done)
-- [ERROR](QueryFlowStatus.md#error)
-- [IN\_PROGRESS](QueryFlowStatus.md#in_progress)
+- [FAILED](QueryFlowStatus.md#failed)
+- [PREPARING\_RESULTS](QueryFlowStatus.md#preparing_results)
+- [PROCESSING\_FILE](QueryFlowStatus.md#processing_file)
+- [STARTED](QueryFlowStatus.md#started)
+- [UPLOADING\_FILE](QueryFlowStatus.md#uploading_file)
 
 ## Enumeration Members
 
 ### DONE
 
-• **DONE** = ``100``
+• **DONE** = ``4``
 
 ___
 
-### ERROR
+### FAILED
 
-• **ERROR** = ``1``
+• **FAILED** = ``5``
 
 ___
 
-### IN\_PROGRESS
+### PREPARING\_RESULTS
 
-• **IN\_PROGRESS** = ``0``
+• **PREPARING\_RESULTS** = ``3``
+
+___
+
+### PROCESSING\_FILE
+
+• **PROCESSING\_FILE** = ``2``
+
+___
+
+### STARTED
+
+• **STARTED** = ``0``
+
+___
+
+### UPLOADING\_FILE
+
+• **UPLOADING\_FILE** = ``1``

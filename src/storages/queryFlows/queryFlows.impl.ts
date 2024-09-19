@@ -1,18 +1,16 @@
-
-import {Context} from "../../context"
-import {FlowId, QueryFlows, QueryFlowsEvent} from "./queryFlows"
-import {QueryFlow} from "./queryFlow"
-import {OrganizationImpl} from "../organizations/organization.impl"
-import {RpcService} from "../../services/rpcService"
-import {ResponseUtils} from "../../services/responseUtils"
-import {WorkspaceId} from "../workspaces/workspaces"
+import { Context } from "../../context"
+import { FlowId, QueryFlows, QueryFlowsEvent } from "./queryFlows"
+import { QueryFlow } from "./queryFlow"
+import { OrganizationImpl } from "../organizations/organization.impl"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
+import { WorkspaceId } from "../workspaces/workspaces"
 import {
   QueryFlowListResponse,
   QueryFlowResponse
 } from "../../dto/queryFlowResponse"
-import {QueryFlowImpl} from "./queryFlow.impl"
-import {UploadFile} from "../files/files"
-
+import { QueryFlowImpl } from "./queryFlow.impl"
+import { UploadFile } from "../files/files"
 
 export class QueryFlowsImpl extends QueryFlows {
 
@@ -63,7 +61,7 @@ export class QueryFlowsImpl extends QueryFlows {
     return this._collection
   }
 
-  async create(name: string, workspaceId: WorkspaceId, file: UploadFile, table: UploadFile ): Promise<FlowId> {
+  async create(name: string, workspaceId: WorkspaceId, file: UploadFile, table: UploadFile): Promise<FlowId> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Name is required, must be not empty")
     }
@@ -104,7 +102,6 @@ export class QueryFlowsImpl extends QueryFlows {
 
     // add workspace to the collection
     this._collection.push(queryFlow)
-
 
     // dispatch event
     this.dispatch({
