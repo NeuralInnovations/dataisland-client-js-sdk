@@ -51,7 +51,7 @@ test("QueryFlows", async () => {
         await new Promise(f => setTimeout(f, 1000))
       }
 
-      //expect(flow_obj.status).toBe(QueryFlowStatus.DONE)
+      expect(flow_obj!.state).toBe(QueryFlowState.DONE)
 
       await expect(org.queryFlows.delete(flow_id)).resolves.not.toThrow()
     })
