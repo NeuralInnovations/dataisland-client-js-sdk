@@ -13,14 +13,14 @@ export enum QueryFlowStatus {
   FAILED = 5
 }
 
-export interface FileUrlDto {
+export interface QueryFileUrlDto {
   name: string
   extension: string
   url: string
 }
 
 export interface QueryFlowResult {
-  files: FileUrlDto[]
+  files: QueryFileUrlDto[]
 }
 
 // GET query flow by ID

@@ -1,6 +1,6 @@
 import { QueryFlow, QueryFlowEvent } from "./queryFlow"
 import {
-  FileUrlDto,
+  QueryFileUrlDto,
   QueryFlowDto,
   QueryFlowState,
   QueryFlowStatus
@@ -69,7 +69,7 @@ export class QueryFlowImpl extends QueryFlow {
     }
   }
 
-  get urls(): FileUrlDto[] | undefined {
+  get urls(): QueryFileUrlDto[] | undefined {
     if (this._content && this._content.result.files) {
       return this._content.result.files
     } else {

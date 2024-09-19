@@ -18,8 +18,9 @@
 
 - [id](QueryFlow.md#id)
 - [name](QueryFlow.md#name)
-- [resultUrl](QueryFlow.md#resulturl)
+- [state](QueryFlow.md#state)
 - [status](QueryFlow.md#status)
+- [urls](QueryFlow.md#urls)
 
 ### Methods
 
@@ -62,13 +63,13 @@ ___
 
 ___
 
-### resultUrl
+### state
 
-• `get` **resultUrl**(): `string`
+• `get` **state**(): [`QueryFlowState`](../enums/QueryFlowState.md)
 
 #### Returns
 
-`string`
+[`QueryFlowState`](../enums/QueryFlowState.md)
 
 ___
 
@@ -79,6 +80,16 @@ ___
 #### Returns
 
 [`QueryFlowStatus`](../enums/QueryFlowStatus.md)
+
+___
+
+### urls
+
+• `get` **urls**(): `undefined` \| [`QueryFileUrlDto`](../interfaces/QueryFileUrlDto.md)[]
+
+#### Returns
+
+`undefined` \| [`QueryFileUrlDto`](../interfaces/QueryFileUrlDto.md)[]
 
 ## Methods
 

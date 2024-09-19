@@ -9,6 +9,7 @@
 - [name](QueryFlowDto.md#name)
 - [result](QueryFlowDto.md#result)
 - [state](QueryFlowDto.md#state)
+- [status](QueryFlowDto.md#status)
 
 ## Properties
 
@@ -26,4 +27,10 @@ ___
 
 ### state
 
-• **state**: [`QueryFlowStatus`](../enums/QueryFlowStatus.md)
+• **state**: [`QueryFlowState`](../enums/QueryFlowState.md)
+
+___
+
+### status
+
+• **status**: [`QueryFlowStatus`](../enums/QueryFlowStatus.md)

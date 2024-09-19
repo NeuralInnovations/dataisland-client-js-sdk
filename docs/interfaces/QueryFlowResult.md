@@ -6,10 +6,10 @@
 
 ### Properties
 
-- [fileUrl](QueryFlowResult.md#fileurl)
+- [files](QueryFlowResult.md#files)
 
 ## Properties
 
-### fileUrl
+### files
 
-• **fileUrl**: `string`
+• **files**: [`QueryFileUrlDto`](QueryFileUrlDto.md)[]

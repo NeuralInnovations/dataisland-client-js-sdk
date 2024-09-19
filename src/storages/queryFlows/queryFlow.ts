@@ -1,7 +1,7 @@
 import { EventDispatcher } from "../../events"
 import { FlowId } from "./queryFlows"
 import {
-  FileUrlDto,
+  QueryFileUrlDto,
   QueryFlowState,
   QueryFlowStatus
 } from "../../dto/queryFlowResponse"
@@ -23,6 +23,6 @@ export abstract class QueryFlow extends EventDispatcher<
 
   abstract get status(): QueryFlowStatus
 
-  abstract get urls(): FileUrlDto[] | undefined
+  abstract get urls(): QueryFileUrlDto[] | undefined
 
 }
