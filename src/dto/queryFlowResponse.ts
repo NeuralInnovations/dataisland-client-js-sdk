@@ -1,19 +1,33 @@
-
-
-export enum QueryFlowStatus {
+export enum QueryFlowState {
   IN_PROGRESS = 0,
   ERROR = 1,
   DONE = 100
 }
 
+export enum QueryFlowStatus {
+  STARTED = 0,
+  UPLOADING_FILE = 1,
+  PROCESSING_FILE = 2,
+  PREPARING_RESULTS = 3,
+  DONE = 4,
+  FAILED = 5
+}
+
+export interface FileUrlDto {
+  name: string
+  extension: string
+  url: string
+}
+
 export interface QueryFlowResult {
-  fileUrl: string
+  files: FileUrlDto[]
 }
 
 // GET query flow by ID
 export interface QueryFlowDto {
   name: string
-  state: QueryFlowStatus,
+  state: QueryFlowState,
+  status: QueryFlowStatus,
   result: QueryFlowResult
 }
 

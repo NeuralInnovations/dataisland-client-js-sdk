@@ -1,6 +1,10 @@
-import {EventDispatcher} from "../../events"
-import {FlowId} from "./queryFlows"
-import {QueryFlowStatus} from "../../dto/queryFlowResponse"
+import { EventDispatcher } from "../../events"
+import { FlowId } from "./queryFlows"
+import {
+  FileUrlDto,
+  QueryFlowState,
+  QueryFlowStatus
+} from "../../dto/queryFlowResponse"
 
 export enum QueryFlowEvent {
   UPDATED = "updated"
@@ -15,8 +19,10 @@ export abstract class QueryFlow extends EventDispatcher<
 
   abstract get name(): string
 
+  abstract get state(): QueryFlowState
+
   abstract get status(): QueryFlowStatus
 
-  abstract get resultUrl(): string
+  abstract get urls(): FileUrlDto[] | undefined
 
 }
