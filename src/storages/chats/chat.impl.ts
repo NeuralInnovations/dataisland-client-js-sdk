@@ -74,6 +74,13 @@ export class ChatImpl extends Chat implements Disposable {
     return <string>this._content?.model
   }
 
+  get createAt(): number{
+    return <number>this._content?.createdAt
+  }
+
+  get modifiedAt(): number{
+    return <number>this._content?.modifiedAt
+  }
   get clientContext(): string {
     return <string>this._content?.clientContext
   }

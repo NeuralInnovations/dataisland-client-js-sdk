@@ -37,6 +37,16 @@ export abstract class Chat {
   abstract get model(): string
 
   /**
+   * CreateAt.
+   */
+  abstract get createAt(): number
+
+  /**
+   * Modified at.
+   */
+  abstract get modifiedAt(): number
+
+  /**
    * Added client context.
    */
   abstract get clientContext(): string
