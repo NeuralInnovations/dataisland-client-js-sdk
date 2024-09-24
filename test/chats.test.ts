@@ -309,6 +309,7 @@ test("Chat create with library", async () => {
       }
 
       await new Promise(f => setTimeout(f, 1000))
+
       // check delete
       await expect(org.chats.delete(chat!.id)).resolves.not.toThrow()
 

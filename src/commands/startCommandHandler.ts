@@ -24,8 +24,8 @@ export class StartCommandHandler extends CommandHandler<StartCommand> {
       }
     }
 
+    await librariesService.initialize()
     await userService.fetch()
     await acquiringService.initialize()
-    await librariesService.initialize()
   }
 }
