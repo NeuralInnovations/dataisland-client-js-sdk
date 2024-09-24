@@ -7,6 +7,8 @@ import { OrganizationId } from "../organizations/organizations"
 import { Chat } from "./chat"
 import { ChatImpl } from "./chat.impl"
 import { Chats, ChatsEvent } from "./chats"
+import {LibraryId} from "../library/libraryId"
+import {LibrariesService} from "../../services/librariesService"
 
 export class ChatsImpl extends Chats {
   private readonly _chats: Chat[] = []
@@ -19,6 +21,16 @@ export class ChatsImpl extends Chats {
   }
 
   async initFrom(organizationId: OrganizationId): Promise<void> {
+    await this.loadOrganizationChats(organizationId)
+    const libraries = (this.context.resolve(LibrariesService) as LibrariesService).libraries.collection
+    for (const library of libraries){
+      await this.loadLibraryChats(library.id)
+    }
+
+    this._chats.sort((a, b) => b.modifiedAt - a.modifiedAt)
+  }
+
+  async loadOrganizationChats(organizationId: OrganizationId): Promise<void> {
     // init chats from the server's response
     const limit = 100
     const page = 0
@@ -55,7 +67,45 @@ export class ChatsImpl extends Chats {
         data: chat
       })
     }
+  }
 
+  async loadLibraryChats(libraryId: LibraryId): Promise<void>{
+    // init chats from the server's response
+    const limit = 100
+    const page = 0
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Chats/list/library")
+      .searchParam("libraryId", libraryId)
+      .searchParam("limit", limit.toString())
+      .searchParam("page", page.toString())
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Chats list library id:${libraryId}, page:${page}, limit:${limit}, failed`,
+        response
+      )
+    }
+
+    // parse chats from the server's response
+    const chats = (await response!.json()) as ChatListResponse
+
+    // init chats
+    for (const cht of chats.chats) {
+      // create chat implementation
+      const chat = await new ChatImpl(this.context, this.organization).initFrom(cht)
+
+      // add chat to the collection
+      this._chats.push(chat)
+
+      // dispatch event
+      this.dispatch({
+        type: ChatsEvent.ADDED,
+        data: chat
+      })
+    }
   }
 
   get collection(): readonly Chat[] {

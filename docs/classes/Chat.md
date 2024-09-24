@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev82](../../README.md) / [Exports](../modules.md) / Chat
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev83](../../README.md) / [Exports](../modules.md) / Chat
 
 # Class: Chat
 
@@ -12,8 +12,10 @@
 
 - [clientContext](Chat.md#clientcontext)
 - [collection](Chat.md#collection)
+- [createAt](Chat.md#createat)
 - [id](Chat.md#id)
 - [model](Chat.md#model)
+- [modifiedAt](Chat.md#modifiedat)
 - [name](Chat.md#name)
 - [organization](Chat.md#organization)
 - [resource](Chat.md#resource)
@@ -60,6 +62,18 @@ readonly [`Answer`](Answer.md)[]
 
 ___
 
+### createAt
+
+• `get` **createAt**(): `number`
+
+CreateAt.
+
+#### Returns
+
+`number`
+
+___
+
 ### id
 
 • `get` **id**(): `string`
@@ -81,6 +95,18 @@ Model.
 #### Returns
 
 `string`
+
+___
+
+### modifiedAt
+
+• `get` **modifiedAt**(): `number`
+
+Modified at.
+
+#### Returns
+
+`number`
 
 ___
 
