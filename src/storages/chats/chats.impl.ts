@@ -154,7 +154,7 @@ export class ChatsImpl extends Chats {
     await chat.initFrom(content)
 
     // add chat to the collection
-    this._chats.push(chat)
+    this._chats.splice(0, 0, chat)
 
     // dispatch event
     this.dispatch({
@@ -202,7 +202,7 @@ export class ChatsImpl extends Chats {
     await chat.initFrom(content)
 
     // add chat to the collection
-    this._chats.push(chat)
+    this._chats.splice(0, 0, chat)
 
     // dispatch event
     this.dispatch({
@@ -251,7 +251,7 @@ export class ChatsImpl extends Chats {
     await chat.initFrom(content)
 
     // add chat to the collection
-    this._chats.push(chat)
+    this._chats.splice(0, 0, chat)
 
     // dispatch event
     this.dispatch({
@@ -297,7 +297,7 @@ export class ChatsImpl extends Chats {
     await chat.initFrom(content)
 
     // add chat to the collection
-    this._chats.push(chat)
+    this._chats.splice(0, 0, chat)
 
     // dispatch event
     this.dispatch({
@@ -343,7 +343,7 @@ export class ChatsImpl extends Chats {
     await chat.initFrom(content)
 
     // add chat to the collection
-    this._chats.push(chat)
+    this._chats.splice(0, 0, chat)
 
     // dispatch event
     this.dispatch({
