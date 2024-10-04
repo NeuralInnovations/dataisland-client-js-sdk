@@ -131,7 +131,7 @@ export class RequestBuilder {
     const url = this._url
     url.search = this._searchParams.toString()
     let json: string | undefined = undefined
-    if (body !== undefined && body !== null && typeof body === "object") {
+    if (body !== undefined && body !== null && (typeof body === "object" || Array.isArray(body))) {
       json = JSON.stringify(body)
     }
     return await this._request(

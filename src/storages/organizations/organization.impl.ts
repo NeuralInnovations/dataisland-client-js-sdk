@@ -1,5 +1,5 @@
-import {OrganizationId} from "./organizations"
-import {Disposable} from "../../disposable"
+import { OrganizationId } from "./organizations"
+import { Disposable } from "../../disposable"
 import {
   CurrentLimitItem,
   CurrentLimitRecordData,
@@ -10,34 +10,36 @@ import {
   UserLimitsData,
   UsersStatisticsResponse
 } from "../../dto/userInfoResponse"
-import {WorkspaceId, Workspaces} from "../workspaces/workspaces"
-import {WorkspacesImpl} from "../workspaces/workspaces.impl"
-import {Context} from "../../context"
-import {Organization, OrganizationEvent} from "./organization"
-import {GroupsImpl} from "../groups/groups.impl"
-import {Groups} from "../groups/groups"
-import {ChatsImpl} from "../chats/chats.impl"
-import {Chats} from "../chats/chats"
-import {RpcService} from "../../services/rpcService"
-import {ResponseUtils} from "../../services/responseUtils"
-import {StatisticsResponse} from "../../dto/statisticsResponse"
+import { WorkspaceId, Workspaces } from "../workspaces/workspaces"
+import { WorkspacesImpl } from "../workspaces/workspaces.impl"
+import { Context } from "../../context"
+import { Organization, OrganizationEvent } from "./organization"
+import { GroupsImpl } from "../groups/groups.impl"
+import { Groups } from "../groups/groups"
+import { ChatsImpl } from "../chats/chats.impl"
+import { Chats } from "../chats/chats"
+import { RpcService } from "../../services/rpcService"
+import { ResponseUtils } from "../../services/responseUtils"
+import { StatisticsResponse } from "../../dto/statisticsResponse"
 import {
   LimitActionType,
   SegmentData,
   SegmentsData
 } from "../../dto/limitsResponse"
-import {FileId} from "../files/file"
-import {QuizData} from "../../dto/quizResponse"
-import {InviteCodeResponse, InviteResponse} from "../../dto/invitesResponse"
+import { FileId } from "../files/file"
+import { QuizData } from "../../dto/quizResponse"
+import { InviteCodeResponse, InviteResponse } from "../../dto/invitesResponse"
 import {
   ApiKeyResponse,
   OrganizationApiKey,
   OrganizationKeysResponse, TokenResponse
 } from "../../dto/apiKeyResponse"
-import {IconResponse} from "../../dto/workspacesResponse"
-import {UploadFile} from "../files/files"
-import {QueryFlowsImpl} from "../queryFlows/queryFlows.impl"
-import {QueryFlows} from "../queryFlows/queryFlows"
+import { IconResponse } from "../../dto/workspacesResponse"
+import { UploadFile } from "../files/files"
+import { QueryFlowsImpl } from "../queryFlows/queryFlows.impl"
+import { QueryFlows } from "../queryFlows/queryFlows"
+import { OrganizationPromptsImpl } from "./organizationPrompts.impl"
+import { OrganizationPrompts } from "./organizationPrompts"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -47,6 +49,7 @@ export class OrganizationImpl extends Organization implements Disposable {
   private readonly _accessGroups: GroupsImpl
   private readonly _queryFlows: QueryFlowsImpl
   private readonly _chats: ChatsImpl
+  private readonly _prompts: OrganizationPromptsImpl
 
   constructor(private readonly context: Context) {
     super()
@@ -54,6 +57,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._accessGroups = new GroupsImpl(this, this.context)
     this._chats = new ChatsImpl(this, this.context)
     this._queryFlows = new QueryFlowsImpl(this, this.context)
+    this._prompts = new OrganizationPromptsImpl(this, this.context)
   }
 
   public async initFrom(
@@ -74,6 +78,10 @@ export class OrganizationImpl extends Organization implements Disposable {
     await Promise.all(promises)
 
     return this
+  }
+
+  get prompts(): OrganizationPrompts {
+    return this._prompts
   }
 
   get isAdmin(): boolean {
@@ -393,10 +401,10 @@ export class OrganizationImpl extends Organization implements Disposable {
     }
   }
 
-  async createInviteCode(accessGroups: string[], validateDomain?: string ): Promise<string> {
+  async createInviteCode(accessGroups: string[], validateDomain?: string): Promise<string> {
 
     let validateObj = null
-    if (validateDomain !== null && validateDomain !== undefined){
+    if (validateDomain !== null && validateDomain !== undefined) {
       validateObj = {
         domain: validateDomain
       }
@@ -424,7 +432,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return code
   }
 
-  async deleteInviteCode(code: string): Promise<void>{
+  async deleteInviteCode(code: string): Promise<void> {
     if (code === undefined || code === null || code.trim() === "") {
       throw new Error("Invite code is required. Please provide a valid code.")
     }
@@ -444,7 +452,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     }
   }
 
-  async getOrganizationInvites(): Promise<InviteResponse>{
+  async getOrganizationInvites(): Promise<InviteResponse> {
     // get invites
     const response = await this.context.resolve(RpcService)
       ?.requestBuilder("api/v1/Invites/link/organization")
@@ -461,7 +469,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return json as InviteResponse
   }
 
-  async createApiKey(name: string, accessGroups: string[]): Promise<OrganizationApiKey>{
+  async createApiKey(name: string, accessGroups: string[]): Promise<OrganizationApiKey> {
     if (name === null || name === undefined || name.trim() === "") {
       throw new Error("Name is required. Please provide a valid name.")
     }
@@ -528,7 +536,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return json as TokenResponse
   }
 
-  async deleteApiKey(key: string): Promise<void>{
+  async deleteApiKey(key: string): Promise<void> {
     if (key === null || key === undefined || key.trim() === "") {
       throw new Error("Key is required. Please provide a valid key.")
     }
@@ -536,7 +544,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Keys/organization")
-      .searchParam("apiKey", key )
+      .searchParam("apiKey", key)
       .sendDelete()
 
     if (ResponseUtils.isFail(response)) {

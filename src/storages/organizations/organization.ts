@@ -1,4 +1,4 @@
-import {WorkspaceId, Workspaces} from "../workspaces/workspaces"
+import { WorkspaceId, Workspaces } from "../workspaces/workspaces"
 import { OrganizationId } from "./organizations"
 import { Groups } from "../groups/groups"
 import { Chats } from "../chats/chats"
@@ -11,12 +11,13 @@ import {
 import { GroupId } from "../groups/group"
 import { StatisticsResponse } from "../../dto/statisticsResponse"
 import { SegmentData } from "../../dto/limitsResponse"
-import {FileId} from "../files/file"
-import {QuizData} from "../../dto/quizResponse"
-import {InviteResponse} from "../../dto/invitesResponse"
+import { FileId } from "../files/file"
+import { QuizData } from "../../dto/quizResponse"
+import { InviteResponse } from "../../dto/invitesResponse"
 import { OrganizationApiKey } from "../../dto/apiKeyResponse"
-import {UploadFile} from "../files/files"
-import {QueryFlows} from "../queryFlows/queryFlows"
+import { UploadFile } from "../files/files"
+import { QueryFlows } from "../queryFlows/queryFlows"
+import { OrganizationPrompts } from "./organizationPrompts"
 
 /**
  * Organization event.
@@ -76,6 +77,11 @@ export abstract class Organization extends EventDispatcher<
    * Query flows
    */
   abstract get queryFlows(): QueryFlows
+
+  /**
+   * Get organization prompts
+   */
+  abstract get prompts(): OrganizationPrompts
 
   /**
    * Get organization members

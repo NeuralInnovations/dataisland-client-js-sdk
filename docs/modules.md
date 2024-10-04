@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev84](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev85](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.0.1-dev84
+# @neuralinnovations/dataisland-sdk - v0.0.1-dev85
 
 ## Table of contents
 
@@ -122,6 +122,7 @@
 - [OrganizationDto](interfaces/OrganizationDto.md)
 - [OrganizationKeysResponse](interfaces/OrganizationKeysResponse.md)
 - [OrganizationProfileDto](interfaces/OrganizationProfileDto.md)
+- [OrganizationPromptDto](interfaces/OrganizationPromptDto.md)
 - [OrganizationSegmentData](interfaces/OrganizationSegmentData.md)
 - [OrganizationWorkspaces](interfaces/OrganizationWorkspaces.md)
 - [PermitsDto](interfaces/PermitsDto.md)
