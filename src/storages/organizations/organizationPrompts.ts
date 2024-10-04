@@ -5,6 +5,11 @@ import {
 export abstract class OrganizationPrompts {
 
   /**
+   * Get default organization prompts
+   */
+  abstract getDefaultPrompts(): Promise<OrganizationPromptDto[]>
+
+  /**
    * Get all organization prompts
    */
   abstract getPrompts(): Promise<OrganizationPromptDto[]>
@@ -27,4 +32,10 @@ export abstract class OrganizationPrompts {
    * @param key
    */
   abstract deletePrompt(key: string): Promise<void>
+
+  /**
+   * Delete prompt
+   * @param keys
+   */
+  abstract deletePrompts(keys: string[]): Promise<void>
 }

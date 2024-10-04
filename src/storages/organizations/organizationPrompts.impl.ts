@@ -6,11 +6,40 @@ import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 
 export class OrganizationPromptsImpl implements OrganizationPrompts {
+
+  private _cacheDefaultPrompts: OrganizationPromptDto[] | null = null
+
   constructor(
     private readonly organization: OrganizationImpl,
     private readonly context: Context
   ) {
 
+  }
+
+  async getDefaultPrompts(): Promise<OrganizationPromptDto[]> {
+    if (this._cacheDefaultPrompts !== null) {
+      return this._cacheDefaultPrompts
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Organizations/prompts/default")
+      .searchParam("organizationId", this.organization.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed during fetch of organization prompts ${this.organization.id}`,
+        response
+      )
+    }
+
+    this._cacheDefaultPrompts = (await response!.json() as {
+      prompts: OrganizationPromptDto[]
+    }).prompts as OrganizationPromptDto[]
+
+    return this._cacheDefaultPrompts
   }
 
   async getPrompts(): Promise<OrganizationPromptDto[]> {
@@ -68,6 +97,13 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
 
   deletePrompt(key: string): Promise<void> {
     return this.updatePrompt(key, null)
+  }
+
+  async deletePrompts(keys: string[]): Promise<void> {
+    return this.updatePrompts(keys.map(key => ({
+      key,
+      value: null
+    })))
   }
 
 }
