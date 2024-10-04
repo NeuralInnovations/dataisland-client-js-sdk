@@ -6,12 +6,14 @@ import {
   ResourceType,
   UploadFile
 } from "../src"
-import {HOST, newTestUserToken, randomHash, testInOrganization} from "./setup"
-import {OrganizationImpl} from "../src/storages/organizations/organization.impl"
+import { HOST, newTestUserToken, randomHash, testInOrganization } from "./setup"
+import {
+  OrganizationImpl
+} from "../src/storages/organizations/organization.impl"
 import {
   DeleteUserFullCommand
 } from "../src/commands/deleteUserFullCommandHandler"
-import {appTest, UnitTest} from "../src/unitTest"
+import { appTest, UnitTest } from "../src/unitTest"
 import fs from "fs"
 
 test.skip("Delete all organizations", async () => {
@@ -174,6 +176,77 @@ test("API keys and custom credentials test", async () => {
       keys = await org.getApiKeys()
 
       expect(keys.length).toBe(0)
+    })
+  })
+})
+
+test("Organization prompts", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    await testInOrganization(async (app, org) => {
+
+      // get default prompts
+      const prompts = await org.prompts.getPrompts()
+      expect(prompts.length).toEqual(0)
+
+      // add prompt
+      await org.prompts.updatePrompt("test", "test")
+
+      // check get prompts
+      const prompts2 = await org.prompts.getPrompts()
+      expect(prompts2.length).toEqual(1)
+
+      // check update prompts
+      await org.prompts.updatePrompts(prompts)
+
+      // length should be 1
+      const prompts3 = await org.prompts.getPrompts()
+      expect(prompts3.length).toEqual(1)
+
+      // check delete prompt
+      await org.prompts.deletePrompt("test")
+      const prompts4 = await org.prompts.getPrompts()
+      expect(prompts4.length).toEqual(0)
+
+      // check update prompts in bulk
+      await org.prompts.updatePrompts([{
+        key: "test",
+        value: "test"
+      }, {
+        key: "test2",
+        value: "test2"
+      }])
+      const prompts5 = await org.prompts.getPrompts()
+      expect(prompts5.length).toEqual(2)
+
+      // check delete prompt
+      await org.prompts.updatePrompts([{
+        key: "test",
+        value: null
+      }, {
+        key: "test2",
+        value: null
+      }])
+
+      const prompts6 = await org.prompts.getPrompts()
+      expect(prompts6.length).toEqual(0)
+    })
+  })
+})
+
+test("Organization default prompts", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    await testInOrganization(async (app, org) => {
+      const prompts = await org.prompts.getDefaultPrompts()
+      expect(prompts.length).toBeGreaterThan(0)
+
+      await org.prompts.updatePrompts(prompts)
+      const currentPrompts = await org.prompts.getPrompts()
+      expect(currentPrompts.length).toEqual(prompts.length)
+
+      await org.prompts.deletePrompts(prompts.map(p => p.key))
+      const currentPrompts2 = await org.prompts.getPrompts()
+      expect(currentPrompts2.length).toEqual(0)
+
     })
   })
 })

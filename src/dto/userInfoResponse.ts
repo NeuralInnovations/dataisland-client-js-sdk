@@ -48,6 +48,11 @@ export interface OrganizationDto {
   profile: OrganizationProfileDto
 }
 
+export interface OrganizationPromptDto {
+  key: string
+  value: string | null
+}
+
 export interface OrganizationWorkspaces extends OrganizationDto {
   workspaces: WorkspaceDto[]
 }
@@ -102,7 +107,7 @@ export interface CurrentLimitItem {
   records: CurrentLimitRecordData[]
 }
 
-export interface CurrentLimitRecordData  {
+export interface CurrentLimitRecordData {
   daysCount: number
   used: number
   all: number
