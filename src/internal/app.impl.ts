@@ -32,8 +32,9 @@ import { CookieService } from "../services/cookieService"
 import { AnonymousService } from "../services/anonymousService"
 import { Acquiring } from "../storages/acquirings/acquiring"
 import { AcquiringService } from "../services/acquiringService"
-import {Libraries} from "../storages/library/libraries"
-import {LibrariesService} from "../services/librariesService"
+import { Libraries } from "../storages/library/libraries"
+import { LibrariesService } from "../services/librariesService"
+import { SignalRService } from "../services/signalRService"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -120,7 +121,7 @@ export class DataIslandAppImpl extends DataIslandApp {
       return new MiddlewareService(context)
     })
     builder.registerService(RpcService, (context: ServiceContext) => {
-      return new RpcService(context, builder.host)
+      return new RpcService(context, builder.rpcHost)
     })
     builder.registerService(CommandService, (context: ServiceContext) => {
       return new CommandService(context)
@@ -133,6 +134,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     })
     builder.registerService(AnonymousService, (context: ServiceContext) => {
       return new AnonymousService(context)
+    })
+    builder.registerService(SignalRService, (context: ServiceContext) => {
+      return new SignalRService(context, builder.signalRHost)
     })
     builder.registerService(AcquiringService, (context: ServiceContext) => {
       return new AcquiringService(context)
@@ -147,7 +151,7 @@ export class DataIslandAppImpl extends DataIslandApp {
     }
 
     // host
-    this._host = builder.host
+    this._host = builder.rpcHost
 
     // automaticDataCollectionEnabled
     this._automaticDataCollectionEnabled =

@@ -25,6 +25,11 @@ export abstract class AppBuilder {
   abstract useHost(host: string): AppBuilder
 
   /**
+   * SignalR host of the app.
+   */
+  abstract useSignalRHost(host: string): AppBuilder
+
+  /**
    * GDPR compliant
    */
   abstract useAutomaticDataCollectionEnabled(value: boolean): AppBuilder

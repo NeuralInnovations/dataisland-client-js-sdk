@@ -5,7 +5,8 @@ import {
   dataIslandApp,
   SDK_VERSION,
   DEFAULT_NAME,
-  DebugCredential
+  DebugCredential,
+  AppBuilder
 } from "../src"
 import { MiddlewareService } from "../src/services/middlewareService"
 import { CredentialService } from "../src/services/credentialService"
@@ -32,7 +33,7 @@ test("Default SDK", async () => {
 test("SDK, middleware", async () => {
   await appTest(UnitTest.DO_NOT_START_SDK, async () => {
     const app = await dataIslandApp("test-settings", async (builder: AppBuilder) => {
-      builder.useHost("https://test.com")
+      builder.useHost("https://test.com", "https://test.com")
       builder.useAutomaticDataCollectionEnabled(false)
       builder.useCredential(new BasicCredential("email", "password"))
       builder.registerMiddleware(async (req, next) => {

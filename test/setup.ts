@@ -12,6 +12,7 @@ import fs from "fs"
 import { LibrariesService } from "../src/services/librariesService"
 
 export const HOST = <string>process.env.HOST
+export const SIGNAL_R_HOST = <string>process.env.SIGNAL_R_HOST
 const UNITTEST_TOKEN = <string>process.env.UNITTEST_TOKEN
 const UNITTEST_RUNNER_ID = <string>process.env.UNITTEST_RUNNER_ID
 
@@ -87,12 +88,14 @@ export const uploadTestFile = async (org: Organization, ws: Workspace, filepath:
 
 export const testInOrganization = async (func: (app: DataIslandApp, org: Organization) => Promise<void>, config ?: {
     host: string,
-    token: string
+    token: string,
+    signalRHost: string | null,
   }
 ): Promise<void> => {
   const randomName = `org-${randomHash(20)}`
   const app = await dataIslandApp(randomName, async builder => {
     builder.useHost(config?.host ?? HOST)
+    builder.useSignalRHost(config?.signalRHost ?? SIGNAL_R_HOST)
     builder.useCredential(new DebugCredential(config?.token ?? newTestUserToken()))
     builder.registerMiddleware(async (req, next) => {
       // const url = req.url

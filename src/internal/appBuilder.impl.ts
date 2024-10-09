@@ -1,5 +1,5 @@
 import { AppBuilder } from "../appBuilder"
-import { DEFAULT_HOST } from "../index"
+import { DEFAULT_HOST, DEFAULT_SIGNALR_HOST } from "../index"
 import { type CredentialBase, DefaultCredential } from "../credentials"
 import type { Middleware } from "../middleware"
 import { type Service, type ServiceContext } from "../services/service"
@@ -12,7 +12,8 @@ export class AppBuilderImplementation extends AppBuilder {
   envData: Record<string, any> = {
     unitTest: UnitTest.DO_NOTHING
   }
-  host: string = DEFAULT_HOST
+  rpcHost: string = DEFAULT_HOST
+  signalRHost: string = DEFAULT_HOST
   automaticDataCollectionEnabled: boolean = true
   credential: CredentialBase = new DefaultCredential()
   middlewares: Middleware[] = []
@@ -26,7 +27,12 @@ export class AppBuilderImplementation extends AppBuilder {
   }
 
   useHost(host: string): AppBuilder {
-    this.host = host ?? DEFAULT_HOST
+    this.rpcHost = host ?? DEFAULT_HOST
+    return this
+  }
+
+  useSignalRHost(host: string): AppBuilder {
+    this.signalRHost = host ?? DEFAULT_SIGNALR_HOST
     return this
   }
 

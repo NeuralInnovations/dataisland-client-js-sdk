@@ -93,9 +93,19 @@ export const SDK_VERSION = version
 export const DEFAULT_NAME = "[DEFAULT]"
 
 /**
+ * Default DataIsland App domain
+ */
+export const DEFAULT_DOMAIN = "dataisland.app"
+
+/**
  * Default DataIsland App host.
  */
-export const DEFAULT_HOST = "https://api.dataisland.com.ua"
+export const DEFAULT_HOST = `https://api.${DEFAULT_DOMAIN}`
+
+/**
+ * Default DataIsland App SignalR host.
+ */
+export const DEFAULT_SIGNALR_HOST = `https://notify.${DEFAULT_DOMAIN}`
 
 /**
  * Returns a list of DataIsland App instances.
