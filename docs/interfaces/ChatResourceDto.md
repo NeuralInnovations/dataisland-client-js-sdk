@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev85](../../README.md) / [Exports](../modules.md) / ChatResourceDto
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev86](../../README.md) / [Exports](../modules.md) / ChatResourceDto
 
 # Interface: ChatResourceDto
 

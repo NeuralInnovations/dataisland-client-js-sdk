@@ -70,6 +70,11 @@ export abstract class UserProfile extends EventDispatcher<
   abstract updateUser(newName: string, newId: string, newEducationalInstitution: string): Promise<void>
 
   /**
+   * Connect telegram account to DataIsland User
+   */
+  abstract addTelegramAccount(data: object): Promise<void>
+
+  /**
    *  Get all invite links for user
    */
   abstract getUserInvites(): Promise<InviteResponse>

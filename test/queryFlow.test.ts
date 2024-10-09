@@ -29,7 +29,7 @@ test("QueryFlows", async () => {
       expect(flow_id).not.toBeUndefined()
       expect(flow_id).not.toBeNull()
 
-      const flow_obj = org.queryFlows.collection.find(obj => obj.id === flow_id)
+      const flow_obj = (await org.queryFlows.getQueryFlows()).find(obj => obj.id === flow_id)
 
       expect(flow_obj).not.toBeUndefined()
       expect(flow_obj).not.toBeNull()

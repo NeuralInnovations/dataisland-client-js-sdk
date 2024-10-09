@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev85](../../README.md) / [Exports](../modules.md) / QueryFlows
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev86](../../README.md) / [Exports](../modules.md) / QueryFlows
 
 # Class: QueryFlows
 
@@ -14,15 +14,12 @@
 
 - [constructor](QueryFlows.md#constructor)
 
-### Accessors
-
-- [collection](QueryFlows.md#collection)
-
 ### Methods
 
 - [create](QueryFlows.md#create)
 - [delete](QueryFlows.md#delete)
 - [dispatch](QueryFlows.md#dispatch)
+- [getQueryFlows](QueryFlows.md#getqueryflows)
 - [subscribe](QueryFlows.md#subscribe)
 
 ## Constructors
@@ -38,16 +35,6 @@
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
-
-## Accessors
-
-### collection
-
-• `get` **collection**(): [`QueryFlow`](QueryFlow.md)[]
-
-#### Returns
-
-[`QueryFlow`](QueryFlow.md)[]
 
 ## Methods
 
@@ -103,6 +90,16 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### getQueryFlows
+
+▸ **getQueryFlows**(): `Promise`\<[`QueryFlow`](QueryFlow.md)[]\>
+
+#### Returns
+
+`Promise`\<[`QueryFlow`](QueryFlow.md)[]\>
 
 ___
 

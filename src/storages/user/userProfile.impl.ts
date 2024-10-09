@@ -110,7 +110,7 @@ export class UserProfileImpl extends UserProfile {
       })
 
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError("Failed to change organization", response)
+      await ResponseUtils.throwError("Failed to change user", response)
     }
 
     if (this.content) {
@@ -123,6 +123,27 @@ export class UserProfileImpl extends UserProfile {
       type: UserEvent.CHANGED,
       data: this
     })
+  }
+
+  async addTelegramAccount(data: object): Promise<void>{
+    if (!this.content) {
+      throw new Error("User is not loaded.")
+    }
+
+    if (data === null || data === undefined) {
+      throw new Error("Data is null or undefined")
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Users/telegram")
+      .sendPutJson({
+        telegram: data
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to connect telegram to user", response)
+    }
   }
 
   async getUserInvites(): Promise<InviteResponse>{
