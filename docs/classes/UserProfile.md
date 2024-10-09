@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev85](../../README.md) / [Exports](../modules.md) / UserProfile
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev86](../../README.md) / [Exports](../modules.md) / UserProfile
 
 # Class: UserProfile
 
@@ -28,6 +28,7 @@
 
 ### Methods
 
+- [addTelegramAccount](UserProfile.md#addtelegramaccount)
 - [deleteUser](UserProfile.md#deleteuser)
 - [dispatch](UserProfile.md#dispatch)
 - [fetch](UserProfile.md#fetch)
@@ -158,6 +159,24 @@ User name.
 `string`
 
 ## Methods
+
+### addTelegramAccount
+
+▸ **addTelegramAccount**(`data`): `Promise`\<`void`\>
+
+Connect telegram account to DataIsland User
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | `object` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
 
 ### deleteUser
 

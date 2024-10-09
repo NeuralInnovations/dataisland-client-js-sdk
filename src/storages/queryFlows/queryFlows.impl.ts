@@ -22,7 +22,7 @@ export class QueryFlowsImpl extends QueryFlows {
     super()
   }
 
-  async init() {
+  async getQueryFlows(): Promise<QueryFlow[]> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/QueryFlows/list")
@@ -55,9 +55,7 @@ export class QueryFlowsImpl extends QueryFlows {
         data: flowImpl
       })
     }
-  }
 
-  get collection(): QueryFlow[] {
     return this._collection
   }
 

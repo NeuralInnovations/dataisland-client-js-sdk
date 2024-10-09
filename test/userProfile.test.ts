@@ -25,6 +25,18 @@ test("UserProfile", async () => {
     expect(userProfile.name).toBe(updatedName)
     expect(userProfile.binanceId).toBe(updatedId)
     expect(userProfile.educationalInstitution).toBe(updatedEducationInstitution)
+
+    const telegram_data = {
+      id: `id_${randomHash(20)}`,
+      username: "test",
+      firstName: "te",
+      lastName: "st",
+      authDate: "2024-10-09T07:31:03.226Z",
+      photoUrl: "url",
+      hash: "hash"
+    }
+
+    await expect(userProfile.addTelegramAccount(telegram_data)).resolves.not.toThrow()
   })})
 
 describe("UserProfileImpl", () => {
