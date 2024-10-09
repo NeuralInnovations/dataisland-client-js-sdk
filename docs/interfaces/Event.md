@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev85](../../README.md) / [Exports](../modules.md) / Event
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev86](../../README.md) / [Exports](../modules.md) / Event
 
 # Interface: Event\<EventType, DataType\>
 
