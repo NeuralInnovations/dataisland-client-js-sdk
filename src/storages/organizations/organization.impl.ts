@@ -13,7 +13,7 @@ import {
 import { WorkspaceId, Workspaces } from "../workspaces/workspaces"
 import { WorkspacesImpl } from "../workspaces/workspaces.impl"
 import { Context } from "../../context"
-import { Organization, OrganizationEvent } from "./organization"
+import { Organization } from "./organization"
 import { GroupsImpl } from "../groups/groups.impl"
 import { Groups } from "../groups/groups"
 import { ChatsImpl } from "../chats/chats.impl"
@@ -193,10 +193,7 @@ export class OrganizationImpl extends Organization implements Disposable {
       this._content.profile.description = description
     }
 
-    this.dispatch({
-      type: OrganizationEvent.CHANGED,
-      data: this
-    })
+    this.fireChanged()
   }
 
   async uploadIcon(icon: UploadFile): Promise<string> {
@@ -401,7 +398,6 @@ export class OrganizationImpl extends Organization implements Disposable {
   }
 
   async createInviteCode(accessGroups: string[], validateDomain?: string): Promise<string> {
-
     let validateObj = null
     if (validateDomain !== null && validateDomain !== undefined) {
       validateObj = {
@@ -573,7 +569,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return (await response!.json()) as QuizData
   }
 
-  async deleteOrganizationMember(userIds: string[]): Promise<void>{
+  async deleteOrganizationMember(userIds: string[]): Promise<void> {
     if (userIds === undefined || userIds === null) {
       throw new Error(`Users delete from org ${this.id}, ids array is undefined or null`)
     }
@@ -585,11 +581,13 @@ export class OrganizationImpl extends Organization implements Disposable {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Organizations/member")
       .searchParam("organizationId", this.id)
-      .searchParam("userIds", userIds.toString() )
+      .searchParam("userIds", userIds.toString())
       .sendDelete()
 
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(`Users delete from org ${this.id} failed`, response)
     }
+
+    this.fireChanged()
   }
 }

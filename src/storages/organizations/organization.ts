@@ -193,4 +193,14 @@ export abstract class Organization extends EventDispatcher<
    * @param userIds
    */
   abstract deleteOrganizationMember(userIds: string[]): Promise<void>
+
+  /**
+   * Fire changed event.
+   */
+  fireChanged(): void {
+    this.dispatch({
+      type: OrganizationEvent.CHANGED,
+      data: this
+    })
+  }
 }

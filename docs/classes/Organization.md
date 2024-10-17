@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev87](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.1.0](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -40,6 +40,7 @@ Organization.
 - [deleteInviteCode](Organization.md#deleteinvitecode)
 - [deleteOrganizationMember](Organization.md#deleteorganizationmember)
 - [dispatch](Organization.md#dispatch)
+- [fireChanged](Organization.md#firechanged)
 - [getApiKeys](Organization.md#getapikeys)
 - [getOrganizationInvites](Organization.md#getorganizationinvites)
 - [inviteUsers](Organization.md#inviteusers)
@@ -351,6 +352,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### fireChanged
+
+▸ **fireChanged**(): `void`
+
+Fire changed event.
+
+#### Returns
+
+`void`
 
 ___
 
