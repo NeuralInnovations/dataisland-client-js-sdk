@@ -51,6 +51,8 @@ test("Invites", async () => {
 
       await expect(org.deleteInviteCode(invite_code)).resolves.not.toThrow()
 
+      await expect(org.deleteOrganizationMember([secondUserApp.userProfile.id])).resolves.not.toThrow()
+
     } else {
       throw new Error(`Admin group is not found for ${org.id}`)
     }
