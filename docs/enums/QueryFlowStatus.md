@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev86](../../README.md) / [Exports](../modules.md) / QueryFlowStatus
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev87](../../README.md) / [Exports](../modules.md) / QueryFlowStatus
 
 # Enumeration: QueryFlowStatus
 
