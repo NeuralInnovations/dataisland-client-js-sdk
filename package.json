@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.0.1-dev87",
+  "version": "0.1.0",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -93,7 +93,7 @@
     "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.3.3",
     "watch": "^0.13.0",
-    "webpack": "5.76.0",
+    "webpack": "5.94.0",
     "yargs": "17.7.2"
   },
   "dependencies": {
