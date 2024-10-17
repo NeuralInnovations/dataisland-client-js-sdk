@@ -39,6 +39,11 @@ export abstract class Organization extends EventDispatcher<
   abstract get id(): OrganizationId
 
   /**
+   * Is admin organization
+   */
+  abstract get isAdmin(): boolean
+
+  /**
    * Organization name.
    */
   abstract get name(): string
@@ -182,4 +187,10 @@ export abstract class Organization extends EventDispatcher<
    * @param fileId - file id in case of test-on-file
    */
   abstract createQuiz(workspaces: WorkspaceId[], query: string, questionsCount: number, optionsCount: number, fileId: FileId): Promise<QuizData>
+
+  /**
+   * Delete users from organization by id
+   * @param userIds
+   */
+  abstract deleteOrganizationMember(userIds: string[]): Promise<void>
 }

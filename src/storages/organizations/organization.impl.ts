@@ -572,4 +572,24 @@ export class OrganizationImpl extends Organization implements Disposable {
 
     return (await response!.json()) as QuizData
   }
+
+  async deleteOrganizationMember(userIds: string[]): Promise<void>{
+    if (userIds === undefined || userIds === null) {
+      throw new Error(`Users delete from org ${this.id}, ids array is undefined or null`)
+    }
+    if (userIds.length === 0) {
+      throw new Error(`Users delete from org ${this.id}, array of ids is empty`)
+    }
+
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Organizations/member")
+      .searchParam("organizationId", this.id)
+      .searchParam("userIds", userIds.toString() )
+      .sendDelete()
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Users delete from org ${this.id} failed`, response)
+    }
+  }
 }

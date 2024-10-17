@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.0.1-dev86](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.0.1-dev87](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -23,6 +23,7 @@ Organization.
 - [description](Organization.md#description)
 - [icon](Organization.md#icon)
 - [id](Organization.md#id)
+- [isAdmin](Organization.md#isadmin)
 - [isAllowedInLibraries](Organization.md#isallowedinlibraries)
 - [name](Organization.md#name)
 - [prompts](Organization.md#prompts)
@@ -37,6 +38,7 @@ Organization.
 - [createQuiz](Organization.md#createquiz)
 - [deleteApiKey](Organization.md#deleteapikey)
 - [deleteInviteCode](Organization.md#deleteinvitecode)
+- [deleteOrganizationMember](Organization.md#deleteorganizationmember)
 - [dispatch](Organization.md#dispatch)
 - [getApiKeys](Organization.md#getapikeys)
 - [getOrganizationInvites](Organization.md#getorganizationinvites)
@@ -124,6 +126,18 @@ Organization id.
 #### Returns
 
 `string`
+
+___
+
+### isAdmin
+
+• `get` **isAdmin**(): `boolean`
+
+Is admin organization
+
+#### Returns
+
+`boolean`
 
 ___
 
@@ -295,6 +309,24 @@ Delete invite code
 | Name | Type |
 | :------ | :------ |
 | `code` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
+
+### deleteOrganizationMember
+
+▸ **deleteOrganizationMember**(`userIds`): `Promise`\<`void`\>
+
+Delete users from organization by id
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `userIds` | `string`[] |
 
 #### Returns
 
