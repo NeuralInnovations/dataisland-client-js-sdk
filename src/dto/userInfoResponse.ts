@@ -63,6 +63,8 @@ export interface MembersResponse {
 
 export interface ApplyInviteCodeResponse {
   organizationId: string
+  addedToNewGroupsCounter: number
+  isAddedToOrganization: boolean
 }
 
 export interface UsersStatisticsResponse {

@@ -5,7 +5,6 @@ import {
   AnswerStepDto,
   FetchAnswerResponse,
   SourceDto,
-  StepStatus,
   StepType
 } from "../../dto/chatResponse"
 import {ResponseUtils} from "../../services/responseUtils"
@@ -107,7 +106,7 @@ export class AnswerImpl extends Answer {
     this._status = <AnswerStatus>answer.status
     this._steps = <AnswerStepDto[]>answer.steps
 
-    if (this.status == AnswerStatus.CANCELED || this.status == AnswerStatus.FAIL){
+    if (this.status === AnswerStatus.CANCELED || this.status === AnswerStatus.FAIL){
       this.dispatch({
         type: AnswerEvent.UPDATED,
         data: this
@@ -137,19 +136,17 @@ export class AnswerImpl extends Answer {
       })
     }
 
-    const doneStep = this.getStep(StepType.DONE)
-    if (doneStep !== undefined) {
-      if (doneStep.status == StepStatus.FAIL || doneStep.status == StepStatus.CANCELED){
-        this.dispatch({
-          type: AnswerEvent.UPDATED,
-          data: this
-        })
-      }else {
-        const step = this.getStep(StepType.DONE)
-        this._timestamp = Date.parse(step!.end_at)
+    if (this.status === AnswerStatus.SUCCESS) {
+      this.dispatch({
+        type: AnswerEvent.UPDATED,
+        data: this
+      })
 
-        await this.chat.update()
-      }
+      const step = this.getStep(StepType.DONE)
+      this._timestamp = Date.parse(step!.end_at)
+
+      await this.chat.update()
+
     } else {
       this.fetchAfter()
     }

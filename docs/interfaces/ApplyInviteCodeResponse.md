@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.1.0](../../README.md) / [Exports](../modules.md) / ApplyInviteCodeResponse
+[@neuralinnovations/dataisland-sdk - v0.1.1](../../README.md) / [Exports](../modules.md) / ApplyInviteCodeResponse
 
 # Interface: ApplyInviteCodeResponse
 
@@ -6,9 +6,23 @@
 
 ### Properties
 
+- [addedToNewGroupsCounter](ApplyInviteCodeResponse.md#addedtonewgroupscounter)
+- [isAddedToOrganization](ApplyInviteCodeResponse.md#isaddedtoorganization)
 - [organizationId](ApplyInviteCodeResponse.md#organizationid)
 
 ## Properties
+
+### addedToNewGroupsCounter
+
+• **addedToNewGroupsCounter**: `number`
+
+___
+
+### isAddedToOrganization
+
+• **isAddedToOrganization**: `boolean`
+
+___
 
 ### organizationId
 
