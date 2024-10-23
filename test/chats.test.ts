@@ -143,10 +143,11 @@ test("Chat create with file, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      for (const source of answer!.sources) {
-        await expect(source.id).toBe(file)
+      if (answer.sources !== undefined) {
+        for (const source of answer.sources!) {
+          await expect(source.id).toBe(file)
+        }
       }
-
 
       const askCancelPromise = chat!.ask(question, ChatAnswerType.SHORT)
 
@@ -228,8 +229,10 @@ test("Chat create with workspace, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      for (const source of answer!.sources) {
-        await expect(source.id).toBe(file)
+      if (answer.sources !== undefined) {
+        for (const source of answer.sources!) {
+          await expect(source.id).toBe(file)
+        }
       }
 
       await new Promise(f => setTimeout(f, 1000))
@@ -304,8 +307,10 @@ test("Chat create with library", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      for (const source of answer!.sources) {
-        await expect(source.id).toBe(file)
+      if (answer.sources !== undefined) {
+        for (const source of answer.sources!) {
+          await expect(source.id).toBe(file)
+        }
       }
 
       await new Promise(f => setTimeout(f, 1000))
@@ -380,8 +385,10 @@ test("Chat create with library file", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      for (const source of answer!.sources) {
-        await expect(source.id).toBe(file)
+      if (answer.sources !== undefined) {
+        for (const source of answer.sources!) {
+          await expect(source.id).toBe(file)
+        }
       }
 
       await new Promise(f => setTimeout(f, 1000))

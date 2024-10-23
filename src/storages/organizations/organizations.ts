@@ -63,6 +63,11 @@ export abstract class Organizations extends EventDispatcher<
   abstract applyInviteCode(code: string): Promise<ApplyInviteCodeResponse>
 
   /**
+   * leave organization
+   */
+  abstract leaveOrganization(organizationId: string): Promise<void>
+
+  /**
    * Upload icon for any available resource ( organization, user, workspace, chat )
    * @param organizationId
    * @param resourceId

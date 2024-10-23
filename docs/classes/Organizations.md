@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.1.0](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.1.1](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
@@ -31,6 +31,7 @@ Organizations storage.
 - [get](Organizations.md#get)
 - [getIconData](Organizations.md#geticondata)
 - [getNewestIcon](Organizations.md#getnewesticon)
+- [leaveOrganization](Organizations.md#leaveorganization)
 - [subscribe](Organizations.md#subscribe)
 - [tryGet](Organizations.md#tryget)
 - [uploadIconGlobal](Organizations.md#uploadiconglobal)
@@ -232,6 +233,24 @@ Get latest icon for provided resource
 #### Returns
 
 `Promise`\<[`IconDto`](../interfaces/IconDto.md)\>
+
+___
+
+### leaveOrganization
+
+▸ **leaveOrganization**(`organizationId`): `Promise`\<`void`\>
+
+leave organization
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `organizationId` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 
