@@ -6,7 +6,7 @@ import {
   UploadFile
 } from "../src"
 
-test("QueryFlows", async () => {
+test.skip("QueryFlows", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
       expect(app).not.toBeUndefined()

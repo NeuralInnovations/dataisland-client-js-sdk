@@ -85,6 +85,24 @@ export class OrganizationsImpl extends Organizations {
     return result
   }
 
+  async leaveOrganization(organizationId: string): Promise<void> {
+    if (organizationId === null || organizationId === undefined || organizationId.trim() === ""){
+      throw new Error("Organization ID is null or empty")
+    }
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Organizations/leave")
+      .sendPutJson({
+        organizationId: organizationId,
+      })
+
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError("Failed to leave organization", response)
+    }
+
+    await this.context.resolve(UserProfileService)?.fetch()
+  }
+
   //----------------------------------------------------------------------------
   // INTERNALS
   //----------------------------------------------------------------------------
