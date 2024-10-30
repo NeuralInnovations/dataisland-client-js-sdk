@@ -68,4 +68,9 @@ export abstract class DataIslandApp {
    * @param type
    */
   abstract resolve<T>(type: Constructor<T>): T | undefined
+
+  /**
+   * Invalidate the app and reload the data.
+   */
+  abstract invalidate(): Promise<void>
 }
