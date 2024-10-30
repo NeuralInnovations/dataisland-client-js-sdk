@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.1.1](../../README.md) / [Exports](../modules.md) / DataIslandApp
+[@neuralinnovations/dataisland-sdk - v0.2.0](../../README.md) / [Exports](../modules.md) / DataIslandApp
 
 # Class: DataIslandApp
 
@@ -25,6 +25,7 @@ DataIsland App instance.
 
 ### Methods
 
+- [invalidate](DataIslandApp.md#invalidate)
 - [resolve](DataIslandApp.md#resolve)
 
 ## Constructors
@@ -170,6 +171,18 @@ User's profile.
 [`UserProfile`](UserProfile.md)
 
 ## Methods
+
+### invalidate
+
+▸ **invalidate**(): `Promise`\<`void`\>
+
+Invalidate the app and reload the data.
+
+#### Returns
+
+`Promise`\<`void`\>
+
+___
 
 ### resolve
 

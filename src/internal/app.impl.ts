@@ -95,6 +95,10 @@ export class DataIslandAppImpl extends DataIslandApp {
     return (this.resolve(LibrariesService) as LibrariesService).libraries
   }
 
+  async invalidate(): Promise<void> {
+    await this.context.execute(new StartCommand())
+  }
+
   async initialize(
     setup: ((builder: AppBuilder) => Promise<void>) | undefined
   ): Promise<void> {

@@ -187,6 +187,7 @@ export class LibrariesImpl extends Libraries {
     // parse limits from the server's response
     const libraries = (json as LibrariesResponse).libraries
 
+    this._libraries.length = 0
     for (const library of libraries) {
       const impl = new LibraryImpl(this.context)
       await impl.initFrom(library)
