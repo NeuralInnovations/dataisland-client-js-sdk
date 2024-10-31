@@ -10,7 +10,7 @@ export abstract class LibraryManagement {
   /**
    * Create a new library
    */
-  abstract createLibrary(name: string, region: number, isPublic: boolean): Promise<LibraryId>
+  abstract createLibrary(name: string, description: string, region: number, isPublic: boolean): Promise<LibraryId>
 
   /**
    * Add permission for an organization to share its data through the library

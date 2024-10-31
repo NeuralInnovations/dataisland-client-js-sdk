@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.2.0](../../README.md) / [Exports](../modules.md) / OrderState
+[@neuralinnovations/dataisland-sdk - v0.2.1](../../README.md) / [Exports](../modules.md) / OrderState
 
 # Enumeration: OrderState
 
