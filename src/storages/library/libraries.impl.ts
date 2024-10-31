@@ -19,13 +19,21 @@ export class LibraryManagementImpl extends LibraryManagement {
     this.context = context
   }
 
-  async createLibrary(name: string, region: number, isPublic: boolean): Promise<LibraryId> {
+  async createLibrary(name: string, description: string, region: number, isPublic: boolean): Promise<LibraryId> {
     if (
       name === undefined ||
       name === null ||
       name.trim() === ""
     ) {
       throw new Error("Name for library is required, must be not empty")
+    }
+
+    if (
+      description === undefined ||
+      description === null ||
+      description.trim() === ""
+    ) {
+      throw new Error("Description for library is required, must be not empty")
     }
 
     if (
@@ -41,6 +49,7 @@ export class LibraryManagementImpl extends LibraryManagement {
       ?.requestBuilder("api/v1/libraries/management")
       .sendPostJson({
         name: name,
+        description: description,
         region: region,
         isPublic: isPublic
       })
