@@ -145,8 +145,9 @@ export const testInLibrary = async (func: (app: DataIslandApp, org: Organization
 }): Promise<void> => {
   await testInWorkspace(async (app, org, ws) => {
     const testLibraryName = "test"
+    const testLibraryDescription = "test library"
     const testLibraryRegion = 0
-    const libraryId = await app.libraries.management.createLibrary(testLibraryName, testLibraryRegion, true)
+    const libraryId = await app.libraries.management.createLibrary(testLibraryName, testLibraryDescription, testLibraryRegion, true)
     await app.libraries.management.addOrgToLibrary(libraryId, org.id)
     await expect(ws.share(true)).resolves.not.toThrow()
     await app.resolve(LibrariesService)!.initialize()

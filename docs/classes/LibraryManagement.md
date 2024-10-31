@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.2.0](../../README.md) / [Exports](../modules.md) / LibraryManagement
+[@neuralinnovations/dataisland-sdk - v0.2.1](../../README.md) / [Exports](../modules.md) / LibraryManagement
 
 # Class: LibraryManagement
 
@@ -51,7 +51,7 @@ ___
 
 ### createLibrary
 
-▸ **createLibrary**(`name`, `region`, `isPublic`): `Promise`\<`string`\>
+▸ **createLibrary**(`name`, `description`, `region`, `isPublic`): `Promise`\<`string`\>
 
 Create a new library
 
@@ -60,6 +60,7 @@ Create a new library
 | Name | Type |
 | :------ | :------ |
 | `name` | `string` |
+| `description` | `string` |
 | `region` | `number` |
 | `isPublic` | `boolean` |
 

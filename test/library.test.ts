@@ -6,8 +6,9 @@ test("Libraries", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
       const testLibraryName = "test"
+      const testLibraryDescription = "test description"
       const testLibraryRegion = 0
-      const libraryId = await app.libraries.management.createLibrary(testLibraryName, testLibraryRegion, true)
+      const libraryId = await app.libraries.management.createLibrary(testLibraryName, testLibraryDescription, testLibraryRegion, true)
 
       expect(libraryId).not.toBeUndefined()
       expect(libraryId).not.toBeNull()
