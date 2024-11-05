@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.2.1](../../README.md) / [Exports](../modules.md) / DataIslandApp
+[@neuralinnovations/dataisland-sdk - v0.3.0](../../README.md) / [Exports](../modules.md) / DataIslandApp
 
 # Class: DataIslandApp
 
@@ -13,6 +13,7 @@ DataIsland App instance.
 ### Accessors
 
 - [acquiring](DataIslandApp.md#acquiring)
+- [administration](DataIslandApp.md#administration)
 - [automaticDataCollectionEnabled](DataIslandApp.md#automaticdatacollectionenabled)
 - [context](DataIslandApp.md#context)
 - [credential](DataIslandApp.md#credential)
@@ -49,6 +50,18 @@ Acquiring.
 #### Returns
 
 `Acquiring`
+
+___
+
+### administration
+
+• `get` **administration**(): `Administration`
+
+Administration.
+
+#### Returns
+
+`Administration`
 
 ___
 

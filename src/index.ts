@@ -73,7 +73,7 @@ export {
 export { FolderId } from "./storages/library/folderId"
 export { LibraryId } from "./storages/library/libraryId"
 export { Library } from "./storages/library/library"
-export { Libraries, LibraryManagement } from "./storages/library/libraries"
+export { Libraries } from "./storages/library/libraries"
 export { LibraryPage, LibraryParent } from "./storages/library/libraryPage"
 export { LibraryFolder } from "./storages/library/libraryFolder"
 
@@ -147,3 +147,6 @@ export async function dataIslandApp(
   }
   return await appPromise
 }
+export {
+  LibraryAdministration
+} from "./storages/administration/library.administration"
