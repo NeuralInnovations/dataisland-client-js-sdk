@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.2.1](../../README.md) / [Exports](../modules.md) / LibraryManagement
+[@neuralinnovations/dataisland-sdk - v0.3.0](../../README.md) / [Exports](../modules.md) / LibraryAdministration
 
-# Class: LibraryManagement
+# Class: LibraryAdministration
 
 Library management, you must have permissions to manage libraries
 
@@ -8,25 +8,25 @@ Library management, you must have permissions to manage libraries
 
 ### Constructors
 
-- [constructor](LibraryManagement.md#constructor)
+- [constructor](LibraryAdministration.md#constructor)
 
 ### Methods
 
-- [addOrgToLibrary](LibraryManagement.md#addorgtolibrary)
-- [createLibrary](LibraryManagement.md#createlibrary)
-- [deleteLibrary](LibraryManagement.md#deletelibrary)
-- [deleteOrgFromLibrary](LibraryManagement.md#deleteorgfromlibrary)
-- [getLibraries](LibraryManagement.md#getlibraries)
+- [addOrgToLibrary](LibraryAdministration.md#addorgtolibrary)
+- [createLibrary](LibraryAdministration.md#createlibrary)
+- [deleteLibrary](LibraryAdministration.md#deletelibrary)
+- [deleteOrgFromLibrary](LibraryAdministration.md#deleteorgfromlibrary)
+- [getLibraries](LibraryAdministration.md#getlibraries)
 
 ## Constructors
 
 ### constructor
 
-• **new LibraryManagement**(): [`LibraryManagement`](LibraryManagement.md)
+• **new LibraryAdministration**(): [`LibraryAdministration`](LibraryAdministration.md)
 
 #### Returns
 
-[`LibraryManagement`](LibraryManagement.md)
+[`LibraryAdministration`](LibraryAdministration.md)
 
 ## Methods
 

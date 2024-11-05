@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.2.1](../../README.md) / [Exports](../modules.md) / Libraries
+[@neuralinnovations/dataisland-sdk - v0.3.0](../../README.md) / [Exports](../modules.md) / Libraries
 
 # Class: Libraries
 
@@ -13,7 +13,6 @@ Libraries
 ### Accessors
 
 - [collection](Libraries.md#collection)
-- [management](Libraries.md#management)
 
 ### Methods
 
@@ -40,18 +39,6 @@ Collection of libraries
 #### Returns
 
 readonly [`Library`](Library.md)[]
-
-___
-
-### management
-
-• `get` **management**(): [`LibraryManagement`](LibraryManagement.md)
-
-You must have permissions to manage libraries
-
-#### Returns
-
-[`LibraryManagement`](LibraryManagement.md)
 
 ## Methods
 
