@@ -32,8 +32,10 @@ import { CookieService } from "../services/cookieService"
 import { AnonymousService } from "../services/anonymousService"
 import { Acquiring } from "../storages/acquirings/acquiring"
 import { AcquiringService } from "../services/acquiringService"
-import {Libraries} from "../storages/library/libraries"
-import {LibrariesService} from "../services/librariesService"
+import { Libraries } from "../storages/library/libraries"
+import { LibrariesService } from "../services/librariesService"
+import { AdministrationService } from "../services/statistics"
+import { Administration } from "../storages/administration/administration"
 
 export class DataIslandAppImpl extends DataIslandApp {
   readonly name: string
@@ -95,6 +97,10 @@ export class DataIslandAppImpl extends DataIslandApp {
     return (this.resolve(LibrariesService) as LibrariesService).libraries
   }
 
+  get administration(): Administration {
+    return this.resolve(AdministrationService) as Administration
+  }
+
   async invalidate(): Promise<void> {
     await this.context.execute(new StartCommand())
   }
@@ -143,6 +149,9 @@ export class DataIslandAppImpl extends DataIslandApp {
     })
     builder.registerService(LibrariesService, (context: ServiceContext) => {
       return new LibrariesService(context)
+    })
+    builder.registerService(AdministrationService, (context: ServiceContext) => {
+      return new AdministrationService(context)
     })
 
     // call customer setup
