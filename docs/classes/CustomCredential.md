@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.3.0](../../README.md) / [Exports](../modules.md) / CustomCredential
+[@neuralinnovations/dataisland-sdk - v0.4.0](../../README.md) / [Exports](../modules.md) / CustomCredential
 
 # Class: CustomCredential
 
@@ -36,7 +36,7 @@ DataIsland App credential.
 | Name | Type |
 | :------ | :------ |
 | `schema` | `string` |
-| `token` | `string` |
+| `token` | `string` \| [`TokenProvider`](../modules.md#tokenprovider) |
 
 #### Returns
 
@@ -56,7 +56,7 @@ ___
 
 ### token
 
-• `Readonly` **token**: `string`
+• `Readonly` **token**: `string` \| [`TokenProvider`](../modules.md#tokenprovider)
 
 ## Methods
 

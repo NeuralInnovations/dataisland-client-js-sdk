@@ -16,6 +16,8 @@ export class DefaultCredential extends CredentialBase {
   }
 }
 
+export type TokenProvider = (req: Request) => Promise<string>;
+
 export class BasicCredential extends CredentialBase {
   readonly email: string
   readonly password: string
@@ -41,9 +43,9 @@ export class BasicCredential extends CredentialBase {
 }
 
 export class DebugCredential extends CredentialBase {
-  readonly token: string
+  readonly token: string | TokenProvider
 
-  constructor(token: string) {
+  constructor(token: string | TokenProvider) {
     super()
     this.token = token
   }
@@ -55,7 +57,8 @@ export class DebugCredential extends CredentialBase {
     }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
-        req.headers.set("Authorization", `Debug ${this.token}`)
+        const currenToken = typeof this.token === "function" ? await this.token(req) : this.token
+        req.headers.set("Authorization", `Debug ${currenToken}`)
         return await next(req)
       })
     )
@@ -63,9 +66,9 @@ export class DebugCredential extends CredentialBase {
 }
 
 export class BearerCredential extends CredentialBase {
-  readonly token: string
+  readonly token: string | TokenProvider
 
-  constructor(token: string) {
+  constructor(token: string | TokenProvider) {
     super()
     this.token = token
   }
@@ -77,7 +80,8 @@ export class BearerCredential extends CredentialBase {
     }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
-        req.headers.set("Authorization", `Bearer ${this.token}`)
+        const currenToken = typeof this.token === "function" ? await this.token(req) : this.token
+        req.headers.set("Authorization", `Bearer ${currenToken}`)
         return await next(req)
       })
     )
@@ -85,9 +89,9 @@ export class BearerCredential extends CredentialBase {
 }
 
 export class AnonymousCredential extends CredentialBase {
-  readonly token: string
+  readonly token: string | TokenProvider
 
-  constructor(token: string) {
+  constructor(token: string | TokenProvider) {
     super()
     this.token = token
   }
@@ -99,7 +103,8 @@ export class AnonymousCredential extends CredentialBase {
     }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
-        req.headers.set("Authorization", `InternalJWT ${this.token}`)
+        const currenToken = typeof this.token === "function" ? await this.token(req) : this.token
+        req.headers.set("Authorization", `InternalJWT ${currenToken}`)
         return await next(req)
       })
     )
@@ -108,9 +113,9 @@ export class AnonymousCredential extends CredentialBase {
 
 export class CustomCredential extends CredentialBase {
   readonly schema: string
-  readonly token: string
+  readonly token: string | TokenProvider
 
-  constructor(schema: string, token: string) {
+  constructor(schema: string, token: string | TokenProvider) {
     super()
     this.token = token
     this.schema = schema
@@ -123,7 +128,8 @@ export class CustomCredential extends CredentialBase {
     }
     lifetime.add(
       service.useMiddleware(async (req, next) => {
-        req.headers.set("Authorization", `${this.schema} ${this.token}`)
+        const currenToken = typeof this.token === "function" ? await this.token(req) : this.token
+        req.headers.set("Authorization", `${this.schema} ${currenToken}`)
         return await next(req)
       })
     )

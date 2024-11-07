@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.3.0](../../README.md) / [Exports](../modules.md) / AnonymousCredential
+[@neuralinnovations/dataisland-sdk - v0.4.0](../../README.md) / [Exports](../modules.md) / AnonymousCredential
 
 # Class: AnonymousCredential
 
@@ -34,7 +34,7 @@ DataIsland App credential.
 
 | Name | Type |
 | :------ | :------ |
-| `token` | `string` |
+| `token` | `string` \| [`TokenProvider`](../modules.md#tokenprovider) |
 
 #### Returns
 
@@ -48,7 +48,7 @@ DataIsland App credential.
 
 ### token
 
-• `Readonly` **token**: `string`
+• `Readonly` **token**: `string` \| [`TokenProvider`](../modules.md#tokenprovider)
 
 ## Methods
 
