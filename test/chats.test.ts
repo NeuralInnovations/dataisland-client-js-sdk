@@ -143,9 +143,9 @@ test("Chat create with file, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      if (answer.sources !== undefined) {
+      if (answer?.sources !== undefined) {
         for (const source of answer.sources!) {
-          await expect(source.id).toBe(file)
+          expect(source.id).toBe(file)
         }
       }
 
@@ -229,7 +229,7 @@ test("Chat create with workspace, ask and delete", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      if (answer.sources !== undefined) {
+      if (answer?.sources !== undefined) {
         for (const source of answer.sources!) {
           await expect(source.id).toBe(file)
         }
@@ -307,9 +307,9 @@ test("Chat create with library", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      if (answer.sources !== undefined) {
+      if (answer?.sources !== undefined) {
         for (const source of answer.sources!) {
-          await expect(source.id).toBe(file)
+          expect(source.id).toBe(file)
         }
       }
 
@@ -385,9 +385,9 @@ test("Chat create with library file", async () => {
         await new Promise(f => setTimeout(f, 500))
       }
 
-      if (answer.sources !== undefined) {
+      if (answer?.sources !== undefined) {
         for (const source of answer.sources!) {
-          await expect(source.id).toBe(file)
+          expect(source.id).toBe(file)
         }
       }
 
