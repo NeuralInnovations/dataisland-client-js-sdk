@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.3.0](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.4.0](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.3.0
+# @neuralinnovations/dataisland-sdk - v0.4.0
 
 ## Table of contents
 
@@ -170,6 +170,7 @@
 - [Middleware](modules.md#middleware)
 - [OrganizationId](modules.md#organizationid)
 - [StepId](modules.md#stepid)
+- [TokenProvider](modules.md#tokenprovider)
 - [UploadFile](modules.md#uploadfile)
 - [UserId](modules.md#userid)
 - [WorkspaceId](modules.md#workspaceid)
@@ -270,6 +271,26 @@ ___
 ### StepId
 
 Ƭ **StepId**: `string`
+
+___
+
+### TokenProvider
+
+Ƭ **TokenProvider**: (`req`: `Request`) => `Promise`\<`string`\>
+
+#### Type declaration
+
+▸ (`req`): `Promise`\<`string`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `req` | `Request` |
+
+##### Returns
+
+`Promise`\<`string`\>
 
 ___
 
