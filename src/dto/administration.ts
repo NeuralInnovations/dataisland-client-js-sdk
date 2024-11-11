@@ -30,5 +30,5 @@ export interface OrganizationMemberStatisticDto {
 export interface OrganizationMembersStatisticResponse {
   dateFrom: string,
   dateTo: string,
-  organizationStats: OrganizationMemberStatisticDto[]
+  membersStats: OrganizationMemberStatisticDto[]
 }
