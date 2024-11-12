@@ -19,7 +19,7 @@ export class StatisticAdministrationImpl implements StatisticAdministration {
   ): Promise<OrganizationMembersStatisticResponse> {
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Stats/internal/organization/members/total")
+      ?.requestBuilder("api/v1/management/stats/organization/members/total")
       .searchParam("organizationId", organizationId)
       .searchParam("dateFrom", dateFrom.toString())
       .searchParam("dateTo", dateTo.toString())
@@ -36,7 +36,7 @@ export class StatisticAdministrationImpl implements StatisticAdministration {
   async getOrganizations(dateFrom: number, dateTo: number): Promise<OrganizationStatisticResponse> {
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("/api/v1/Stats/internal/organizations")
+      ?.requestBuilder("api/v1/management/stats/organizations")
       .searchParam("dateFrom", dateFrom.toString())
       .searchParam("dateTo", dateTo.toString())
       .sendGet()
