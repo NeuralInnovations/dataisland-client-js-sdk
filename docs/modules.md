@@ -135,6 +135,7 @@
 - [QuestionData](interfaces/QuestionData.md)
 - [QuizData](interfaces/QuizData.md)
 - [RegulationDto](interfaces/RegulationDto.md)
+- [SearchUserResponse](interfaces/SearchUserResponse.md)
 - [SegmentActionData](interfaces/SegmentActionData.md)
 - [SegmentData](interfaces/SegmentData.md)
 - [SegmentItemData](interfaces/SegmentItemData.md)
