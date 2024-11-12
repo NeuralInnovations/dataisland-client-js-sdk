@@ -45,7 +45,7 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/libraries/management")
+      ?.requestBuilder("api/v1/management/libraries")
       .sendPostJson({
         name: name,
         description: description,
@@ -79,7 +79,7 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
 
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/libraries/management/allowed/organization")
+      ?.requestBuilder("api/v1/management/libraries/allowed/organization")
       .sendPutJson({
         libraryId: libraryId,
         organizationId: organizationId
@@ -95,7 +95,7 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
   async getLibraries(): Promise<LibraryDto[]> {
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/libraries/management/allowed/organizations")
+      ?.requestBuilder("api/v1/management/libraries/allowed/organizations")
       .sendGet()
 
     // check response status
@@ -129,7 +129,7 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/libraries/management/allowed/organization")
+      ?.requestBuilder("api/v1/management/libraries/allowed/organization")
       .searchParam("libraryId", libraryId)
       .searchParam("organizationId", organizationId)
       .sendDelete()
@@ -154,7 +154,7 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/libraries/management")
+      ?.requestBuilder("api/v1/management/libraries")
       .searchParam("libraryId", libraryId)
       .sendDelete()
 

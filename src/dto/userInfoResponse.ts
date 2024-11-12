@@ -10,6 +10,12 @@ export interface UserInfoResponse {
   user: UserDto
 }
 
+export interface SearchUserResponse {
+  user: UserDto
+  organizations: OrganizationDto[]
+  segmentKey: string
+}
+
 export interface UserDto {
   id: UserId
   isDeleted: boolean

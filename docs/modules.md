@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.4.0](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.4.1](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.4.0
+# @neuralinnovations/dataisland-sdk - v0.4.1
 
 ## Table of contents
 
@@ -135,6 +135,7 @@
 - [QuestionData](interfaces/QuestionData.md)
 - [QuizData](interfaces/QuizData.md)
 - [RegulationDto](interfaces/RegulationDto.md)
+- [SearchUserResponse](interfaces/SearchUserResponse.md)
 - [SegmentActionData](interfaces/SegmentActionData.md)
 - [SegmentData](interfaces/SegmentData.md)
 - [SegmentItemData](interfaces/SegmentItemData.md)

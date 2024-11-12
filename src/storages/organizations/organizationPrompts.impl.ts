@@ -7,7 +7,7 @@ import { ResponseUtils } from "../../services/responseUtils"
 
 export class OrganizationPromptsImpl implements OrganizationPrompts {
 
-  private _cacheDefaultPrompts: OrganizationPromptDto[] | null = null
+  private _cacheDefaultPrompts: Map<string, OrganizationPromptDto[]> = new Map<string, OrganizationPromptDto[]>()
 
   constructor(
     private readonly organization: OrganizationImpl,
@@ -16,15 +16,20 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
 
   }
 
-  async getDefaultPrompts(): Promise<OrganizationPromptDto[]> {
-    if (this._cacheDefaultPrompts !== null) {
-      return this._cacheDefaultPrompts
+  async getDefaultPrompts(sourceName: string): Promise<OrganizationPromptDto[]> {
+    if (sourceName === undefined || sourceName === null || sourceName.trim() === "") {
+      throw new Error("Source name is empty or null")
+    }
+
+    if (this._cacheDefaultPrompts.get(sourceName) !== undefined) {
+      return this._cacheDefaultPrompts.get(sourceName)!
     }
 
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Organizations/prompts/default")
+      ?.requestBuilder("api/v1/Prompts/organization/default")
       .searchParam("organizationId", this.organization.id)
+      .searchParam("sourceName", sourceName)
       .sendGet()
 
     // check response status
@@ -35,18 +40,23 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
       )
     }
 
-    this._cacheDefaultPrompts = (await response!.json() as {
+    this._cacheDefaultPrompts.set(sourceName,  (await response!.json() as {
       prompts: OrganizationPromptDto[]
-    }).prompts as OrganizationPromptDto[]
+    }).prompts as OrganizationPromptDto[])
 
-    return this._cacheDefaultPrompts
+    return this._cacheDefaultPrompts.get(sourceName)!
   }
 
-  async getPrompts(): Promise<OrganizationPromptDto[]> {
+  async getPrompts(sourceName: string): Promise<OrganizationPromptDto[]> {
+    if (sourceName === undefined || sourceName === null || sourceName.trim() === "") {
+      throw new Error("Source name is empty or null")
+    }
+
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Organizations/prompts")
+      ?.requestBuilder("api/v1/Prompts/organization")
       .searchParam("organizationId", this.organization.id)
+      .searchParam("sourceName", sourceName)
       .sendGet()
 
     // check response status
@@ -62,7 +72,10 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
     }).prompts as OrganizationPromptDto[]
   }
 
-  async updatePrompts(prompts: OrganizationPromptDto[]): Promise<void> {
+  async updatePrompts(sourceName: string, prompts: OrganizationPromptDto[]): Promise<void> {
+    if (sourceName === undefined || sourceName === null || sourceName.trim() === "") {
+      throw new Error("Source name is empty or null")
+    }
     if (prompts === undefined || prompts === null || prompts.length === 0) {
       return
     }
@@ -75,9 +88,13 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
 
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Organizations/prompts")
-      .searchParam("organizationId", this.organization.id)
-      .sendPutJson(prompts)
+      ?.requestBuilder("api/v1/Prompts/organization")
+      .sendPutJson(
+        {
+          "organizationId": this.organization.id,
+          "sourceName": sourceName,
+          "prompts": prompts
+        })
 
     // check response status
     if (ResponseUtils.isFail(response)) {
@@ -88,19 +105,19 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
     }
   }
 
-  async updatePrompt(key: string, value: string | null): Promise<void> {
-    return this.updatePrompts([{
+  async updatePrompt(sourceName: string, key: string, value: string | null): Promise<void> {
+    return this.updatePrompts(sourceName,[{
       key,
       value
     }])
   }
 
-  deletePrompt(key: string): Promise<void> {
-    return this.updatePrompt(key, null)
+  deletePrompt(sourceName: string, key: string): Promise<void> {
+    return this.updatePrompt(sourceName, key, null)
   }
 
-  async deletePrompts(keys: string[]): Promise<void> {
-    return this.updatePrompts(keys.map(key => ({
+  async deletePrompts(sourceName: string, keys: string[]): Promise<void> {
+    return this.updatePrompts(sourceName, keys.map(key => ({
       key,
       value: null
     })))
