@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.4.1](../../README.md) / [Exports](../modules.md) / Lifetime
+[@neuralinnovations/dataisland-sdk - v0.4.2](../../README.md) / [Exports](../modules.md) / Lifetime
 
 # Class: Lifetime
 
