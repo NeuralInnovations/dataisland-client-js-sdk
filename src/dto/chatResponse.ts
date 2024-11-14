@@ -6,6 +6,7 @@ export interface SourceDto {
   id: string;
   name: string;
   url: string;
+  status: number
   content: string;
   page: number;
 }

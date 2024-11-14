@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.4.1](../../README.md) / [Exports](../modules.md) / SourceDto
+[@neuralinnovations/dataisland-sdk - v0.4.2](../../README.md) / [Exports](../modules.md) / SourceDto
 
 # Interface: SourceDto
 
@@ -10,6 +10,7 @@
 - [id](SourceDto.md#id)
 - [name](SourceDto.md#name)
 - [page](SourceDto.md#page)
+- [status](SourceDto.md#status)
 - [url](SourceDto.md#url)
 
 ## Properties
@@ -35,6 +36,12 @@ ___
 ### page
 
 • **page**: `number`
+
+___
+
+### status
+
+• **status**: `number`
 
 ___
 
