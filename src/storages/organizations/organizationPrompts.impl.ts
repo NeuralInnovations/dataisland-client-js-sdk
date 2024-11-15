@@ -5,7 +5,7 @@ import { OrganizationPromptDto } from "../../dto/userInfoResponse"
 import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 
-export class OrganizationPromptsImpl implements OrganizationPrompts {
+export class OrganizationPromptsImpl extends OrganizationPrompts {
 
   private _cacheDefaultPrompts: Map<string, OrganizationPromptDto[]> = new Map<string, OrganizationPromptDto[]>()
 
@@ -13,10 +13,20 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
     private readonly organization: OrganizationImpl,
     private readonly context: Context
   ) {
+    super()
+  }
 
+  assertSourceName(sourceName: string): void {
+    if (sourceName === undefined || sourceName === null || sourceName.trim() === "") {
+      throw new Error("Source name is empty or null")
+    }
+    if (!this.sourceNames.includes(sourceName)) {
+      throw new Error("Source name is not supported")
+    }
   }
 
   async getDefaultPrompts(sourceName: string): Promise<OrganizationPromptDto[]> {
+    this.assertSourceName(sourceName)
     if (sourceName === undefined || sourceName === null || sourceName.trim() === "") {
       throw new Error("Source name is empty or null")
     }
@@ -40,7 +50,7 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
       )
     }
 
-    this._cacheDefaultPrompts.set(sourceName,  (await response!.json() as {
+    this._cacheDefaultPrompts.set(sourceName, (await response!.json() as {
       prompts: OrganizationPromptDto[]
     }).prompts as OrganizationPromptDto[])
 
@@ -48,6 +58,7 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
   }
 
   async getPrompts(sourceName: string): Promise<OrganizationPromptDto[]> {
+    this.assertSourceName(sourceName)
     if (sourceName === undefined || sourceName === null || sourceName.trim() === "") {
       throw new Error("Source name is empty or null")
     }
@@ -73,6 +84,7 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
   }
 
   async updatePrompts(sourceName: string, prompts: OrganizationPromptDto[]): Promise<void> {
+    this.assertSourceName(sourceName)
     if (sourceName === undefined || sourceName === null || sourceName.trim() === "") {
       throw new Error("Source name is empty or null")
     }
@@ -106,17 +118,20 @@ export class OrganizationPromptsImpl implements OrganizationPrompts {
   }
 
   async updatePrompt(sourceName: string, key: string, value: string | null): Promise<void> {
-    return this.updatePrompts(sourceName,[{
+    this.assertSourceName(sourceName)
+    return this.updatePrompts(sourceName, [{
       key,
       value
     }])
   }
 
   deletePrompt(sourceName: string, key: string): Promise<void> {
+    this.assertSourceName(sourceName)
     return this.updatePrompt(sourceName, key, null)
   }
 
   async deletePrompts(sourceName: string, keys: string[]): Promise<void> {
+    this.assertSourceName(sourceName)
     return this.updatePrompts(sourceName, keys.map(key => ({
       key,
       value: null
