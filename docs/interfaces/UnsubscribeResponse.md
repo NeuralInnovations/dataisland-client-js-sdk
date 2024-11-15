@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.4.2](../../README.md) / [Exports](../modules.md) / UnsubscribeResponse
+[@neuralinnovations/dataisland-sdk - v0.4.3](../../README.md) / [Exports](../modules.md) / UnsubscribeResponse
 
 # Interface: UnsubscribeResponse
 
