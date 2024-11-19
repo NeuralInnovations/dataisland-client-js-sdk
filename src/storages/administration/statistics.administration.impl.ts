@@ -14,8 +14,8 @@ export class StatisticAdministrationImpl implements StatisticAdministration {
 
   async getOrganizationMembers(
     organizationId: OrganizationId,
-    dateFrom: number,
-    dateTo: number
+    dateFrom: Date,
+    dateTo: Date
   ): Promise<OrganizationMembersStatisticResponse> {
     const response = await this.context
       .resolve(RpcService)
@@ -33,7 +33,7 @@ export class StatisticAdministrationImpl implements StatisticAdministration {
     return await response!.json() as OrganizationMembersStatisticResponse
   }
 
-  async getOrganizations(dateFrom: number, dateTo: number): Promise<OrganizationStatisticResponse> {
+  async getOrganizations(dateFrom: Date, dateTo: Date): Promise<OrganizationStatisticResponse> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/management/stats/organizations")

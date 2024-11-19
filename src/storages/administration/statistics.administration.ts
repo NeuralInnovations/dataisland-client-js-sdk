@@ -12,10 +12,10 @@ export abstract class StatisticAdministration {
   /**
    * Get organization statistics
    */
-  abstract getOrganizations(dateFrom: number, dateTo: number): Promise<OrganizationStatisticResponse>;
+  abstract getOrganizations(dateFrom: Date, dateTo: Date): Promise<OrganizationStatisticResponse>;
 
   /**
    * Get organization members statistics
    */
-  abstract getOrganizationMembers(organizationId: OrganizationId, dateFrom: number, dateTo: number): Promise<OrganizationMembersStatisticResponse>;
+  abstract getOrganizationMembers(organizationId: OrganizationId, dateFrom: Date, dateTo: Date): Promise<OrganizationMembersStatisticResponse>;
 }
