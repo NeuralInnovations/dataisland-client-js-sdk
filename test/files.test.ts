@@ -47,7 +47,7 @@ test("Files", async () => {
           break
         }
         case FileProcessingStage.ERROR: {
-          console.error(file.progress.error)
+          console.error(file.progress?.error)
           loaded_ids.push(file.id)
           break
         }

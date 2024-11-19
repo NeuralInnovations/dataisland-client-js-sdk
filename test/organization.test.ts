@@ -101,8 +101,8 @@ test("Organization", async () => {
 
     expect(org.description.trim()).toBe(test_description)
 
-    await expect(org.statistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
-    await expect(org.membersStatistics(new Date().getSeconds() - 100, new Date().getSeconds())).resolves.not.toThrow()
+    await expect(org.statistics(new Date(Date.now() - 100 * 1000), new Date())).resolves.not.toThrow()
+    await expect(org.membersStatistics(new Date(Date.now() - 100 * 1000), new Date())).resolves.not.toThrow()
 
     await expect(org.organizationLimits()).resolves.not.toThrow()
     await expect(org.limitSegments()).resolves.not.toThrow()

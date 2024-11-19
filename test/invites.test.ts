@@ -7,7 +7,7 @@ test("Invites", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     // Make random name
     const randomName = `org-test-${randomHash(20)}`
-  
+
     // Create first user app
     const firstUserApp = await dataIslandApp(randomName, async builder => {
       builder.useHost(HOST)
@@ -43,7 +43,7 @@ test("Invites", async () => {
       const second_invite_code = await org.createInviteCode([notAdminGroup.id])
       const new_second_response = await secondUserApp.organizations.applyInviteCode(second_invite_code)
       expect(new_second_response.isAddedToOrganization).toBe(false)
-        
+
       // Check duplicate invite for first user
       const first_user_duplicate = await firstUserApp.organizations.applyInviteCode(invite_code)
       expect(first_user_duplicate.isAddedToOrganization).toBe(false)
@@ -52,7 +52,7 @@ test("Invites", async () => {
       // Check if new org is present on orgranizations list
       await expect(secondUserOrg).not.toBeUndefined()
 
-      await expect(secondUserApp.organizations.leaveOrganization(secondUserOrg.id)).resolves.not.toThrow()
+      await expect(secondUserApp.organizations.leaveOrganization(secondUserOrg!.id)).resolves.not.toThrow()
 
       // Apply second invite code once more
       await secondUserApp.organizations.applyInviteCode(second_invite_code)

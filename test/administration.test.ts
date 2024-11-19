@@ -19,12 +19,12 @@ test("Administration statistics", async () => {
     await testInOrganization(async (app, org) => {
       expect(org).not.toBeUndefined()
 
-      const organizations = await app.administration.statistic.getOrganizations(0, Date.now())
+      const organizations = await app.administration.statistic.getOrganizations(new Date(0), new Date(Date.now()))
       expect(organizations.organizationStats).not.toBeUndefined()
       expect(organizations.organizationStats).not.toBeNull()
       expect(organizations.organizationStats.length).toBeGreaterThan(0)
 
-      const members = await app.administration.statistic.getOrganizationMembers(org.id, 0, Date.now())
+      const members = await app.administration.statistic.getOrganizationMembers(org.id, new Date(0), new Date(Date.now()))
       expect(members.membersStats).not.toBeUndefined()
       expect(members.membersStats).not.toBeNull()
     })
