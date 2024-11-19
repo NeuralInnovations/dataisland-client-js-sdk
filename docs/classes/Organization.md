@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.4.3](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.5.0](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -444,8 +444,8 @@ Get organization statistics
 
 | Name | Type |
 | :------ | :------ |
-| `dateFrom` | `number` |
-| `dateTo` | `number` |
+| `dateFrom` | `Date` |
+| `dateTo` | `Date` |
 
 #### Returns
 
@@ -475,8 +475,8 @@ Get organization statistics
 
 | Name | Type |
 | :------ | :------ |
-| `dateFrom` | `number` |
-| `dateTo` | `number` |
+| `dateFrom` | `Date` |
+| `dateTo` | `Date` |
 
 #### Returns
 
@@ -546,8 +546,8 @@ Get statistics for user
 | Name | Type |
 | :------ | :------ |
 | `userid` | `string` |
-| `dateFrom` | `number` |
-| `dateTo` | `number` |
+| `dateFrom` | `Date` |
+| `dateTo` | `Date` |
 
 #### Returns
 

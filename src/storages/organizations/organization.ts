@@ -98,14 +98,14 @@ export abstract class Organization extends EventDispatcher<
    * @param dateFrom
    * @param dateTo
    */
-  abstract statistics(dateFrom: number, dateTo: number): Promise<StatisticsResponse>
+  abstract statistics(dateFrom: Date, dateTo: Date): Promise<StatisticsResponse>
 
   /**
    *  Get organization statistics
    * @param dateFrom
    * @param dateTo
    */
-  abstract membersStatistics(dateFrom: number, dateTo: number): Promise<UsersStatisticsResponse>
+  abstract membersStatistics(dateFrom: Date, dateTo: Date): Promise<UsersStatisticsResponse>
 
   /**
    * Get statistics for user
@@ -113,7 +113,7 @@ export abstract class Organization extends EventDispatcher<
    * @param dateFrom
    * @param dateTo
    */
-  abstract userStatistic(userid: string, dateFrom: number, dateTo: number): Promise<StatisticsResponse>
+  abstract userStatistic(userid: string, dateFrom: Date, dateTo: Date): Promise<StatisticsResponse>
 
   /**
    * Get user limits data

@@ -224,7 +224,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return iconResponse.iconId
   }
 
-  async statistics(dateFrom: number, dateTo: number): Promise<StatisticsResponse> {
+  async statistics(dateFrom: Date, dateTo: Date): Promise<StatisticsResponse> {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
@@ -245,7 +245,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return await response!.json() as StatisticsResponse
   }
 
-  async membersStatistics(dateFrom: number, dateTo: number): Promise<UsersStatisticsResponse> {
+  async membersStatistics(dateFrom: Date, dateTo: Date): Promise<UsersStatisticsResponse> {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
@@ -266,7 +266,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     return await response!.json() as UsersStatisticsResponse
   }
 
-  async userStatistic(userId: string, dateFrom: number, dateTo: number): Promise<StatisticsResponse> {
+  async userStatistic(userId: string, dateFrom: Date, dateTo: Date): Promise<StatisticsResponse> {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
