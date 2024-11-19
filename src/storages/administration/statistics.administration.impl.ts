@@ -21,8 +21,8 @@ export class StatisticAdministrationImpl implements StatisticAdministration {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/management/stats/organization/members/total")
       .searchParam("organizationId", organizationId)
-      .searchParam("dateFrom", dateFrom.toString())
-      .searchParam("dateTo", dateTo.toString())
+      .searchParam("dateFrom", dateFrom.toISOString())
+      .searchParam("dateTo", dateTo.toISOString())
       .sendGet()
 
     // check response status
@@ -37,8 +37,8 @@ export class StatisticAdministrationImpl implements StatisticAdministration {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/management/stats/organizations")
-      .searchParam("dateFrom", dateFrom.toString())
-      .searchParam("dateTo", dateTo.toString())
+      .searchParam("dateFrom", dateFrom.toISOString())
+      .searchParam("dateTo", dateTo.toISOString())
       .sendGet()
 
     // check response status
