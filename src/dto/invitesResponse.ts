@@ -23,3 +23,7 @@ export interface UserInviteData {
   name: string
   email: string
 }
+
+export interface EmailsWhitelistResponse{
+  emails: string[]
+}
