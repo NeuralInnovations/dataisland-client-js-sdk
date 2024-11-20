@@ -230,8 +230,8 @@ export class OrganizationImpl extends Organization implements Disposable {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Stats/organization")
       .searchParam("organizationId", this.id)
-      .searchParam("dateFrom", dateFrom.toString())
-      .searchParam("dateTo", dateTo.toString())
+      .searchParam("dateFrom", (dateFrom.getTime() / 1000 | 0).toString())
+      .searchParam("dateTo", (dateTo.getTime() / 1000 | 0).toString())
       .sendGet()
 
     // check response status
@@ -251,8 +251,8 @@ export class OrganizationImpl extends Organization implements Disposable {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Stats/organization/members")
       .searchParam("organizationId", this.id)
-      .searchParam("dateFrom", dateFrom.toString())
-      .searchParam("dateTo", dateTo.toString())
+      .searchParam("dateFrom", (dateFrom.getTime() / 1000 | 0).toString())
+      .searchParam("dateTo", (dateTo.getTime() / 1000 | 0).toString())
       .sendGet()
 
     // check response status
@@ -273,8 +273,8 @@ export class OrganizationImpl extends Organization implements Disposable {
       ?.requestBuilder("api/v1/Stats/user")
       .searchParam("userId", userId)
       .searchParam("organizationId", this.id)
-      .searchParam("dateFrom", dateFrom.toString())
-      .searchParam("dateTo", dateTo.toString())
+      .searchParam("dateFrom", (dateFrom.getTime() / 1000 | 0).toString())
+      .searchParam("dateTo", (dateTo.getTime() / 1000 | 0).toString())
       .sendGet()
 
     // check response status
