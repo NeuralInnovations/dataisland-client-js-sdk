@@ -95,3 +95,7 @@ export enum ResourceType {
   File = 6
 }
 
+export interface BrokenFilesResponse {
+  files: string[]
+}
+

@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.5.1](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.5.2](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.5.1
+# @neuralinnovations/dataisland-sdk - v0.5.2
 
 ## Table of contents
 
@@ -84,6 +84,7 @@
 - [ApiKeyResponse](interfaces/ApiKeyResponse.md)
 - [ApplyInviteCodeResponse](interfaces/ApplyInviteCodeResponse.md)
 - [BadRequest](interfaces/BadRequest.md)
+- [BrokenFilesResponse](interfaces/BrokenFilesResponse.md)
 - [ChatDto](interfaces/ChatDto.md)
 - [ChatListResponse](interfaces/ChatListResponse.md)
 - [ChatResourceDto](interfaces/ChatResourceDto.md)
@@ -92,6 +93,7 @@
 - [CurrentLimitRecordData](interfaces/CurrentLimitRecordData.md)
 - [CurrentLimitsData](interfaces/CurrentLimitsData.md)
 - [Disposable](interfaces/Disposable.md)
+- [EmailsWhitelistResponse](interfaces/EmailsWhitelistResponse.md)
 - [Event](interfaces/Event.md)
 - [EventSubscriber](interfaces/EventSubscriber.md)
 - [FetchAnswerResponse](interfaces/FetchAnswerResponse.md)
