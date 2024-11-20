@@ -1,5 +1,5 @@
 import { UnitTest, appTest } from "../src/unitTest"
-import { testInOrganization } from "./setup"
+import {testInOrganization, testInWorkspace} from "./setup"
 
 test("Administration libraries", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
@@ -27,6 +27,31 @@ test("Administration statistics", async () => {
       const members = await app.administration.statistic.getOrganizationMembers(org.id, new Date(0), new Date(Date.now()))
       expect(members.membersStats).not.toBeUndefined()
       expect(members.membersStats).not.toBeNull()
+    })
+  })
+})
+
+test("Administration cheats", async () => {
+  await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
+    await testInWorkspace(async (app, org, ws) => {
+      expect(org).not.toBeUndefined()
+      expect(ws).not.toBeUndefined()
+
+      const testEmail = "test@test.com"
+
+      await expect(app.administration.cheats.addEmailToWhitelist(testEmail, 10)).resolves.not.toThrow()
+
+      const emails = await app.administration.cheats.getWhitelistEmails()
+      expect(emails.emails.find(mail => mail === testEmail)).not.toBeUndefined()
+
+      await expect(app.administration.cheats.removeEmailFromWhitelist(testEmail)).resolves.not.toThrow()
+
+      const files = await app.administration.cheats.getBrokenFilesInfo(org.id, ws.id)
+      expect(files.files.length).toBe(0)
+
+      await expect(app.administration.cheats.deleteBrokenFiles(org.id, ws.id, true, true)).resolves.not.toThrow()
+
+      await expect(app.administration.cheats.cleanRedisCache(true)).resolves.not.toThrow()
     })
   })
 })
