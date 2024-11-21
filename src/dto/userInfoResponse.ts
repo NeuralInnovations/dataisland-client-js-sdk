@@ -74,8 +74,8 @@ export interface ApplyInviteCodeResponse {
 }
 
 export interface UsersStatisticsResponse {
-  dateFrom: number
-  dateTo: number
+  dateFrom: string
+  dateTo: string
   membersData: UserStatisticsData[]
 }
 
