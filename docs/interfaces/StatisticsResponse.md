@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.2](../../README.md) / [Exports](../modules.md) / StatisticsResponse
+[@neuralinnovations/dataisland-sdk - v0.5.3](../../README.md) / [Exports](../modules.md) / StatisticsResponse
 
 # Interface: StatisticsResponse
 
@@ -20,10 +20,10 @@ ___
 
 ### dateFrom
 
-• **dateFrom**: `number`
+• **dateFrom**: `string`
 
 ___
 
 ### dateTo
 
-• **dateTo**: `number`
+• **dateTo**: `string`
