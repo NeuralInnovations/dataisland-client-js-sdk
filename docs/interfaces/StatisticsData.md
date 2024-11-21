@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.2](../../README.md) / [Exports](../modules.md) / StatisticsData
+[@neuralinnovations/dataisland-sdk - v0.5.3](../../README.md) / [Exports](../modules.md) / StatisticsData
 
 # Interface: StatisticsData
 
@@ -20,10 +20,10 @@ ___
 
 ### date
 
-• **date**: `number`
+• **date**: `string`
 
 ___
 
 ### promptUsage
 
-• **promptUsage**: `number`
+• **promptUsage**: `string`

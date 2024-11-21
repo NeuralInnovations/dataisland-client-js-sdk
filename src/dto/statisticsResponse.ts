@@ -1,12 +1,12 @@
 export interface StatisticsResponse {
-    dateFrom: number
-    dateTo: number
+    dateFrom: string
+    dateTo: string
     data: StatisticsData[]
 }
 
 export interface StatisticsData {
-    date: number
-    promptUsage: number
+    date: string
+    promptUsage: string
     completionUsage: number
 }
 

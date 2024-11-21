@@ -10,6 +10,7 @@ export interface OrganizationStatisticDataDto {
 export interface OrganizationStatisticDto {
   organizationId: OrganizationId
   organizationName: string
+  creatorName: string
   totalUsage: number
   data: OrganizationStatisticDataDto[]
 }
