@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.3](../../README.md) / [Exports](../modules.md) / Answer
+[@neuralinnovations/dataisland-sdk - v0.5.4](../../README.md) / [Exports](../modules.md) / Answer
 
 # Class: Answer
 
@@ -27,6 +27,7 @@
 
 - [cancel](Answer.md#cancel)
 - [dispatch](Answer.md#dispatch)
+- [getAllSources](Answer.md#getallsources)
 - [subscribe](Answer.md#subscribe)
 
 ## Constructors
@@ -146,6 +147,18 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### getAllSources
+
+▸ **getAllSources**(): `Promise`\<[`SourceDto`](../interfaces/SourceDto.md)[]\>
+
+Get all debug sources
+
+#### Returns
+
+`Promise`\<[`SourceDto`](../interfaces/SourceDto.md)[]\>
 
 ___
 

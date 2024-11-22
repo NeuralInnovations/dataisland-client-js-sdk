@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.3](../../README.md) / [Exports](../modules.md) / FileListResponse
+[@neuralinnovations/dataisland-sdk - v0.5.4](../../README.md) / [Exports](../modules.md) / FileListResponse
 
 # Interface: FileListResponse
 

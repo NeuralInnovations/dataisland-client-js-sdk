@@ -50,4 +50,9 @@ export abstract class Answer extends EventDispatcher<AnswerEvent, Answer> {
    * Cancel answer
    */
   abstract cancel(): Promise<void>
+
+  /**
+   * Get all debug sources
+   */
+  abstract getAllSources(): Promise<SourceDto[]>
 }
