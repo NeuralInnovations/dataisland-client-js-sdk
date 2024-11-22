@@ -89,8 +89,8 @@ export interface FetchTokensResponse {
 export interface AnswerSourcesResponse {
   chat_uid: string;
   uid: string;
-  step_id: string;
   sources: SourceDto[];
+  sources_all: SourceDto[];
 }
 
 export enum StepStatus {
