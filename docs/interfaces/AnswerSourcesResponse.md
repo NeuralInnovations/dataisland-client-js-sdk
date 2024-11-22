@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.3](../../README.md) / [Exports](../modules.md) / AnswerSourcesResponse
+[@neuralinnovations/dataisland-sdk - v0.5.4](../../README.md) / [Exports](../modules.md) / AnswerSourcesResponse
 
 # Interface: AnswerSourcesResponse
 
@@ -8,7 +8,7 @@
 
 - [chat\_uid](AnswerSourcesResponse.md#chat_uid)
 - [sources](AnswerSourcesResponse.md#sources)
-- [step\_id](AnswerSourcesResponse.md#step_id)
+- [sources\_all](AnswerSourcesResponse.md#sources_all)
 - [uid](AnswerSourcesResponse.md#uid)
 
 ## Properties
@@ -25,9 +25,9 @@ ___
 
 ___
 
-### step\_id
+### sources\_all
 
-• **step\_id**: `string`
+• **sources\_all**: [`SourceDto`](SourceDto.md)[]
 
 ___
 

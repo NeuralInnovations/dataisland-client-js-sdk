@@ -1,6 +1,6 @@
 import {Context} from "../../context"
 import {
-  AnswerDto,
+  AnswerDto, AnswerSourcesResponse,
   AnswerStatus,
   AnswerStepDto,
   FetchAnswerResponse,
@@ -171,5 +171,24 @@ export class AnswerImpl extends Answer {
       type: AnswerEvent.CANCALLED,
       data: this
     })
+  }
+
+  async getAllSources(): Promise<SourceDto[]>{
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Chats/answer/sources")
+      .searchParam("chat_uid", this.chat.id)
+      .searchParam("uid", this.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(`Failed get all sources for chat ${this.chat.id} answer ${this.id}`, response)
+    }
+
+    // parse sources from the server's response
+    const sources = (await response!.json()) as AnswerSourcesResponse
+
+    return sources.sources_all
   }
 }
