@@ -10,14 +10,14 @@ export class UsersAdministrationImpl implements UsersAdministration {
   constructor(private readonly context: Context) {
   }
 
-  async search(email: string): Promise<SearchUserResponse> {
-    if (email === undefined || email === null || email.trim() === ""){
-      throw new Error("Email is null or empty")
-    }
+  async search(query: string | undefined, email: string | undefined, userId: string | undefined): Promise<SearchUserResponse> {
+
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/management/users/info/email")
+      .searchParam("query", query)
       .searchParam("email", email)
+      .searchParam("userId", userId)
       .sendGet()
 
     // check response status
