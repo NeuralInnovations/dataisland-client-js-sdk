@@ -35,8 +35,10 @@ export class RequestBuilder {
     return this
   }
 
-  public searchParam(name: string, value: string): RequestBuilder {
-    this._searchParams.set(name, value)
+  public searchParam(name: string, value: string | undefined): RequestBuilder {
+    if ( value !== undefined ){
+      this._searchParams.set(name, value)
+    }
     return this
   }
 
