@@ -1,5 +1,7 @@
 import {UsersAdministration} from "./users.administration"
-import {SearchUserResponse} from "../../dto/userInfoResponse"
+import {
+  SearchUsersResponse
+} from "../../dto/userInfoResponse"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
 import {Context} from "../../context"
@@ -10,7 +12,7 @@ export class UsersAdministrationImpl implements UsersAdministration {
   constructor(private readonly context: Context) {
   }
 
-  async search(query: string | undefined, email: string | undefined, userId: string | undefined): Promise<SearchUserResponse> {
+  async search(query: string | undefined, email: string | undefined, userId: string | undefined): Promise<SearchUsersResponse> {
 
     const response = await this.context
       .resolve(RpcService)
@@ -25,7 +27,7 @@ export class UsersAdministrationImpl implements UsersAdministration {
       await ResponseUtils.throwError("Failed to search user by email", response)
     }
 
-    return await response!.json() as SearchUserResponse
+    return await response!.json() as SearchUsersResponse
   }
 
   async setUserSegment(email: string, userId: string, segmentKey: string): Promise<void> {
