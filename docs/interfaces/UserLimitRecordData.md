@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.5](../../README.md) / [Exports](../modules.md) / UserLimitRecordData
+[@neuralinnovations/dataisland-sdk - v0.5.6](../../README.md) / [Exports](../modules.md) / UserLimitRecordData
 
 # Interface: UserLimitRecordData
 
