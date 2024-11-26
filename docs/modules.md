@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.5.6](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.5.7](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.5.6
+# @neuralinnovations/dataisland-sdk - v0.5.7
 
 ## Table of contents
 
@@ -138,6 +138,7 @@
 - [QuizData](interfaces/QuizData.md)
 - [RegulationDto](interfaces/RegulationDto.md)
 - [SearchUserResponse](interfaces/SearchUserResponse.md)
+- [SearchUsersResponse](interfaces/SearchUsersResponse.md)
 - [SegmentActionData](interfaces/SegmentActionData.md)
 - [SegmentData](interfaces/SegmentData.md)
 - [SegmentItemData](interfaces/SegmentItemData.md)
@@ -152,8 +153,10 @@
 - [UserInfoResponse](interfaces/UserInfoResponse.md)
 - [UserInviteData](interfaces/UserInviteData.md)
 - [UserLimitData](interfaces/UserLimitData.md)
+- [UserLimitRecord](interfaces/UserLimitRecord.md)
 - [UserLimitRecordData](interfaces/UserLimitRecordData.md)
 - [UserLimitsData](interfaces/UserLimitsData.md)
+- [UserLimitsInfo](interfaces/UserLimitsInfo.md)
 - [UserSettings](interfaces/UserSettings.md)
 - [UserStatisticsData](interfaces/UserStatisticsData.md)
 - [UsersStatisticsResponse](interfaces/UsersStatisticsResponse.md)

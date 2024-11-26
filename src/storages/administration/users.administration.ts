@@ -1,4 +1,6 @@
-import {SearchUserResponse} from "../../dto/userInfoResponse"
+import {
+  SearchUsersResponse
+} from "../../dto/userInfoResponse"
 
 
 export abstract class UsersAdministration {
@@ -6,7 +8,7 @@ export abstract class UsersAdministration {
   /*
   Search user by email
    */
-  abstract search(query: string | undefined, email: string | undefined, userId: string | undefined): Promise<SearchUserResponse>
+  abstract search(query: string | undefined, email: string | undefined, userId: string | undefined): Promise<SearchUsersResponse>
 
   /*
   Set user segment
