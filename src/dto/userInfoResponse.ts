@@ -3,6 +3,7 @@ import { UserId } from "../storages/user/userProfile"
 import { OrganizationId } from "../storages/organizations/organizations"
 import { StatisticsData } from "./statisticsResponse"
 import { LimitActionType, SegmentData } from "./limitsResponse"
+import {AcquiringPlan} from "./acquiringResponse"
 
 export interface UserInfoResponse {
   adminInOrganization: string[]
@@ -10,10 +11,29 @@ export interface UserInfoResponse {
   user: UserDto
 }
 
+export interface SearchUsersResponse {
+  users: SearchUserResponse[]
+  allSubscriptionPlans: AcquiringPlan[]
+  allLimitSegments: SegmentData[]
+}
+
 export interface SearchUserResponse {
-  user: UserDto
+  userInfo: UserDto
   organizations: OrganizationDto[]
+  limits: UserLimitsInfo[]
   segmentKey: string
+}
+
+export interface UserLimitsInfo {
+  action: LimitActionType
+  records: UserLimitRecord[]
+}
+
+export interface UserLimitRecord {
+  daysCount: number,
+  countLimit: number,
+  tokenLimit: number,
+  activeTill: number
 }
 
 export interface UserDto {

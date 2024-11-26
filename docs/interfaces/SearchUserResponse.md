@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.6](../../README.md) / [Exports](../modules.md) / SearchUserResponse
+[@neuralinnovations/dataisland-sdk - v0.5.7](../../README.md) / [Exports](../modules.md) / SearchUserResponse
 
 # Interface: SearchUserResponse
 
@@ -6,11 +6,18 @@
 
 ### Properties
 
+- [limits](SearchUserResponse.md#limits)
 - [organizations](SearchUserResponse.md#organizations)
 - [segmentKey](SearchUserResponse.md#segmentkey)
-- [user](SearchUserResponse.md#user)
+- [userInfo](SearchUserResponse.md#userinfo)
 
 ## Properties
+
+### limits
+
+• **limits**: [`UserLimitsInfo`](UserLimitsInfo.md)[]
+
+___
 
 ### organizations
 
@@ -24,6 +31,6 @@ ___
 
 ___
 
-### user
+### userInfo
 
-• **user**: [`UserDto`](UserDto.md)
+• **userInfo**: [`UserDto`](UserDto.md)
