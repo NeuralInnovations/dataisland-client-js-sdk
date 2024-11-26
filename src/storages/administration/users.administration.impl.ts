@@ -14,7 +14,7 @@ export class UsersAdministrationImpl implements UsersAdministration {
 
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/management/users/info/email")
+      ?.requestBuilder("api/v1/management/users/info/search")
       .searchParam("query", query)
       .searchParam("email", email)
       .searchParam("userId", userId)
