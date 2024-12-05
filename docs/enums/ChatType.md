@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.7](../../README.md) / [Exports](../modules.md) / ChatType
+[@neuralinnovations/dataisland-sdk - v0.5.8](../../README.md) / [Exports](../modules.md) / ChatType
 
 # Enumeration: ChatType
 
