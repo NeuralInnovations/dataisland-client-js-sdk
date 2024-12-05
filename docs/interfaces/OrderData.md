@@ -7,6 +7,7 @@
 ### Properties
 
 - [data](OrderData.md#data)
+- [orderId](OrderData.md#orderid)
 - [signature](OrderData.md#signature)
 
 ## Properties
@@ -14,6 +15,12 @@
 ### data
 
 • **data**: `string`
+
+___
+
+### orderId
+
+• **orderId**: `string`
 
 ___
 
