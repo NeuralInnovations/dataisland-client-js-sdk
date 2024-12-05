@@ -6,6 +6,7 @@ export interface OrderResponse {
 
 export interface OrderData {
   data: string,
+  orderId: string,
   signature: string
 }
 

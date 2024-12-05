@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.7](../../README.md) / [Exports](../modules.md) / OrderData
+[@neuralinnovations/dataisland-sdk - v0.5.8](../../README.md) / [Exports](../modules.md) / OrderData
 
 # Interface: OrderData
 
@@ -7,6 +7,7 @@
 ### Properties
 
 - [data](OrderData.md#data)
+- [orderId](OrderData.md#orderid)
 - [signature](OrderData.md#signature)
 
 ## Properties
@@ -14,6 +15,12 @@
 ### data
 
 • **data**: `string`
+
+___
+
+### orderId
+
+• **orderId**: `string`
 
 ___
 
