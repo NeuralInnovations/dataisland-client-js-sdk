@@ -47,6 +47,29 @@ export interface AcquiringSegmentData {
   dayItems: SegmentItemData[]
 }
 
+export interface PaymentInfoResponse {
+  dateFrom: string;
+  dateTo: string;
+  info: PaymentInfo[];
+}
+
+export interface PaymentInfo {
+  userId: string;
+  userEmail: string;
+  lastPayment: string;
+  segmentKey: string;
+  price: number;
+  currency: string;
+  stateInfo: string;
+  payIds: string[];
+}
+
+export interface RefundResponse{
+  payId: string;
+  isSuccessful: boolean;
+  amount: number;
+}
+
 export enum OrderState {
   Created = 0,
   WaitingForPayment = 10,
