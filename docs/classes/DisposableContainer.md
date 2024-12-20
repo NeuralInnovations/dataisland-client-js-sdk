@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.8](../../README.md) / [Exports](../modules.md) / DisposableContainer
+[@neuralinnovations/dataisland-sdk - v0.5.9](../../README.md) / [Exports](../modules.md) / DisposableContainer
 
 # Class: DisposableContainer
 
