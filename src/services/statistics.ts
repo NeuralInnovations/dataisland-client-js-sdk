@@ -15,12 +15,16 @@ import {
 import {
   CheatsAdministrationImpl
 } from "../storages/administration/cheats.administration.impl"
+import {
+  MaibAdministrationImpl
+} from "../storages/administration/maib.administration.impl"
 
 export class AdministrationService extends Service implements Administration {
   private readonly _libraries: LibraryAdministrationImpl
   private readonly _statistic: StatisticAdministrationImpl
   private readonly _users: UsersAdministrationImpl
   private readonly _cheats: CheatsAdministrationImpl
+  private readonly _maib: MaibAdministrationImpl
 
   constructor(context: ServiceContext) {
     super(context)
@@ -29,6 +33,7 @@ export class AdministrationService extends Service implements Administration {
     this._statistic = new StatisticAdministrationImpl(context.context)
     this._users = new UsersAdministrationImpl(context.context)
     this._cheats = new CheatsAdministrationImpl(context.context)
+    this._maib = new MaibAdministrationImpl(context.context)
   }
 
   get libraries(): LibraryAdministration {
@@ -45,5 +50,9 @@ export class AdministrationService extends Service implements Administration {
 
   get cheats(): CheatsAdministrationImpl {
     return this._cheats
+  }
+
+  get maib(): MaibAdministrationImpl {
+    return this._maib
   }
 }
