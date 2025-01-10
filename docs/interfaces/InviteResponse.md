@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.5.9](../../README.md) / [Exports](../modules.md) / InviteResponse
+[@neuralinnovations/dataisland-sdk - v0.6.0](../../README.md) / [Exports](../modules.md) / InviteResponse
 
 # Interface: InviteResponse
 

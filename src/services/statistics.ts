@@ -18,6 +18,7 @@ import {
 import {
   MaibAdministrationImpl
 } from "../storages/administration/maib.administration.impl"
+import { ChatsAdministrationImpl } from "../storages/administration/chats.administration.impl"
 
 export class AdministrationService extends Service implements Administration {
   private readonly _libraries: LibraryAdministrationImpl
@@ -25,6 +26,7 @@ export class AdministrationService extends Service implements Administration {
   private readonly _users: UsersAdministrationImpl
   private readonly _cheats: CheatsAdministrationImpl
   private readonly _maib: MaibAdministrationImpl
+  private readonly _chats: ChatsAdministrationImpl
 
   constructor(context: ServiceContext) {
     super(context)
@@ -34,6 +36,7 @@ export class AdministrationService extends Service implements Administration {
     this._users = new UsersAdministrationImpl(context.context)
     this._cheats = new CheatsAdministrationImpl(context.context)
     this._maib = new MaibAdministrationImpl(context.context)
+    this._chats = new ChatsAdministrationImpl(context.context)
   }
 
   get libraries(): LibraryAdministration {
@@ -54,5 +57,9 @@ export class AdministrationService extends Service implements Administration {
 
   get maib(): MaibAdministrationImpl {
     return this._maib
+  }
+
+  get chats(): ChatsAdministrationImpl {
+    return this._chats
   }
 }
