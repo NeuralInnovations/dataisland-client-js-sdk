@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.5.9](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.6.0](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.5.9
+# @neuralinnovations/dataisland-sdk - v0.6.0
 
 ## Table of contents
 
@@ -85,6 +85,7 @@
 - [ApplyInviteCodeResponse](interfaces/ApplyInviteCodeResponse.md)
 - [BadRequest](interfaces/BadRequest.md)
 - [BrokenFilesResponse](interfaces/BrokenFilesResponse.md)
+- [ChatCount](interfaces/ChatCount.md)
 - [ChatDto](interfaces/ChatDto.md)
 - [ChatListResponse](interfaces/ChatListResponse.md)
 - [ChatResourceDto](interfaces/ChatResourceDto.md)
