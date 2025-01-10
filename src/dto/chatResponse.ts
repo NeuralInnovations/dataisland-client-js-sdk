@@ -56,6 +56,10 @@ export interface ChatListResponse {
   chats: ChatDto[]
 }
 
+export interface ChatCount {
+  chatsCount: number
+}
+
 export enum AnswerStatus {
   RUNNING = 0,
   SUCCESS = 1,
