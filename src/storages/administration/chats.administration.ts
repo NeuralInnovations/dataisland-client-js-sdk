@@ -16,5 +16,5 @@ export abstract class ChatsAdministration {
   /*
   Send Message to users
    */
-  abstract sendMessageToUsers( message: string, platformFilter: number, activityInMinutesFilter: number, stageFilter: number ): Promise<ChatCount>
+  abstract sendMessageToUsers( message: string, organizationIdFilter: string, platformFilter: number, activityInMinutesFilter: number, stageFilter: number ): Promise<ChatCount>
 }
