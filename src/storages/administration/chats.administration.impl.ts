@@ -67,9 +67,13 @@ export class ChatsAdministrationImpl extends ChatsAdministration {
   /*
   Send Message to users
    */
-  async sendMessageToUsers( message: string, platformFilter: number = 0, activityInMinutesFilter: number = 0, stageFilter: number = 0): Promise<ChatCount>{
+  async sendMessageToUsers( message: string, organizationIdFilter: string, platformFilter: number = 0, activityInMinutesFilter: number = 0, stageFilter: number = 0): Promise<ChatCount>{
     if (message === undefined || message === null || message.trim() === "") {
       throw new Error("userId is required, must be not empty")
+    }
+    
+    if (organizationIdFilter === undefined || organizationIdFilter === null || organizationIdFilter.trim() === "") {
+      throw new Error("organizationIdFilter is required, must be not empty")
     }
 
     // send create request to the server
@@ -78,6 +82,7 @@ export class ChatsAdministrationImpl extends ChatsAdministration {
       ?.requestBuilder("api/v1/management/chat/message/users")
       .sendPostJson({
         message: message,
+        organizationIdFilter: organizationIdFilter,
         platformFilter: platformFilter,
         activityInMinutesFilter: activityInMinutesFilter,
         stageFilter: stageFilter
