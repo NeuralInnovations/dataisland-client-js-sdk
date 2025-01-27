@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.1](../../README.md) / [Exports](../modules.md) / FileUrlDto
+[@neuralinnovations/dataisland-sdk - v0.7.0](../../README.md) / [Exports](../modules.md) / FileUrlDto
 
 # Interface: FileUrlDto
 
