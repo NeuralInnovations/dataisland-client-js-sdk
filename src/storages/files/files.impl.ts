@@ -26,6 +26,7 @@ export class FilesImpl extends Files {
   public filesList?: FilesPage
 
   private _fetchList: FileId[] = []
+  private _fetchTimeout?: NodeJS.Timeout
 
   async upload(files: UploadFile[]): Promise<File[]> {
     const loaded_files = []
@@ -80,7 +81,7 @@ export class FilesImpl extends Files {
     }
 
     if (this._fetchList.length != 0){
-      setTimeout(async () => await this.internalFetchQuery(), 2000)
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchQuery(), 2000)
     }
   }
 
@@ -200,6 +201,11 @@ export class FilesImpl extends Files {
 
     this._fetchList = []
 
+    if (this._fetchTimeout){
+      clearTimeout(this._fetchTimeout)
+    }
+
+
     // parse files from the server's response
     const files = (await response!.json()) as FileListResponse
 
@@ -227,7 +233,7 @@ export class FilesImpl extends Files {
     this.filesList = filesList
 
     if (this._fetchList.length != 0){
-      setTimeout(async () => await this.internalFetchQuery(), 2000)
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchQuery(), 2000)
     }
 
     return filesList
