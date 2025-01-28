@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.2](../../README.md) / [Exports](../modules.md) / QueryFlows
+[@neuralinnovations/dataisland-sdk - v0.6.3](../../README.md) / [Exports](../modules.md) / QueryFlows
 
 # Class: QueryFlows
 

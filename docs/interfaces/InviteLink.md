@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.2](../../README.md) / [Exports](../modules.md) / InviteLink
+[@neuralinnovations/dataisland-sdk - v0.6.3](../../README.md) / [Exports](../modules.md) / InviteLink
 
 # Interface: InviteLink
 

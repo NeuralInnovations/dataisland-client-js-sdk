@@ -36,7 +36,6 @@ test("Files", async () => {
 
       const files = await ws.files.query("", 0, 10)
 
-
       const ids: string[] = []
       const loaded_ids: string[] = []
 
@@ -80,6 +79,11 @@ test("Files", async () => {
 
       while (!files_loaded) {
         await new Promise(f => setTimeout(f, 500))
+
+        if (ids.length != loaded_ids.length){
+          continue
+        }
+
         for (const id of ids) {
           files_loaded = loaded_ids.some(l_id => l_id === id)
         }
