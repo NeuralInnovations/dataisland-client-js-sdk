@@ -301,11 +301,16 @@ export class OrganizationImpl extends Organization implements Disposable {
 
     // parse limits from the server's response
     const limits = (await response!.json()) as UserLimitsData
+    const defaultSegmentKey = "registered_default"
 
     const currentLimits = {
-      segment: limits.userSegment.key,
+      segment: limits.userSegment ? limits.userSegment.key : defaultSegmentKey,
       limits: []
+      
     } as CurrentLimitsData
+
+    if (!limits) return currentLimits
+
     for (const limit of limits.userLimits) {
       const type = limit.action as LimitActionType
       const currentItem = {
