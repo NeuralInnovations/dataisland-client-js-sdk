@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.3](../../README.md) / [Exports](../modules.md) / ChatCount
+[@neuralinnovations/dataisland-sdk - v0.6.4](../../README.md) / [Exports](../modules.md) / ChatCount
 
 # Interface: ChatCount
 
