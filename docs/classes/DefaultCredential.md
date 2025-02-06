@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.3](../../README.md) / [Exports](../modules.md) / DefaultCredential
+[@neuralinnovations/dataisland-sdk - v0.6.4](../../README.md) / [Exports](../modules.md) / DefaultCredential
 
 # Class: DefaultCredential
 

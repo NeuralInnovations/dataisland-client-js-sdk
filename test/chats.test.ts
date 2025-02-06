@@ -149,10 +149,10 @@ test("Chat create with file, ask and delete", async () => {
         }
       }
 
-      const all_sources_promise = answer.getAllSources()
+      const all_sources_promise = answer?.getAllSources()
       await expect(all_sources_promise).resolves.not.toThrow()
 
-      const all_sources = await all_sources_promise
+      const all_sources = await all_sources_promise || []
 
       for (const source of all_sources) {
         expect(source.id).toBe(file)
