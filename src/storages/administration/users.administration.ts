@@ -8,7 +8,7 @@ export abstract class UsersAdministration {
   /*
   Search user by email
    */
-  abstract search(query: string | undefined, email: string | undefined, userId: string | undefined): Promise<SearchUsersResponse>
+  abstract search(query: string | undefined, email: string | undefined, userId: string | undefined, limit: number, page: number): Promise<SearchUsersResponse>
 
   /*
   Set user segment

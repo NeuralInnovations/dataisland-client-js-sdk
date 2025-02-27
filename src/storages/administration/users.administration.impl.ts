@@ -12,7 +12,7 @@ export class UsersAdministrationImpl implements UsersAdministration {
   constructor(private readonly context: Context) {
   }
 
-  async search(query: string | undefined, email: string | undefined, userId: string | undefined): Promise<SearchUsersResponse> {
+  async search(query: string | undefined, email: string | undefined, userId: string | undefined, limit: number, page: number): Promise<SearchUsersResponse> {
 
     const response = await this.context
       .resolve(RpcService)
@@ -20,6 +20,8 @@ export class UsersAdministrationImpl implements UsersAdministration {
       .searchParam("query", query)
       .searchParam("email", email)
       .searchParam("userId", userId)
+      .searchParam("limit", limit.toString())
+      .searchParam("page", page.toString())
       .sendGet()
 
     // check response status

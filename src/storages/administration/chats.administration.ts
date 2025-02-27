@@ -6,7 +6,7 @@ export abstract class ChatsAdministration {
   /*
   Get user chats
   */
-  abstract userChats(userId: string): Promise<ChatListResponse>
+  abstract userChats(userId: string, organizationId: string, limit: number, page: number): Promise<ChatListResponse>
 
   /*
   Send Message to chat
