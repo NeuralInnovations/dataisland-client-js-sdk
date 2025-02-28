@@ -16,15 +16,18 @@ export class ChatsAdministrationImpl extends ChatsAdministration {
   /*  
   Get user chats
   */
-  async userChats(userId: string): Promise<ChatListResponse>{
+  async userChats(userId: string, organizationId: string, limit: number, page: number): Promise<ChatListResponse>{
     if (userId === undefined || userId === null || userId.trim() === "") {
       throw new Error("userId is required, must be not empty")
     }
 
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/management/chat/user")
+      ?.requestBuilder("api/v1/management/chats")
       .searchParam("userId", userId)
+      .searchParam("organizationId", organizationId)
+      .searchParam("limit", limit.toString())
+      .searchParam("page", page.toString())
       .sendGet()
 
     // check response status
