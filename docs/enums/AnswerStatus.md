@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.5](../../README.md) / [Exports](../modules.md) / AnswerStatus
+[@neuralinnovations/dataisland-sdk - v0.6.6](../../README.md) / [Exports](../modules.md) / AnswerStatus
 
 # Enumeration: AnswerStatus
 
