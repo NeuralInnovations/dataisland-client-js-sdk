@@ -15,6 +15,7 @@ export interface SearchUsersResponse {
   users: SearchUserResponse[]
   allSubscriptionPlans: AcquiringPlan[]
   allLimitSegments: SegmentData[]
+  listResult: ListResultDto
 }
 
 export interface SearchUserResponse {
@@ -140,4 +141,10 @@ export interface CurrentLimitRecordData {
   used: number
   all: number
   activeTill: number
+}
+
+export interface ListResultDto {
+  limit: number
+  page: number
+  totalRecords: number
 }
