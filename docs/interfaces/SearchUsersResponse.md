@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.5](../../README.md) / [Exports](../modules.md) / SearchUsersResponse
+[@neuralinnovations/dataisland-sdk - v0.6.6](../../README.md) / [Exports](../modules.md) / SearchUsersResponse
 
 # Interface: SearchUsersResponse
 
@@ -8,6 +8,7 @@
 
 - [allLimitSegments](SearchUsersResponse.md#alllimitsegments)
 - [allSubscriptionPlans](SearchUsersResponse.md#allsubscriptionplans)
+- [listResult](SearchUsersResponse.md#listresult)
 - [users](SearchUsersResponse.md#users)
 
 ## Properties
@@ -21,6 +22,12 @@ ___
 ### allSubscriptionPlans
 
 • **allSubscriptionPlans**: [`AcquiringPlan`](AcquiringPlan.md)[]
+
+___
+
+### listResult
+
+• **listResult**: [`ListResultDto`](ListResultDto.md)
 
 ___
 

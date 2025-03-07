@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.6.5](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.6.6](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.6.5
+# @neuralinnovations/dataisland-sdk - v0.6.6
 
 ## Table of contents
 
@@ -118,6 +118,7 @@
 - [LibraryOrganizationDto](interfaces/LibraryOrganizationDto.md)
 - [LibraryPageResponse](interfaces/LibraryPageResponse.md)
 - [LibraryResponse](interfaces/LibraryResponse.md)
+- [ListResultDto](interfaces/ListResultDto.md)
 - [MembersResponse](interfaces/MembersResponse.md)
 - [OrderData](interfaces/OrderData.md)
 - [OrderResponse](interfaces/OrderResponse.md)
