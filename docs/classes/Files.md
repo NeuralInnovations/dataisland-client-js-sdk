@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.7](../../README.md) / [Exports](../modules.md) / Files
+[@neuralinnovations/dataisland-sdk - v0.6.8](../../README.md) / [Exports](../modules.md) / Files
 
 # Class: Files
 
@@ -6,7 +6,7 @@ Files storage.
 
 ## Hierarchy
 
-- [`EventDispatcher`](EventDispatcher.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)\>
+- [`EventDispatcher`](EventDispatcher.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)[]\>
 
   ↳ **`Files`**
 
@@ -67,7 +67,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `input` | [`Input`](../interfaces/Input.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)\> |
+| `input` | [`Input`](../interfaces/Input.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)[]\> |
 
 #### Returns
 
@@ -125,7 +125,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `callback` | (`event`: [`Event`](../interfaces/Event.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)\>) => `void` |
+| `callback` | (`event`: [`Event`](../interfaces/Event.md)\<[`FilesEvent`](../enums/FilesEvent.md), [`File`](File.md)[]\>) => `void` |
 | `type?` | [`FilesEvent`](../enums/FilesEvent.md) |
 
 #### Returns

@@ -19,7 +19,7 @@ export type UploadFile = globalThis.File
 /**
  * Files storage.
  */
-export abstract class Files extends EventDispatcher<FilesEvent, File> {
+export abstract class Files extends EventDispatcher<FilesEvent, File[]> {
   /**
    * Upload file.
    */
