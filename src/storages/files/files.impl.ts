@@ -201,10 +201,7 @@ export class FilesImpl extends Files {
 
     this._fetchList = []
 
-    if (this._fetchTimeout){
-      clearTimeout(this._fetchTimeout)
-    }
-
+    clearTimeout(this._fetchTimeout)
 
     // parse files from the server's response
     const files = (await response!.json()) as FileListResponse

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.6](../../README.md) / [Exports](../modules.md) / ProfileDto
+[@neuralinnovations/dataisland-sdk - v0.6.7](../../README.md) / [Exports](../modules.md) / ProfileDto
 
 # Interface: ProfileDto
 
