@@ -1,7 +1,7 @@
 import { Context } from "../../context"
 import {
-  FileDto,
-  FileListResponse, FileProcessingStage,
+  FileDto, FileListResponse,
+  FileProcessingStage,
   FilesBatchFetchResponse
 } from "../../dto/workspacesResponse"
 import { RpcService } from "../../services/rpcService"
@@ -9,7 +9,7 @@ import { FileImpl } from "./file.impl"
 import { Files, FilesEvent, UploadFile } from "./files"
 import { WorkspaceImpl } from "../workspaces/workspace.impl"
 import { ResponseUtils } from "../../services/responseUtils"
-import {File, FileId} from "./file"
+import { File, FileId } from "./file"
 import { FilesPage } from "./filesPage"
 import { FilesPageImpl } from "./filesPage.impl"
 // import { FormData } from "../../utils/request"
@@ -36,6 +36,11 @@ export class FilesImpl extends Files {
         loaded_files.push(loaded_file)
       }
     }
+    // dispatch event, files added
+    this.dispatch({
+      type: FilesEvent.ADDED,
+      data: loaded_files
+    })
     return loaded_files
   }
 
@@ -45,6 +50,11 @@ export class FilesImpl extends Files {
 
   async delete(ids: string[]): Promise<void> {
     await this.internalDeleteFiles(ids)
+    // dispatch event, files deleted
+    this.dispatch({
+      type: FilesEvent.REMOVED,
+      data: []
+    })
   }
 
   async query(query: string, page: number, limit: number): Promise<FilesPage> {
@@ -146,12 +156,6 @@ export class FilesImpl extends Files {
 
       // remove file from collection
       this.filesList!.files.splice(index, 1)
-
-      // dispatch event, file removed
-      this.dispatch({
-        type: FilesEvent.REMOVED,
-        data: file
-      })
 
       // dispose file
       file.dispose()
@@ -271,12 +275,6 @@ export class FilesImpl extends Files {
     const fileImpl = new FileImpl(this.context)
 
     await fileImpl.initFrom(result)
-
-    // dispatch event, file added
-    this.dispatch({
-      type: FilesEvent.ADDED,
-      data: fileImpl
-    })
 
     return fileImpl
   }
