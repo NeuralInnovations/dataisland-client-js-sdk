@@ -38,6 +38,9 @@ export class QueryFlowsImpl extends QueryFlows {
     const flows = ((await response!.json()) as QueryFlowListResponse)
       .flowIds
 
+    // Clear collection before add new elementss
+    this._collection = []
+
     // init flows from the server's response
     for (const flow of flows) {
       // create workspace implementation
@@ -48,12 +51,6 @@ export class QueryFlowsImpl extends QueryFlows {
 
       // add workspace to the collection
       this._collection.push(flowImpl)
-
-      // dispatch event
-      this.dispatch({
-        type: QueryFlowsEvent.ADDED,
-        data: flowImpl
-      })
     }
 
     return this._collection
@@ -64,7 +61,7 @@ export class QueryFlowsImpl extends QueryFlows {
       throw new Error("Name is required, must be not empty")
     }
     if (workspaceId === undefined || workspaceId === null || workspaceId.trim() === "") {
-      throw new Error("WorkspaceId is required, must be not empty")
+      throw new Error("WorkspaceIds is required, must be not empty")
     }
     if (file === undefined || file === null) {
       throw new Error("Create query flow, file is undefined or null")
