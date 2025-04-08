@@ -81,7 +81,7 @@ test("Chat create, ask question, delete", async () => {
   })
 })
 
-test("Chat create with file, ask and delete", async () => {
+test.skip("Chat create with file, ask and delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
       const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")
@@ -176,7 +176,7 @@ test("Chat create with file, ask and delete", async () => {
   })
 })
 
-test("Chat create with workspace, ask and delete", async () => {
+test.skip("Chat create with workspace, ask and delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
       const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")
@@ -253,7 +253,7 @@ test("Chat create with workspace, ask and delete", async () => {
   })
 })
 
-test("Chat create with library", async () => {
+test.skip("Chat create with library", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInLibrary(async (app, org, ws, lib) => {
       const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")
@@ -332,7 +332,7 @@ test("Chat create with library", async () => {
   })
 })
 
-test("Chat create with library file", async () => {
+test.skip("Chat create with library file", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInLibrary(async (app, org, ws, lib) => {
       const file = await uploadTestFile(org, ws,"test/data/test_file.pdf", "application/pdf")

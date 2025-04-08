@@ -25,4 +25,6 @@ export abstract class QueryFlow extends EventDispatcher<
 
   abstract get urls(): QueryFileUrlDto[] | undefined
 
+  abstract fetch(): any
+
 }

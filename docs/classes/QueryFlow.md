@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.9](../../README.md) / [Exports](../modules.md) / QueryFlow
+[@neuralinnovations/dataisland-sdk - v0.6.10](../../README.md) / [Exports](../modules.md) / QueryFlow
 
 # Class: QueryFlow
 
@@ -25,6 +25,7 @@
 ### Methods
 
 - [dispatch](QueryFlow.md#dispatch)
+- [fetch](QueryFlow.md#fetch)
 - [subscribe](QueryFlow.md#subscribe)
 
 ## Constructors
@@ -110,6 +111,16 @@ ___
 #### Inherited from
 
 [EventDispatcher](EventDispatcher.md).[dispatch](EventDispatcher.md#dispatch)
+
+___
+
+### fetch
+
+▸ **fetch**(): `any`
+
+#### Returns
+
+`any`
 
 ___
 
