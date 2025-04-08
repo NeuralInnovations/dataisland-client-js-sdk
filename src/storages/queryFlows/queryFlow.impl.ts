@@ -47,10 +47,6 @@ export class QueryFlowImpl extends QueryFlow {
         data: this
       })
     }
-
-    if (this._content.state === QueryFlowState.IN_PROGRESS) {
-      setTimeout(async () => await this.fetch(), 2000)
-    }
   }
 
   get id(): FlowId {

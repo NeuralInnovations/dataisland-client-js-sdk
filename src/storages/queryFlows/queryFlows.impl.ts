@@ -1,20 +1,25 @@
-import { Context } from "../../context"
-import { FlowId, QueryFlows, QueryFlowsEvent } from "./queryFlows"
-import { QueryFlow } from "./queryFlow"
-import { OrganizationImpl } from "../organizations/organization.impl"
-import { RpcService } from "../../services/rpcService"
-import { ResponseUtils } from "../../services/responseUtils"
-import { WorkspaceId } from "../workspaces/workspaces"
+import {Context} from "../../context"
+import {FlowId, QueryFlows, QueryFlowsEvent} from "./queryFlows"
+import {QueryFlow} from "./queryFlow"
+import {OrganizationImpl} from "../organizations/organization.impl"
+import {RpcService} from "../../services/rpcService"
+import {ResponseUtils} from "../../services/responseUtils"
+import {WorkspaceId} from "../workspaces/workspaces"
 import {
   QueryFlowListResponse,
-  QueryFlowResponse
+  QueryFlowResponse,
+  QueryFlowState
 } from "../../dto/queryFlowResponse"
-import { QueryFlowImpl } from "./queryFlow.impl"
-import { UploadFile } from "../files/files"
+import {QueryFlowImpl} from "./queryFlow.impl"
+import {UploadFile} from "../files/files"
 
 export class QueryFlowsImpl extends QueryFlows {
 
   private _collection: QueryFlow[] = []
+
+  private _inProgress: QueryFlow[] = []
+
+  private _fetchTimeout?: NodeJS.Timeout
 
   constructor(
     public readonly organization: OrganizationImpl,
@@ -40,6 +45,8 @@ export class QueryFlowsImpl extends QueryFlows {
 
     // Clear collection before add new elementss
     this._collection = []
+    this._inProgress = []
+    clearTimeout(this._fetchTimeout)
 
     // init flows from the server's response
     for (const flow of flows) {
@@ -49,11 +56,33 @@ export class QueryFlowsImpl extends QueryFlows {
       // init workspace from the server's response
       await flowImpl.initFrom(flow)
 
+      if (flowImpl.state == QueryFlowState.IN_PROGRESS){
+        this._inProgress.push(flowImpl)
+      }
+
       // add workspace to the collection
       this._collection.push(flowImpl)
     }
 
+    if (this._inProgress.length > 0) {
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchQueries(), 2000)
+    }
+
     return this._collection
+  }
+
+  async internalFetchQueries() {
+    for (const flow of this._inProgress){
+      await flow.fetch()
+    }
+
+    this._inProgress = this._inProgress.filter(flow => flow.state == QueryFlowState.IN_PROGRESS)
+
+    if (this._inProgress.length > 0) {
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchQueries(), 2000)
+    } else {
+      clearTimeout(this._fetchTimeout)
+    }
   }
 
   async create(name: string, workspaceId: WorkspaceId, file: UploadFile, table: UploadFile): Promise<FlowId> {
