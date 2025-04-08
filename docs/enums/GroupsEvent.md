@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.9](../../README.md) / [Exports](../modules.md) / GroupsEvent
+[@neuralinnovations/dataisland-sdk - v0.6.10](../../README.md) / [Exports](../modules.md) / GroupsEvent
 
 # Enumeration: GroupsEvent
 
