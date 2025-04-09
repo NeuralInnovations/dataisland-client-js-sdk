@@ -165,6 +165,14 @@ export class QueryFlowsImpl extends QueryFlows {
     }
     this._collection.splice(index, 1)
 
+    if (flow.state === QueryFlowState.IN_PROGRESS) {
+      const progressIndex = this._inProgress.indexOf(flow)
+      if (progressIndex < 0) {
+        throw new Error(`Query flow ${id} is not found`)
+      }
+      this._inProgress.splice(progressIndex, 1)
+    }
+
     // dispatch event
     this.dispatch({
       type: QueryFlowsEvent.REMOVED,
