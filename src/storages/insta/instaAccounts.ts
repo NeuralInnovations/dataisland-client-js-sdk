@@ -1,30 +1,19 @@
-import { EventDispatcher } from "../../events"
-import { FlowId } from "./queryFlows"
 import {
-  QueryFileUrlDto,
-  QueryFlowState,
-  QueryFlowStatus
-} from "../../dto/queryFlowResponse"
+  InstaPostResult
+} from "../../dto/instaResponse"
+import {InstaAccount} from "./instaAccount"
 
-export enum QueryFlowEvent {
-  UPDATED = "updated"
-}
 
-export abstract class QueryFlow extends EventDispatcher<
-  QueryFlowEvent,
-  QueryFlow
-> {
+export abstract class InstaAccounts {
 
-  abstract get id(): FlowId
+  abstract get collection(): InstaAccount[]
 
-  abstract get name(): string
+  abstract update(): Promise<void>
 
-  abstract get state(): QueryFlowState
+  abstract add(name: string, token: string, accountId: string, additionalContext: string, folderId: string): Promise<void>
 
-  abstract get status(): QueryFlowStatus
+  abstract delete(id: string): Promise<void>
 
-  abstract get urls(): QueryFileUrlDto[] | undefined
-
-  abstract fetch(): any
+  abstract post(message: string): Promise<InstaPostResult>
 
 }

@@ -18,6 +18,7 @@ import { OrganizationApiKey } from "../../dto/apiKeyResponse"
 import { UploadFile } from "../files/files"
 import { QueryFlows } from "../queryFlows/queryFlows"
 import { OrganizationPrompts } from "./organizationPrompts"
+import {InstaAccounts} from "../insta/instaAccounts"
 
 /**
  * Organization event.
@@ -82,6 +83,11 @@ export abstract class Organization extends EventDispatcher<
    * Query flows
    */
   abstract get queryFlows(): QueryFlows
+
+  /**
+   * Insta accounts
+   */
+  abstract get instaAccounts(): InstaAccounts
 
   /**
    * Get organization prompts
