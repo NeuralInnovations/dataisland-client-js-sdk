@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.11](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.6.12](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -23,6 +23,7 @@ Organization.
 - [description](Organization.md#description)
 - [icon](Organization.md#icon)
 - [id](Organization.md#id)
+- [instaAccounts](Organization.md#instaaccounts)
 - [isAdmin](Organization.md#isadmin)
 - [isAllowedInLibraries](Organization.md#isallowedinlibraries)
 - [name](Organization.md#name)
@@ -127,6 +128,18 @@ Organization id.
 #### Returns
 
 `string`
+
+___
+
+### instaAccounts
+
+• `get` **instaAccounts**(): `InstaAccounts`
+
+Insta accounts
+
+#### Returns
+
+`InstaAccounts`
 
 ___
 
