@@ -40,6 +40,8 @@ import { QueryFlowsImpl } from "../queryFlows/queryFlows.impl"
 import { QueryFlows } from "../queryFlows/queryFlows"
 import { OrganizationPromptsImpl } from "./organizationPrompts.impl"
 import { OrganizationPrompts } from "./organizationPrompts"
+import {InstaAccountsImpl} from "../insta/instaAccounts.impl"
+import {InstaAccounts} from "../insta/instaAccounts"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -48,6 +50,7 @@ export class OrganizationImpl extends Organization implements Disposable {
   private readonly _workspaces: WorkspacesImpl
   private readonly _accessGroups: GroupsImpl
   private readonly _queryFlows: QueryFlowsImpl
+  private readonly _instaAccounts: InstaAccountsImpl
   private readonly _chats: ChatsImpl
   private readonly _prompts: OrganizationPromptsImpl
 
@@ -57,6 +60,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._accessGroups = new GroupsImpl(this, this.context)
     this._chats = new ChatsImpl(this, this.context)
     this._queryFlows = new QueryFlowsImpl(this, this.context)
+    this._instaAccounts = new InstaAccountsImpl(this, this.context)
     this._prompts = new OrganizationPromptsImpl(this, this.context)
   }
 
@@ -71,7 +75,8 @@ export class OrganizationImpl extends Organization implements Disposable {
     const promises = [
       this._workspaces.initFrom(content.id),
       this._chats.initFrom(content.id),
-      this._accessGroups.initialize()
+      this._accessGroups.initialize(),
+      this._instaAccounts.update()
     ]
 
     await Promise.all(promises)
@@ -125,6 +130,10 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get queryFlows(): QueryFlows {
     return this._queryFlows
+  }
+
+  get instaAccounts(): InstaAccounts {
+    return this._instaAccounts
   }
 
   get chats(): Chats {
