@@ -1,15 +1,27 @@
 import {InstaAccounts} from "./instaAccounts"
-import {InstaCutAccountDto, InstaPostResult} from "../../dto/instaResponse"
+import {
+  InstaCutAccountDto,
+  InstaPostDto,
+  PostStatus,
+} from "../../dto/instaResponse"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
 import {OrganizationImpl} from "../organizations/organization.impl"
 import {Context} from "../../context"
 import {InstaAccountImpl} from "./instaAccount.impl"
 import {InstaAccount} from "./instaAccount"
+import {InstaPostImpl} from "./instaPost.impl"
+import {InstaPost} from "./instaPost"
 
 
 export class InstaAccountsImpl extends InstaAccounts {
-  private _collection?: InstaAccountImpl[]
+  private _accounts?: InstaAccountImpl[]
+  private _posts?: InstaPostImpl[]
+
+
+  private _inProgress: InstaPostImpl[] = []
+
+  private _fetchTimeout?: NodeJS.Timeout
 
   constructor(
     public readonly organization: OrganizationImpl,
@@ -18,11 +30,33 @@ export class InstaAccountsImpl extends InstaAccounts {
   }
 
 
-  get collection(): InstaAccount[] {
-    if (this._collection !== undefined) {
-      return this._collection
+  get accounts(): InstaAccount[] {
+    if (this._accounts !== undefined) {
+      return this._accounts
     } else {
       throw new Error("Insta accounts collection is not loaded, please update it first")
+    }
+  }
+
+  get posts(): InstaPost[] {
+    if (this._posts !== undefined) {
+      return this._posts
+    } else {
+      throw new Error("Insta posts collection is not loaded, please update it first")
+    }
+  }
+
+  async internalFetchPosts() {
+    for (const post of this._inProgress){
+      await post.update()
+    }
+
+    this._inProgress = this._inProgress.filter(post => post.status == PostStatus.Generation)
+
+    if (this._inProgress.length > 0) {
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchPosts(), 2000)
+    } else {
+      clearTimeout(this._fetchTimeout)
     }
   }
 
@@ -43,8 +77,33 @@ export class InstaAccountsImpl extends InstaAccounts {
     }
 
     const accounts = (await response!.json() as {instaAccounts: InstaCutAccountDto[]}).instaAccounts
+    this._accounts = accounts.map(acc => new InstaAccountImpl(this.context, acc.id))
 
-    this._collection = accounts.map(acc => new InstaAccountImpl(this.context, acc.id))
+    const postsResponse = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Insta/post/list")
+      .searchParam("organizationId", this.organization.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(postsResponse)) {
+      await ResponseUtils.throwError(
+        `Insta posts list for organization ${this.organization.id} failed`,
+        postsResponse
+      )
+    }
+
+    const posts = (await postsResponse!.json() as {instaPosts: InstaPostDto[]}).instaPosts
+    this._posts = posts.map(acc => new InstaPostImpl(this.context, acc.id))
+
+    this._inProgress = []
+    clearTimeout(this._fetchTimeout)
+
+    this._inProgress = this._posts.filter(post => post.status == PostStatus.Generation)
+
+    if (this._inProgress.length > 0) {
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchPosts(), 2000)
+    }
   }
 
   async add(name: string, token: string, accountId: string, additionalContext: string, folderId: string): Promise<void> {
@@ -88,7 +147,7 @@ export class InstaAccountsImpl extends InstaAccounts {
 
 
   async delete(id: string): Promise<void> {
-    const account = this._collection?.find(acc => acc.id === id)
+    const account = this._accounts?.find(acc => acc.id === id)
 
     // check if account is found
     if (!account) {
@@ -113,7 +172,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     await this.update()
   }
 
-  async post(message: string): Promise<InstaPostResult> {
+  async post(message: string): Promise<void> {
     if (message === undefined || message === null || message.trim() === "") {
       throw new Error("Add insta post, message can not be null or empty")
     }
@@ -133,7 +192,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     }
 
 
-    return (await response!.json()) as InstaPostResult
+    await this.update()
   }
 
 
