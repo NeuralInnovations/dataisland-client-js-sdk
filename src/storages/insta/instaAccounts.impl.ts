@@ -93,7 +93,7 @@ export class InstaAccountsImpl extends InstaAccounts {
       )
     }
 
-    const posts = (await postsResponse!.json() as {instaPosts: InstaPostDto[]}).instaPosts
+    const posts = (await postsResponse!.json() as {posts: InstaPostDto[]}).posts
     this._posts = posts.map(acc => new InstaPostImpl(this.context, acc.id))
 
     this._inProgress = []
