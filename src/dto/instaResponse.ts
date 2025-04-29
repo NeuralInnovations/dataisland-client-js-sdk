@@ -16,7 +16,14 @@ export interface InstaCutAccountDto {
   name: string
 }
 
-export interface InstaPostResult {
-  success: boolean
-  error: string
+export interface InstaPostDto {
+  id: string
+  status: PostStatus
+  message: string
+  postLeft: number
+}
+
+export enum PostStatus {
+  Generation = 0,
+  Finished = 1
 }
