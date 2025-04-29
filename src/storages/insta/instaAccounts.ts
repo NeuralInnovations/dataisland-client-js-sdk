@@ -1,12 +1,13 @@
-import {
-  InstaPostResult
-} from "../../dto/instaResponse"
+
 import {InstaAccount} from "./instaAccount"
+import {InstaPost} from "./instaPost"
 
 
 export abstract class InstaAccounts {
 
-  abstract get collection(): InstaAccount[]
+  abstract get accounts(): InstaAccount[]
+
+  abstract get posts(): InstaPost[]
 
   abstract update(): Promise<void>
 
@@ -14,6 +15,6 @@ export abstract class InstaAccounts {
 
   abstract delete(id: string): Promise<void>
 
-  abstract post(message: string): Promise<InstaPostResult>
+  abstract post(message: string): Promise<void>
 
 }
