@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.13](../../README.md) / [Exports](../modules.md) / UserDto
+[@neuralinnovations/dataisland-sdk - v0.6.14](../../README.md) / [Exports](../modules.md) / UserDto
 
 # Interface: UserDto
 

@@ -41,7 +41,7 @@ export class InstaPostImpl extends InstaPost {
 
   get postsLeft(): number {
     if (this._data) {
-      return this._data?.postLeft
+      return this._data?.postsLeft
     } else {
       throw new Error("Insta post data not loaded, please call update first")
     }
