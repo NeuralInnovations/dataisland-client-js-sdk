@@ -33,7 +33,7 @@ export class InstaAccountImpl extends InstaAccount {
     return (await response!.json() as { instaAccount: InstaAccountDto }).instaAccount
   }
 
-  async update(name: string, additionalContext: string, folderId: string): Promise<InstaAccountDto> {
+  async update(name: string, additionalContext: string, folderId: string, token: string, proxy: string): Promise<InstaAccountDto> {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
@@ -42,7 +42,9 @@ export class InstaAccountImpl extends InstaAccount {
         instaId: this._id,
         name: name,
         additionalContext: additionalContext,
-        folderId: folderId
+        folderId: folderId,
+        token: token,
+        proxy: proxy
       })
 
     // check response status

@@ -20,7 +20,7 @@ export interface InstaPostDto {
   id: string
   status: PostStatus
   message: string
-  postLeft: number
+  postsLeft: number
 }
 
 export enum PostStatus {

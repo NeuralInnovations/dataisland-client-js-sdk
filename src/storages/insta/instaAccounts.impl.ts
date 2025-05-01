@@ -106,7 +106,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     }
   }
 
-  async add(name: string, token: string, accountId: string, additionalContext: string, folderId: string): Promise<void> {
+  async add(name: string, token: string, accountId: string, proxy: string, additionalContext: string, folderId: string): Promise<void> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Add insta account, name can not be null or empty")
     }
@@ -115,6 +115,9 @@ export class InstaAccountsImpl extends InstaAccounts {
     }
     if (accountId === undefined || accountId === null || accountId.trim() === "") {
       throw new Error("Add insta account, accountId can not be null or empty")
+    }
+    if (proxy === undefined || proxy === null || proxy.trim() === "") {
+      throw new Error("Add insta account, proxy can not be null or empty")
     }
     if (additionalContext === undefined || additionalContext === null) {
       throw new Error("Add insta account, additionalContext can not be null")
@@ -132,6 +135,7 @@ export class InstaAccountsImpl extends InstaAccounts {
         organizationId: this.organization.id,
         token: token,
         accountId: accountId,
+        proxy: proxy,
         additionalContext: additionalContext,
         folderId: folderId
       })
