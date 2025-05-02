@@ -116,13 +116,13 @@ export class InstaAccountsImpl extends InstaAccounts {
     if (accountId === undefined || accountId === null || accountId.trim() === "") {
       throw new Error("Add insta account, accountId can not be null or empty")
     }
-    if (proxy === undefined || proxy === null || proxy.trim() === "") {
+    if (proxy === undefined || proxy === null) {
       throw new Error("Add insta account, proxy can not be null or empty")
     }
     if (additionalContext === undefined || additionalContext === null) {
       throw new Error("Add insta account, additionalContext can not be null")
     }
-    if (folderId === undefined || folderId === null || folderId.trim() === "") {
+    if (folderId === undefined || folderId === null) {
       throw new Error("Add insta account, folderId can not be null or empty")
     }
 
