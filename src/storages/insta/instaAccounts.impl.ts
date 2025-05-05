@@ -76,6 +76,7 @@ export class InstaAccountsImpl extends InstaAccounts {
       )
     }
 
+    this._accounts = []
     const accounts = (await response!.json() as {instaAccounts: InstaCutAccountDto[]}).instaAccounts
     this._accounts = accounts.map(acc => new InstaAccountImpl(this.context, acc.id))
 
@@ -93,6 +94,7 @@ export class InstaAccountsImpl extends InstaAccounts {
       )
     }
 
+    this._posts = []
     const posts = (await postsResponse!.json() as {posts: InstaPostDto[]}).posts
     this._posts = posts.map(acc => new InstaPostImpl(this.context, acc.id))
 
