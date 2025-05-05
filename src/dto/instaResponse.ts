@@ -20,10 +20,25 @@ export interface InstaPostDto {
   id: string
   status: PostStatus
   message: string
-  postsLeft: number
+  history: InstaContentDto[]
+}
+
+export interface InstaContentDto {
+  accountId: string
+  postId: string
+  content: string
+  url: string
+  status: ContentStatus
+  error: string
 }
 
 export enum PostStatus {
   Generation = 0,
   Finished = 1
+}
+
+export enum ContentStatus {
+  Generation = 0,
+  Finished = 1,
+  Error = 2
 }
