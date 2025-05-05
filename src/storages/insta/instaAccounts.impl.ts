@@ -96,7 +96,7 @@ export class InstaAccountsImpl extends InstaAccounts {
 
     this._posts = []
     const posts = (await postsResponse!.json() as {posts: InstaPostDto[]}).posts
-    this._posts = posts.map(acc => new InstaPostImpl(this.context, acc.id))
+    this._posts = posts.map(post => new InstaPostImpl(this.context, post))
 
     this._inProgress = []
     clearTimeout(this._fetchTimeout)

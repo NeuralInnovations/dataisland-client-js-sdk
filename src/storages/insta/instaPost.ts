@@ -1,4 +1,4 @@
-import {PostStatus} from "../../dto/instaResponse"
+import {InstaContentDto, PostStatus} from "../../dto/instaResponse"
 
 
 export type InstaPostId = string;
@@ -11,7 +11,7 @@ export abstract class InstaPost {
 
   abstract get status(): PostStatus
 
-  abstract get postsLeft(): number
+  abstract get content(): InstaContentDto[]
 
   abstract update(): Promise<void>
 }
