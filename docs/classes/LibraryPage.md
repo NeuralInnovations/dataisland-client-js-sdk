@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.16](../../README.md) / [Exports](../modules.md) / LibraryPage
+[@neuralinnovations/dataisland-sdk - v0.6.17](../../README.md) / [Exports](../modules.md) / LibraryPage
 
 # Class: LibraryPage
 

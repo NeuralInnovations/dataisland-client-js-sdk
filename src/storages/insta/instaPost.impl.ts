@@ -1,6 +1,7 @@
 import {InstaPost, InstaPostId} from "./instaPost"
 import {Context} from "../../context"
 import {
+  InstaContentDto,
   InstaPostDto,
   PostStatus
 } from "../../dto/instaResponse"
@@ -13,10 +14,12 @@ export class InstaPostImpl extends InstaPost {
 
   private _data?: InstaPostDto
 
-  constructor(private readonly context: Context, id: string) {
+  constructor(private readonly context: Context, data: InstaPostDto) {
     super()
 
-    this._id = id
+    this._id = data.id
+
+    this._data = data
   }
 
   get id(): InstaPostId {
@@ -39,9 +42,9 @@ export class InstaPostImpl extends InstaPost {
     }
   }
 
-  get postsLeft(): number {
+  get content(): InstaContentDto[] {
     if (this._data) {
-      return this._data?.postsLeft
+      return this._data?.history
     } else {
       throw new Error("Insta post data not loaded, please call update first")
     }
