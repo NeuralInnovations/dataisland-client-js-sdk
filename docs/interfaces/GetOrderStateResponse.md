@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.17](../../README.md) / [Exports](../modules.md) / GetOrderStateResponse
+[@neuralinnovations/dataisland-sdk - v0.6.18](../../README.md) / [Exports](../modules.md) / GetOrderStateResponse
 
 # Interface: GetOrderStateResponse
 

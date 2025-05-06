@@ -24,7 +24,7 @@ test.skip("QueryFlows", async () => {
 
       const flow_name = "test"
 
-      const flow_id = await org.queryFlows.create(flow_name, ws.id, test_file, table_test_file)
+      const flow_id = await org.queryFlows.create(flow_name, [ws.id], test_file, table_test_file)
 
       expect(flow_id).not.toBeUndefined()
       expect(flow_id).not.toBeNull()
