@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.17](../../README.md) / [Exports](../modules.md) / Group
+[@neuralinnovations/dataisland-sdk - v0.6.18](../../README.md) / [Exports](../modules.md) / Group
 
 # Class: Group
 

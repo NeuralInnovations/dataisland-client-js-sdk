@@ -85,11 +85,11 @@ export class QueryFlowsImpl extends QueryFlows {
     }
   }
 
-  async create(name: string, workspaceId: WorkspaceId, file: UploadFile, table: UploadFile): Promise<FlowId> {
+  async create(name: string, workspaceIds: WorkspaceId[], file: UploadFile, table: UploadFile): Promise<FlowId> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Name is required, must be not empty")
     }
-    if (workspaceId === undefined || workspaceId === null || workspaceId.trim() === "") {
+    if (workspaceIds === undefined || workspaceIds === null) {
       throw new Error("WorkspaceIds is required, must be not empty")
     }
     if (file === undefined || file === null) {
@@ -102,10 +102,12 @@ export class QueryFlowsImpl extends QueryFlows {
     // form data to send
     const form = new FormData()
     form.append("organizationId", this.organization.id)
-    form.append("workspaceId", workspaceId)
     form.append("name", name)
     form.append("file", file, file.name)
     form.append("tableFile", table, table.name)
+    workspaceIds.forEach(item => {
+      form.append("workspaceIds", item)
+    })
 
     // send request to the server
     const response = await this.context
