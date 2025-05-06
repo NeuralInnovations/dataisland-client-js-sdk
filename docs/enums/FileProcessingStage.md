@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.18](../../README.md) / [Exports](../modules.md) / FileProcessingStage
+[@neuralinnovations/dataisland-sdk - v0.6.19](../../README.md) / [Exports](../modules.md) / FileProcessingStage
 
 # Enumeration: FileProcessingStage
 

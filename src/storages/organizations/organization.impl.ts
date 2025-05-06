@@ -75,8 +75,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     const promises = [
       this._workspaces.initFrom(content.id),
       this._chats.initFrom(content.id),
-      this._accessGroups.initialize(),
-      this._instaAccounts.update()
+      this._accessGroups.initialize()
     ]
 
     await Promise.all(promises)
