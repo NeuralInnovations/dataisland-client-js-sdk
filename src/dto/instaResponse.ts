@@ -4,6 +4,7 @@
 export interface InstaAccountDto {
   id: string
   name: string
+  enabled: boolean
   organizationId: string
   token: string
   accountId: string
@@ -14,6 +15,7 @@ export interface InstaAccountDto {
 export interface InstaCutAccountDto {
   id: string
   name: string
+  enabled: boolean
 }
 
 export interface InstaPostDto {
