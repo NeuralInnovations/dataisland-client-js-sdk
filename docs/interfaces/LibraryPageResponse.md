@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.19](../../README.md) / [Exports](../modules.md) / LibraryPageResponse
+[@neuralinnovations/dataisland-sdk - v0.6.20](../../README.md) / [Exports](../modules.md) / LibraryPageResponse
 
 # Interface: LibraryPageResponse
 
