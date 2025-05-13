@@ -34,6 +34,14 @@ export class InstaPostImpl extends InstaPost {
     }
   }
 
+  get createdAt(): number {
+    if (this._data) {
+      return this._data?.createdAt
+    } else {
+      throw new Error("Insta post data not loaded, please call update first")
+    }
+  }
+
   get status(): PostStatus {
     if (this._data) {
       return this._data?.status

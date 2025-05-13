@@ -201,5 +201,31 @@ export class InstaAccountsImpl extends InstaAccounts {
     await this.update()
   }
 
+  async deletePost(id: string): Promise<void> {
+    const post = this._posts?.find(acc => acc.id === id)
+
+    // check if account is found
+    if (!post) {
+      throw new Error(`Insta post ${id} is not found, organization: ${this.organization.id}`)
+    }
+
+    // send delete request to the server
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Insta/post")
+      .searchParam("postId", id)
+      .sendDelete()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Failed to delete insta post: ${id}, organization: ${this.organization.id}`,
+        response
+      )
+    }
+
+    await this.update()
+  }
+
 
 }
