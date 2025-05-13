@@ -9,6 +9,8 @@ export abstract class InstaPost {
 
   abstract get message(): string
 
+  abstract get createdAt(): number
+
   abstract get status(): PostStatus
 
   abstract get content(): InstaContentDto[]
