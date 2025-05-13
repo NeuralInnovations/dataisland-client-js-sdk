@@ -47,6 +47,9 @@ export class InstaAccountsImpl extends InstaAccounts {
   }
 
   async internalFetchPosts() {
+    // Remove deleted posts from fetching
+    this._inProgress = this._inProgress.filter(post => this._posts?.find(pst => pst.id === post.id) !== undefined)
+
     for (const post of this._inProgress){
       await post.update()
     }
