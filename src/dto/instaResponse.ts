@@ -20,6 +20,7 @@ export interface InstaCutAccountDto {
 
 export interface InstaPostDto {
   id: string
+  createdAt: number
   status: PostStatus
   message: string
   history: InstaContentDto[]
