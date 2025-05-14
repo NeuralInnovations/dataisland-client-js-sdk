@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.22](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.6.23](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -26,6 +26,7 @@ Organization.
 - [instaAccounts](Organization.md#instaaccounts)
 - [isAdmin](Organization.md#isadmin)
 - [isAllowedInLibraries](Organization.md#isallowedinlibraries)
+- [messengerAccounts](Organization.md#messengeraccounts)
 - [name](Organization.md#name)
 - [prompts](Organization.md#prompts)
 - [queryFlows](Organization.md#queryflows)
@@ -164,6 +165,18 @@ If organizations allowed in libraries
 #### Returns
 
 `boolean`
+
+___
+
+### messengerAccounts
+
+• `get` **messengerAccounts**(): `MessengerAccounts`
+
+Messenger accounts
+
+#### Returns
+
+`MessengerAccounts`
 
 ___
 
