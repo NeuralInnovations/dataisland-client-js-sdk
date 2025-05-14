@@ -19,6 +19,7 @@ import { UploadFile } from "../files/files"
 import { QueryFlows } from "../queryFlows/queryFlows"
 import { OrganizationPrompts } from "./organizationPrompts"
 import {InstaAccounts} from "../insta/instaAccounts"
+import {MessengerAccounts} from "../messenger/messengerAccounts"
 
 /**
  * Organization event.
@@ -88,6 +89,11 @@ export abstract class Organization extends EventDispatcher<
    * Insta accounts
    */
   abstract get instaAccounts(): InstaAccounts
+
+  /**
+   * Messenger accounts
+   */
+  abstract get messengerAccounts(): MessengerAccounts
 
   /**
    * Get organization prompts

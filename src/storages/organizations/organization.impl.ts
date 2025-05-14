@@ -42,6 +42,8 @@ import { OrganizationPromptsImpl } from "./organizationPrompts.impl"
 import { OrganizationPrompts } from "./organizationPrompts"
 import {InstaAccountsImpl} from "../insta/instaAccounts.impl"
 import {InstaAccounts} from "../insta/instaAccounts"
+import {MessengerAccountsImpl} from "../messenger/messengerAccounts.impl"
+import {MessengerAccounts} from "../messenger/messengerAccounts"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -51,6 +53,7 @@ export class OrganizationImpl extends Organization implements Disposable {
   private readonly _accessGroups: GroupsImpl
   private readonly _queryFlows: QueryFlowsImpl
   private readonly _instaAccounts: InstaAccountsImpl
+  private readonly _messengerAccounts: MessengerAccountsImpl
   private readonly _chats: ChatsImpl
   private readonly _prompts: OrganizationPromptsImpl
 
@@ -61,6 +64,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._chats = new ChatsImpl(this, this.context)
     this._queryFlows = new QueryFlowsImpl(this, this.context)
     this._instaAccounts = new InstaAccountsImpl(this, this.context)
+    this._messengerAccounts = new MessengerAccountsImpl(this, this.context)
     this._prompts = new OrganizationPromptsImpl(this, this.context)
   }
 
@@ -133,6 +137,10 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get instaAccounts(): InstaAccounts {
     return this._instaAccounts
+  }
+
+  get messengerAccounts(): MessengerAccounts {
+    return this._messengerAccounts
   }
 
   get chats(): Chats {
