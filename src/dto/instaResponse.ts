@@ -3,18 +3,22 @@
 
 export interface InstaAccountDto {
   id: string
-  name: string
-  enabled: boolean
   organizationId: string
-  token: string
-  accountId: string
+  status: AccountStatus
+  enabled: boolean
+  username: string
+  twoFactorKey: string
+  proxy: string
   additionalContext: string
   folderId: string
+  error: string
 }
+
 
 export interface InstaCutAccountDto {
   id: string
-  name: string
+  status: AccountStatus
+  username: string
   enabled: boolean
 }
 
@@ -44,4 +48,11 @@ export enum ContentStatus {
   Generation = 0,
   Finished = 1,
   Error = 2
+}
+
+export enum AccountStatus {
+  None = 0,
+  Created = 1,
+  Authenticated = 2,
+  Error = 3
 }
