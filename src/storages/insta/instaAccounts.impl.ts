@@ -81,7 +81,7 @@ export class InstaAccountsImpl extends InstaAccounts {
 
     this._accounts = []
     const accounts = (await response!.json() as {instaAccounts: InstaCutAccountDto[]}).instaAccounts
-    this._accounts = accounts.map(acc => new InstaAccountImpl(this.context, acc.id))
+    this._accounts = accounts.map(acc => new InstaAccountImpl(this.context, acc))
 
     const postsResponse = await this.context
       .resolve(RpcService)
@@ -111,15 +111,21 @@ export class InstaAccountsImpl extends InstaAccounts {
     }
   }
 
-  async add(name: string, token: string, accountId: string, proxy: string, additionalContext: string, folderId: string): Promise<void> {
-    if (name === undefined || name === null || name.trim() === "") {
-      throw new Error("Add insta account, name can not be null or empty")
+  async add( 
+    username: string, 
+    password: string, 
+    twoFactorKey: string, 
+    proxy: string,
+    additionalContext: string,
+    folderId: string): Promise<void> {
+    if (username === undefined || username === null || username.trim() === "") {
+      throw new Error("Add insta account, username can not be null or empty")
     }
-    if (token === undefined || token === null || token.trim() === "") {
-      throw new Error("Add insta account, token can not be null or empty")
+    if (password === undefined || password === null || password.trim() === "") {
+      throw new Error("Add insta account, password can not be null or empty")
     }
-    if (accountId === undefined || accountId === null || accountId.trim() === "") {
-      throw new Error("Add insta account, accountId can not be null or empty")
+    if (twoFactorKey === undefined || twoFactorKey === null || twoFactorKey.trim() === "") {
+      throw new Error("Add insta account, twoFactorKey can not be null or empty")
     }
     if (proxy === undefined || proxy === null) {
       throw new Error("Add insta account, proxy can not be null or empty")
@@ -136,10 +142,10 @@ export class InstaAccountsImpl extends InstaAccounts {
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Insta")
       .sendPostJson({
-        name: name,
         organizationId: this.organization.id,
-        token: token,
-        accountId: accountId,
+        username: username,
+        password: password,
+        twoFactorKey: twoFactorKey,
         proxy: proxy,
         additionalContext: additionalContext,
         folderId: folderId

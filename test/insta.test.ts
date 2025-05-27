@@ -13,9 +13,9 @@ test.skip("Insta", async () => {
       expect(org.instaAccounts.posts.length).toBe(0)
 
       const createPromise = org.instaAccounts.add(
-        "Test",
-        "Token",
-        "AccountId",
+        "test",
+        "password",
+        "2fa",
         "",
         "",
         "")

@@ -1,56 +1,75 @@
 import {InstaAccount, InstaAccountId} from "./instaAccount"
-import {InstaAccountDto} from "../../dto/instaResponse"
+import {AccountStatus, InstaAccountDto,InstaCutAccountDto} from "../../dto/instaResponse"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
 import {Context} from "../../context"
 
 
 export class InstaAccountImpl extends InstaAccount {
-  private readonly _id: string
+  private readonly _cutData: InstaCutAccountDto
 
-  constructor(private readonly context: Context, id: string) {
+  constructor(private readonly context: Context, accountCut: InstaCutAccountDto) {
     super()
 
-    this._id = id
+    this._cutData = accountCut
   }
 
   get id(): InstaAccountId{
-    return this._id
+    return this._cutData.id
+  }
+
+  get username(): InstaAccountId{
+    return this._cutData.username
+  }
+
+  get status(): AccountStatus{
+    return this._cutData.status
   }
 
   async data(): Promise<InstaAccountDto> {
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Insta")
-      .searchParam("instaId", this._id)
+      .searchParam("instaId", this._cutData.id)
       .sendGet()
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to get insta account data with id ${this._id}`, response)
+      await ResponseUtils.throwError(`Failed to get insta account data with id ${this._cutData.id}`, response)
     }
 
     return (await response!.json() as { instaAccount: InstaAccountDto }).instaAccount
   }
 
-  async update(enabled: boolean, name: string, additionalContext: string, folderId: string, token: string, proxy: string): Promise<InstaAccountDto> {
+  async update(
+    enabled: boolean, 
+    relogin: boolean, 
+    username: string, 
+    password: string, 
+    twoFactorKey: string, 
+    proxy: string,
+    additionalContext: string,
+    folderId: string
+  ): Promise<InstaAccountDto> {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Insta")
       .sendPutJson({
-        instaId: this._id,
+        instaId: this._cutData.id,
         enabled: enabled,
-        name: name,
+        relogin: relogin,
+        username: username,
+        password: password,
+        twoFactorKey: twoFactorKey,
+        proxy: proxy,
         additionalContext: additionalContext,
-        folderId: folderId,
-        token: token,
-        proxy: proxy
+        folderId: folderId
       })
 
     // check response status
     if (ResponseUtils.isFail(response)) {
-      await ResponseUtils.throwError(`Failed to update insta account with ID: ${this._id}`, response)
+      await ResponseUtils.throwError(`Failed to update insta account with ID: ${this._cutData.id}`, response)
     }
 
     return await this.data()

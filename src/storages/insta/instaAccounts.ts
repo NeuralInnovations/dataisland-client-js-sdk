@@ -11,7 +11,14 @@ export abstract class InstaAccounts {
 
   abstract update(): Promise<void>
 
-  abstract add(name: string, token: string, accountId: string, proxy: string, additionalContext: string, folderId: string): Promise<void>
+  abstract add(
+    username: string, 
+    password: string, 
+    twoFactorKey: string, 
+    proxy: string,
+    additionalContext: string,
+    folderId: string
+  ): Promise<void>
 
   abstract delete(id: string): Promise<void>
 
