@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.25](../../README.md) / [Exports](../modules.md) / FilesPage
+[@neuralinnovations/dataisland-sdk - v0.6.26](../../README.md) / [Exports](../modules.md) / FilesPage
 
 # Class: FilesPage
 
