@@ -57,7 +57,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     this._inProgress = this._inProgress.filter(post => post.status == PostStatus.Generation)
 
     if (this._inProgress.length > 0) {
-      this._fetchTimeout = setTimeout(async () => await this.internalFetchPosts(), 2000)
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchPosts(), 10000)
     } else {
       clearTimeout(this._fetchTimeout)
     }
@@ -107,7 +107,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     this._inProgress = this._posts.filter(post => post.status == PostStatus.Generation)
 
     if (this._inProgress.length > 0) {
-      this._fetchTimeout = setTimeout(async () => await this.internalFetchPosts(), 2000)
+      this._fetchTimeout = setTimeout(async () => await this.internalFetchPosts(), 10000)
     }
   }
 
@@ -187,18 +187,14 @@ export class InstaAccountsImpl extends InstaAccounts {
     await this.update()
   }
 
-  async post(message: string): Promise<void> {
-    if (message === undefined || message === null || message.trim() === "") {
-      throw new Error("Add insta post, message can not be null or empty")
-    }
+  async post(): Promise<void> {
 
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Insta/post")
       .sendPostJson({
-        organizationId: this.organization.id,
-        message: message
+        organizationId: this.organization.id
       })
 
     // check response status
