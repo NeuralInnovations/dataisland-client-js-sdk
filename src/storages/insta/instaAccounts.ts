@@ -24,6 +24,6 @@ export abstract class InstaAccounts {
 
   abstract deletePost(id: string): Promise<void>
 
-  abstract post(message: string): Promise<void>
+  abstract post(): Promise<void>
 
 }
