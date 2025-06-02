@@ -26,14 +26,6 @@ export class InstaPostImpl extends InstaPost {
     return <InstaPostId>this._id
   }
 
-  get message(): string {
-    if (this._data) {
-      return this._data?.message
-    } else {
-      throw new Error("Insta post data not loaded, please call update first")
-    }
-  }
-
   get createdAt(): number {
     if (this._data) {
       return this._data?.createdAt

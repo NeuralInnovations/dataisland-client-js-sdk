@@ -7,8 +7,6 @@ export abstract class InstaPost {
 
   abstract get id(): InstaPostId
 
-  abstract get message(): string
-
   abstract get createdAt(): number
 
   abstract get status(): PostStatus
