@@ -17,7 +17,9 @@ export abstract class InstaAccounts {
     twoFactorKey: string, 
     proxy: string,
     additionalContext: string,
-    folderId: string
+    folderId: string,
+    cron: string,
+    timezone: string
   ): Promise<void>
 
   abstract delete(id: string): Promise<void>

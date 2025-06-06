@@ -49,7 +49,9 @@ export class InstaAccountImpl extends InstaAccount {
     twoFactorKey: string, 
     proxy: string,
     additionalContext: string,
-    folderId: string
+    folderId: string,
+    cron: string,
+    timezone: string
   ): Promise<InstaAccountDto> {
     // send request to the server
     const response = await this.context
@@ -64,7 +66,9 @@ export class InstaAccountImpl extends InstaAccount {
         twoFactorKey: twoFactorKey,
         proxy: proxy,
         additionalContext: additionalContext,
-        folderId: folderId
+        folderId: folderId,
+        cron: cron,
+        timezone: timezone
       })
 
     // check response status

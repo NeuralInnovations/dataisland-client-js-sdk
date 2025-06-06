@@ -117,7 +117,9 @@ export class InstaAccountsImpl extends InstaAccounts {
     twoFactorKey: string, 
     proxy: string,
     additionalContext: string,
-    folderId: string): Promise<void> {
+    folderId: string,
+    cron: string,
+    timezone: string): Promise<void> {
     if (username === undefined || username === null || username.trim() === "") {
       throw new Error("Add insta account, username can not be null or empty")
     }
@@ -128,13 +130,19 @@ export class InstaAccountsImpl extends InstaAccounts {
       throw new Error("Add insta account, twoFactorKey can not be null or empty")
     }
     if (proxy === undefined || proxy === null) {
-      throw new Error("Add insta account, proxy can not be null or empty")
+      throw new Error("Add insta account, proxy can not be null")
     }
     if (additionalContext === undefined || additionalContext === null) {
       throw new Error("Add insta account, additionalContext can not be null")
     }
     if (folderId === undefined || folderId === null) {
-      throw new Error("Add insta account, folderId can not be null or empty")
+      throw new Error("Add insta account, folderId can not be null")
+    }
+    if (cron === undefined || cron === null) {
+      throw new Error("Add insta account, cron can not be null")
+    }
+    if (timezone === undefined || timezone === null) {
+      throw new Error("Add insta account, timezone can not be null")
     }
 
     // send create request to the server
@@ -148,7 +156,9 @@ export class InstaAccountsImpl extends InstaAccounts {
         twoFactorKey: twoFactorKey,
         proxy: proxy,
         additionalContext: additionalContext,
-        folderId: folderId
+        folderId: folderId,
+        cron: cron,
+        timezone: timezone
       })
 
     // check response status
