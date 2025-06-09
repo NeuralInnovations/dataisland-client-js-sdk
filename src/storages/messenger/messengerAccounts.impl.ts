@@ -46,7 +46,7 @@ export class MessengerAccountsImpl extends MessengerAccounts {
     this._collection = accounts.map(acc => new MessengerAccountImpl(this.context, acc.id, acc.name))
   }
 
-  async add(name: string, accountId: string, token: string, accountContext: string, referralUrl: string): Promise<void> {
+  async add(name: string, accountId: string, token: string, language: string, accountContext: string, referralUrl: string): Promise<void> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Add messenger account, name can not be null or empty")
     }
@@ -55,6 +55,9 @@ export class MessengerAccountsImpl extends MessengerAccounts {
     }
     if (token === undefined || token === null || token.trim() === "") {
       throw new Error("Add messenger account, token can not be null or empty")
+    }
+    if (language === undefined || language === null) {
+      throw new Error("Add messenger account, language can not be null or empty")
     }
     if (accountContext === undefined || accountContext === null) {
       throw new Error("Add messenger account, accountContext can not be null or empty")
@@ -72,6 +75,7 @@ export class MessengerAccountsImpl extends MessengerAccounts {
         organizationId: this.organization.id,
         token: token,
         accountId: accountId,
+        language: language,
         accountContext: accountContext,
         referralUrl: referralUrl
       })

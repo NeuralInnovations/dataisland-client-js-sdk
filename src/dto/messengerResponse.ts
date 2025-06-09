@@ -6,6 +6,7 @@ export interface MessengerAccountDto {
   name: string
   accountId: string
   token: string
+  language: string
   accountContext: string
   referralUrl: string
 }
