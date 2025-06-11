@@ -18,7 +18,7 @@ export abstract class InstaAccounts {
     proxy: string,
     additionalContext: string,
     folderId: string,
-    cron: string,
+    cron: string[],
     timezone: string
   ): Promise<void>
 

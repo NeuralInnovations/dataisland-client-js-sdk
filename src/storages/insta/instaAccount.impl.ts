@@ -50,7 +50,7 @@ export class InstaAccountImpl extends InstaAccount {
     proxy: string,
     additionalContext: string,
     folderId: string,
-    cron: string,
+    cron: string[],
     timezone: string
   ): Promise<InstaAccountDto> {
     // send request to the server
