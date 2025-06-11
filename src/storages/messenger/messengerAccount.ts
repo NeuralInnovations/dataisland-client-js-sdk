@@ -11,6 +11,6 @@ export abstract class MessengerAccount {
 
   abstract data(): Promise<MessengerAccountDto>
 
-  abstract update(name: string, token: string, language: string, accountContext: string, referralUrl: string): Promise<MessengerAccountDto>
+  abstract update(name: string, token: string, language: string, accountContext: string, referralUrl: string, notificationDelays: number[]): Promise<MessengerAccountDto>
 
 }

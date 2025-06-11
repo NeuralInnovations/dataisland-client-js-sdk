@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.29](../../README.md) / [Exports](../modules.md) / EmailsWhitelistResponse
+[@neuralinnovations/dataisland-sdk - v0.6.30](../../README.md) / [Exports](../modules.md) / EmailsWhitelistResponse
 
 # Interface: EmailsWhitelistResponse
 

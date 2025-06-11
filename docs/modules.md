@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.6.29](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.6.30](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.6.29
+# @neuralinnovations/dataisland-sdk - v0.6.30
 
 ## Table of contents
 

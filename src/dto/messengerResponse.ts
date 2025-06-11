@@ -9,6 +9,7 @@ export interface MessengerAccountDto {
   language: string
   accountContext: string
   referralUrl: string
+  notificationDelays: number[]
 }
 
 export interface MessengerAccountCutDto{

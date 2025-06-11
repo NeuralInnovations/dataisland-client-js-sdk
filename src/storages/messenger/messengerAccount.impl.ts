@@ -40,7 +40,7 @@ export class MessengerAccountImpl extends MessengerAccount {
     return (await response!.json() as { account: MessengerAccountDto }).account
   }
 
-  async update(name: string, token: string, language: string, accountContext: string, referralUrl: string): Promise<MessengerAccountDto> {
+  async update(name: string, token: string, language: string, accountContext: string, referralUrl: string, notificationDelays: number[]): Promise<MessengerAccountDto> {
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
@@ -52,6 +52,7 @@ export class MessengerAccountImpl extends MessengerAccount {
         language: language,
         accountContext: accountContext,
         referralUrl: referralUrl,
+        notificationDelays: notificationDelays
       })
 
     // check response status

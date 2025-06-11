@@ -118,7 +118,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     proxy: string,
     additionalContext: string,
     folderId: string,
-    cron: string,
+    cron: string[],
     timezone: string): Promise<void> {
     if (username === undefined || username === null || username.trim() === "") {
       throw new Error("Add insta account, username can not be null or empty")
