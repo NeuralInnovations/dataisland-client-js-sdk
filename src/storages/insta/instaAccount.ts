@@ -19,7 +19,7 @@ export abstract class InstaAccount {
     proxy: string,
     additionalContext: string,
     folderId: string,
-    cron: string,
+    cron: string[],
     timezone: string
   ): Promise<InstaAccountDto>
 

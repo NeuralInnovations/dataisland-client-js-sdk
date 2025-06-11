@@ -12,7 +12,7 @@ export interface InstaAccountDto {
   additionalContext: string
   folderId: string
   error: string
-  cron: string
+  cron: string[]
   timezone: string
 }
 
