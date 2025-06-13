@@ -85,15 +85,12 @@ export class QueryFlowsImpl extends QueryFlows {
     }
   }
 
-  async create(name: string, workspaceIds: WorkspaceId[], file: UploadFile, table: UploadFile): Promise<FlowId> {
+  async create(name: string, workspaceIds: WorkspaceId[], table: UploadFile): Promise<FlowId> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Name is required, must be not empty")
     }
     if (workspaceIds === undefined || workspaceIds === null) {
       throw new Error("WorkspaceIds is required, must be not empty")
-    }
-    if (file === undefined || file === null) {
-      throw new Error("Create query flow, file is undefined or null")
     }
     if (table === undefined || table === null) {
       throw new Error("Create query flow, table is undefined or null")
@@ -103,7 +100,6 @@ export class QueryFlowsImpl extends QueryFlows {
     const form = new FormData()
     form.append("organizationId", this.organization.id)
     form.append("name", name)
-    form.append("file", file, file.name)
     form.append("tableFile", table, table.name)
     workspaceIds.forEach(item => {
       form.append("workspaceIds", item)
@@ -118,7 +114,7 @@ export class QueryFlowsImpl extends QueryFlows {
     // check response status
     if (ResponseUtils.isFail(response)) {
 
-      await ResponseUtils.throwError(`Query flow creation for ${file.name}`, response)
+      await ResponseUtils.throwError(`Query flow creation for ${table.name}`, response)
     }
 
     const content = (await response!.json()) as QueryFlowResponse
