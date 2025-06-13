@@ -40,7 +40,7 @@
 
 ### create
 
-▸ **create**(`name`, `workspaceIds`, `file`, `table`): `Promise`\<`string`\>
+▸ **create**(`name`, `workspaceIds`, `table`): `Promise`\<`string`\>
 
 #### Parameters
 
@@ -48,7 +48,6 @@
 | :------ | :------ |
 | `name` | `string` |
 | `workspaceIds` | `string`[] |
-| `file` | `File` |
 | `table` | `File` |
 
 #### Returns
