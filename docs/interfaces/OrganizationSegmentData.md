@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.30](../../README.md) / [Exports](../modules.md) / OrganizationSegmentData
+[@neuralinnovations/dataisland-sdk - v0.6.31](../../README.md) / [Exports](../modules.md) / OrganizationSegmentData
 
 # Interface: OrganizationSegmentData
 

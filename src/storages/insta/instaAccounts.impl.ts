@@ -1,6 +1,7 @@
 import {InstaAccounts} from "./instaAccounts"
 import {
   InstaCutAccountDto,
+  InstaErrorDto,
   InstaPostDto,
   PostStatus,
 } from "../../dto/instaResponse"
@@ -240,6 +241,26 @@ export class InstaAccountsImpl extends InstaAccounts {
     }
 
     await this.update()
+  }
+
+  async errors(): Promise<InstaErrorDto[]> {
+    const response = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Insta/statistics")
+      .searchParam("organizationId", this.organization.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(response)) {
+      await ResponseUtils.throwError(
+        `Insta errors list for organization ${this.organization.id} failed`,
+        response
+      )
+    }
+
+    const errors = (await response!.json() as {errors: InstaErrorDto[]}).errors
+
+    return errors
   }
 
 
