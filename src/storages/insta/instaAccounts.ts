@@ -1,4 +1,5 @@
 
+import { InstaErrorDto } from "../../dto/instaResponse"
 import {InstaAccount} from "./instaAccount"
 import {InstaPost} from "./instaPost"
 
@@ -27,5 +28,7 @@ export abstract class InstaAccounts {
   abstract deletePost(id: string): Promise<void>
 
   abstract post(): Promise<void>
+
+  abstract errors(): Promise<InstaErrorDto[]>
 
 }

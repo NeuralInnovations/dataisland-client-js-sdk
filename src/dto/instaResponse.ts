@@ -40,6 +40,13 @@ export interface InstaContentDto {
   error: string
 }
 
+export interface InstaErrorDto {
+  message: string
+  frequency: number
+  accountIds: string[]
+  postIds: string[]
+}
+
 export enum PostStatus {
   Generation = 0,
   Finished = 1
@@ -57,3 +64,5 @@ export enum AccountStatus {
   Authenticated = 2,
   Error = 3
 }
+
+
