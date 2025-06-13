@@ -24,7 +24,7 @@ export abstract class QueryFlows extends EventDispatcher<
 
   abstract getQueryFlows(): Promise<QueryFlow[]>
 
-  abstract create(name: string, workspaceIds: WorkspaceId[], file: UploadFile, table: UploadFile ): Promise<FlowId>
+  abstract create(name: string, workspaceIds: WorkspaceId[], table: UploadFile ): Promise<FlowId>
 
   abstract delete(id: FlowId): Promise<void>
 
