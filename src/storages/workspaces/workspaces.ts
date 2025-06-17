@@ -54,4 +54,9 @@ export abstract class Workspaces extends EventDispatcher<
    * Delete workspace.
    */
   abstract delete(id: WorkspaceId): Promise<void>
+
+  /**
+   * Load organization workspaces
+   */
+  abstract load(): Promise<void>
 }

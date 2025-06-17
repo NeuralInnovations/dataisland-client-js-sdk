@@ -44,6 +44,8 @@ import {InstaAccountsImpl} from "../insta/instaAccounts.impl"
 import {InstaAccounts} from "../insta/instaAccounts"
 import {MessengerAccountsImpl} from "../messenger/messengerAccounts.impl"
 import {MessengerAccounts} from "../messenger/messengerAccounts"
+import { ChatbotAccountsImpl } from "../chatbot/chatbotAccounts.impl"
+import { ChatbotAccounts } from "../chatbot/chatbotAccounts"
 
 export class OrganizationImpl extends Organization implements Disposable {
   private _isDisposed: boolean = false
@@ -54,6 +56,7 @@ export class OrganizationImpl extends Organization implements Disposable {
   private readonly _queryFlows: QueryFlowsImpl
   private readonly _instaAccounts: InstaAccountsImpl
   private readonly _messengerAccounts: MessengerAccountsImpl
+  private readonly _chatbotAccounts: ChatbotAccountsImpl
   private readonly _chats: ChatsImpl
   private readonly _prompts: OrganizationPromptsImpl
 
@@ -65,6 +68,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._queryFlows = new QueryFlowsImpl(this, this.context)
     this._instaAccounts = new InstaAccountsImpl(this, this.context)
     this._messengerAccounts = new MessengerAccountsImpl(this, this.context)
+    this._chatbotAccounts = new ChatbotAccountsImpl(this, this.context)
     this._prompts = new OrganizationPromptsImpl(this, this.context)
   }
 
@@ -76,13 +80,13 @@ export class OrganizationImpl extends Organization implements Disposable {
     this._isAdmin = isAdmin
 
     // init workspaces by organization id
-    const promises = [
-      this._workspaces.initFrom(content.id),
-      this._chats.initFrom(content.id),
-      this._accessGroups.initialize()
-    ]
+    // const promises = [
+    //   this._workspaces.initFrom(content.id),
+    //   this._chats.initFrom(content.id),
+    //   this._accessGroups.initialize()
+    // ]
 
-    await Promise.all(promises)
+    // await Promise.all(promises)
 
     return this
   }
@@ -141,6 +145,10 @@ export class OrganizationImpl extends Organization implements Disposable {
 
   get messengerAccounts(): MessengerAccounts {
     return this._messengerAccounts
+  }
+
+  get chatbotAccounts(): ChatbotAccounts {
+    return this._chatbotAccounts
   }
 
   get chats(): Chats {

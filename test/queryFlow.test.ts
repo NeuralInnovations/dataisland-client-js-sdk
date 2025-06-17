@@ -12,10 +12,10 @@ test.skip("QueryFlows", async () => {
       expect(app).not.toBeUndefined()
       expect(org).not.toBeUndefined()
 
-      const buffer = fs.readFileSync("test/data/test_file2.pdf")
-      const test_file: UploadFile = new File([new Uint8Array(buffer)], "test_file2.pdf", {
-        type: "application/pdf"
-      })
+      // const buffer = fs.readFileSync("test/data/test_file2.pdf")
+      // const test_file: UploadFile = new File([new Uint8Array(buffer)], "test_file2.pdf", {
+      //   type: "application/pdf"
+      // })
 
       const table_buffer = fs.readFileSync("test/data/test_csv.csv")
       const table_test_file: UploadFile = new File([new Uint8Array(table_buffer)], "test_csv.csv", {
@@ -24,7 +24,7 @@ test.skip("QueryFlows", async () => {
 
       const flow_name = "test"
 
-      const flow_id = await org.queryFlows.create(flow_name, [ws.id], test_file, table_test_file)
+      const flow_id = await org.queryFlows.create(flow_name, [ws.id], table_test_file)
 
       expect(flow_id).not.toBeUndefined()
       expect(flow_id).not.toBeNull()

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.31](../../README.md) / [Exports](../modules.md) / SearchUsersResponse
+[@neuralinnovations/dataisland-sdk - v0.6.32](../../README.md) / [Exports](../modules.md) / SearchUsersResponse
 
 # Interface: SearchUsersResponse
 

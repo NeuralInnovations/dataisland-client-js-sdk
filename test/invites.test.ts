@@ -15,6 +15,7 @@ test("Invites", async () => {
     })
     // Create test organization and fin admin group
     const org = await firstUserApp.organizations.create(randomName, "Test description")
+    await org.accessGroups.reload()
     const notAdminGroup = await org.accessGroups.collection.find(group => !group.group.regulation.isRegulateOrganization)
     if (notAdminGroup) {
       const invite_code = await org.createInviteCode([notAdminGroup.id])

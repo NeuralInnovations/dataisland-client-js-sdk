@@ -8,6 +8,9 @@ import { appTest, UnitTest } from "../src/unitTest"
 test("Workspace create / delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
+
+      await org.workspaces.load()
+
       // save init length
       const initWorkspaceCount = org.workspaces.collection.length
 
