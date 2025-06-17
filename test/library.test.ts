@@ -5,6 +5,9 @@ import { LibrariesService } from "../src/services/librariesService"
 test("Libraries", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInWorkspace(async (app, org, ws) => {
+
+      await app.resolve(LibrariesService)?.initialize()
+
       const testLibraryName = "test"
       const testLibraryDescription = "test description"
       const testLibraryRegion = 0

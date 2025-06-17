@@ -25,10 +25,6 @@ export class GroupsImpl extends Groups {
     return this._groups
   }
 
-  async initialize() {
-    await this.internalInit()
-  }
-
   async reload(){
     this._groups = []
     await this.internalInit()

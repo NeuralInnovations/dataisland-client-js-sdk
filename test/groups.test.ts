@@ -5,6 +5,8 @@ import { appTest, UnitTest } from "../src/unitTest"
 test("Groups", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
+      await org.accessGroups.reload()
+
       const initialGroupsCount = org.accessGroups.collection.length
 
       const groupPromise = org.accessGroups.create("Test group", { isAdmin: true }, ["123"])

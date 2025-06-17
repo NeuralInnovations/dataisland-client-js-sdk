@@ -23,6 +23,11 @@ export abstract class Chats extends EventDispatcher<ChatsEvent, Chat> {
   abstract get collection(): ReadonlyArray<Chat>
 
   /**
+   * Load organization chats
+   */
+  abstract load(): Promise<void>
+
+  /**
    * Create new chat.
    */
   abstract create(model: string, clientContext: string): Promise<Chat | undefined>

@@ -20,6 +20,7 @@ import { QueryFlows } from "../queryFlows/queryFlows"
 import { OrganizationPrompts } from "./organizationPrompts"
 import {InstaAccounts} from "../insta/instaAccounts"
 import {MessengerAccounts} from "../messenger/messengerAccounts"
+import { ChatbotAccounts } from "../chatbot/chatbotAccounts"
 
 /**
  * Organization event.
@@ -94,6 +95,11 @@ export abstract class Organization extends EventDispatcher<
    * Messenger accounts
    */
   abstract get messengerAccounts(): MessengerAccounts
+
+  /**
+   * Chatbot accounts
+   */
+  abstract get chatbotAccounts(): ChatbotAccounts
 
   /**
    * Get organization prompts

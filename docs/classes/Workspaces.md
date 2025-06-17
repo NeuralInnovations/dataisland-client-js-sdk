@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.31](../../README.md) / [Exports](../modules.md) / Workspaces
+[@neuralinnovations/dataisland-sdk - v0.6.32](../../README.md) / [Exports](../modules.md) / Workspaces
 
 # Class: Workspaces
 
@@ -27,6 +27,7 @@ Organization's workspaces.
 - [delete](Workspaces.md#delete)
 - [dispatch](Workspaces.md#dispatch)
 - [get](Workspaces.md#get)
+- [load](Workspaces.md#load)
 - [subscribe](Workspaces.md#subscribe)
 - [tryGet](Workspaces.md#tryget)
 
@@ -152,6 +153,18 @@ Get workspace by id.
 #### Returns
 
 [`Workspace`](Workspace.md)
+
+___
+
+### load
+
+▸ **load**(): `Promise`\<`void`\>
+
+Load organization workspaces
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 

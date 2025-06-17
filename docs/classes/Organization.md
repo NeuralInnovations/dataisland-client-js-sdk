@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.31](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.6.32](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -19,6 +19,7 @@ Organization.
 ### Accessors
 
 - [accessGroups](Organization.md#accessgroups)
+- [chatbotAccounts](Organization.md#chatbotaccounts)
 - [chats](Organization.md#chats)
 - [description](Organization.md#description)
 - [icon](Organization.md#icon)
@@ -81,6 +82,18 @@ Groups.
 #### Returns
 
 [`Groups`](Groups.md)
+
+___
+
+### chatbotAccounts
+
+• `get` **chatbotAccounts**(): `ChatbotAccounts`
+
+Chatbot accounts
+
+#### Returns
+
+`ChatbotAccounts`
 
 ___
 
