@@ -20,8 +20,8 @@ export class ChatsImpl extends Chats {
     super()
   }
 
-  async initFrom(organizationId: OrganizationId): Promise<void> {
-    await this.loadOrganizationChats(organizationId)
+  async load(): Promise<void> {
+    await this.loadOrganizationChats(this.organization.id)
     const libraries = (this.context.resolve(LibrariesService) as LibrariesService).libraries.collection
     for (const library of libraries){
       await this.loadLibraryChats(library.id)

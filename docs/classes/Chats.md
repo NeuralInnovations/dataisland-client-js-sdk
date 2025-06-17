@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.31](../../README.md) / [Exports](../modules.md) / Chats
+[@neuralinnovations/dataisland-sdk - v0.6.32](../../README.md) / [Exports](../modules.md) / Chats
 
 # Class: Chats
 
@@ -31,6 +31,7 @@ Chats storage.
 - [delete](Chats.md#delete)
 - [dispatch](Chats.md#dispatch)
 - [get](Chats.md#get)
+- [load](Chats.md#load)
 - [subscribe](Chats.md#subscribe)
 - [tryGet](Chats.md#tryget)
 
@@ -221,6 +222,18 @@ Get chat by id.
 #### Returns
 
 [`Chat`](Chat.md)
+
+___
+
+### load
+
+▸ **load**(): `Promise`\<`void`\>
+
+Load organization chats
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ___
 

@@ -16,6 +16,9 @@ import {appTest, UnitTest} from "../src/unitTest"
 test("Chat create, ask question, delete", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
+
+      await org.chats.load()
+
       const chatPromise = org.chats.create("search", "Test user")
 
       // check not throw

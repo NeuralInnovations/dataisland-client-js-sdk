@@ -1,9 +1,13 @@
+import { AcquiringService } from "../src/services/acquiringService"
 import { UnitTest, appTest } from "../src/unitTest"
 import { testInOrganization } from "./setup"
 
 test("Acquiring", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
+
+      await app.resolve(AcquiringService)?.initialize()
+
       expect(org).not.toBeUndefined()
 
       const plans = await app.acquiring.getPlans()

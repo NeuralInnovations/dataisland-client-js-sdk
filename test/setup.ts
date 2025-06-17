@@ -123,6 +123,8 @@ export const testInWorkspace = async (func: (app: DataIslandApp, org: Organizati
   token: string,
 }): Promise<void> => {
   await testInOrganization(async (app, org) => {
+    await org.workspaces.load()
+
     const randomName = `workspace-${randomHash()}`
     const workspace = await org.workspaces.create(randomName, `description of ${randomName}`, {
       isCreateNewGroup: true,

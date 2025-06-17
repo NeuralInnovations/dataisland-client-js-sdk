@@ -143,6 +143,8 @@ test("Organization", async () => {
 test("API keys and custom credentials test", async () => {
   await appTest(UnitTest.DO_NOT_PRINT_INITIALIZED_LOG, async () => {
     await testInOrganization(async (app, org) => {
+      await org.accessGroups.reload()
+
       const accessGroupId = org.accessGroups.collection[0].id
       const apiKeyOrg: OrganizationApiKey = await org.createApiKey("testKey", [accessGroupId])
       const apiKey = apiKeyOrg.apiKey

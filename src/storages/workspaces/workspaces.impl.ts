@@ -3,7 +3,6 @@ import { OrganizationImpl } from "../organizations/organization.impl"
 import { Context } from "../../context"
 import { Workspace } from "./workspace"
 import { WorkspaceImpl } from "./workspace.impl"
-import { OrganizationId } from "../organizations/organizations"
 import { RpcService } from "../../services/rpcService"
 import { OrganizationWorkspaces } from "../../dto/userInfoResponse"
 import { WorkspaceDto } from "../../dto/workspacesResponse"
@@ -170,18 +169,18 @@ export class WorkspacesImpl extends Workspaces {
     })
   }
 
-  async initFrom(organizationId: OrganizationId): Promise<void> {
+  async load(): Promise<void> {
     // init workspaces from the server's response
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Organizations")
-      .searchParam("id", organizationId)
+      .searchParam("id", this.organization.id)
       .sendGet()
 
     // check response status
     if (ResponseUtils.isFail(response)) {
       const userProfile = this.context.resolve(UserProfileService)?.userProfile as UserProfile
-      await ResponseUtils.throwError(`Failed to fetch workspaces in organization: ${organizationId}, userId: ${userProfile.id}, email: ${userProfile.email}`, response)
+      await ResponseUtils.throwError(`Failed to fetch workspaces in organization: ${this.organization.id}, userId: ${userProfile.id}, email: ${userProfile.email}`, response)
     }
 
     // parse workspaces from the server's response
