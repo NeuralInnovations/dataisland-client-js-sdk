@@ -95,7 +95,7 @@ export class ChatbotAccountsImpl extends ChatbotAccounts {
 
 
   async delete(id: string): Promise<void> {
-    const account = this._collection?.find(acc => acc.id === id)
+    const account = this._collection?.find(acc => acc.data.id === id)
 
     // check if account is found
     if (!account) {

@@ -18,7 +18,8 @@ test.skip("Insta", async () => {
         "2fa",
         "",
         "",
-        "")
+        "",
+        [""], "")
 
       await expect(createPromise).resolves.not.toThrow()
 

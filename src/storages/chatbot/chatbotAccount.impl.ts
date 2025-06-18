@@ -2,7 +2,7 @@
 import {Context} from "../../context"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
-import { ChatbotAccount, ChatbotAccountId } from "./chatbotAccount"
+import { ChatbotAccount } from "./chatbotAccount"
 import { ChatbotAccountDto, KeyValueItem } from "../../dto/chatbotAccountResponse"
 
 
@@ -15,12 +15,8 @@ export class ChatbotAccountImpl extends ChatbotAccount {
     this._data = data
   }
 
-  get id(): ChatbotAccountId {
-    return this._data.id
-  }
-
-  get name(): string {
-    return this._data.id
+  get data(): ChatbotAccountDto {
+    return this._data
   }
 
   async update(name: string, token: string, accountContext: string, notificationDelays: number[], data: KeyValueItem[]){
