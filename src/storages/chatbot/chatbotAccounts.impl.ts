@@ -79,9 +79,10 @@ export class ChatbotAccountsImpl extends ChatbotAccounts {
         organizationId: this.organization.id,
         accountType: type,
         name: name,
-        token: token,
         accountId: accountId,
+        token: token,
         context: accountContext,
+        notificationDelays: notificationDelays,
         data: data
       })
 
