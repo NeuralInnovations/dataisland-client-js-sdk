@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.34](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.6.35](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
