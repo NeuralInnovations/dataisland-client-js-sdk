@@ -41,10 +41,11 @@ export interface InstaContentDto {
 }
 
 export interface InstaErrorDto {
+  id: string
+  createdAt: number
   message: string
-  frequency: number
-  accountIds: string[]
-  postIds: string[]
+  accountId: string
+  postId: string
 }
 
 export enum PostStatus {

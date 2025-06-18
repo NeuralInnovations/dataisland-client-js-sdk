@@ -10,6 +10,8 @@ export abstract class InstaAccounts {
 
   abstract get posts(): InstaPost[]
 
+  abstract get errors(): InstaErrorDto[]
+
   abstract update(): Promise<void>
 
   abstract add(
@@ -29,6 +31,6 @@ export abstract class InstaAccounts {
 
   abstract post(): Promise<void>
 
-  abstract errors(): Promise<InstaErrorDto[]>
+  abstract deleteError(id: string): Promise<void>
 
 }

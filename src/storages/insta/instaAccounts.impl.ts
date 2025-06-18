@@ -18,6 +18,7 @@ import {InstaPost} from "./instaPost"
 export class InstaAccountsImpl extends InstaAccounts {
   private _accounts?: InstaAccountImpl[]
   private _posts?: InstaPostImpl[]
+  private _errors?: InstaErrorDto[]
 
 
   private _inProgress: InstaPostImpl[] = []
@@ -44,6 +45,14 @@ export class InstaAccountsImpl extends InstaAccounts {
       return this._posts
     } else {
       throw new Error("Insta posts collection is not loaded, please update it first")
+    }
+  }
+
+  get errors(): InstaErrorDto[] {
+    if (this._errors !== undefined) {
+      return this._errors
+    } else {
+      throw new Error("Insta errors collection is not loaded, please update it first")
     }
   }
 
@@ -83,6 +92,23 @@ export class InstaAccountsImpl extends InstaAccounts {
     this._accounts = []
     const accounts = (await response!.json() as {instaAccounts: InstaCutAccountDto[]}).instaAccounts
     this._accounts = accounts.map(acc => new InstaAccountImpl(this.context, acc))
+
+    const errorsResponse = await this.context
+      .resolve(RpcService)
+      ?.requestBuilder("api/v1/Insta/errors")
+      .searchParam("organizationId", this.organization.id)
+      .sendGet()
+
+    // check response status
+    if (ResponseUtils.isFail(errorsResponse)) {
+      await ResponseUtils.throwError(
+        `Insta errors list for organization ${this.organization.id} failed`,
+        errorsResponse
+      )
+    }
+
+    this._errors = []
+    this._errors = (await errorsResponse!.json() as {errors: InstaErrorDto[]}).errors
 
     const postsResponse = await this.context
       .resolve(RpcService)
@@ -243,25 +269,32 @@ export class InstaAccountsImpl extends InstaAccounts {
     await this.update()
   }
 
-  async errors(): Promise<InstaErrorDto[]> {
+  async deleteError(id: string): Promise<void> {
+    const error = this._errors?.find(err => err.id === id)
+
+    // check if account is found
+    if (!error) {
+      throw new Error(`Insta error ${id} is not found, organization: ${this.organization.id}`)
+    }
+
+    // send delete request to the server
     const response = await this.context
       .resolve(RpcService)
-      ?.requestBuilder("api/v1/Insta/statistics")
-      .searchParam("organizationId", this.organization.id)
-      .sendGet()
+      ?.requestBuilder("api/v1/Insta/error")
+      .searchParam("errorId", id)
+      .sendDelete()
 
     // check response status
     if (ResponseUtils.isFail(response)) {
       await ResponseUtils.throwError(
-        `Insta errors list for organization ${this.organization.id} failed`,
+        `Failed to delete insta error: ${id}, organization: ${this.organization.id}`,
         response
       )
     }
 
-    const errors = (await response!.json() as {errors: InstaErrorDto[]}).errors
-
-    return errors
+    await this.update()
   }
+
 
 
 }

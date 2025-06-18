@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.33](../../README.md) / [Exports](../modules.md) / UserProfile
+[@neuralinnovations/dataisland-sdk - v0.6.34](../../README.md) / [Exports](../modules.md) / UserProfile
 
 # Class: UserProfile
 
