@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.35](../../README.md) / [Exports](../modules.md) / QueryFlowDto
+[@neuralinnovations/dataisland-sdk - v0.6.36](../../README.md) / [Exports](../modules.md) / QueryFlowDto
 
 # Interface: QueryFlowDto
 
@@ -6,12 +6,26 @@
 
 ### Properties
 
+- [completedRowsCount](QueryFlowDto.md#completedrowscount)
+- [error](QueryFlowDto.md#error)
 - [name](QueryFlowDto.md#name)
 - [result](QueryFlowDto.md#result)
 - [state](QueryFlowDto.md#state)
-- [status](QueryFlowDto.md#status)
+- [totalRowsCount](QueryFlowDto.md#totalrowscount)
 
 ## Properties
+
+### completedRowsCount
+
+• **completedRowsCount**: `number`
+
+___
+
+### error
+
+• **error**: `string`
+
+___
 
 ### name
 
@@ -31,6 +45,6 @@ ___
 
 ___
 
-### status
+### totalRowsCount
 
-• **status**: [`QueryFlowStatus`](../enums/QueryFlowStatus.md)
+• **totalRowsCount**: `number`

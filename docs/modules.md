@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.6.35](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.6.36](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.6.35
+# @neuralinnovations/dataisland-sdk - v0.6.36
 
 ## Table of contents
 
@@ -21,7 +21,6 @@
 - [OrganizationsEvent](enums/OrganizationsEvent.md)
 - [QueryFlowEvent](enums/QueryFlowEvent.md)
 - [QueryFlowState](enums/QueryFlowState.md)
-- [QueryFlowStatus](enums/QueryFlowStatus.md)
 - [QueryFlowsEvent](enums/QueryFlowsEvent.md)
 - [ResourceType](enums/ResourceType.md)
 - [StepStatus](enums/StepStatus.md)
@@ -64,6 +63,7 @@
 - [Organizations](classes/Organizations.md)
 - [QueryFlow](classes/QueryFlow.md)
 - [QueryFlows](classes/QueryFlows.md)
+- [SearchResource](classes/SearchResource.md)
 - [StepTypeInfo](classes/StepTypeInfo.md)
 - [UserProfile](classes/UserProfile.md)
 - [Workspace](classes/Workspace.md)

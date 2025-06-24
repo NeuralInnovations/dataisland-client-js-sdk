@@ -4,15 +4,6 @@ export enum QueryFlowState {
   DONE = 100
 }
 
-export enum QueryFlowStatus {
-  STARTED = 0,
-  UPLOADING_FILE = 1,
-  PROCESSING_FILE = 2,
-  PREPARING_RESULTS = 3,
-  DONE = 4,
-  FAILED = 5
-}
-
 export interface QueryFileUrlDto {
   name: string
   extension: string
@@ -27,8 +18,10 @@ export interface QueryFlowResult {
 export interface QueryFlowDto {
   name: string
   state: QueryFlowState,
-  status: QueryFlowStatus,
+  totalRowsCount: number
+  completedRowsCount: number
   result: QueryFlowResult
+  error: string
 }
 
 // GET org query flows
@@ -39,4 +32,14 @@ export interface QueryFlowListResponse {
 // POST Create query flow
 export interface QueryFlowResponse {
   flowId: string
+}
+
+export class SearchResource {
+  organizationId: string
+  workspaceIds: string[]
+
+  constructor(organizationId: string, workspaceIds: string[]){
+    this.organizationId = organizationId
+    this.workspaceIds = workspaceIds
+  }
 }
