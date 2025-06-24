@@ -1,7 +1,7 @@
 import {EventDispatcher} from "../../events"
 import {QueryFlow} from "./queryFlow"
-import {WorkspaceId} from "../workspaces/workspaces"
 import {UploadFile} from "../files/files"
+import { SearchResource } from "../../dto/queryFlowResponse"
 
 
 /**
@@ -24,7 +24,7 @@ export abstract class QueryFlows extends EventDispatcher<
 
   abstract getQueryFlows(): Promise<QueryFlow[]>
 
-  abstract create(name: string, workspaceIds: WorkspaceId[], table: UploadFile ): Promise<FlowId>
+  abstract create(name: string, resources: SearchResource[], table: UploadFile ): Promise<FlowId>
 
   abstract delete(id: FlowId): Promise<void>
 

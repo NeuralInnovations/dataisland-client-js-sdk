@@ -2,8 +2,7 @@ import { QueryFlow, QueryFlowEvent } from "./queryFlow"
 import {
   QueryFileUrlDto,
   QueryFlowDto,
-  QueryFlowState,
-  QueryFlowStatus
+  QueryFlowState
 } from "../../dto/queryFlowResponse"
 import { FlowId } from "./queryFlows"
 import { Context } from "../../context"
@@ -65,6 +64,22 @@ export class QueryFlowImpl extends QueryFlow {
     }
   }
 
+  get error(): string {
+    if (this._content) {
+      return this._content.error
+    } else {
+      throw new Error("Query flow is not loaded")
+    }
+  }
+
+  get progress(): number {
+    if (this._content) {
+      return this._content.completedRowsCount / this._content.totalRowsCount
+    } else {
+      throw new Error("Query flow is not loaded")
+    }
+  }
+
   get urls(): QueryFileUrlDto[] | undefined {
     if (this._content && this._content.result.files) {
       return this._content.result.files
@@ -81,12 +96,5 @@ export class QueryFlowImpl extends QueryFlow {
     }
   }
 
-  get status(): QueryFlowStatus {
-    if (this._content) {
-      return this._content.status
-    } else {
-      throw new Error("Query fLow is not loaded")
-    }
-  }
 
 }

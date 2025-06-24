@@ -2,8 +2,7 @@ import { EventDispatcher } from "../../events"
 import { FlowId } from "./queryFlows"
 import {
   QueryFileUrlDto,
-  QueryFlowState,
-  QueryFlowStatus
+  QueryFlowState
 } from "../../dto/queryFlowResponse"
 
 export enum QueryFlowEvent {
@@ -21,7 +20,9 @@ export abstract class QueryFlow extends EventDispatcher<
 
   abstract get state(): QueryFlowState
 
-  abstract get status(): QueryFlowStatus
+  abstract get error(): string
+
+  abstract get progress(): number
 
   abstract get urls(): QueryFileUrlDto[] | undefined
 
