@@ -4,11 +4,11 @@ import {QueryFlow} from "./queryFlow"
 import {OrganizationImpl} from "../organizations/organization.impl"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
-import {WorkspaceId} from "../workspaces/workspaces"
 import {
   QueryFlowListResponse,
   QueryFlowResponse,
-  QueryFlowState
+  QueryFlowState,
+  SearchResource
 } from "../../dto/queryFlowResponse"
 import {QueryFlowImpl} from "./queryFlow.impl"
 import {UploadFile} from "../files/files"
@@ -85,12 +85,12 @@ export class QueryFlowsImpl extends QueryFlows {
     }
   }
 
-  async create(name: string, workspaceIds: WorkspaceId[], table: UploadFile): Promise<FlowId> {
+  async create(name: string, resources: SearchResource[], table: UploadFile): Promise<FlowId> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Name is required, must be not empty")
     }
-    if (workspaceIds === undefined || workspaceIds === null) {
-      throw new Error("WorkspaceIds is required, must be not empty")
+    if (resources === undefined || resources === null) {
+      throw new Error("Resources is required, must be not empty")
     }
     if (table === undefined || table === null) {
       throw new Error("Create query flow, table is undefined or null")
@@ -101,9 +101,7 @@ export class QueryFlowsImpl extends QueryFlows {
     form.append("organizationId", this.organization.id)
     form.append("name", name)
     form.append("tableFile", table, table.name)
-    workspaceIds.forEach(item => {
-      form.append("workspaceIds", item)
-    })
+    form.append("resources", JSON.stringify(resources))
 
     // send request to the server
     const response = await this.context

@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.35](../../README.md) / [Exports](../modules.md) / QueryFlow
+[@neuralinnovations/dataisland-sdk - v0.6.36](../../README.md) / [Exports](../modules.md) / QueryFlow
 
 # Class: QueryFlow
 
@@ -16,10 +16,11 @@
 
 ### Accessors
 
+- [error](QueryFlow.md#error)
 - [id](QueryFlow.md#id)
 - [name](QueryFlow.md#name)
+- [progress](QueryFlow.md#progress)
 - [state](QueryFlow.md#state)
-- [status](QueryFlow.md#status)
 - [urls](QueryFlow.md#urls)
 
 ### Methods
@@ -44,6 +45,16 @@
 
 ## Accessors
 
+### error
+
+• `get` **error**(): `string`
+
+#### Returns
+
+`string`
+
+___
+
 ### id
 
 • `get` **id**(): `string`
@@ -64,6 +75,16 @@ ___
 
 ___
 
+### progress
+
+• `get` **progress**(): `number`
+
+#### Returns
+
+`number`
+
+___
+
 ### state
 
 • `get` **state**(): [`QueryFlowState`](../enums/QueryFlowState.md)
@@ -71,16 +92,6 @@ ___
 #### Returns
 
 [`QueryFlowState`](../enums/QueryFlowState.md)
-
-___
-
-### status
-
-• `get` **status**(): [`QueryFlowStatus`](../enums/QueryFlowStatus.md)
-
-#### Returns
-
-[`QueryFlowStatus`](../enums/QueryFlowStatus.md)
 
 ___
 
