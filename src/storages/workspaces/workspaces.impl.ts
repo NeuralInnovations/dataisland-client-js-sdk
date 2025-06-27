@@ -11,7 +11,7 @@ import { UserProfileService } from "../../services/userProfileService"
 import { UserProfile } from "../user/userProfile"
 
 export class WorkspacesImpl extends Workspaces {
-  private readonly _workspaces: WorkspaceImpl[] = []
+  private _workspaces: WorkspaceImpl[] = []
 
   constructor(
     private readonly organization: OrganizationImpl,
@@ -182,6 +182,8 @@ export class WorkspacesImpl extends Workspaces {
       const userProfile = this.context.resolve(UserProfileService)?.userProfile as UserProfile
       await ResponseUtils.throwError(`Failed to fetch workspaces in organization: ${this.organization.id}, userId: ${userProfile.id}, email: ${userProfile.email}`, response)
     }
+
+    this._workspaces = []
 
     // parse workspaces from the server's response
     const workspaces = ((await response!.json()) as OrganizationWorkspaces)
