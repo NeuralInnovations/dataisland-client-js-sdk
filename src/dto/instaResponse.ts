@@ -36,6 +36,7 @@ export interface InstaContentDto {
   postId: string
   content: string
   url: string
+  modifiedAt: number
   status: ContentStatus
   error: string
 }
