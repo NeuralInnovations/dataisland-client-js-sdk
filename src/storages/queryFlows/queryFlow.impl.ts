@@ -37,10 +37,11 @@ export class QueryFlowImpl extends QueryFlow {
     // parse flow from the server's response
     const flow = (await response!.json()) as QueryFlowDto
 
-    const lastState = this._content?.state
+    const lastState = this._content
 
     this._content = flow
-    if (lastState !== undefined && lastState !== this._content.state) {
+    if (lastState !== undefined && 
+      (lastState.state !== this._content.state || lastState.completedRowsCount !== this._content.completedRowsCount)) {
       this.dispatch({
         type: QueryFlowEvent.UPDATED,
         data: this
