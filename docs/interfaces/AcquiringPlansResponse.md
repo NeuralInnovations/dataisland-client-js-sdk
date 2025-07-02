@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.39](../../README.md) / [Exports](../modules.md) / AcquiringPlansResponse
+[@neuralinnovations/dataisland-sdk - v0.6.40](../../README.md) / [Exports](../modules.md) / AcquiringPlansResponse
 
 # Interface: AcquiringPlansResponse
 
