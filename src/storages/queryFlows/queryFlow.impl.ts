@@ -65,6 +65,22 @@ export class QueryFlowImpl extends QueryFlow {
     }
   }
 
+  get userId(): string {
+    if (this._content) {
+      return this._content.userId
+    } else {
+      throw new Error("Query flow is not loaded")
+    }
+  }
+
+  get modifiedAt(): number {
+    if (this._content) {
+      return this._content.modifiedAt
+    } else {
+      throw new Error("Query flow is not loaded")
+    }
+  }
+
   get error(): string {
     if (this._content) {
       return this._content.error

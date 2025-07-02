@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.39](../../README.md) / [Exports](../modules.md) / QueryFlow
+[@neuralinnovations/dataisland-sdk - v0.6.40](../../README.md) / [Exports](../modules.md) / QueryFlow
 
 # Class: QueryFlow
 
@@ -18,10 +18,12 @@
 
 - [error](QueryFlow.md#error)
 - [id](QueryFlow.md#id)
+- [modifiedAt](QueryFlow.md#modifiedat)
 - [name](QueryFlow.md#name)
 - [progress](QueryFlow.md#progress)
 - [state](QueryFlow.md#state)
 - [urls](QueryFlow.md#urls)
+- [userId](QueryFlow.md#userid)
 
 ### Methods
 
@@ -65,6 +67,16 @@ ___
 
 ___
 
+### modifiedAt
+
+• `get` **modifiedAt**(): `number`
+
+#### Returns
+
+`number`
+
+___
+
 ### name
 
 • `get` **name**(): `string`
@@ -102,6 +114,16 @@ ___
 #### Returns
 
 `undefined` \| [`QueryFileUrlDto`](../interfaces/QueryFileUrlDto.md)[]
+
+___
+
+### userId
+
+• `get` **userId**(): `string`
+
+#### Returns
+
+`string`
 
 ## Methods
 
