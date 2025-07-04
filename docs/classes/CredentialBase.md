@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.40](../../README.md) / [Exports](../modules.md) / CredentialBase
+[@neuralinnovations/dataisland-sdk - v0.6.41](../../README.md) / [Exports](../modules.md) / CredentialBase
 
 # Class: CredentialBase
 
