@@ -56,7 +56,7 @@ export class QueryFlowsImpl extends QueryFlows {
       // init workspace from the server's response
       await flowImpl.initFrom(flow)
 
-      if (flowImpl.state == QueryFlowState.IN_PROGRESS){
+      if (flowImpl.state === QueryFlowState.IN_QUEUE || flowImpl.state === QueryFlowState.IN_PROGRESS){
         this._inProgress.push(flowImpl)
       }
 
@@ -76,7 +76,7 @@ export class QueryFlowsImpl extends QueryFlows {
       await flow.fetch()
     }
 
-    this._inProgress = this._inProgress.filter(flow => flow.state == QueryFlowState.IN_PROGRESS)
+    this._inProgress = this._inProgress.filter(flow => flow.state === QueryFlowState.IN_QUEUE ||  flow.state === QueryFlowState.IN_PROGRESS)
 
     if (this._inProgress.length > 0) {
       this._fetchTimeout = setTimeout(async () => await this.internalFetchQueries(), 2000)
@@ -161,7 +161,7 @@ export class QueryFlowsImpl extends QueryFlows {
     }
     this._collection.splice(index, 1)
 
-    if (flow.state === QueryFlowState.IN_PROGRESS) {
+    if (flow.state === QueryFlowState.IN_QUEUE || flow.state === QueryFlowState.IN_PROGRESS) {
       const progressIndex = this._inProgress.indexOf(flow)
       if (progressIndex < 0) {
         throw new Error(`Query flow ${id} is not found`)
