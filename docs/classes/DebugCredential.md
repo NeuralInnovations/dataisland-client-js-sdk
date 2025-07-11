@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.41](../../README.md) / [Exports](../modules.md) / DebugCredential
+[@neuralinnovations/dataisland-sdk - v0.6.42](../../README.md) / [Exports](../modules.md) / DebugCredential
 
 # Class: DebugCredential
 
