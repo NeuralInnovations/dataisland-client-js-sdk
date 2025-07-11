@@ -64,7 +64,8 @@ export enum AccountStatus {
   None = 0,
   Created = 1,
   Authenticated = 2,
-  Error = 3
+  Error = 3,
+  NeedContent = 4
 }
 
 
