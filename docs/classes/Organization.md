@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.44](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.6.45](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -31,6 +31,7 @@ Organization.
 - [name](Organization.md#name)
 - [prompts](Organization.md#prompts)
 - [queryFlows](Organization.md#queryflows)
+- [slackWebhookUrl](Organization.md#slackwebhookurl)
 - [workspaces](Organization.md#workspaces)
 
 ### Methods
@@ -226,6 +227,18 @@ Query flows
 #### Returns
 
 [`QueryFlows`](QueryFlows.md)
+
+___
+
+### slackWebhookUrl
+
+• `get` **slackWebhookUrl**(): `string`
+
+Webhook url for slack notifictions
+
+#### Returns
+
+`string`
 
 ___
 
