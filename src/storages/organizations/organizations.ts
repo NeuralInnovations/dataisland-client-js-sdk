@@ -50,7 +50,7 @@ export abstract class Organizations extends EventDispatcher<
   /**
    * Create new organization.
    */
-  abstract create(name: string, description: string): Promise<Organization>
+  abstract create(name: string, description: string, slackWebhookUrl: string): Promise<Organization>
 
   /**
    * Delete organization.

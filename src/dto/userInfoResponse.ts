@@ -64,6 +64,7 @@ export interface OrganizationProfileDto {
   name: string
   description: string
   iconId: string
+  slackWebhookUrl: string
   isAllowedInLibraries: boolean
 }
 

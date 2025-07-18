@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.43](../../README.md) / [Exports](../modules.md) / OrganizationProfileDto
+[@neuralinnovations/dataisland-sdk - v0.6.44](../../README.md) / [Exports](../modules.md) / OrganizationProfileDto
 
 # Interface: OrganizationProfileDto
 
@@ -10,6 +10,7 @@
 - [iconId](OrganizationProfileDto.md#iconid)
 - [isAllowedInLibraries](OrganizationProfileDto.md#isallowedinlibraries)
 - [name](OrganizationProfileDto.md#name)
+- [slackWebhookUrl](OrganizationProfileDto.md#slackwebhookurl)
 
 ## Properties
 
@@ -34,3 +35,9 @@ ___
 ### name
 
 • **name**: `string`
+
+___
+
+### slackWebhookUrl
+
+• **slackWebhookUrl**: `string`
