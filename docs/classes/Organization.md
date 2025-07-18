@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.43](../../README.md) / [Exports](../modules.md) / Organization
+[@neuralinnovations/dataisland-sdk - v0.6.44](../../README.md) / [Exports](../modules.md) / Organization
 
 # Class: Organization
 
@@ -243,7 +243,7 @@ Workspaces.
 
 ### change
 
-▸ **change**(`name`, `description`): `Promise`\<`void`\>
+▸ **change**(`name`, `description`, `slackWebhookUrl`): `Promise`\<`void`\>
 
 Change organization name and description.
 
@@ -253,6 +253,7 @@ Change organization name and description.
 | :------ | :------ |
 | `name` | `string` |
 | `description` | `string` |
+| `slackWebhookUrl` | `string` |
 
 #### Returns
 

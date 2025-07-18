@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.43](../../README.md) / [Exports](../modules.md) / AccessGroupResponse
+[@neuralinnovations/dataisland-sdk - v0.6.44](../../README.md) / [Exports](../modules.md) / AccessGroupResponse
 
 # Interface: AccessGroupResponse
 

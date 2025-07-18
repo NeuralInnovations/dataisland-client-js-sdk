@@ -176,7 +176,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     }).members as UserDto[]
   }
 
-  async change(name: string, description: string): Promise<void> {
+  async change(name: string, description: string, slackWebhookUrl: string): Promise<void> {
     if (!this._content) {
       throw new Error("Organization is not loaded.")
     }
@@ -204,7 +204,8 @@ export class OrganizationImpl extends Organization implements Disposable {
         organizationId: this.id,
         profile: {
           name,
-          description
+          description,
+          slackWebhookUrl
         }
       })
 
@@ -215,6 +216,7 @@ export class OrganizationImpl extends Organization implements Disposable {
     if (this._content) {
       this._content.profile.name = name
       this._content.profile.description = description
+      this._content.profile.slackWebhookUrl = slackWebhookUrl
     }
 
     this.fireChanged()
