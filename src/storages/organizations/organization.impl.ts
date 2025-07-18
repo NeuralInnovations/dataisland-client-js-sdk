@@ -123,6 +123,10 @@ export class OrganizationImpl extends Organization implements Disposable {
     return <string>this._content?.profile.iconId
   }
 
+  get slackWebhookUrl(): string {
+    return <string>this._content?.profile.slackWebhookUrl
+  }
+
   get isAllowedInLibraries(): boolean {
     return <boolean>this._content?.profile.isAllowedInLibraries
   }

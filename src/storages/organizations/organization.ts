@@ -62,6 +62,11 @@ export abstract class Organization extends EventDispatcher<
   abstract get icon(): string
 
   /**
+   * Webhook url for slack notifictions
+   */
+  abstract get slackWebhookUrl(): string
+
+  /**
    * If organizations allowed in libraries
    */
   abstract get isAllowedInLibraries(): boolean
