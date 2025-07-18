@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.43](../../README.md) / [Exports](../modules.md) / Organizations
+[@neuralinnovations/dataisland-sdk - v0.6.44](../../README.md) / [Exports](../modules.md) / Organizations
 
 # Class: Organizations
 
@@ -108,7 +108,7 @@ ___
 
 ### create
 
-▸ **create**(`name`, `description`): `Promise`\<[`Organization`](Organization.md)\>
+▸ **create**(`name`, `description`, `slackWebhookUrl`): `Promise`\<[`Organization`](Organization.md)\>
 
 Create new organization.
 
@@ -118,6 +118,7 @@ Create new organization.
 | :------ | :------ |
 | `name` | `string` |
 | `description` | `string` |
+| `slackWebhookUrl` | `string` |
 
 #### Returns
 

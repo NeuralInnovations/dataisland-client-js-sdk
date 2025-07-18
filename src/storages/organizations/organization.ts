@@ -151,7 +151,7 @@ export abstract class Organization extends EventDispatcher<
   /**
    * Change organization name and description.
    */
-  abstract change(name: string, description: string): Promise<void>
+  abstract change(name: string, description: string, slackWebhookUrl: string): Promise<void>
 
   /**
    * Upload an icon for organization

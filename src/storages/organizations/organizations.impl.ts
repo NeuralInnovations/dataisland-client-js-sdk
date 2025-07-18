@@ -56,8 +56,8 @@ export class OrganizationsImpl extends Organizations {
     return this.organizations.some(organization => organization.id === id)
   }
 
-  async create(name: string, description: string): Promise<Organization> {
-    return this.internalCreateOrganization(name, description)
+  async create(name: string, description: string, slackWebhookUrl: string): Promise<Organization> {
+    return this.internalCreateOrganization(name, description, slackWebhookUrl)
   }
 
   delete(id: string): Promise<void> {
@@ -163,7 +163,8 @@ export class OrganizationsImpl extends Organizations {
    */
   async internalCreateOrganization(
     name: string,
-    description: string
+    description: string,
+    slackWebhookUrl: string = ""
   ): Promise<OrganizationImpl> {
     if (name === undefined || name === null) {
       throw new Error("Organization create, name is undefined or null")
@@ -180,7 +181,8 @@ export class OrganizationsImpl extends Organizations {
       .sendPostJson({
         profile: {
           name: name,
-          description: description
+          description: description,
+          slackWebhookUrl: slackWebhookUrl
         },
         currentOrganizationId: this.currentOrganizationId
       })
