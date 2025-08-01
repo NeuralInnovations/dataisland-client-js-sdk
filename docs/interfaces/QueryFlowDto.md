@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.45](../../README.md) / [Exports](../modules.md) / QueryFlowDto
+[@neuralinnovations/dataisland-sdk - v0.6.46](../../README.md) / [Exports](../modules.md) / QueryFlowDto
 
 # Interface: QueryFlowDto
 
@@ -7,6 +7,7 @@
 ### Properties
 
 - [completedRowsCount](QueryFlowDto.md#completedrowscount)
+- [createdAt](QueryFlowDto.md#createdat)
 - [error](QueryFlowDto.md#error)
 - [modifiedAt](QueryFlowDto.md#modifiedat)
 - [name](QueryFlowDto.md#name)
@@ -20,6 +21,12 @@
 ### completedRowsCount
 
 • **completedRowsCount**: `number`
+
+___
+
+### createdAt
+
+• **createdAt**: `number`
 
 ___
 

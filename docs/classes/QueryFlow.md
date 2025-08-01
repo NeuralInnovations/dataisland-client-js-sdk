@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.45](../../README.md) / [Exports](../modules.md) / QueryFlow
+[@neuralinnovations/dataisland-sdk - v0.6.46](../../README.md) / [Exports](../modules.md) / QueryFlow
 
 # Class: QueryFlow
 
@@ -16,6 +16,7 @@
 
 ### Accessors
 
+- [createdAt](QueryFlow.md#createdat)
 - [error](QueryFlow.md#error)
 - [id](QueryFlow.md#id)
 - [modifiedAt](QueryFlow.md#modifiedat)
@@ -46,6 +47,16 @@
 [EventDispatcher](EventDispatcher.md).[constructor](EventDispatcher.md#constructor)
 
 ## Accessors
+
+### createdAt
+
+• `get` **createdAt**(): `number`
+
+#### Returns
+
+`number`
+
+___
 
 ### error
 

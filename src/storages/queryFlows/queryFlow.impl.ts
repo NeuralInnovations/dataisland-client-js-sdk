@@ -73,6 +73,15 @@ export class QueryFlowImpl extends QueryFlow {
     }
   }
 
+  get createdAt(): number {
+    if (this._content) {
+      return this._content.createdAt
+    } else {
+      throw new Error("Query flow is not loaded")
+    }
+  }
+
+
   get modifiedAt(): number {
     if (this._content) {
       return this._content.modifiedAt

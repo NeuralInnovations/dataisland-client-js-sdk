@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.45](../../README.md) / [Exports](../modules.md) / PermitsDto
+[@neuralinnovations/dataisland-sdk - v0.6.46](../../README.md) / [Exports](../modules.md) / PermitsDto
 
 # Interface: PermitsDto
 

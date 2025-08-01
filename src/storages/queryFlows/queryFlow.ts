@@ -20,6 +20,8 @@ export abstract class QueryFlow extends EventDispatcher<
 
   abstract get userId(): string
 
+  abstract get createdAt(): number
+
   abstract get modifiedAt(): number
 
   abstract get state(): QueryFlowState
