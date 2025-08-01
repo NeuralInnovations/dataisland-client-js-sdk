@@ -19,6 +19,7 @@ export interface QueryFlowResult {
 export interface QueryFlowDto {
   name: string
   userId: string
+  createdAt: number
   modifiedAt: number
   state: QueryFlowState,
   totalRowsCount: number
