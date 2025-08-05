@@ -13,13 +13,14 @@ export class QueryFlowImpl extends QueryFlow {
   private _content?: QueryFlowDto
   private _id?: FlowId
 
+  private _fetchTimeout?: NodeJS.Timeout
+
   constructor(private readonly context: Context) {
     super()
   }
 
-  async initFrom(id: FlowId) {
+  initFrom(id: FlowId) {
     this._id = id
-    await this.fetch()
   }
 
   async fetch() {
@@ -34,6 +35,8 @@ export class QueryFlowImpl extends QueryFlow {
       await ResponseUtils.throwError(`Failed to fetch query flow with id ${this.id}`, response)
     }
 
+    clearTimeout(this._fetchTimeout)
+
     // parse flow from the server's response
     const flow = (await response!.json()) as QueryFlowDto
 
@@ -41,11 +44,15 @@ export class QueryFlowImpl extends QueryFlow {
 
     this._content = flow
     if (lastState !== undefined && 
-      (lastState.state !== this._content.state || lastState.completedRowsCount !== this._content.completedRowsCount)) {
+      (lastState.state !== this.state || lastState.completedRowsCount !== this._content.completedRowsCount)) {
       this.dispatch({
         type: QueryFlowEvent.UPDATED,
         data: this
       })
+    }
+
+    if (this.state === QueryFlowState.IN_QUEUE || this.state === QueryFlowState.IN_PROGRESS){
+      this._fetchTimeout = setTimeout(async () => await this.fetch(), 2000)
     }
   }
 

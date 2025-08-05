@@ -144,9 +144,12 @@ export class InstaAccountsImpl extends InstaAccounts {
     twoFactorKey: string, 
     proxy: string,
     additionalContext: string,
+    conversationContext: string,
     folderId: string,
-    cron: string[],
-    timezone: string): Promise<void> {
+    postCron: string[],
+    postTimezone: string,
+    directCron: string[],
+    directTimezone: string): Promise<void> {
     if (username === undefined || username === null || username.trim() === "") {
       throw new Error("Add insta account, username can not be null or empty")
     }
@@ -162,14 +165,23 @@ export class InstaAccountsImpl extends InstaAccounts {
     if (additionalContext === undefined || additionalContext === null) {
       throw new Error("Add insta account, additionalContext can not be null")
     }
+    if (conversationContext === undefined || conversationContext === null) {
+      throw new Error("Add insta account, conversationContext can not be null")
+    }
     if (folderId === undefined || folderId === null) {
       throw new Error("Add insta account, folderId can not be null")
     }
-    if (cron === undefined || cron === null) {
-      throw new Error("Add insta account, cron can not be null")
+    if (postCron === undefined || postCron === null) {
+      throw new Error("Add insta account, postCron can not be null")
     }
-    if (timezone === undefined || timezone === null) {
-      throw new Error("Add insta account, timezone can not be null")
+    if (postTimezone === undefined || postTimezone === null) {
+      throw new Error("Add insta account, postTimezone can not be null")
+    }
+    if (directCron === undefined || directCron === null) {
+      throw new Error("Add insta account, directCron can not be null")
+    }
+    if (directTimezone === undefined || directTimezone === null) {
+      throw new Error("Add insta account, directTimezone can not be null")
     }
 
     // send create request to the server
@@ -183,9 +195,12 @@ export class InstaAccountsImpl extends InstaAccounts {
         twoFactorKey: twoFactorKey,
         proxy: proxy,
         additionalContext: additionalContext,
+        conversationContext: conversationContext,
         folderId: folderId,
-        cron: cron,
-        timezone: timezone
+        postCron: postCron,
+        postTimezone: postTimezone,
+        directCron: directCron,
+        directTimezone: directTimezone
       })
 
     // check response status

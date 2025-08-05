@@ -18,9 +18,12 @@ export abstract class InstaAccount {
     twoFactorKey: string, 
     proxy: string,
     additionalContext: string,
+    conversationContext: string,
     folderId: string,
-    cron: string[],
-    timezone: string
+    postCron: string[],
+    postTimezone: string,
+    directCron: string[],
+    directTimezone: string
   ): Promise<InstaAccountDto>
 
 }

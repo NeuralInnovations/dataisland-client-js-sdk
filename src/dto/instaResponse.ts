@@ -10,10 +10,13 @@ export interface InstaAccountDto {
   twoFactorKey: string
   proxy: string
   additionalContext: string
+  conversationContext: string
   folderId: string
   error: string
-  cron: string[]
-  timezone: string
+  postCrom: string[]
+  postTimezone: string
+  directCron: string[]
+  directTimezone: string
 }
 
 
