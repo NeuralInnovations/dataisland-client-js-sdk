@@ -13,7 +13,7 @@ export interface InstaAccountDto {
   conversationContext: string
   folderId: string
   error: string
-  postCrom: string[]
+  postCron: string[]
   postTimezone: string
   directCron: string[]
   directTimezone: string

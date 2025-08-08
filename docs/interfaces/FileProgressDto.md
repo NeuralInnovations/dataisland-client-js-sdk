@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.47](../../README.md) / [Exports](../modules.md) / FileProgressDto
+[@neuralinnovations/dataisland-sdk - v0.6.48](../../README.md) / [Exports](../modules.md) / FileProgressDto
 
 # Interface: FileProgressDto
 
