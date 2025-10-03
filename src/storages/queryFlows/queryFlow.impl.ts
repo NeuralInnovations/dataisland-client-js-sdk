@@ -51,7 +51,7 @@ export class QueryFlowImpl extends QueryFlow {
       })
     }
 
-    if (this.state === QueryFlowState.IN_QUEUE || this.state === QueryFlowState.IN_PROGRESS){
+    if (this.state === QueryFlowState.IN_QUEUE || this.state === QueryFlowState.IN_PROGRESS || this.state === QueryFlowState.ANALYTICS){
       this._fetchTimeout = setTimeout(async () => await this.fetch(), 2000)
     }
   }
