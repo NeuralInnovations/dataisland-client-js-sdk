@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.48](../../README.md) / [Exports](../modules.md) / LibraryDto
+[@neuralinnovations/dataisland-sdk - v0.6.49](../../README.md) / [Exports](../modules.md) / LibraryDto
 
 # Interface: LibraryDto
 
