@@ -19,6 +19,16 @@ export abstract class Library {
   abstract get name(): string
 
   /**
+   * Is remote library
+   */
+  abstract get isRemote(): boolean
+
+  /**
+   * Remote library url
+   */
+  abstract get remoteUrl(): string | undefined
+
+  /**
    * Get library folder by id.
    */
   abstract getFolder(folderId: FolderId): Promise<LibraryFolder>

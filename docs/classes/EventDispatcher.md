@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.49](../../README.md) / [Exports](../modules.md) / EventDispatcher
+[@neuralinnovations/dataisland-sdk - v0.6.50](../../README.md) / [Exports](../modules.md) / EventDispatcher
 
 # Class: EventDispatcher\<EventType, DataType\>
 

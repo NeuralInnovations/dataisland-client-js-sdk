@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.49](../../README.md) / [Exports](../modules.md) / LibraryFolderDto
+[@neuralinnovations/dataisland-sdk - v0.6.50](../../README.md) / [Exports](../modules.md) / LibraryFolderDto
 
 # Interface: LibraryFolderDto
 
@@ -10,8 +10,11 @@
 - [description](LibraryFolderDto.md#description)
 - [iconId](LibraryFolderDto.md#iconid)
 - [id](LibraryFolderDto.md#id)
+- [isRemote](LibraryFolderDto.md#isremote)
 - [modifiedAt](LibraryFolderDto.md#modifiedat)
 - [name](LibraryFolderDto.md#name)
+- [remoteLibraryId](LibraryFolderDto.md#remotelibraryid)
+- [remoteUrl](LibraryFolderDto.md#remoteurl)
 
 ## Properties
 
@@ -39,6 +42,12 @@ ___
 
 ___
 
+### isRemote
+
+• **isRemote**: `boolean`
+
+___
+
 ### modifiedAt
 
 • **modifiedAt**: `number`
@@ -48,3 +57,15 @@ ___
 ### name
 
 • **name**: `string`
+
+___
+
+### remoteLibraryId
+
+• `Optional` **remoteLibraryId**: `string`
+
+___
+
+### remoteUrl
+
+• `Optional` **remoteUrl**: `string`

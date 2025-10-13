@@ -1,6 +1,6 @@
-[@neuralinnovations/dataisland-sdk - v0.6.49](../README.md) / Exports
+[@neuralinnovations/dataisland-sdk - v0.6.50](../README.md) / Exports
 
-# @neuralinnovations/dataisland-sdk - v0.6.49
+# @neuralinnovations/dataisland-sdk - v0.6.50
 
 ## Table of contents
 
@@ -15,6 +15,7 @@
 - [FilesEvent](enums/FilesEvent.md)
 - [GroupEvent](enums/GroupEvent.md)
 - [GroupsEvent](enums/GroupsEvent.md)
+- [LibararyType](enums/LibararyType.md)
 - [LimitActionType](enums/LimitActionType.md)
 - [OrderState](enums/OrderState.md)
 - [OrganizationEvent](enums/OrganizationEvent.md)
@@ -57,6 +58,7 @@
 - [LibraryFolder](classes/LibraryFolder.md)
 - [LibraryPage](classes/LibraryPage.md)
 - [LibraryParent](classes/LibraryParent.md)
+- [LibraryResource](classes/LibraryResource.md)
 - [Lifetime](classes/Lifetime.md)
 - [MetadataDto](classes/MetadataDto.md)
 - [Organization](classes/Organization.md)

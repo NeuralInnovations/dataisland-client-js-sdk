@@ -16,7 +16,7 @@ import { FolderId } from "./folderId"
 import { LibraryId } from "./libraryId"
 
 export class LibraryImpl extends Library {
-
+  
   private _library?: LibraryFolderDto
 
   public root?: LibraryPage
@@ -41,6 +41,20 @@ export class LibraryImpl extends Library {
   get name(): string {
     if (this._library) {
       return this._library.name
+    }
+    throw new Error("Library is not loaded.")
+  }
+
+  get isRemote(): boolean {
+    if (this._library) {
+      return this._library.isRemote
+    }
+    throw new Error("Library is not loaded.")
+  }
+
+  get remoteUrl(): string | undefined {
+    if (this._library) {
+      return `${this._library.remoteUrl}library/${this._library.remoteLibraryId}`
     }
     throw new Error("Library is not loaded.")
   }

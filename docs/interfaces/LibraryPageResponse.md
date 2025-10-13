@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.49](../../README.md) / [Exports](../modules.md) / LibraryPageResponse
+[@neuralinnovations/dataisland-sdk - v0.6.50](../../README.md) / [Exports](../modules.md) / LibraryPageResponse
 
 # Interface: LibraryPageResponse
 
@@ -8,8 +8,11 @@
 
 - [files](LibraryPageResponse.md#files)
 - [folders](LibraryPageResponse.md#folders)
+- [isRemote](LibraryPageResponse.md#isremote)
 - [itemsPerPage](LibraryPageResponse.md#itemsperpage)
 - [parentIds](LibraryPageResponse.md#parentids)
+- [remoteLibraryId](LibraryPageResponse.md#remotelibraryid)
+- [remoteUrl](LibraryPageResponse.md#remoteurl)
 - [totalItemsCount](LibraryPageResponse.md#totalitemscount)
 
 ## Properties
@@ -26,6 +29,12 @@ ___
 
 ___
 
+### isRemote
+
+• **isRemote**: `boolean`
+
+___
+
 ### itemsPerPage
 
 • **itemsPerPage**: `number`
@@ -35,6 +44,18 @@ ___
 ### parentIds
 
 • **parentIds**: `string`[]
+
+___
+
+### remoteLibraryId
+
+• `Optional` **remoteLibraryId**: `string`
+
+___
+
+### remoteUrl
+
+• `Optional` **remoteUrl**: `string`
 
 ___
 
