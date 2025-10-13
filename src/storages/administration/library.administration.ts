@@ -1,6 +1,6 @@
 import { LibraryId } from "../library/libraryId"
 import { OrganizationId } from "../organizations/organizations"
-import { LibraryDto } from "../../dto/libraryResponse"
+import { LibararyType, LibraryDto } from "../../dto/libraryResponse"
 
 /**
  * Library management, you must have permissions to manage libraries
@@ -9,7 +9,14 @@ export abstract class LibraryAdministration {
   /**
    * Create a new library
    */
-  abstract createLibrary(name: string, description: string, region: number, isPublic: boolean): Promise<LibraryId>
+  abstract createLibrary(
+    name: string, 
+    description: string, 
+    region: number, 
+    type: LibararyType,
+    libraryUrl: string,
+    remoteLibraryId: string,
+    isPublic: boolean): Promise<LibraryId>
 
   /**
    * Add permission for an organization to share its data through the library

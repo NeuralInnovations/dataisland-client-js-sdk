@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.49](../../README.md) / [Exports](../modules.md) / QueryFlows
+[@neuralinnovations/dataisland-sdk - v0.6.50](../../README.md) / [Exports](../modules.md) / QueryFlows
 
 # Class: QueryFlows
 
@@ -40,7 +40,7 @@
 
 ### create
 
-▸ **create**(`name`, `resources`, `table`): `Promise`\<`string`\>
+▸ **create**(`name`, `resources`, `libraryResources`, `table`): `Promise`\<`string`\>
 
 #### Parameters
 
@@ -48,6 +48,7 @@
 | :------ | :------ |
 | `name` | `string` |
 | `resources` | [`SearchResource`](SearchResource.md)[] |
+| `libraryResources` | [`LibraryResource`](LibraryResource.md)[] |
 | `table` | `File` |
 
 #### Returns

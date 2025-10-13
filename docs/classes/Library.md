@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.49](../../README.md) / [Exports](../modules.md) / Library
+[@neuralinnovations/dataisland-sdk - v0.6.50](../../README.md) / [Exports](../modules.md) / Library
 
 # Class: Library
 
@@ -13,7 +13,9 @@ Library.
 ### Accessors
 
 - [id](Library.md#id)
+- [isRemote](Library.md#isremote)
 - [name](Library.md#name)
+- [remoteUrl](Library.md#remoteurl)
 
 ### Methods
 
@@ -44,6 +46,18 @@ Library id.
 
 ___
 
+### isRemote
+
+• `get` **isRemote**(): `boolean`
+
+Is remote library
+
+#### Returns
+
+`boolean`
+
+___
+
 ### name
 
 • `get` **name**(): `string`
@@ -53,6 +67,18 @@ Library name.
 #### Returns
 
 `string`
+
+___
+
+### remoteUrl
+
+• `get` **remoteUrl**(): `undefined` \| `string`
+
+Remote library url
+
+#### Returns
+
+`undefined` \| `string`
 
 ## Methods
 
