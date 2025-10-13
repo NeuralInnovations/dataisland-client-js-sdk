@@ -14,6 +14,9 @@ export interface LibraryFolderDto {
   iconId: string
   createdAt: number
   modifiedAt: number
+  isRemote: boolean
+  remoteUrl?: string
+  remoteLibraryId?: string
 }
 
 export interface LibraryPageResponse {
@@ -22,10 +25,16 @@ export interface LibraryPageResponse {
   itemsPerPage: number
   folders: LibraryFolderDto[]
   files: FileDto[]
+  isRemote: boolean
+  remoteUrl?: string
+  remoteLibraryId?: string
 }
 
 export interface LibraryFolderResponse {
   folder: LibraryFolderDto
+  isRemote: boolean
+  remoteUrl?: string
+  remoteLibraryId?: string
 }
 
 export interface LibraryOrganizationDto {
@@ -37,6 +46,9 @@ export interface LibraryDto {
   id: LibraryId
   name: string
   region: number
+  type: LibararyType
+  libraryUrl: string
+  remoteLibraryId: string
   isPublic: boolean
   organizations: LibraryOrganizationDto[]
 }
@@ -46,6 +58,11 @@ export interface LibraryResponse {
 }
 
 export interface CreateLibraryResponse {
-
   libraryId: LibraryId
+}
+
+
+export enum LibararyType {
+  Local = 0,
+  Remote = 1
 }

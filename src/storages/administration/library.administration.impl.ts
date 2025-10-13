@@ -5,6 +5,7 @@ import { RpcService } from "../../services/rpcService"
 import { ResponseUtils } from "../../services/responseUtils"
 import {
   CreateLibraryResponse,
+  LibararyType,
   LibraryDto,
   LibraryResponse
 } from "../../dto/libraryResponse"
@@ -18,7 +19,15 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
     this.context = context
   }
 
-  async createLibrary(name: string, description: string, region: number, isPublic: boolean): Promise<LibraryId> {
+  async createLibrary(
+    name: string, 
+    description: string, 
+    region: number, 
+    type: LibararyType,
+    libraryUrl: string,
+    remoteLibraryId: string,
+    isPublic: boolean
+  ): Promise<LibraryId> {
     if (
       name === undefined ||
       name === null ||
@@ -42,6 +51,16 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
       throw new Error("IsPublic is required, must be not empty")
     }
 
+    if (type == LibararyType.Remote && 
+      (libraryUrl === undefined || libraryUrl === null || libraryUrl.trim() === "")) {
+      throw new Error("Library url is required for Remote libraries")
+    }
+
+    if (type == LibararyType.Remote && 
+      (remoteLibraryId === undefined || remoteLibraryId === null || remoteLibraryId.trim() === "")) {
+      throw new Error("Library ID is required for Remote libraries")
+    }
+
     // send create request to the server
     const response = await this.context
       .resolve(RpcService)
@@ -50,6 +69,9 @@ export class LibraryAdministrationImpl extends LibraryAdministration {
         name: name,
         description: description,
         region: region,
+        type: type,
+        libraryUrl: libraryUrl,
+        remoteLibraryId: remoteLibraryId,
         isPublic: isPublic
       })
 

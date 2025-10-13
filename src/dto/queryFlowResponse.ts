@@ -48,3 +48,11 @@ export class SearchResource {
     this.workspaceIds = workspaceIds
   }
 }
+
+export class LibraryResource {
+  libraryId: string
+
+  constructor(libraryId: string){
+    this.libraryId = libraryId
+  }
+}

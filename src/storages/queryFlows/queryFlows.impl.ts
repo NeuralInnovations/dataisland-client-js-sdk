@@ -5,6 +5,7 @@ import {OrganizationImpl} from "../organizations/organization.impl"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
 import {
+  LibraryResource,
   QueryFlowListResponse,
   QueryFlowResponse,
   SearchResource
@@ -55,12 +56,15 @@ export class QueryFlowsImpl extends QueryFlows {
     return this._collection
   }
 
-  async create(name: string, resources: SearchResource[], table: UploadFile): Promise<FlowId> {
+  async create(name: string, resources: SearchResource[], libraryResources: LibraryResource[],  table: UploadFile): Promise<FlowId> {
     if (name === undefined || name === null || name.trim() === "") {
       throw new Error("Name is required, must be not empty")
     }
     if (resources === undefined || resources === null) {
       throw new Error("Resources is required, must be not empty")
+    }
+    if (libraryResources === undefined || libraryResources === null) {
+      throw new Error("Library resources is required, must be not empty")
     }
     if (table === undefined || table === null) {
       throw new Error("Create query flow, table is undefined or null")
@@ -72,6 +76,7 @@ export class QueryFlowsImpl extends QueryFlows {
     form.append("name", name)
     form.append("tableFile", table, table.name)
     form.append("resources", JSON.stringify(resources))
+    form.append("libraryResources", JSON.stringify(libraryResources))
 
     // send request to the server
     const response = await this.context
