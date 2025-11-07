@@ -51,7 +51,7 @@ export class QueryFlowImpl extends QueryFlow {
       })
     }
 
-    if (this.state < 99){
+    if (this.state < QueryFlowState.ERROR){
       this._fetchTimeout = setTimeout(async () => await this.fetch(), 2000)
     }
   }

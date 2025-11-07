@@ -2,6 +2,7 @@ export enum QueryFlowState {
   IN_QUEUE = 0,
   IN_PROGRESS = 50,
   ANALYTICS = 75,
+  PREPARING_RESULTS = 80,
   ERROR = 99,
   DONE = 100
 }
