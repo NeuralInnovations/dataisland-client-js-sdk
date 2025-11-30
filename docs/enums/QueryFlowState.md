@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.52](../../README.md) / [Exports](../modules.md) / QueryFlowState
+[@neuralinnovations/dataisland-sdk - v0.6.53](../README.md) / [Exports](../modules.md) / QueryFlowState
 
 # Enumeration: QueryFlowState
 
@@ -11,6 +11,7 @@
 - [ERROR](QueryFlowState.md#error)
 - [IN\_PROGRESS](QueryFlowState.md#in_progress)
 - [IN\_QUEUE](QueryFlowState.md#in_queue)
+- [PREPARING\_RESULTS](QueryFlowState.md#preparing_results)
 
 ## Enumeration Members
 
@@ -41,3 +42,9 @@ ___
 ### IN\_QUEUE
 
 • **IN\_QUEUE** = ``0``
+
+___
+
+### PREPARING\_RESULTS
+
+• **PREPARING\_RESULTS** = ``80``

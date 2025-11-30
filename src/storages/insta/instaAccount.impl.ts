@@ -1,4 +1,4 @@
-import {InstaAccount, InstaAccountId} from "./instaAccount"
+import {InstaAccount, InstaAccountId, InstaVideoEditingSetting} from "./instaAccount"
 import {AccountStatus, InstaAccountDto,InstaCutAccountDto} from "../../dto/instaResponse"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
@@ -54,28 +54,50 @@ export class InstaAccountImpl extends InstaAccount {
     postCron: string[],
     postTimezone: string,
     directCron: string[],
-    directTimezone: string
+    directTimezone: string,
+    videoEditingSetting?: InstaVideoEditingSetting
   ): Promise<InstaAccountDto> {
+    if (videoEditingSetting !== undefined) {
+      if (videoEditingSetting.minSpeedChange === undefined || videoEditingSetting.minSpeedChange === null) {
+        throw new Error("Update insta account, videoEditingSetting.minSpeedChange can not be null")
+      }
+      if (videoEditingSetting.maxSpeedChange === undefined || videoEditingSetting.maxSpeedChange === null) {
+        throw new Error("Update insta account, videoEditingSetting.maxSpeedChange can not be null")
+      }
+      if (videoEditingSetting.minSpeedChange > videoEditingSetting.maxSpeedChange) {
+        throw new Error("Update insta account, videoEditingSetting.minSpeedChange can not be greater than maxSpeedChange")
+      }
+    }
+
+    const form = new FormData()
+    form.append("instaId", this._cutData.id)
+    form.append("enabled", enabled.toString())
+    form.append("relogin", relogin.toString())
+    form.append("username", username)
+    form.append("password", password)
+    form.append("twoFactorKey", twoFactorKey)
+    form.append("proxy", proxy)
+    form.append("additionalContext", additionalContext)
+    form.append("conversationContext", conversationContext)
+    form.append("folderId", folderId)
+    postCron.forEach(cron => form.append("postCron", cron))
+    form.append("postTimezone", postTimezone)
+    directCron.forEach(cron => form.append("directCron", cron))
+    form.append("directTimezone", directTimezone)
+
+    if (videoEditingSetting !== undefined) {
+      form.append("videoEditingSetting.minSpeedChange", videoEditingSetting.minSpeedChange.toString())
+      form.append("videoEditingSetting.maxSpeedChange", videoEditingSetting.maxSpeedChange.toString())
+      if (videoEditingSetting.watermarkFile) {
+        form.append("videoEditingSetting.watermarkFile", videoEditingSetting.watermarkFile, videoEditingSetting.watermarkFile.name)
+      }
+    }
+
     // send request to the server
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Insta")
-      .sendPutJson({
-        instaId: this._cutData.id,
-        enabled: enabled,
-        relogin: relogin,
-        username: username,
-        password: password,
-        twoFactorKey: twoFactorKey,
-        proxy: proxy,
-        additionalContext: additionalContext,
-        conversationContext: conversationContext,
-        folderId: folderId,
-        postCron: postCron,
-        postTimezone: postTimezone,
-        directCron: directCron,
-        directTimezone: directTimezone
-      })
+      .sendPutFormData(form)
 
     // check response status
     if (ResponseUtils.isFail(response)) {
