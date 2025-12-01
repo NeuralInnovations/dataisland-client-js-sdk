@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.53](../README.md) / [Exports](../modules.md) / Disposable
+[@neuralinnovations/dataisland-sdk - v0.6.53](../../README.md) / [Exports](../modules.md) / Disposable
 
 # Interface: Disposable
 
