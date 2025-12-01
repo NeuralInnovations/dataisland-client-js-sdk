@@ -17,6 +17,13 @@ export interface InstaAccountDto {
   postTimezone: string
   directCron: string[]
   directTimezone: string
+  videoEditingSetting?: InstaVideoEditingSettingDto | null
+}
+
+export interface InstaVideoEditingSettingDto {
+  minSpeedChange: number
+  maxSpeedChange: number
+  watermarkFile?: string | null
 }
 
 
