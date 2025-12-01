@@ -1,4 +1,4 @@
-
+import fs from "fs"
 import { appTest, UnitTest } from "../src/unitTest"
 import { testInOrganization } from "./setup"
 
@@ -8,7 +8,9 @@ test("Insta account add with video editing settings", async () => {
       const updatePromise = org.instaAccounts.update()
       await expect(updatePromise).resolves.not.toThrow()
 
-      const watermark = new File([new Blob(["wm"])], "watermark.png", { type: "image/png" })
+
+      const buffer2 = fs.readFileSync("test/data/test_icon.png")
+      const watermark = new File([new Uint8Array(buffer2)], "watermark.png", { type: "image/png" })
       const createPromise = org.instaAccounts.add(
         "test_user",
         "password",

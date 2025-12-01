@@ -86,10 +86,10 @@ export class InstaAccountImpl extends InstaAccount {
     form.append("directTimezone", directTimezone)
 
     if (videoEditingSetting !== undefined) {
-      form.append("videoEditingSetting.minSpeedChange", videoEditingSetting.minSpeedChange.toString())
-      form.append("videoEditingSetting.maxSpeedChange", videoEditingSetting.maxSpeedChange.toString())
+      form.append("videoMinSpeed", videoEditingSetting.minSpeedChange.toString())
+      form.append("videoMaxSpeed", videoEditingSetting.maxSpeedChange.toString())
       if (videoEditingSetting.watermarkFile) {
-        form.append("videoEditingSetting.watermarkFile", videoEditingSetting.watermarkFile, videoEditingSetting.watermarkFile.name)
+        form.append("videoWatermarkFile", videoEditingSetting.watermarkFile, videoEditingSetting.watermarkFile.name)
       }
     }
 
