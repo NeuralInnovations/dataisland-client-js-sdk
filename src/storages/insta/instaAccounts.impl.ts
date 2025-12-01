@@ -10,7 +10,7 @@ import {ResponseUtils} from "../../services/responseUtils"
 import {OrganizationImpl} from "../organizations/organization.impl"
 import {Context} from "../../context"
 import {InstaAccountImpl} from "./instaAccount.impl"
-import {InstaAccount} from "./instaAccount"
+import {InstaAccount, InstaVideoEditingSetting} from "./instaAccount"
 import {InstaPostImpl} from "./instaPost.impl"
 import {InstaPost} from "./instaPost"
 
@@ -149,7 +149,8 @@ export class InstaAccountsImpl extends InstaAccounts {
     postCron: string[],
     postTimezone: string,
     directCron: string[],
-    directTimezone: string): Promise<void> {
+    directTimezone: string,
+    videoEditingSetting?: InstaVideoEditingSetting): Promise<void> {
     if (username === undefined || username === null || username.trim() === "") {
       throw new Error("Add insta account, username can not be null or empty")
     }
@@ -183,25 +184,45 @@ export class InstaAccountsImpl extends InstaAccounts {
     if (directTimezone === undefined || directTimezone === null) {
       throw new Error("Add insta account, directTimezone can not be null")
     }
+    if (videoEditingSetting !== undefined) {
+      if (videoEditingSetting.minSpeedChange === undefined || videoEditingSetting.minSpeedChange === null) {
+        throw new Error("Add insta account, videoEditingSetting.minSpeedChange can not be null")
+      }
+      if (videoEditingSetting.maxSpeedChange === undefined || videoEditingSetting.maxSpeedChange === null) {
+        throw new Error("Add insta account, videoEditingSetting.maxSpeedChange can not be null")
+      }
+      if (videoEditingSetting.minSpeedChange > videoEditingSetting.maxSpeedChange) {
+        throw new Error("Add insta account, videoEditingSetting.minSpeedChange can not be greater than maxSpeedChange")
+      }
+    }
 
     // send create request to the server
+    const form = new FormData()
+    form.append("organizationId", this.organization.id)
+    form.append("username", username)
+    form.append("password", password)
+    form.append("twoFactorKey", twoFactorKey)
+    form.append("proxy", proxy)
+    form.append("additionalContext", additionalContext)
+    form.append("conversationContext", conversationContext)
+    form.append("folderId", folderId)
+    postCron.forEach(cron => form.append("postCron", cron))
+    form.append("postTimezone", postTimezone)
+    directCron.forEach(cron => form.append("directCron", cron))
+    form.append("directTimezone", directTimezone)
+
+    if (videoEditingSetting !== undefined) {
+      form.append("videoMinSpeed", videoEditingSetting.minSpeedChange.toString())
+      form.append("videoMaxSpeed", videoEditingSetting.maxSpeedChange.toString())
+      if (videoEditingSetting.watermarkFile) {
+        form.append("videoWatermarkFile", videoEditingSetting.watermarkFile, videoEditingSetting.watermarkFile.name)
+      }
+    }
+
     const response = await this.context
       .resolve(RpcService)
       ?.requestBuilder("api/v1/Insta")
-      .sendPostJson({
-        organizationId: this.organization.id,
-        username: username,
-        password: password,
-        twoFactorKey: twoFactorKey,
-        proxy: proxy,
-        additionalContext: additionalContext,
-        conversationContext: conversationContext,
-        folderId: folderId,
-        postCron: postCron,
-        postTimezone: postTimezone,
-        directCron: directCron,
-        directTimezone: directTimezone
-      })
+      .sendPostFormData(form)
 
     // check response status
     if (ResponseUtils.isFail(response)) {

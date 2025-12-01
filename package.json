@@ -1,6 +1,6 @@
 {
   "name": "@neuralinnovations/dataisland-sdk",
-  "version": "0.6.52",
+  "version": "0.6.53",
   "description": "SDK for DataIsland project",
   "licenses": [
     {
@@ -65,8 +65,8 @@
     "@babel/preset-typescript": "^7.23.3",
     "@babel/register": "7.22.5",
     "@jest/globals": "^29.7.0",
-    "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.27",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.19.25",
     "@types/node-fetch": "^2.6.11",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
@@ -100,6 +100,7 @@
   },
   "dependencies": {
     "dotenv": "^16.3.2",
+    "has-flag": "^4.0.0",
     "jsdom": "^23.2.0"
   }
 }

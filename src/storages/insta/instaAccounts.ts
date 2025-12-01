@@ -1,6 +1,6 @@
 
 import { InstaErrorDto } from "../../dto/instaResponse"
-import {InstaAccount} from "./instaAccount"
+import {InstaAccount, InstaVideoEditingSetting} from "./instaAccount"
 import {InstaPost} from "./instaPost"
 
 
@@ -25,7 +25,8 @@ export abstract class InstaAccounts {
     postCron: string[],
     postTimezone: string,
     directCron: string[],
-    directTimezone: string
+    directTimezone: string,
+    videoEditingSetting?: InstaVideoEditingSetting
   ): Promise<void>
 
   abstract delete(id: string): Promise<void>

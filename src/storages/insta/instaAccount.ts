@@ -1,7 +1,14 @@
 import {InstaAccountDto} from "../../dto/instaResponse"
+import {UploadFile} from "../files/files"
 
 
 export type InstaAccountId = string
+
+export interface InstaVideoEditingSetting {
+  minSpeedChange: number
+  maxSpeedChange: number
+  watermarkFile?: UploadFile
+}
 
 
 export abstract class InstaAccount {
@@ -23,7 +30,8 @@ export abstract class InstaAccount {
     postCron: string[],
     postTimezone: string,
     directCron: string[],
-    directTimezone: string
+    directTimezone: string,
+    videoEditingSetting?: InstaVideoEditingSetting
   ): Promise<InstaAccountDto>
 
 }
