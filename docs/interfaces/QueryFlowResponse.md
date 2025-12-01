@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.53](../README.md) / [Exports](../modules.md) / QueryFlowResponse
+[@neuralinnovations/dataisland-sdk - v0.6.53](../../README.md) / [Exports](../modules.md) / QueryFlowResponse
 
 # Interface: QueryFlowResponse
 
