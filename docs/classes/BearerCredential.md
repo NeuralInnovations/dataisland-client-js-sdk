@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.53](../../README.md) / [Exports](../modules.md) / BearerCredential
+[@neuralinnovations/dataisland-sdk - v0.6.55](../../README.md) / [Exports](../modules.md) / BearerCredential
 
 # Class: BearerCredential
 

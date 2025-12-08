@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.53](../../README.md) / [Exports](../modules.md) / WorkspaceProfileDto
+[@neuralinnovations/dataisland-sdk - v0.6.55](../../README.md) / [Exports](../modules.md) / WorkspaceProfileDto
 
 # Interface: WorkspaceProfileDto
 
