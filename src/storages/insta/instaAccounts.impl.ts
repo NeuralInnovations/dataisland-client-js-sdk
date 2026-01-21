@@ -1,5 +1,6 @@
 import {InstaAccounts} from "./instaAccounts"
 import {
+  ContentProvider,
   InstaCutAccountDto,
   InstaErrorDto,
   InstaPostDto,
@@ -146,6 +147,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     additionalContext: string,
     conversationContext: string,
     folderId: string,
+    contentProvider: ContentProvider = ContentProvider.GoogleDrive,
     postCron: string[],
     postTimezone: string,
     directCron: string[],
@@ -206,6 +208,7 @@ export class InstaAccountsImpl extends InstaAccounts {
     form.append("additionalContext", additionalContext)
     form.append("conversationContext", conversationContext)
     form.append("folderId", folderId)
+    form.append("contentProvider", contentProvider.toString())
     postCron.forEach(cron => form.append("postCron", cron))
     form.append("postTimezone", postTimezone)
     directCron.forEach(cron => form.append("directCron", cron))

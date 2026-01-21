@@ -1,4 +1,4 @@
-[@neuralinnovations/dataisland-sdk - v0.6.55](../../README.md) / [Exports](../modules.md) / QuizData
+[@neuralinnovations/dataisland-sdk - v0.6.56](../../README.md) / [Exports](../modules.md) / QuizData
 
 # Interface: QuizData
 
