@@ -1,4 +1,4 @@
-import {InstaAccountDto} from "../../dto/instaResponse"
+import {ContentProvider, InstaAccountDto} from "../../dto/instaResponse"
 import {UploadFile} from "../files/files"
 
 
@@ -27,6 +27,7 @@ export abstract class InstaAccount {
     additionalContext: string,
     conversationContext: string,
     folderId: string,
+    contentProvider: ContentProvider,
     postCron: string[],
     postTimezone: string,
     directCron: string[],
