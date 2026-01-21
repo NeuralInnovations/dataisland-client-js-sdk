@@ -1,5 +1,5 @@
 import {InstaAccount, InstaAccountId, InstaVideoEditingSetting} from "./instaAccount"
-import {AccountStatus, InstaAccountDto,InstaCutAccountDto} from "../../dto/instaResponse"
+import {AccountStatus, ContentProvider, InstaAccountDto,InstaCutAccountDto} from "../../dto/instaResponse"
 import {RpcService} from "../../services/rpcService"
 import {ResponseUtils} from "../../services/responseUtils"
 import {Context} from "../../context"
@@ -51,6 +51,7 @@ export class InstaAccountImpl extends InstaAccount {
     additionalContext: string,
     conversationContext: string,
     folderId: string,
+    contentProvider: ContentProvider,
     postCron: string[],
     postTimezone: string,
     directCron: string[],
@@ -80,6 +81,7 @@ export class InstaAccountImpl extends InstaAccount {
     form.append("additionalContext", additionalContext)
     form.append("conversationContext", conversationContext)
     form.append("folderId", folderId)
+    form.append("contentProvider", contentProvider.toString())
     postCron.forEach(cron => form.append("postCron", cron))
     form.append("postTimezone", postTimezone)
     directCron.forEach(cron => form.append("directCron", cron))

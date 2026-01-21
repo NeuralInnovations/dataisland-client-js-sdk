@@ -12,6 +12,7 @@ export interface InstaAccountDto {
   additionalContext: string
   conversationContext: string
   folderId: string
+  contentProvider: ContentProvider
   error: string
   postCron: string[]
   postTimezone: string
@@ -76,6 +77,11 @@ export enum AccountStatus {
   Authenticated = 2,
   Error = 3,
   NeedContent = 4
+}
+
+export enum ContentProvider {
+  GoogleDrive = 0,
+  AwsS3 = 1
 }
 
 

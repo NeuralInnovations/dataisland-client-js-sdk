@@ -1,5 +1,5 @@
 
-import { InstaErrorDto } from "../../dto/instaResponse"
+import { ContentProvider, InstaErrorDto } from "../../dto/instaResponse"
 import {InstaAccount, InstaVideoEditingSetting} from "./instaAccount"
 import {InstaPost} from "./instaPost"
 
@@ -22,6 +22,7 @@ export abstract class InstaAccounts {
     additionalContext: string,
     conversationContext: string,
     folderId: string,
+    contentProvider: ContentProvider,
     postCron: string[],
     postTimezone: string,
     directCron: string[],
